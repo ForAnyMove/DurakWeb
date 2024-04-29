@@ -1,0 +1,28 @@
+body,
+button {
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  /*LoadedFont_Default, */
+}
+
+@media screen and (-apple-system: BlinkMacSystemFont) {
+
+  body,
+  button {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-weight: bold;
+  }
+}
+
+img {
+  -webkit-touch-callout: none;
+  /* Отключение меню вызова на iOS */
+  -webkit-user-select: none;
+  /* Отключение выделения на iOS */
+  -moz-user-select: none;
+  /* Отключение выделения на Firefox */
+  -ms-user-select: none;
+  /* Отключение выделения на Internet Explorer */
+  user-select: none;
+  /* Отключение выделения на других платформах */
+}

@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="color-scheme" content="light">
+  <!-- <link rel="stylesheet" href="main.css" id="style-switcher" /> -->
+  <!-- <link rel="stylesheet" href="default.css"> -->
+  <link rel="stylesheet" href="src/loader/loader.css">
+  <link rel="stylesheet" href="./src/Rewards Receiver/rewardsReceiver.css">
+  <!-- <link rel="stylesheet" href="./src/loader/loader.css"> -->
+  <!-- <link rel="stylesheet" href="./src/StoryMode/storyMode.css"> -->
+  <!-- <link rel="stylesheet" href="./src/challenges/challenge.css"> -->
+  <!-- <link rel="stylesheet" href="./src/Collection/collection.css"> -->
+  <!-- <link rel="stylesheet" href="./src/achievements/achievements.css"> -->
+  <link rel="stylesheet" href="fonts.css">
+  <!-- <link rel="stylesheet" href="test.css"> -->
+
+  <title>Spider Web</title>
+
+  <script src="https://yandex.ru/games/sdk/v2"></script>
+</head>
+
+<body style="max-width: 100%; max-height: 100%; overflow: hidden;">
+
+  <audio id="backgroundMusic" loop>
+    <source src="./assets/audio/music/Card-game-track-2.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <audio id="buttonClick">
+    <source src="./assets/audio/sounds/Button-01.mp3" type="audio/mpeg">
+  </audio>
+  <div class="mask">
+    <div class="banter-loader">
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+      <div class="banter-loader__box"></div>
+    </div>
+  </div>
+  <div id="main-screen">
+    <header>
+      <nav class="header-navigation">
+        <ul class="header-navigation-list">
+          <li class="nav-btn">
+            <!-- <a href="./src/achievements/achievements.html"> -->
+            <button class="header-navigation-btn" id="achievements-switch-btn">
+              <div class="header-navigation-icon-container">
+                <img src="./Sprites/Icons/Icon_Profile.png" alt="Profile" class="header-navigation-list-icon" />
+              </div>
+            </button>
+            <!-- </a> -->
+            <button class="header-navigation-btn" id="daily-btn">
+              <div class="header-navigation-icon-container">
+                <img src="./Sprites/Icons/Icon_Chest.png" draggable="false" alt="Profile"
+                  class="header-navigation-list-icon" />
+              </div>
+            </button>
+          </li>
+          <li class="nav-btn">
+            <button class="header-navigation-btn" id="settings-btn">
+              <div class="header-navigation-icon-container">
+                <img src="./Sprites/Icons/Icon_Settings.png" alt="Settings" class="header-navigation-list-icon" />
+              </div>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <section class="logo">
+      <img src="./Sprites/Logos/Logo_RU.png" alt="Logo" class="logo-icon" lang="[img]logo_img" />
+    </section>
+    <div class="popup daily-bonuses" id="daily-bonuses">
+      <div id="popup-fade-close"></div>
+      <div class="popup-content">
+        <div class="popup-header">
+          <h3 lang="daily_bonus">Ежедневные бонусы</h3>
+          <img src="./Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-daily" class="close-popup" />
+        </div>
+        <div class="daily-boosters-container">
+          <div class="regular-daily">
+            <div class="booster">
+              <span class="completed-flag" lang="ready">Готово</span>
+              <span class="booster-title" lang="day {1}">День 1</span>
+              <img src="./Sprites/Icons/Icon_Energy.png" alt="hint" class="booster-icon" />
+              <span class="booster-counter">2</span>
+              <div class="complete-overlay">Выполнено</div>
+            </div>
+            <div class="booster">
+              <span class="completed-flag" lang="ready">Готово</span>
+              <span class="booster-title" lang="day {2}">День 2</span>
+              <img src="./Sprites/Icons/Icon_Hint.png" alt="hint" class="booster-icon" />
+              <span class="booster-counter">3</span>
+              <div class="complete-overlay">Выполнено</div>
+            </div>
+            <div class="booster">
+              <span class="completed-flag" lang="ready">Готово</span>
+              <span class="booster-title" lang="day {3}">День 3</span>
+              <img src="./Sprites/Icons/Icon_Energy.png" alt="hint" class="booster-icon" />
+              <span class="booster-counter">5</span>
+              <div class="complete-overlay">Выполнено</div>
+            </div>
+            <div class="booster">
+              <span class="completed-flag" lang="ready">Готово</span>
+              <span class="booster-title" lang="day {4}">День 4</span>
+              <img src="./Sprites/Icons/Icon_Mage.png" alt="hint" class="booster-icon" />
+              <span class="booster-counter">3</span>
+              <div class="complete-overlay">Выполнено</div>
+            </div>
+            <div class="booster">
+              <span class="completed-flag" lang="ready">Готово</span>
+              <span class="booster-title" lang="day {5}">День 5</span>
+              <img src="./Sprites/Icons/Icon_Energy.png" alt="hint" class="booster-icon" />
+              <span class="booster-counter">10</span>
+              <div class="complete-overlay">Выполнено</div>
+            </div>
+            <div class="booster">
+              <span class="completed-flag" lang="ready">Готово</span>
+              <span class="booster-title" lang="day {6}">День 3</span>
+              <img src="./Sprites/Icons/Icon_Undo.png" alt="hint" class="booster-icon" />
+              <span class="booster-counter">5</span>
+              <div class="complete-overlay">Выполнено</div>
+            </div>
+          </div>
+          <div class="special-booster">
+            <span class="completed-flag" lang="ready">Готово</span>
+            <span class="special-booster-title" lang="day {7}">День 7</span>
+            <img src="./Sprites/Icons/Icon_Chest.png" alt="hint" class="special-booster-icon" />
+            <span class="booster-counter" lang="spec_reward">Специальная награда</span>
+            <div class="complete-overlay">Выполнено</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="popup regular-bonuses" id="regular-bonuses">
+      <div id="popup-fade-close"></div>
+      <div class="popup-content">
+        <div class="web-mask"></div>
+        <div class="popup-header">
+          <h3 lang="bonuses">Бонусы</h3>
+          <img src="./Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-regular" class="close-popup" />
+        </div>
+        <div class="regular-boosters-container">
+          <div class="booster">
+            <div class="booster-type">
+              <div class="booster-prompt-container">
+                <span class="booster-prompt-title" lang="energy_i"></span>
+              </div>
+              <img src="./Sprites/Icons/Icon_Energy.png" alt="arrow" class="booster-icon" />
+              <span class="booster-counter">5</span>
+            </div>
+            <button class="start-level-btn" id="play-btn">
+              <span class="start-level-btn-title" lang="free">Бесплатно</span>
+              <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
+            </button>
+          </div>
+          <div class="booster">
+            <div class="booster-type">
+              <div class="booster-prompt-container">
+                <span class="booster-prompt-title" lang="hint_i"></span>
+              </div>
+              <img src="./Sprites/Icons/Icon_Hint.png" alt="arrow" class="booster-icon" />
+              <span class="booster-counter">4</span>
+            </div>
+            <button class="start-level-btn" id="play-btn">
+              <span class="start-level-btn-title" lang="free">Бесплатно</span>
+              <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
+            </button>
+          </div>
+          <div class="booster">
+            <div class="booster-type">
+              <div class="booster-prompt-container">
+                <span class="booster-prompt-title" lang="mage_i"></span>
+              </div>
+              <img src="./Sprites/Icons/Icon_Mage.png" alt="arrow" class="booster-icon" />
+              <span class="booster-counter">2</span>
+            </div>
+            <button class="start-level-btn" id="play-btn">
+              <span class="start-level-btn-title" lang="free">Бесплатно</span>
+              <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
+            </button>
+          </div>
+          <div class="booster">
+            <div class="booster-type">
+              <div class="booster-prompt-container">
+                <span class="booster-prompt-title" lang="undo_i"></span>
+              </div>
+              <img src="./Sprites/Icons/Icon_Undo.png" alt="arrow" class="booster-icon" />
+              <span class="booster-counter">5</span>
+            </div>
+            <button class="start-level-btn" id="play-btn">
+              <span class="start-level-btn-title" lang="free">Бесплатно</span>
+              <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
+            </button>
+          </div>
+          <div class="booster">
+            <div class="booster-type">
+              <div class="booster-prompt-container">
+                <span class="booster-prompt-title" lang="timer_i"></span>
+              </div>
+              <img src="./Sprites/Icons/Icon_Time.png" alt="arrow" class="booster-icon" />
+              <span class="booster-counter">1</span>
+            </div>
+            <button class="start-level-btn" id="play-btn">
+              <span class="start-level-btn-title" lang="free">Бесплатно</span>
+              <img src="./Sprites/Icons/Icon_Ads.png" alt="Ads" class="btn-info-icon" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="popup settings" id="settings">
+      <div id="popup-fade-close"></div>
+      <div class="popup-content">
+        <div class="popup-header">
+          <h3 lang="setttings">Настройки</h3>
+          <img src="./Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-settings" class="close-popup" />
+        </div>
+        <div class="settings-panel">
+          <div class="setting-btn-container">
+            <button class="header-navigation-btn" id="music-switch">
+              <img src="./Sprites/Icons/Icon_Music_Off.png" alt="Icon_Music_Off" class="header-navigation-list-icon" />
+            </button>
+            <span class="settings-btn-title" lang="music">Музыка</span>
+          </div>
+          <div class="setting-btn-container">
+            <button class="header-navigation-btn" id="sound-switch">
+              <img src="./Sprites/Icons/Icon_Sound_Off.png" alt="Icon_Sound_Off" class="header-navigation-list-icon" />
+            </button>
+            <span class="settings-btn-title" lang="sound">Звук</span>
+          </div>
+          <div class="setting-btn-container">
+            <a href="./src/playground/playground.html?levelID=level_def_s_1&isTutorial=true">
+              <button class="header-navigation-btn">
+                <img src="./Sprites/Icons/Icon_Tutorial.png " alt="Tutorial" class="header-navigation-list-icon" />
+              </button>
+            </a>
+            <span class="settings-btn-title" lang="tutorial">Обучение</span>
+          </div>
+          <div class="setting-btn-container">
+            <button class="special-language-btn header-navigation-btn" id="lang-btn">
+              <img src="./Sprites/Lang/ru.png " alt="Lang" class="header-navigation-list-icon" id="languages-btn"
+                lang="[img]flag_img" />
+            </button>
+            <span class="settings-btn-title" lang="lang">Язык</span>
+          </div>
+        </div>
+        <div class="version">
+          <span class="version-title">v0.0.2.19</span>
+        </div>
+      </div>
+    </div>
+    <div class="popup languages" id="languages">
+      <div id="popup-fade-close"></div>
+      <div class="popup-content">
+        <div class="popup-header">
+          <h3 lang="lang">Язык</h3>
+          <img src="./Sprites/Icons/Icon_Close.png" alt="close" id="close-popup-languages" class="close-popup" />
+        </div>
+        <div class="languages-list">
+          <div class="language-container">
+            <div class="language">
+              <img src="./Sprites/Lang/ru.png" alt="RU" class="language-icon">
+              <span class="language-title">Русский</span>
+            </div>
+            <div class="custom-checkbox">
+              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon">
+            </div>
+          </div>
+          <div class="language-container">
+            <div class="language">
+              <img src="./Sprites/Lang/en.png" alt="EN" class="language-icon">
+              <span class="language-title">English</span>
+            </div>
+            <div class="custom-checkbox">
+              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+            </div>
+          </div>
+          <div class="language-container">
+            <div class="language">
+              <img src="./Sprites/Lang/de.png" alt="GER" class="language-icon">
+              <span class="language-title">German</span>
+            </div>
+            <div class="custom-checkbox">
+              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+            </div>
+          </div>
+          <div class="language-container">
+            <div class="language">
+              <img src="./Sprites/Lang/ja.png" alt="JAP" class="language-icon">
+              <span class="language-title">Japanese</span>
+            </div>
+            <div class="custom-checkbox">
+              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+            </div>
+          </div>
+          <div class="language-container">
+            <div class="language">
+              <img src="./Sprites/Lang/hi.png" alt="IND" class="language-icon">
+              <span class="language-title">Hindi</span>
+            </div>
+            <div class="custom-checkbox">
+              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+            </div>
+          </div>
+          <div class="language-container">
+            <div class="language">
+              <img src="./Sprites/Lang/pt.png" alt="PORTU" class="language-icon">
+              <span class="language-title">Portuguese</span>
+            </div>
+            <div class="custom-checkbox">
+              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+            </div>
+          </div>
+          <div class="language-container">
+            <div class="language">
+              <img src="./Sprites/Lang/es.png" alt="ESP" class="language-icon">
+              <span class="language-title">Spanish</span>
+            </div>
+            <div class="custom-checkbox">
+              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+            </div>
+          </div>
+          <div class="language-container">
+            <div class="language">
+              <img src="./Sprites/Lang/tr.png" alt="TURK" class="language-icon">
+              <span class="language-title">Turkish</span>
+            </div>
+            <div class="custom-checkbox">
+              <img src="./Sprites/Icons/Icon_Check.png" alt="Check" class="accept-checkbox-icon hidden">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="popup exid-game" id="exid-game">
+      <div class="popup-content">
+        <div class="popup-header">
+          <h3 class="exid-tab-title" lang="exit_question">Вы уверены, что хотите выйти из игры?</h3>
+        </div>
+        <div class="exid-btns-container">
+          <button class="start-level-btn exid-yes" id="play-btn">
+            <span class="start-level-btn-title" lang="yes">Да</span>
+          </button>
+          <button class="start-level-btn exid-no" id="play-btn">
+            <span class="start-level-btn-title" lang="no">Нет</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="popup exid-game" id="tutorial-offer">
+      <div class="popup-content">
+        <div class="popup-header">
+          <h3 class="exid-tab-title" lang="tutorial_offer">Вы хотите пройти обучение?</h3>
+        </div>
+        <div class="exid-btns-container">
+          <button class="start-level-btn exid-yes" id="play-btn">
+            <span class="start-level-btn-title" lang="yes">Да</span>
+          </button>
+          <button class="start-level-btn exid-no" id="play-btn">
+            <span class="start-level-btn-title" lang="no">Нет</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <main class="main-content">
+      <section class="btn-panel">
+        <div class="main-panel-btn-container-1">
+          <a href="./src/playground/playground.html?levelID=level_def_s_1">
+            <button class="main-panel-btn main-panel-btn-1">
+              <span class="main-panel-btn-title" lang="one_suit">Одна масть</span>
+              <span class="main-panel-btn-level" lang="spider">Паук</span>
+            </button>
+          </a>
+        </div>
+        <div class="main-panel-btn-container-2">
+          <a href="./src/playground/playground.html?levelID=level_def_s_2">
+            <button class="main-panel-btn main-panel-btn-2">
+              <span class="main-panel-btn-title" lang="two_suit">Две масти</span>
+              <span class="main-panel-btn-level" lang="spider">Паук</span>
+            </button>
+          </a>
+        </div>
+        <div class="main-panel-btn-container-3">
+          <a href="./src/playground/playground.html?levelID=level_def_s_4">
+            <button class="main-panel-btn main-panel-btn-3">
+              <span class="main-panel-btn-title" lang="four_suit">Четыре масти</span>
+              <span class="main-panel-btn-level" lang="spider">Паук</span>
+            </button>
+          </a>
+        </div>
+        <div class="main-panel-btn-container-4">
+          <a href="./src/playground/playground.html?levelID=level_def_sl_1">
+            <button class="main-panel-btn main-panel-btn-4">
+              <span class="main-panel-btn-title" lang="one_suit">Одна масть</span>
+              <span class="main-panel-btn-level" lang="spider_w">Паучиха</span>
+            </button>
+          </a>
+        </div>
+        <div class="main-panel-btn-container-5">
+          <a href="./src/playground/playground.html?levelID=level_def_sl_2">
+            <button class="main-panel-btn main-panel-btn-5">
+              <span class="main-panel-btn-title" lang="two_suit">Две масти</span>
+              <span class="main-panel-btn-level" lang="spider_w">Паучиха</span>
+            </button>
+          </a>
+        </div>
+        <div class="main-panel-btn-container-6">
+          <a href="./src/playground/playground.html?levelID=level_def_sl_4">
+            <button class="main-panel-btn main-panel-btn-6">
+              <span class="main-panel-btn-title" lang="four_suit">Четыре масти</span>
+              <span class="main-panel-btn-level" lang="spider_w">Паучиха</span>
+            </button>
+          </a>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <section class="footer-container">
+        <div class="absolute-footer">
+          <ul style="text-wrap: nowrap;">
+            <li>
+              <!-- <a href="./src/StoryMode/storyMode.html"> -->
+              <button class="control-btn" id="story-mode-switch-btm">
+                <div class="header-navigation-icon-container">
+                  <img src="./Sprites/Icons/Icon_Story.png" alt="StoryMode" class="control-button-list-icon" />
+                </div>
+              </button>
+              <!-- </a> -->
+              <span class="control-button-title" lang="story_mode">Режим История</span>
+            </li>
+            <li>
+              <!-- <a href="./src/challenges/challenge.html"> -->
+              <button class="control-btn" id="challenges-switch-btn">
+                <div class="header-navigation-icon-container">
+                  <img src="./Sprites/Icons/Icon_Trial.png" alt="Icon_Trial" class="control-button-list-icon" />
+                </div>
+              </button>
+              <!-- </a> -->
+              <span class="control-button-title" lang="trial_mode">Испытания</span>
+            </li>
+            <li>
+              <!-- <a href="./src/Collection/collection.html"> -->
+              <button class="control-btn" id="collection-switch-btn">
+                <div class="header-navigation-icon-container">
+                  <img src="./Sprites/Icons/Icon_Skins.png" alt="Icon_Skins" class="control-button-list-icon" />
+                </div>
+              </button>
+              <!-- </a> -->
+              <span class="control-button-title" lang="collection">Коллекция</span>
+            </li>
+            <li>
+              <button class="control-btn" id="regular-btn">
+                <div class="header-navigation-icon-container">
+                  <img src="./Sprites/Icons/Icon_Booster.png" alt="Bonuses" class="control-button-list-icon" />
+                </div>
+              </button>
+              <span class="control-button-title" lang="bonuses">Бонусы</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </footer>
+  </div>
+  <div id="story-mode-screen" style="display: none; position: absolute;">
+    <header>
+      <ul class="header-interface-list">
+        <li class="header-ui-container">
+          <button class="header-navigation-btn main-screen-switch-btn">
+            <img src="./Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
+          </button>
+        </li>
+        <li class="header-ui-container">
+          <div class="energy-counter">
+            <span class="energy-text" id="energy-text">8</span>
+            <img src="./Sprites/Icons/Icon_Energy.png" alt="Energy">
+          </div>
+        </li>
+      </ul>
+    </header>
+    <div class="popup" id="popup">
+    </div>
+    <main>
+      <div class="story-map-container">
+        <div class="levels-axis first-axis">
+          <button class="level-btn closed" id="level-btn-29"></button>
+          <button class="level-btn closed" id="level-btn-21"></button>
+          <button class="level-btn closed" id="level-btn-13"></button>
+          <button class="level-btn closed" id="level-btn-5"></button>
+          <button class="level-btn" id="level-btn-1">1</button>
+          <button class="level-btn closed" id="level-btn-9"></button>
+          <button class="level-btn closed" id="level-btn-17"></button>
+          <button class="level-btn closed" id="level-btn-25"></button>
+          <button class="level-btn closed" id="level-btn-33"></button>
+        </div>
+        <div class="levels-axis second-axis">
+          <button class="level-btn closed" id="level-btn-30"></button>
+          <button class="level-btn closed" id="level-btn-22"></button>
+          <button class="level-btn closed" id="level-btn-14"></button>
+          <button class="level-btn closed" id="level-btn-6"></button>
+          <button class="level-btn closed" id="level-btn-2"></button>
+          <button class="level-btn closed" id="level-btn-10"></button>
+          <button class="level-btn closed" id="level-btn-18"></button>
+          <button class="level-btn closed" id="level-btn-26"></button>
+          <button class="level-btn closed" id="level-btn-34"></button>
+        </div>
+        <div class="levels-axis third-axis">
+          <button class="level-btn closed" id="level-btn-31"></button>
+          <button class="level-btn closed" id="level-btn-23"></button>
+          <button class="level-btn closed" id="level-btn-15"></button>
+          <button class="level-btn closed" id="level-btn-7"></button>
+          <button class="level-btn closed" id="level-btn-3"></button>
+          <button class="level-btn closed" id="level-btn-11"></button>
+          <button class="level-btn closed" id="level-btn-19"></button>
+          <button class="level-btn closed" id="level-btn-27"></button>
+          <button class="level-btn closed" id="level-btn-35"></button>
+        </div>
+        <div class="levels-axis fourth-axis">
+          <button class="level-btn closed" id="level-btn-32"></button>
+          <button class="level-btn closed" id="level-btn-24"></button>
+          <button class="level-btn closed" id="level-btn-16"></button>
+          <button class="level-btn closed" id="level-btn-8"></button>
+          <button class="level-btn closed" id="level-btn-4"></button>
+          <button class="level-btn closed" id="level-btn-12"></button>
+          <button class="level-btn closed" id="level-btn-20"></button>
+          <button class="level-btn closed" id="level-btn-28"></button>
+        </div>
+      </div>
+    </main>
+  </div>
+  <div id="challenge-screen" style="display: none; position: absolute;">
+    <header>
+      <ul class="header-interface-list">
+        <li class="header-ui-container">
+          <!-- <a href="./index.html" class="back-to" id="close-button"> -->
+          <button class="header-navigation-btn main-screen-switch-btn">
+            <img src="./Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
+          </button>
+          <!-- </a> -->
+        </li>
+        <li class="header-ui-container">
+          <div class="energy-counter">
+            <span class="energy-text" id="energy-text">8</span>
+            <img src="./Sprites/Icons/Icon_Energy.png" alt="Energy">
+          </div>
+        </li>
+      </ul>
+    </header>
+    <div class="challenges">
+    </div>
+  </div>
+  <div id="collection-screen" style="display: none; position: absolute;">
+    <header>
+      <!-- <a href="./index.html" class="back-to" id="close-button"> -->
+      <button class="header-navigation-btn main-screen-switch-btn">
+        <img src="./Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
+      </button>
+      <!-- </a> -->
+    </header>
+    <main>
+      <nav class="collection-navigation">
+        <ul class="collection-nav-list">
+          <li class="categories-btn-container">
+            <button class="categories-btn active-btn" id="skin-sw-button">
+              <span class="categories-btn-title" lang="skins">Скины</span>
+            </button>
+          </li>
+          <li class="categories-btn-container">
+            <button class="categories-btn" id="skin-back-sw-button">
+              <span class="categories-btn-title" lang="card_back">Рубашка</span>
+            </button>
+          </li>
+          <li class="categories-btn-container">
+            <button class="categories-btn" id="background-sw-button">
+              <span class="categories-btn-title" lang="backgrounds">Фоны</span>
+            </button>
+          </li>
+          <li class="categories-btn-container">
+            <button class="categories-btn" id="trophy-sw-button">
+              <span class="categories-btn-title" lang="trophies">Кубки</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+      <div class="collection-pick-area" id="pick-area-1"></div>
+      <div class="collection-pick-area hidden" id="pick-area-2"></div>
+      <div class="collection-pick-area hidden" id="pick-area-3"></div>
+      <div class="collection-pick-area hidden" id="pick-area-4"></div>
+    </main>
+  </div>
+  <div id="achievements-screen" style="display: none; position: absolute;">
+    <header>
+      <ul class="header-interface-list">
+        <li class="header-ui-container">
+          <!-- <a href="./index.html" class="back-to" id="close-button"> -->
+          <button class="header-navigation-btn main-screen-switch-btn">
+            <img src="./Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="header-navigation-list-icon" />
+          </button>
+          <!-- </a> -->
+        </li>
+        <li class="header-ui-container">
+          <div class="energy-counter">
+            <span class="energy-text">8</span>
+            <img src="./Sprites/Icons/Icon_Energy.png" alt="Energy" />
+          </div>
+        </li>
+      </ul>
+    </header>
+    <main>
+      <nav class="collection-navigation">
+        <ul class="collection-nav-list">
+          <li class="categories-btn-container">
+            <button class="categories-btn active-btn">
+              <span class="categories-btn-title" lang="achivs">Достижения</span>
+            </button>
+          </li>
+          <li class="categories-btn-container">
+            <button class="categories-btn">
+              <span class="categories-btn-title" lang="stats">Статистика</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+      <div class="achievements" id="achievements">
+      </div>
+      <div class="achievements hidden" id="statistics">
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img src="./Sprites/Icons/Icon_Trophy.png" alt="Trophy" class="achievement-icon" />
+            <span class="achievement-title" lang="game_count_s">Количество игр</span>
+          </div>
+          <span class="statistic-counter" id="st-game-count">1</span>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img src="./Sprites/Icons/Icon_Trophy.png" alt="Trophy" class="achievement-icon" />
+            <span class="achievement-title" lang="win_count_s">Количество побед</span>
+          </div>
+          <span class="statistic-counter" id="st-win-count">1</span>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img src="./Sprites/Icons/Icon_Trophy.png" alt="Trophy" class="achievement-icon" />
+            <span class="achievement-title" lang="win_perc_s">Процент побед</span>
+          </div>
+          <span class="statistic-counter" id="st-win-percent">100%</span>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img src="./Sprites/Icons/Icon_Time.png" alt="Time" class="achievement-icon" />
+            <span class="achievement-title" lang="most_speed_win_s">Самая быстрая победа</span>
+          </div>
+          <span class="statistic-counter" id="st-fastest-win">8</span>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img src="./Sprites/Icons/Icon_Step.png" alt="Step" class="achievement-icon" />
+            <span class="achievement-title" lang="less_step_s">Меньше всего шагов для победы</span>
+          </div>
+          <span class="statistic-counter" id="st-least-steps">8</span>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img src="./Sprites/Icons/Icon_Trial.png" alt="Triaд" class="achievement-icon" />
+            <span class="achievement-title" lang="comp_trial_s">Завершенных Испытаний</span>
+          </div>
+          <span class="statistic-counter" id="st-completed-trials">1</span>
+        </div>
+        <div class="achievement">
+          <div class="achievement-lable">
+            <img src="./Sprites/Icons/Icon_Trial.png" alt="Trial" class="achievement-icon" />
+            <span class="achievement-title" lang="play_trial_s">Сыгранных Испытаний</span>
+          </div>
+          <span class="statistic-counter" id="st-played-trials">1</span>
+        </div>
+      </div>
+    </main>
+  </div>
+  <div id="challenges-test-screen" style="display: none; position: absolute;">
+    <header>
+      <ul class="challenge-header-list">
+        <li class="header-ui-container-challenges">
+          <button class="challenge-header-navigation-btn main-screen-switch-btn">
+            <img src="./Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="challenge-header-navigation-list-icon" />
+          </button>
+        </li>
+        <li class="header-ui-container-challenges">
+          <div class="challenge-energy-counter">
+            <span class="challenge-energy-text" id="challenge-energy-text">8</span>
+            <img src="./Sprites/Icons/Icon_Energy.png" alt="Energy">
+          </div>
+        </li>
+      </ul>
+    </header>
+    <div class="challenges-test-container">
+    </div>
+    <div class="hidden-mock-container" style="opacity: 0;"></div>
+  </div>
+  <!-- rewards popup begin -->
+  <div class="popup-b" id="bounty-popup">
+    <div class="bounty-popup-content bounty-tab" id="bounty-container">
+    </div>
+    <div class="double-bounty-by-ads-container">
+      <button class="get-double-bounty-btn fade-hidden" id="play-btn">
+        <span class="get-double-bounty-btn-title" lang="claim">Получить</span>
+        <div class="interactive-btn-info">
+          <img class="get-double-bounty-icon" src="./Sprites/Icons/Icon_Ads.png" />
+          <span class="get-double-bounty-value">x2</span>
+        </div>
+      </button>
+      <span class="cancel-bounty-btn fade-hidden" lang="no_thanks">Нет, спасибо</span>
+    </div>
+  </div>
+  <script>
+    let savesList = [];
+    let SDK = null;
+    let player = null;
+    let user = null;
+    let input = null;
+    let languageChangeEvent;
+    let platform;
+    let navigation;
+    let storyMode;
+    let challenges;
+    // let challengesTest;
+    let collection;
+    let achievements;
+    let backActionHandler;
+    let dynamicFontChanger;
+    let audioManager;
+  </script>
+  <script type="module">
+    import { preload } from './src/loader/loader.js';
+    import { initializeSDK, getPlatform } from './src/scripts/sdk/sdk.js';
+    import { initialize } from './src/scripts/save_system/SaveSystem.js';
+    import User from './src/scripts/userData.js';
+    import { Action } from './src/scripts/globalEvents.js';
+    import { StackNavigation } from './src/scripts/navigation/navigation.js';
+    import { AudioManager } from './src/scripts/audioManager.js'
+
+    languageChangeEvent = new Action();
+
+    const preloadImageList = [
+      'Sprites/card_lock.png',
+      'Sprites/Tutorial/Used_Tutorial_05_1.png',
+      'Sprites/Tutorial/Used_Tutorial_05_2.png',
+      'Sprites/Tutorial/Used_Tutorial_6.png',
+      'Sprites/Tutorial/Used_Tutorial_7.png',
+      'Sprites/Trophies/Trophy_01.png',
+      'Sprites/Trophies/Trophy_02.png',
+      'Sprites/Trophies/Trophy_03.png',
+      'Sprites/Trophies/Trophy_04.png',
+      'Sprites/Trophies/Trophy_05.png',
+      'Sprites/Story Mode/Used_Frame 5.png',
+      'Sprites/Story Mode/Used_Web.png',
+      'Sprites/Misc/Circle.png',
+      'Sprites/Misc/Circular_Loader.png',
+      'Sprites/Misc/Used_Button_Selection.png',
+      'Sprites/Misc/Used_Card_Shine.png',
+      'Sprites/Misc/Used_Element_Selection.png',
+      'Sprites/Misc/Used_Indicator.png',
+      // 'Sprites/Misc/Used_Tutorial_Hand.png',
+      // 'Sprites/Logos/Logo_DE.png',
+      // 'Sprites/Logos/Logo_EN.png',
+      // 'Sprites/Logos/Logo_ES.png',
+      // 'Sprites/Logos/Logo_HI.png',
+      // 'Sprites/Logos/Logo_JA.png',
+      // 'Sprites/Logos/Logo_PT.png',
+      // 'Sprites/Logos/Logo_RU.png',
+      // 'Sprites/Logos/Logo_TR.png',
+      // 'Sprites/Lang/de.png',
+      // 'Sprites/Lang/en.png',
+      // 'Sprites/Lang/es.png',
+      // 'Sprites/Lang/hi.png',
+      // 'Sprites/Lang/ja.png',
+      // 'Sprites/Lang/pt.png',
+      // 'Sprites/Lang/ru.png',
+      // 'Sprites/Lang/tr.png',
+      // 'Sprites/Icons/Icon_Ads.png',
+      // 'Sprites/Icons/Icon_Arrow_Back.png',
+      // 'Sprites/Icons/Icon_Booster.png',
+      // 'Sprites/Icons/Icon_Calendar.png',
+      // 'Sprites/Icons/Icon_Check.png',
+      // 'Sprites/Icons/Icon_Chest.png',
+      // 'Sprites/Icons/Icon_Close.png',
+      // 'Sprites/Icons/Icon_Clubs.png',
+      // 'Sprites/Icons/Icon_Diamond.png',
+      // 'Sprites/Icons/Icon_Energy.png',
+      // 'Sprites/Icons/Icon_FourSuits.png',
+      // 'Sprites/Icons/Icon_Hearts.png',
+      // 'Sprites/Icons/Icon_Hint.png',
+      // 'Sprites/Icons/Icon_Home.png',
+      // 'Sprites/Icons/Icon_Info.png',
+      // 'Sprites/Icons/Icon_Lock.png',
+      // 'Sprites/Icons/Icon_Mage.png',
+      // 'Sprites/Icons/Icon_Music_Off.png',
+      // 'Sprites/Icons/Icon_Music_On.png',
+      // 'Sprites/Icons/Icon_OneSuit.png',
+      // 'Sprites/Icons/Icon_Profile.png',
+      // 'Sprites/Icons/Icon_Restart.png',
+      // 'Sprites/Icons/Icon_Sandwatch.png',
+      // 'Sprites/Icons/Icon_Settings.png',
+      // 'Sprites/Icons/Icon_Skins.png',
+      // 'Sprites/Icons/Icon_Sound_Off.png',
+      // 'Sprites/Icons/Icon_Sound_On.png',
+      // 'Sprites/Icons/Icon_Spades.png',
+      // 'Sprites/Icons/Icon_Spider.png',
+      // 'Sprites/Icons/Icon_Spider_L.png',
+      // 'Sprites/Icons/Icon_Step.png',
+      // 'Sprites/Icons/Icon_Steps.png',
+      // 'Sprites/Icons/Icon_Stopwatch.png',
+      // 'Sprites/Icons/Icon_Stopwatch_x2.png',
+      // 'Sprites/Icons/Icon_Story.png',
+      // 'Sprites/Icons/Icon_Time.png',
+      // 'Sprites/Icons/Icon_Trial.png',
+      // 'Sprites/Icons/Icon_Trophy.png',
+      // 'Sprites/Icons/Icon_Tutorial.png',
+      // 'Sprites/Icons/Icon_TwoSuits.png',
+      // 'Sprites/Icons/Icon_Undo.png',
+      // 'Sprites/Icons/Icon_WS1.png',
+      // 'Sprites/Icons/Icon_WS2.png',
+      // 'Sprites/Icons/Icon_WS4.png',
+      // 'Sprites/Icons/Icon_WSL1.png',
+      // 'Sprites/Icons/Icon_WSL2.png',
+      // 'Sprites/Icons/Icon_WSL4.png',
+      'Sprites/Frames/Dialog_Left.png',
+      'Sprites/Frames/Used_Frame_01.png',
+      'Sprites/Frames/Used_Frame_02.png',
+      'Sprites/Frames/Used_Frame_03.png',
+      'Sprites/Frames/Used_Frame_04.png',
+      'Sprites/Frames/Used_Frame_07.png',
+      'Sprites/Frames/Used_Frame_08.png',
+      'Sprites/Frames/Used_Frame_09.png',
+      'Sprites/Frames/Used_Frame_10.png',
+      'Sprites/Frames/Used_Frame_11.png',
+      'Sprites/Frames/Used_Frame_11_2.png',
+      'Sprites/Frames/Used_Frame_11_3.png',
+      'Sprites/Frames/Used_Frame_12.png',
+      'Sprites/Frames/Used_Frame_13.png',
+      'Sprites/Frames/Used_Frame_14.png',
+      'Sprites/Frames/Used_Frame_17.png',
+      'Sprites/Frames/Used_Frame_18.png',
+      'Sprites/Frames/Used_Frame_green.png',
+      'Sprites/Frames/Used_Frame_green_o.png',
+      'Sprites/Frames/Used_Frame_tr_o-x.png',
+      'Sprites/Frames/Used_Frame_tr_o.png',
+      'Sprites/Frames/Used_R_Frame_01.png',
+      'Sprites/Frames/Used_R_Frame_02.png',
+      'Sprites/Frames/Used_Slider_Back_Bar.png',
+      'Sprites/Frames/Used_Slider_Fill.png',
+      'Sprites/Frames/Used_Trial_Frame.png',
+      'Sprites/Frames/Used_Web.png',
+      'Sprites/Card Skins/Preview/Skin_01.png',
+      'Sprites/Card Skins/Preview/Skin_02.png',
+      'Sprites/Card Skins/Preview/Skin_03.png',
+      'Sprites/Card Skins/Preview/Skin_04.png',
+      'Sprites/Card Skins/Preview/Skin_05.png',
+      'Sprites/Card Skins/Preview/Skin_06.png',
+      'Sprites/Card Skins/Preview/Skin_07.png',
+      'Sprites/Card Skins/Preview/Skin_08.png',
+      'Sprites/Card Skins/Preview/Skin_09.png',
+      'Sprites/Buttons/Used_Button_01.png',
+      'Sprites/Buttons/Used_Button_03.png',
+      'Sprites/Buttons/Used_Button_06.png',
+      'Sprites/Buttons/Used_Button_2.2.png',
+      'Sprites/Buttons/Used_plus.png',
+      'Sprites/Buttons/Used_plus_hl.png',
+      'Sprites/Buttons/Used_X_Shine.png',
+      'Sprites/Backgrounds/Background_MainMenu.png',
+    ];
+
+    audioManager = new AudioManager(
+      ['./Sprites/Icons/Icon_Music_On.png', './Sprites/Icons/Icon_Music_Off.png'],
+      ['./Sprites/Icons/Icon_Sound_On.png', './Sprites/Icons/Icon_Sound_Off.png'],
+    );
+    user = new User();
+    navigation = new StackNavigation();
+
+    async function preloadImagesAsync(urls) {
+      const promises = [];
+
+      urls.forEach(url => {
+        const promise = new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => resolve(url);
+          img.onerror = () => reject(new Error(`Failed to preload image: ${url}`));
+          img.src = url;
+        });
+        promises.push(promise);
+      });
+
+      return Promise.all(promises);
+    }
+
+    const images = document.querySelectorAll('img');
+
+    images.forEach(image => {
+      image.draggable = false;
+    });
+
+    preload(async () => {
+      await initializeSDK();
+      platform = await getPlatform();
+      await initialize();
+      user.loadData();
+      await preloadImagesAsync(preloadImageList);
+      await import('./src/localization/translator.js').then(async (translatorItem) => {
+        storyMode = await import('./src/StoryMode/storyMode.js')
+        challenges = await import('./src/challenges/challenge.js')
+        // challengesTest = await import('./test.js')
+        collection = await import('./src/Collection/collection.js');
+        achievements = await import('./src/achievements/achievements.js');
+
+        await import('./index.js').then((indexItem) => {
+          indexItem.setupLanguageSelector(translatorItem.initialLocale);
+        });
+      });
+    });
+
+  </script>
+</body>
+
+</html>

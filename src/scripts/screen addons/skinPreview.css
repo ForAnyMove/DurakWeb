@@ -1,0 +1,116 @@
+button.selected,
+div.selected,
+img.selected,
+a.selected>button {
+    box-shadow: inset 0vw 0vw 0vw 0.3vw chartreuse;
+}
+
+.skin-content {
+    min-width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: baseline;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow-x: scroll;
+}
+
+.lock-mask {
+    position: absolute;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
+    background-color: #0000007b;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 2vh;
+}
+
+.mask-title {
+    color: #fff6c6;
+    font-size: 1.6vh;
+
+    text-align: center;
+}
+
+.card-skin {
+    width: 22vh;
+    margin: 0 2vw;
+}
+
+.skin-card,
+.skin-card-back,
+.background-card {
+    background-color: #ffffff48;
+    background-image: url('../../../Sprites/Frames/Used_Frame_04.png');
+    background-size: 150%;
+    background-position: center;
+    width: 18vh;
+    border-radius: 2vh;
+    border: 0.1vh solid #18ed00;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    -webkit-box-shadow: 5px 5px 15px -5px #000000;
+    box-shadow: 5px 5px 15px -5px #000000;
+    margin: 3vh;
+    position: relative;
+}
+
+.skin-card-back {
+    height: 25vh;
+    justify-content: flex-end;
+    background-image: url('../../../Sprites/Card Backs/Card_Backs.png');
+}
+
+.background-card {
+    height: 20vh;
+    width: 36vh;
+    justify-content: flex-end;
+    background-image: url('../../../Sprites/Card Backs/Card_Backs.png');
+}
+
+.check-icon,
+.lock-icon {
+    width: 7vh;
+    z-index: 10;
+}
+
+.tonned {
+    filter: brightness(70%);
+}
+
+.black {
+    filter: brightness(0%);
+    opacity: 30%;
+}
+
+.start-level-btn {
+    border-radius: 1vh;
+    border: none;
+    background: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 2vh 0.7vh 2vh;
+}
+
+.start-level-btn-title {
+
+    color: #ab6531;
+    padding: 1.6vh 0;
+}
+
+#play-btn {
+    background-image: url('../../../Sprites/Buttons/Used_Button_03.png');
+    font-size: 1.8vh;
+}
+
+.interactive-btn-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

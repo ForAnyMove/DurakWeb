@@ -1,0 +1,122 @@
+.popup-b {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.84);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.popup-b.selected {
+    filter: none;
+}
+
+
+.cancel-bounty-btn {
+    color: #fff;
+    text-decoration: underline;
+    font-size: 2.5vh;
+    --target-font-size: 2.5vh;
+
+    text-align: center;
+}
+
+.bounty-icon {
+    width: 7vh;
+}
+
+.bounty-title {
+    color: #fff;
+}
+
+.bounty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bounty-popup-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0.8;
+    margin-top: 15vh;
+}
+
+.double-bounty-by-ads-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.get-double-bounty-btn {
+    border-radius: 2vw;
+    margin-bottom: 1vw;
+    width: 23vh;
+    height: 8vh;
+    border: none;
+    background: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 0.5vw;
+    background-image: url('../../Sprites/Buttons/Used_Button_03.png');
+}
+
+.get-double-bounty-btn-title {
+
+    color: #ab6531;
+    font-size: 2.1vh;
+    --target-font-size: 2.1vh;
+}
+
+.get-double-bounty-icon {
+    width: 4vh;
+}
+
+.get-double-bounty-value {
+
+    color: #ab6531;
+    font-size: 2.1vh;
+    --target-font-size: 2.1vh;
+}
+
+.hidden {
+    display: none;
+}
+
+.fade-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: visibility 0.2s ease, opacity 0.2s ease;
+}
+
+.fade-visible {
+    opacity: 1;
+    visibility: visible;
+    transition: visibility 0.2s ease, opacity 0.2s ease;
+}
+
+.bounty {
+    scale: 0;
+}
+
+.bounty {
+    transition: scale 0.5s ease;
+}
+
+.fade-visible>.bounty-tab>.bounty {
+    scale: 1;
+}

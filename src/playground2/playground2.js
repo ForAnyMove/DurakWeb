@@ -56,3 +56,51 @@ for (let i = 0; i<testCardsList.length; i++) {
   container.style.transformOrigin = 'center bottom'
   playerCardsList.appendChild(container)
 }
+
+const cardsDeck = document.getElementsByClassName('cards-deck')[0]
+
+for (let i = 0; i<25; i++) {
+  const container = document.createElement('div')
+  container.classList.add('card-element', 'closed')
+  container.style.backgroundImage = 'url("../../Sprites/CardBacks/Card_Back_01.png")'
+  container.style.backgroundSize = '100% 100%'
+  container.style.position = 'relative'
+  container.style.left = '0px'
+  container.style.top = '0px'
+  container.style.marginLeft = -0.2 * i + 'px'
+  cardsDeck.appendChild(container)
+}
+
+const playgroundZone = document.getElementsByClassName('playground-zone')[0]
+
+
+for (let i = 0; i<3; i++) {
+  const container = document.createElement('div')
+  container.classList.add('playground-pare-element')
+
+  const firstCard = document.createElement('div')
+  const secondCard = document.createElement('div')
+
+  firstCard.classList.add('card-element', 'opened')
+  firstCard.style.backgroundImage = 'url("../../Sprites/Card Skins/Release/Skin_01/queen_clubs_01.png")'
+  firstCard.style.backgroundSize = '100% 100%'
+  firstCard.style.position = 'relative'
+  firstCard.style.left = '0px'
+  firstCard.style.top = '0px'
+  firstCard.style.transform = `rotate(${Math.floor(Math.random()*40-20)}deg)`
+  firstCard.style.transformOrigin = 'center'
+
+  secondCard.classList.add('card-element', 'opened')
+  secondCard.style.backgroundImage = 'url("../../Sprites/Card Skins/Release/Skin_01/queen_clubs_01.png")'
+  secondCard.style.backgroundSize = '100% 100%'
+  secondCard.style.position = 'relative'
+  secondCard.style.left = '0px'
+  secondCard.style.top = '0px'
+  secondCard.style.transform = `rotate(${Math.floor(Math.random()*40-20)}deg)`
+  secondCard.style.transformOrigin = 'center'
+  
+  container.appendChild(firstCard)
+  container.appendChild(secondCard)
+
+  playgroundZone.appendChild(container)
+}

@@ -101,13 +101,19 @@ body {
 .enemy-cards-container>.card-element{
   margin: 0 -3vw;
 }
-
-.playground-zone {
+.playground {
+  margin-top: 2vw;
   width: 50vw;
   height: 30vh;
   flex: auto;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.playground-zone {
+  display: flex;
+  align-items: flex-start;
   justify-content: center;
   column-gap: 5vw;
 }
@@ -118,7 +124,29 @@ body {
   justify-content: center;
 }
 .playground-pare-element>.card-element:not(:first-child) {
-  margin-top: -8vw;
+  margin-top: -10vw;
+}
+.pass-btn {
+  border-radius: 2vw;
+  border: none;
+  width: 11vw;
+  height: 4vw;
+  background: no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2vh 0.7vh 2vh;
+  background-image: url('../../Sprites/Mutual/base 4x -737054888.png');
+  transform: translateY(-85%);
+}
+.pass-btn-title {
+
+  font-size: 2.3vw;
+  --target-font-size: 2.3vw;
+  font-weight: 600;
+  color: #ab6531;
+  padding: 1.6vh 0;
 }
 
 .player-panel {
@@ -153,14 +181,15 @@ body {
   height: 8vw;
   bottom: 3vw;
   left: 9vw;
-  rotate: 20deg;
+  rotate: 15deg;
+  scale: 0.9;
 }
 .cards-deck>.card-element:not(:first-child) {
-  margin-top: -8.05vw;
+  margin-top: -8.15vw;
   box-shadow: none;
 }
 .cards-deck>.card-element:first-child {
-  transform: rotate(90deg) translate(0%, -45%);
+  transform: rotate(90deg) translate(0%, -40%);
 }
 .cards-counter {
   color: #ffffffe3;
@@ -177,4 +206,5 @@ body {
   min-width: 6vw;
   -webkit-box-shadow: 0.2vw 0.2vw 0.7vw 0.2vw #0000006e; 
   box-shadow: 0.2vw 0.2vw 0.7vw 0.2vw #0000006e;
+  /* scale: 0.9; */
 }

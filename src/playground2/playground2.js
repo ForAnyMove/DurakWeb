@@ -59,7 +59,7 @@ for (let i = 0; i<testCardsList.length; i++) {
 
 const cardsDeck = document.getElementsByClassName('cards-deck')[0]
 
-for (let i = 0; i<25; i++) {
+for (let i = 0; i<5; i++) {
   const container = document.createElement('div')
   container.classList.add('card-element', 'closed')
   container.style.backgroundImage = 'url("../../Sprites/CardBacks/Card_Back_01.png")'
@@ -67,7 +67,7 @@ for (let i = 0; i<25; i++) {
   container.style.position = 'relative'
   container.style.left = '0px'
   container.style.top = '0px'
-  container.style.marginLeft = -0.2 * i + 'px'
+  container.style.marginLeft = -1.5 * i + 'px'
   cardsDeck.appendChild(container)
 }
 
@@ -87,7 +87,7 @@ for (let i = 0; i<3; i++) {
   firstCard.style.position = 'relative'
   firstCard.style.left = '0px'
   firstCard.style.top = '0px'
-  firstCard.style.transform = `rotate(${Math.floor(Math.random()*40-20)}deg)`
+  firstCard.style.transform = `rotate(${Math.floor(Math.random()*60-30)}deg)`
   firstCard.style.transformOrigin = 'center'
 
   secondCard.classList.add('card-element', 'opened')
@@ -96,7 +96,7 @@ for (let i = 0; i<3; i++) {
   secondCard.style.position = 'relative'
   secondCard.style.left = '0px'
   secondCard.style.top = '0px'
-  secondCard.style.transform = `rotate(${Math.floor(Math.random()*40-20)}deg)`
+  secondCard.style.transform = `rotate(${Math.floor(Math.random()*60-30)}deg)`
   secondCard.style.transformOrigin = 'center'
   
   container.appendChild(firstCard)

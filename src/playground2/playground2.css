@@ -234,5 +234,94 @@ body {
 }
 
 @media only screen and (orientation: portrait) {
-
+  .arrow-back-btn-link {
+    top: 4vw;
+    right: 4vw;
+  }
+  .arrow-back-btn-icon {
+    width: 11.5vw;
+  }
+  .enemies-panel {
+    column-gap: 4vw;
+  }
+  .enemy-cards-container {
+    scale: 0.7;
+}
+  .enemy-container {
+    margin-top: 10vw;
+    width: 20vw;
+    height: 30vw;
+  }
+  .name-container {
+    width: 20vw;
+  }
+  .name {
+    font-size: 3.5vw;
+    --target-font-size: 3.5vw;
+  }
+  .portrait {
+    width: 15vw;
+    height: 15vw;
+  }
+  .portrait>.portrait-icon {
+    width: 14.7vw;
+  }
+  .enemy-cards-container>.card-element {
+    margin: 0 -9vw;
+  }
+  .playground-zone {
+    column-gap: 5vw;
+    row-gap: 15vw;
+    width: 70vw;
+    flex-wrap: wrap;
+  }
+  .playground-pare-element>.card-element:not(:first-child) {
+    margin-top: -30vw;
+  }
+  .pass-btn {
+    border-radius: 6vw;
+    width: 35vw;
+    height: 13vw;
+    transform: translateY(0%);
+  }
+  .pass-btn-title {
+    font-size: 6.3vw;
+    --target-font-size: 6.3vw;
+    transform: translateY(5%);
+  }
+  .player {
+    position: absolute;
+    left: 0%;
+    bottom: 28%;
+  }
+  .cards-deck-container {
+    width: 18vw;
+    height: 24vw;
+    bottom: 40%;
+    left: -10%;
+    scale: 1;
+  }
+  .cards-deck>.card-element:not(:first-child) {
+    margin-top: -24.15vw;
+  }
+  .cards-counter {
+    color: #ffffffe3;
+    font-size: 7.5vw;
+    top: 20%;
+    left: 10%;
+  }
+  .player-cards-container {
+    width: 80vw;
+  }
+  .player-cards-container>.card-element {
+    margin: 0px -3.7vw;
+  }
+  .card-element {
+    width: 18vw;
+    height: 24vw;
+    min-width: 15vw;
+  }
+  .mock {
+    display: none;
+  }
 }

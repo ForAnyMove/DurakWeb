@@ -74,7 +74,7 @@ for (let i = 0; i<5; i++) {
 const playgroundZone = document.getElementsByClassName('playground-zone')[0]
 
 
-for (let i = 0; i<3; i++) {
+for (let i = 0; i<5; i++) {
   const container = document.createElement('div')
   container.classList.add('playground-pare-element')
 

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <span lang="MainMenu/MainPanel/PlayTitle">Text</span>
+</body>
+
+<script>
+    let savesList = [];
+    let languageChangeEvent;
+    let dynamicFontChanger;
+</script>
+<script type="module">
+    import { Action } from '../scripts/globalEvents.js';
+
+    languageChangeEvent = new Action();
+
+    const dfc = await import('./dynamicFontChanger.js')
+    dynamicFontChanger = dfc.getNew();
+
+    languageChangeEvent.invoke('en');
+</script>
+
+</html>

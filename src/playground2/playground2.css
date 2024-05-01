@@ -34,21 +34,25 @@ body {
   background: -webkit-radial-gradient(center, #579E37 0%, #316224 100%);
   background: radial-gradient(ellipse at center, #579E37 0%, #316224 100%);
 }
+
 .arrow-back-btn-link {
   position: absolute;
   top: 2vw;
   right: 2vw;
 }
+
 .arrow-back-btn-icon {
   width: 4.5vw;
 }
+
 .enemies-panel {
   flex: 1;
   display: flex;
   justify-content: center;
   column-gap: 15vw;
 }
-.enemy-container{
+
+.enemy-container {
   margin: 2vw;
   width: 10vw;
   height: 12vw;
@@ -57,6 +61,7 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
 .name-container {
   width: 10vw;
   display: flex;
@@ -64,12 +69,14 @@ body {
   align-items: center;
   margin: 0.5vw;
 }
+
 .name {
   color: #fff;
   font-weight: bold;
   font-size: 1.5vw;
   --target-font-size: 1.5vw
 }
+
 .portrait {
   display: flex;
   align-items: center;
@@ -84,12 +91,14 @@ body {
   border: 1px solid #000;
   position: relative;
 }
+
 .portrait>.portrait-icon {
   width: 5.7vw;
   position: absolute;
   top: 0%;
   left: 0%;
 }
+
 .enemy-cards-container {
   position: absolute;
   bottom: 0;
@@ -98,9 +107,11 @@ body {
   rotate: 180deg;
   scale: 0.8;
 }
-.enemy-cards-container>.card-element{
+
+.enemy-cards-container>.card-element {
   margin: 0 -3vw;
 }
+
 .playground {
   margin-top: 2vw;
   width: 50vw;
@@ -111,21 +122,25 @@ body {
   justify-content: space-between;
   flex-direction: column;
 }
+
 .playground-zone {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   column-gap: 5vw;
 }
+
 .playground-pare-element {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
+
 .playground-pare-element>.card-element:not(:first-child) {
   margin-top: -10vw;
 }
+
 .pass-btn {
   border-radius: 2vw;
   border: none;
@@ -140,6 +155,7 @@ body {
   background-image: url('../../Sprites/Mutual/base 4x -737054888.png');
   transform: translateY(-85%);
 }
+
 .pass-btn-title {
 
   font-size: 2.3vw;
@@ -155,26 +171,31 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 .player {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.player-cards-container{
+
+.player-cards-container {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 25vw;
   transform: translateY(-30%);
 }
+
 .player-cards-container>.card-element {
   margin: 0 -1.7vw;
 }
+
 .mock {
   width: 10vw;
   opacity: 0;
 }
+
 .cards-deck-container {
   position: absolute;
   width: 6vw;
@@ -184,13 +205,16 @@ body {
   rotate: 15deg;
   scale: 0.9;
 }
+
 .cards-deck>.card-element:not(:first-child) {
   margin-top: -8.15vw;
   box-shadow: none;
 }
+
 .cards-deck>.card-element:first-child {
   transform: rotate(90deg) translate(0%, -40%);
 }
+
 .cards-counter {
   color: #ffffffe3;
   font-size: 2.5vw;
@@ -200,11 +224,12 @@ body {
   left: 12%;
   text-shadow: 0 0 4px #000000;
 }
+
 .card-element {
   width: 6vw;
   height: 8vw;
   min-width: 6vw;
-  -webkit-box-shadow: 0.2vw 0.2vw 0.7vw 0.2vw #0000006e; 
+  -webkit-box-shadow: 0.2vw 0.2vw 0.7vw 0.2vw #0000006e;
   box-shadow: 0.2vw 0.2vw 0.7vw 0.2vw #0000006e;
   /* scale: 0.9; */
 }

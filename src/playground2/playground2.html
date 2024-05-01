@@ -48,7 +48,7 @@
     <div class="playground-zone"></div>
     <div class="control-btns-panel">
       <button class="pass-btn">
-        <span class="pass-btn-title">PASS</span>
+        <span class="pass-btn-title" lang="Buttons/Pass">PASS</span>
       </button>
     </div>
   </div>
@@ -72,4 +72,19 @@
   </div>
   <script src="playground2.js"></script>
 </body>
+<!-- <script>
+  let savesList = [];
+  let languageChangeEvent;
+  let dynamicFontChanger;
+</script>
+<script type="module">
+  import { Action } from '../scripts/globalEvents.js';
+
+  languageChangeEvent = new Action();
+
+  const dfc = await import('../localization/dynamicFontChanger.js')
+  dynamicFontChanger = dfc.getNew();
+
+  languageChangeEvent.invoke('en');
+</script> -->
 </html>

@@ -231,5 +231,8 @@ body {
   min-width: 6vw;
   -webkit-box-shadow: 0.2vw 0.2vw 0.7vw 0.2vw #0000006e;
   box-shadow: 0.2vw 0.2vw 0.7vw 0.2vw #0000006e;
-  /* scale: 0.9; */
+}
+
+@media only screen and (orientation: portrait) {
+
 }

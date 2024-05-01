@@ -2,10 +2,9 @@ import { animator } from "./animator.js";
 import { boundsChecker } from "./cardBoundsChecker.js";
 import { cardSelector } from "./cardSelector.js";
 import { cardCollector } from "./cardsCollector.js";
-import { getSkinBackImage, getSkinImage, getSkinImageCleanPath } from "./data/card_skin_database.js";
+import { getSkinBackImage, getSkinImage } from "./data/card_skin_database.js";
 import { DOChangeValue, DOChangeXY, DelayedCall, Ease } from "./dotween/dotween.js";
 import { Action, CanInteract, disableInteractions, enableInteractions } from "./globalEvents.js";
-import { preloadImagesAsync } from "./helpers.js";
 import { selectedRules } from "./rules/gameRules.js";
 import { CardSide, RanksStringList } from "./statics/enums.js";
 import { Platform } from "./statics/staticValues.js";
@@ -27,6 +26,8 @@ export default class Card {
         this.cardColumn = null;
         this.subscribeDragAndDrop();
         this.dropFinishedEvent = new Action();
+
+        this.isFocused = false;
     }
 
     setClosed = function () {
@@ -83,6 +84,22 @@ export default class Card {
         });
     }
 
+    focus = function () {
+        if (!cardElement.classList.contains('focused')) {
+            cardElement.classList.add('focused');
+        }
+
+        this.isFocused = true;
+    }
+
+    unfocus = function () {
+        if (cardElement.classList.contains('focused')) {
+            cardElement.classList.remove('focused');
+        }
+
+        this.isFocused = false;
+    }
+
     setupCardBackImage = function (backContent) {
         if (this.lastBackContent == backContent) return;
 
@@ -99,7 +116,6 @@ export default class Card {
         if (this.lastFaceContent == faceContent) return;
 
         this.faceImage = getSkinImage(faceContent, this.suit, RanksStringList[this.rank - 1]);
-        // preloadImagesAsync([`../../../${getSkinImageCleanPath(faceContent, this.suit, RanksStringList[this.rank - 1])}`]);
 
         this.lastFaceContent = faceContent;
         if (this.side == CardSide.Face) {
@@ -308,57 +324,6 @@ class CardColumn {
         this.cardRemovedEvent = new Action();
     }
 
-    lock = function () {
-        if (this.locked) return;
-        this.locked = true;
-
-        this.lockedCanPlaceState = this.canPlace;
-        this.lockedCanRemoveState = this.canRemove;
-
-        // this.setCantPlace();
-        this.setCantRemove();
-
-        for (let i = 0; i < this.cards.length; i++) {
-            const card = this.cards[i];
-            card.domElement.classList.add('locked')
-        }
-
-        this.lockElement = document.createElement('div');
-        this.lockElement.classList.add('card-locker-hidden');
-        this.domElement.appendChild(this.lockElement)
-
-        DelayedCall(0.1, () => {
-            this.lockElement.classList.replace('card-locker-hidden', 'card-locked-showed');
-        })
-
-        this.cardAddedEvent.addListener(() => {
-            this.unlock();
-            this.cardAddedEvent.removeAllListeners();
-            this.recalculateFirstOpened();
-        })
-    }
-
-    unlock = () => {
-        if (!this.locked) return;
-        this.locked = false;
-
-        this.setCantPlace();
-        // if (this.lockedCanPlaceState) {
-        //     this.setCanPlace();
-        // }
-
-        // if (this.lockedCanRemoveState) {
-        // this.setCanRemove();
-        // }
-
-        for (let i = 0; i < this.cards.length; i++) {
-            const card = this.cards[i];
-            card.domElement.classList.remove('locked')
-        }
-
-        this.lockElement.remove();
-    }
-
     setCanPlace = function () {
         this.canPlace = true;
     }
@@ -512,16 +477,6 @@ class CardColumn {
 
         card.joinToColumn(this);
         this.domElement.appendChild(card.domElement);
-        this.recalculateFirstOpened();
-        this.checkIfColumnHasCollectedCardsSet();
-
-    }
-
-    addCards = function (cards) {
-        for (let i = 0; i < cards.length; i++) {
-            const element = cards[i];
-            this.addCard(element)
-        }
     }
 
     removeCard = function (card) {
@@ -541,160 +496,6 @@ class CardColumn {
             }
         }
     }
-
-    removeCards = function (cards) {
-        for (let i = 0; i < cards.length; i++) {
-            const element = cards[i];
-            this.removeCard(element)
-        }
-    }
-
-    checkIfLastCardClosedAndOpen = function () {
-        if (this.cards.length == 0) return;
-
-        const card = this.cards[this.cards.length - 1];
-        if (card.side == CardSide.Back) {
-            card.open();
-        }
-    }
-
-    checkIfColumnHasCollectedCardsSet = function () {
-        const result = selectedRules.isCardSetCollectable(this.cards);
-
-        if (result.isTrue) {
-            cardCollector.collect(result.cards, this);
-        }
-    }
-
-    recalculateFirstOpened = function () {
-        let firstSetup = false;
-
-        for (let i = 0; i < this.cards.length; i++) {
-            const card = this.cards[i];
-            if (!firstSetup && card.side == CardSide.Face) {
-
-                firstSetup = true;
-                card.domElement.classList.add('first');
-                continue;
-            }
-            card.domElement.classList.remove('first');
-        }
-    }
-
-    getOpenedCards = function () {
-        if (this.cards == null || this.cards.length == 0) return null;
-
-        const cards = [];
-
-        for (let i = 0; i < this.cards.length; i++) {
-            const element = this.cards[i];
-            if (element.side == CardSide.Face) {
-                cards.push(element);
-            }
-        }
-
-        return cards.length > 0 ? cards : null;
-    }
-
-    getLastCard = function () {
-        if (this.cards == null || this.cards.length == 0) return null;
-
-        return this.cards[this.cards.length - 1];
-    }
-
-    getRange = function (from, count) {
-        if (from < 0 || from > this.cards.length - 1 || count == 0) return null;
-        const cards = [];
-
-        for (let i = from; i < from + count; i++) {
-            if (i > this.cards.length - 1) break;
-            const element = this.cards[i];
-            cards.push(element);
-        }
-
-        return cards;
-    }
-
-    getRangeFromEnd = function (count, includesClosed = true) {
-        if (count == 0) return null;
-        const cards = [];
-
-        for (let i = this.cards.length - 1; i >= this.cards.length - count; i--) {
-            if (i < 0) break;
-            const element = this.cards[i];
-            if (!includesClosed && element.side == CardSide.Back) continue;
-            cards.push(element);
-        }
-
-        return cards;
-    }
 }
 
-class SolitaireCardColumn extends CardColumn {
-    constructor(domElement, number, overlapArray, isClosed) {
-        super(domElement);
-
-        this.number = number;
-        this.overlapArray = overlapArray;
-        this.isClosed = isClosed;
-        this.topLevelColumns = [];
-
-        this.cardAddedEvent.addListener(this.cardAdded);
-    }
-
-    makeColumnFree = function () {
-        if (!this.domElement.classList.contains('removed')) {
-            this.domElement.classList.add('removed');
-        }
-    }
-
-    makeColumnFilled = function () {
-        this.domElement.classList.remove('removed')
-    }
-
-    onCardDropped = (card) => {
-        if (card.cardColumn == this) return;
-
-        if (this.cards.length == 0) {
-            this.makeColumnFree();
-        }
-
-    }
-
-    cardAdded = (card) => {
-        this.makeColumnFilled();
-
-        card.dropFinishedEvent.removeListener(this.onCardDropped);
-        card.dropFinishedEvent.addListenerToStart(this.onCardDropped);
-    }
-
-
-    addOverlapColumns = function (column) {
-        this.topLevelColumns.push(column);
-
-        const lastCard = column.getLastCard();
-
-        lastCard.dropFinishedEvent.addListener((card) => {
-            if (card.cardColumn == column) return;
-
-            this.checkIfCanOpen();
-            setTimeout(() => {
-                lastCard.dropFinishedEvent.removeAllListeners();
-            }, 50)
-        });
-    }
-
-    checkIfCanOpen = function () {
-        for (let i = 0; i < this.topLevelColumns.length; i++) {
-            const element = this.topLevelColumns[i];
-            if (element.getLastCard() != null) {
-                return false;
-            }
-        }
-
-        this.getLastCard()?.open();
-        return true;
-    }
-}
-
-export { CardColumn, SolitaireCardColumn }
+export { CardColumn }

@@ -688,7 +688,8 @@
       <ul class="challenge-header-list">
         <li class="header-ui-container-challenges">
           <button class="challenge-header-navigation-btn main-screen-switch-btn">
-            <img src="./Sprites/Icons/Icon_Arrow_Back.png" alt="Profile" class="challenge-header-navigation-list-icon" />
+            <img src="./Sprites/Icons/Icon_Arrow_Back.png" alt="Profile"
+              class="challenge-header-navigation-list-icon" />
           </button>
         </li>
         <li class="header-ui-container-challenges">
@@ -727,9 +728,6 @@
     let languageChangeEvent;
     let platform;
     let navigation;
-    let storyMode;
-    let challenges;
-    // let challengesTest;
     let collection;
     let achievements;
     let backActionHandler;
@@ -748,132 +746,6 @@
     languageChangeEvent = new Action();
 
     const preloadImageList = [
-      'Sprites/card_lock.png',
-      'Sprites/Tutorial/Used_Tutorial_05_1.png',
-      'Sprites/Tutorial/Used_Tutorial_05_2.png',
-      'Sprites/Tutorial/Used_Tutorial_6.png',
-      'Sprites/Tutorial/Used_Tutorial_7.png',
-      'Sprites/Trophies/Trophy_01.png',
-      'Sprites/Trophies/Trophy_02.png',
-      'Sprites/Trophies/Trophy_03.png',
-      'Sprites/Trophies/Trophy_04.png',
-      'Sprites/Trophies/Trophy_05.png',
-      'Sprites/Story Mode/Used_Frame 5.png',
-      'Sprites/Story Mode/Used_Web.png',
-      'Sprites/Misc/Circle.png',
-      'Sprites/Misc/Circular_Loader.png',
-      'Sprites/Misc/Used_Button_Selection.png',
-      'Sprites/Misc/Used_Card_Shine.png',
-      'Sprites/Misc/Used_Element_Selection.png',
-      'Sprites/Misc/Used_Indicator.png',
-      // 'Sprites/Misc/Used_Tutorial_Hand.png',
-      // 'Sprites/Logos/Logo_DE.png',
-      // 'Sprites/Logos/Logo_EN.png',
-      // 'Sprites/Logos/Logo_ES.png',
-      // 'Sprites/Logos/Logo_HI.png',
-      // 'Sprites/Logos/Logo_JA.png',
-      // 'Sprites/Logos/Logo_PT.png',
-      // 'Sprites/Logos/Logo_RU.png',
-      // 'Sprites/Logos/Logo_TR.png',
-      // 'Sprites/Lang/de.png',
-      // 'Sprites/Lang/en.png',
-      // 'Sprites/Lang/es.png',
-      // 'Sprites/Lang/hi.png',
-      // 'Sprites/Lang/ja.png',
-      // 'Sprites/Lang/pt.png',
-      // 'Sprites/Lang/ru.png',
-      // 'Sprites/Lang/tr.png',
-      // 'Sprites/Icons/Icon_Ads.png',
-      // 'Sprites/Icons/Icon_Arrow_Back.png',
-      // 'Sprites/Icons/Icon_Booster.png',
-      // 'Sprites/Icons/Icon_Calendar.png',
-      // 'Sprites/Icons/Icon_Check.png',
-      // 'Sprites/Icons/Icon_Chest.png',
-      // 'Sprites/Icons/Icon_Close.png',
-      // 'Sprites/Icons/Icon_Clubs.png',
-      // 'Sprites/Icons/Icon_Diamond.png',
-      // 'Sprites/Icons/Icon_Energy.png',
-      // 'Sprites/Icons/Icon_FourSuits.png',
-      // 'Sprites/Icons/Icon_Hearts.png',
-      // 'Sprites/Icons/Icon_Hint.png',
-      // 'Sprites/Icons/Icon_Home.png',
-      // 'Sprites/Icons/Icon_Info.png',
-      // 'Sprites/Icons/Icon_Lock.png',
-      // 'Sprites/Icons/Icon_Mage.png',
-      // 'Sprites/Icons/Icon_Music_Off.png',
-      // 'Sprites/Icons/Icon_Music_On.png',
-      // 'Sprites/Icons/Icon_OneSuit.png',
-      // 'Sprites/Icons/Icon_Profile.png',
-      // 'Sprites/Icons/Icon_Restart.png',
-      // 'Sprites/Icons/Icon_Sandwatch.png',
-      // 'Sprites/Icons/Icon_Settings.png',
-      // 'Sprites/Icons/Icon_Skins.png',
-      // 'Sprites/Icons/Icon_Sound_Off.png',
-      // 'Sprites/Icons/Icon_Sound_On.png',
-      // 'Sprites/Icons/Icon_Spades.png',
-      // 'Sprites/Icons/Icon_Spider.png',
-      // 'Sprites/Icons/Icon_Spider_L.png',
-      // 'Sprites/Icons/Icon_Step.png',
-      // 'Sprites/Icons/Icon_Steps.png',
-      // 'Sprites/Icons/Icon_Stopwatch.png',
-      // 'Sprites/Icons/Icon_Stopwatch_x2.png',
-      // 'Sprites/Icons/Icon_Story.png',
-      // 'Sprites/Icons/Icon_Time.png',
-      // 'Sprites/Icons/Icon_Trial.png',
-      // 'Sprites/Icons/Icon_Trophy.png',
-      // 'Sprites/Icons/Icon_Tutorial.png',
-      // 'Sprites/Icons/Icon_TwoSuits.png',
-      // 'Sprites/Icons/Icon_Undo.png',
-      // 'Sprites/Icons/Icon_WS1.png',
-      // 'Sprites/Icons/Icon_WS2.png',
-      // 'Sprites/Icons/Icon_WS4.png',
-      // 'Sprites/Icons/Icon_WSL1.png',
-      // 'Sprites/Icons/Icon_WSL2.png',
-      // 'Sprites/Icons/Icon_WSL4.png',
-      'Sprites/Frames/Dialog_Left.png',
-      'Sprites/Frames/Used_Frame_01.png',
-      'Sprites/Frames/Used_Frame_02.png',
-      'Sprites/Frames/Used_Frame_03.png',
-      'Sprites/Frames/Used_Frame_04.png',
-      'Sprites/Frames/Used_Frame_07.png',
-      'Sprites/Frames/Used_Frame_08.png',
-      'Sprites/Frames/Used_Frame_09.png',
-      'Sprites/Frames/Used_Frame_10.png',
-      'Sprites/Frames/Used_Frame_11.png',
-      'Sprites/Frames/Used_Frame_11_2.png',
-      'Sprites/Frames/Used_Frame_11_3.png',
-      'Sprites/Frames/Used_Frame_12.png',
-      'Sprites/Frames/Used_Frame_13.png',
-      'Sprites/Frames/Used_Frame_14.png',
-      'Sprites/Frames/Used_Frame_17.png',
-      'Sprites/Frames/Used_Frame_18.png',
-      'Sprites/Frames/Used_Frame_green.png',
-      'Sprites/Frames/Used_Frame_green_o.png',
-      'Sprites/Frames/Used_Frame_tr_o-x.png',
-      'Sprites/Frames/Used_Frame_tr_o.png',
-      'Sprites/Frames/Used_R_Frame_01.png',
-      'Sprites/Frames/Used_R_Frame_02.png',
-      'Sprites/Frames/Used_Slider_Back_Bar.png',
-      'Sprites/Frames/Used_Slider_Fill.png',
-      'Sprites/Frames/Used_Trial_Frame.png',
-      'Sprites/Frames/Used_Web.png',
-      'Sprites/Card Skins/Preview/Skin_01.png',
-      'Sprites/Card Skins/Preview/Skin_02.png',
-      'Sprites/Card Skins/Preview/Skin_03.png',
-      'Sprites/Card Skins/Preview/Skin_04.png',
-      'Sprites/Card Skins/Preview/Skin_05.png',
-      'Sprites/Card Skins/Preview/Skin_06.png',
-      'Sprites/Card Skins/Preview/Skin_07.png',
-      'Sprites/Card Skins/Preview/Skin_08.png',
-      'Sprites/Card Skins/Preview/Skin_09.png',
-      'Sprites/Buttons/Used_Button_01.png',
-      'Sprites/Buttons/Used_Button_03.png',
-      'Sprites/Buttons/Used_Button_06.png',
-      'Sprites/Buttons/Used_Button_2.2.png',
-      'Sprites/Buttons/Used_plus.png',
-      'Sprites/Buttons/Used_plus_hl.png',
-      'Sprites/Buttons/Used_X_Shine.png',
-      'Sprites/Backgrounds/Background_MainMenu.png',
     ];
 
     audioManager = new AudioManager(
@@ -912,8 +784,6 @@
       user.loadData();
       await preloadImagesAsync(preloadImageList);
       await import('./src/localization/translator.js').then(async (translatorItem) => {
-        storyMode = await import('./src/StoryMode/storyMode.js')
-        challenges = await import('./src/challenges/challenge.js')
         // challengesTest = await import('./test.js')
         collection = await import('./src/Collection/collection.js');
         achievements = await import('./src/achievements/achievements.js');

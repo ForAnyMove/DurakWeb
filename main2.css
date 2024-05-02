@@ -1,0 +1,180 @@
+body {
+  background-color: #004b1b;
+  background-image: url('../../Sprites/Custom Icons/фон.png');
+  background-size: 100% 100%;
+}
+
+.main-tab {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.logo-container {
+  width: 25vw;
+}
+.logo {
+  width: 100%;
+}
+
+.play-btn {
+  border-radius: 2vw;
+  border: none;
+  width: 18vw;
+  height: 5vw;
+  background: no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2vh 0.7vh 2vh;
+  background-image: url('../../Sprites/Mutual/base 4x -737054888.png');
+}
+.play-btn-title {
+  font-size: 2.6vw;
+  --target-font-size: 2.6vw;
+  font-weight: 600;
+  color: #ab6531;
+}
+
+.switch-tabs-btns-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.switch-tab-btn-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 10vw;
+}
+.switch-tab-btn {
+  background: none;
+  border: none;
+  border-radius: 50%;
+  width: 6vw;
+  position: relative;
+}
+.switch-tab-btn-icon {
+  width: 100%;
+}
+.switch-tab-btn-interactive-counter-container {
+  border-radius: 50%;
+  width: 2.5vw;
+  height: 2.5vw;
+  position: absolute;
+  bottom: 0.5vw;
+  right: -0.5vw;
+  animation: scaleUpDown .3s infinite alternate;
+  background: #EF457C;
+  background: -moz-linear-gradient(45deg, #EF457C 0%, #f886ab 100%);
+  background: -webkit-linear-gradient(45deg, #EF457C 0%, #f886ab 100%);
+  background: linear-gradient(45deg, #EF457C 0%, #f886ab 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@keyframes scaleUpDown {
+  0% {
+      transform: scale(1);
+  }
+  100% {
+      transform: scale(1.2);
+  }
+}
+.switch-tab-btn-interactive-counter {
+  color: #fff;
+  font-size: 2vw;
+}
+.switch-tab-title-container {
+  width: 10vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.switch-tab-title {
+  color: #f0e0a8;
+  font-size: 1vw;
+  --target-font-size: 1vw;
+}
+
+.open-profile-tab-btn,
+.open-settings-tab-btn {
+  position: absolute;
+  top: 2vw;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  width: 6vw;
+}
+
+.open-profile-tab-btn {
+  left: 2vw;
+}
+.open-settings-tab-btn {
+  right: 2vw;
+}
+
+.open-profile-tab-btn-icon,
+.open-settings-tab-btn-icon {
+  width: 100%;
+}
+
+.hidden-all {
+  display: none;
+}
+
+
+@media only screen and (orientation: portrait) {
+  .switch-tab-btn {
+    width: 14vw;
+  }
+  .open-profile-tab-btn, .open-settings-tab-btn {
+    width: 14vw;
+    top: 6vw;
+  }
+  .open-profile-tab-btn {
+    left: 6vw;
+  }
+  .open-settings-tab-btn {
+    right: 6vw;
+  }
+  .switch-tab-btn-interactive-counter-container {
+    width: 5.5vw;
+    height: 5.5vw;
+  }
+  .logo-container {
+    width: 95vw;
+  }
+  .play-btn {
+    width: 35vw;
+    height: 10vw;
+    padding: 0;
+  }
+  .play-btn-title {
+    font-size: 5.6vw;
+    --target-font-size: 5.6vw;
+    font-weight: 700;
+  }
+  .switch-tabs-btns-container {
+    justify-content: space-between;
+    width: 80vw;
+  }
+  .switch-tab-btn-container {
+    width: 15vw;
+  }
+  .switch-tab-title-container {
+    width: 100%;
+  }
+  .switch-tab-title {
+    font-size: 2.5vw;
+    --target-font-size: 2.5vw;
+  }
+  .play-btn-container {
+    transform: translateY(20vw);
+  }
+}

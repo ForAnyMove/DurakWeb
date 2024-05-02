@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="general.css" />
+    <link rel="stylesheet" href="main2.css" />
+  </head>
+  <body>
+    <div class="background-mask"></div>
+    <section class="main-tab">
+      <button class="open-profile-tab-btn">
+        <img
+          src="./Sprites/Desktop - дурак main/Профиль 4x -2007492933.png"
+          width="50px"
+          alt="Profile"
+          class="open-profile-tab-btn-icon"
+        />
+        <div class="switch-tab-btn-interactive-counter-container">
+          <span class="switch-tab-btn-interactive-counter">1</span>
+        </div>
+      </button>
+      <button class="open-settings-tab-btn">
+        <img
+          src="./Sprites/Desktop - дурак main/Настройки 4x -192305961.png"
+          width="50px"
+          alt="Settings"
+          class="open-settings-tab-btn-icon"
+        />
+        <div class="switch-tab-btn-interactive-counter-container hidden-all">
+          <span class="switch-tab-btn-interactive-counter">1</span>
+        </div>
+      </button>
+      <div class="logo-container">
+        <img
+          src="./Sprites/Desktop - дурак main/Logo/EN.png"
+          alt="Logo"
+          width="200px"
+          class="logo"
+        />
+      </div>
+      <div class="play-btn-container">
+        <button class="play-btn">
+          <span class="play-btn-title" lang="MainMenu/MainPanel/PlayTitle"></span>
+        </button>
+      </div>
+      <div class="switch-tabs-btns-container">
+        <div class="switch-tab-btn-container">
+          <button class="switch-tab-btn">
+            <img
+              src="./Sprites/Desktop - дурак main/Режим Испытания 4x 689633518.png"
+              alt=""
+              class="switch-tab-btn-icon"
+              width="50px"
+            />
+            <div class="switch-tab-btn-interactive-counter-container">
+              <span class="switch-tab-btn-interactive-counter">1</span>
+            </div>
+          </button>
+          <div class="switch-tab-title-container">
+            <span
+              class="switch-tab-title"
+              lang="MainMenu/MainPanel/AchievementsTitle"
+            ></span>
+          </div>
+        </div>
+        <div class="switch-tab-btn-container">
+          <button class="switch-tab-btn">
+            <img
+              src="./Sprites/Desktop - дурак main/Скины 4x -906074328.png"
+              alt=""
+              class="switch-tab-btn-icon"
+              width="50px"
+            />
+            <div class="switch-tab-btn-interactive-counter-container hidden-all">
+              <span class="switch-tab-btn-interactive-counter">1</span>
+            </div>
+          </button>
+          <div class="switch-tab-title-container">
+            <span
+              class="switch-tab-title"
+              lang="MainMenu/MainPanel/ContentTitle"
+            ></span>
+          </div>
+        </div>
+        <div class="switch-tab-btn-container">
+          <button class="switch-tab-btn">
+            <img
+              src="./Sprites/Desktop - дурак main/Бонусы 4x -1211469916.png"
+              alt=""
+              class="switch-tab-btn-icon"
+              width="50px"
+            />
+            <div class="switch-tab-btn-interactive-counter-container hidden-all">
+              <span class="switch-tab-btn-interactive-counter">1</span>
+            </div>
+          </button>
+          <div class="switch-tab-title-container">
+            <span
+              class="switch-tab-title"
+              lang="MainMenu/MainPanel/BonusesTitle"
+            ></span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+
+  <script>
+    let savesList = [];
+    let languageChangeEvent;
+    let dynamicFontChanger;
+  </script>
+  <script type="module">
+    import { Action } from './src/scripts/globalEvents.js';
+
+    languageChangeEvent = new Action();
+
+    const dfc = await import('./src/localization/dynamicFontChanger.js');
+    dynamicFontChanger = dfc.getNew();
+
+    languageChangeEvent.invoke('en');
+  </script>
+</html>

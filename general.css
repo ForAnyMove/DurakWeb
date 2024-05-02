@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body,
+button {
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  /*LoadedFont_Default, */
+}
+.body {
+  background-color: #004b1b;
+}
+.background-mask {
+  background-image: url('../../Sprites/Custom Icons/Фон 2.png');
+  opacity: 0.2;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: 25vh;
+  background-position: center;
+  z-index: -1;
+}
+
+@media screen and (-apple-system: BlinkMacSystemFont) {
+
+  body,
+  button {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-weight: bold;
+  }
+}
+
+img {
+  -webkit-touch-callout: none;
+  /* Отключение меню вызова на iOS */
+  -webkit-user-select: none;
+  /* Отключение выделения на iOS */
+  -moz-user-select: none;
+  /* Отключение выделения на Firefox */
+  -ms-user-select: none;
+  /* Отключение выделения на Internet Explorer */
+  user-select: none;
+  /* Отключение выделения на других платформах */
+}

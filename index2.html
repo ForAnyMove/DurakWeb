@@ -9,7 +9,7 @@
   </head>
   <body>
     <div class="background-mask"></div>
-    <section class="main-tab">
+    <section class="main-tab hidden-all" id="main-tab">
       <button class="open-profile-tab-btn">
         <img
           src="./Sprites/Desktop - дурак main/Профиль 4x -2007492933.png"
@@ -42,7 +42,10 @@
       </div>
       <div class="play-btn-container">
         <button class="play-btn">
-          <span class="play-btn-title" lang="MainMenu/MainPanel/PlayTitle"></span>
+          <span
+            class="play-btn-title"
+            lang="MainMenu/MainPanel/PlayTitle"
+          ></span>
         </button>
       </div>
       <div class="switch-tabs-btns-container">
@@ -73,7 +76,9 @@
               class="switch-tab-btn-icon"
               width="50px"
             />
-            <div class="switch-tab-btn-interactive-counter-container hidden-all">
+            <div
+              class="switch-tab-btn-interactive-counter-container hidden-all"
+            >
               <span class="switch-tab-btn-interactive-counter">1</span>
             </div>
           </button>
@@ -92,7 +97,9 @@
               class="switch-tab-btn-icon"
               width="50px"
             />
-            <div class="switch-tab-btn-interactive-counter-container hidden-all">
+            <div
+              class="switch-tab-btn-interactive-counter-container hidden-all"
+            >
               <span class="switch-tab-btn-interactive-counter">1</span>
             </div>
           </button>
@@ -104,6 +111,356 @@
           </div>
         </div>
       </div>
+    </section>
+    <section class="profile-tab hidden-all" id="profile-tab">
+      <button class="open-profile-tab-btn" id="choose-avatar">
+        <img
+          src="./Sprites/Desktop - дурак main/Профиль 4x -2007492933.png"
+          width="50px"
+          alt="Profile"
+          class="open-profile-tab-btn-icon"
+        />
+      </button>
+      <button class="arrow-back-btn">
+        <img
+          src="../../Sprites/Mutual/button back 4x -525781139.png"
+          width="50px"
+          alt="Arrow-back"
+          class="arrow-back-btn-icon"
+        />
+      </button>
+      <div class="cash-info-container">
+        <span class="cash-info-value">100</span>
+      </div>
+      <div class="profile-container">
+        <div class="profile-header-container">
+          <h2
+            class="profile-header"
+            lang="MainMenu/MainPanel/ProfileTitle"
+          ></h2>
+        </div>
+        <div class="profile-subtab-switch-container">
+          <button
+            class="profile-subtab-switch-btn profile-subtab-switch-btn_active"
+          >
+            <span
+              class="profile-subtab-switch-btn-title"
+              lang="MainMenu/MainPanel/Status"
+            ></span>
+          </button>
+          <button class="profile-subtab-switch-btn">
+            <span
+              class="profile-subtab-switch-btn-title"
+              lang="MainMenu/MainPanel/Statisics"
+            ></span>
+          </button>
+        </div>
+        <div class="profile-statuses-list hidden-all">
+          <div class="profile-status-item" id="profile-status-item-1">
+            <div class="profile-status-loading"></div>
+            <div class="profile-status-cover-container">
+              <div class="profile-status-type-icon-container">
+                <img
+                  src="./Sprites/Desktop - дурак- Профиль (статус/BackgroundIcon.png"
+                  width="20px"
+                  alt="Status-icon"
+                  class="profile-status-type-icon"
+                />
+              </div>
+              <div class="profile-status-title-container">
+                <span
+                  class="profile-status-title"
+                  lang="UserData/Status/Title/Lord"
+                ></span>
+              </div>
+              <div class="profile-status-bounty-title-container">
+                <span class="profile-status-bounty-title">100</span>
+              </div>
+            </div>
+          </div>
+          <div class="profile-status-item" id="profile-status-item-2">
+            <div class="profile-status-loading"></div>
+            <div class="profile-status-cover-container">
+              <div class="profile-status-type-icon-container">
+                <img
+                  src="./Sprites/Desktop - дурак- Профиль (статус/BackgroundIcon.png"
+                  width="20px"
+                  alt="Status-icon"
+                  class="profile-status-type-icon"
+                />
+              </div>
+              <div class="profile-status-title-container">
+                <span
+                  class="profile-status-title"
+                  lang="UserData/Status/Title/Guru"
+                ></span>
+              </div>
+              <div class="profile-status-bounty-title-container">
+                <span class="profile-status-bounty-title">50</span>
+              </div>
+            </div>
+          </div>
+          <div class="profile-status-item" id="profile-status-item-3">
+            <div class="profile-status-loading"></div>
+            <div class="profile-status-cover-container">
+              <div class="profile-status-type-icon-container">
+                <img
+                  src="./Sprites/Desktop - дурак- Профиль (статус/BackgroundIcon.png"
+                  width="20px"
+                  alt="Status-icon"
+                  class="profile-status-type-icon"
+                />
+              </div>
+              <div class="profile-status-title-container">
+                <span
+                  class="profile-status-title"
+                  lang="UserData/Status/Title/Pro"
+                ></span>
+              </div>
+              <div class="profile-status-bounty-title-container">
+                <span class="profile-status-bounty-title">10</span>
+              </div>
+            </div>
+          </div>
+          <div class="profile-status-item" id="profile-status-item-4">
+            <div class="profile-status-loading"></div>
+            <div class="profile-status-cover-container">
+              <div class="profile-status-type-icon-container">
+                <img
+                  src="./Sprites/Desktop - дурак- Профиль (статус/BackgroundIcon.png"
+                  width="20px"
+                  alt="Status-icon"
+                  class="profile-status-type-icon"
+                />
+              </div>
+              <div class="profile-status-title-container">
+                <span
+                  class="profile-status-title"
+                  lang="UserData/Status/Title/Specialist"
+                ></span>
+              </div>
+              <div class="profile-status-bounty-title-container">
+                <span class="profile-status-bounty-title">5</span>
+              </div>
+            </div>
+          </div>
+          <div class="profile-status-item" id="profile-status-item-5">
+            <div class="profile-status-loading"></div>
+            <div class="profile-status-cover-container">
+              <div class="profile-status-type-icon-container">
+                <img
+                  src="./Sprites/Desktop - дурак- Профиль (статус/BackgroundIcon.png"
+                  width="20px"
+                  alt="Status-icon"
+                  class="profile-status-type-icon"
+                />
+              </div>
+              <div class="profile-status-title-container">
+                <span
+                  class="profile-status-title"
+                  lang="UserData/Status/Title/Experianced"
+                ></span>
+              </div>
+              <div class="profile-status-bounty-title-container">
+                <span class="profile-status-bounty-title">2</span>
+              </div>
+            </div>
+          </div>
+          <div class="profile-status-item" id="profile-status-item-6">
+            <div class="profile-status-loading"></div>
+            <div class="profile-status-cover-container">
+              <div class="profile-status-type-icon-container">
+                <img
+                  src="./Sprites/Desktop - дурак- Профиль (статус/BackgroundIcon.png"
+                  width="20px"
+                  alt="Status-icon"
+                  class="profile-status-type-icon"
+                />
+              </div>
+              <div class="profile-status-title-container">
+                <span
+                  class="profile-status-title"
+                  lang="UserData/Status/Title/Participant"
+                ></span>
+              </div>
+              <div class="profile-status-bounty-title-container">
+                <span class="profile-status-bounty-title">1</span>
+              </div>
+            </div>
+          </div>
+          <div class="profile-status-item" id="profile-status-item-7">
+            <div class="profile-status-loading"></div>
+            <div class="profile-status-cover-container">
+              <div class="profile-status-type-icon-container">
+                <img
+                  src="./Sprites/Desktop - дурак- Профиль (статус/BackgroundIcon.png"
+                  width="20px"
+                  alt="Status-icon"
+                  class="profile-status-type-icon"
+                />
+              </div>
+              <div class="profile-status-title-container">
+                <span
+                  class="profile-status-title"
+                  lang="UserData/Status/Title/Perspective"
+                ></span>
+              </div>
+              <div class="profile-status-bounty-title-container">
+                <span class="profile-status-bounty-title">500</span>
+              </div>
+            </div>
+          </div>
+          <div class="profile-status-item profile-status-item_completed" id="profile-status-item-8">
+            <div class="profile-status-loading"></div>
+            <div class="profile-status-cover-container">
+              <div class="profile-status-type-icon-container">
+                <img
+                  src="./Sprites/Desktop - дурак- Профиль (статус/BackgroundIcon.png"
+                  width="20px"
+                  alt="Status-icon"
+                  class="profile-status-type-icon"
+                />
+              </div>
+              <div class="profile-status-title-container">
+                <span
+                  class="profile-status-title"
+                  lang="UserData/Status/Title/Newbie"
+                ></span>
+              </div>
+              <div class="profile-status-bounty-title-container">
+                <span class="profile-status-bounty-title">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="profile-stats-list">
+          <div class="profile-stats-list_first-line">
+            <div class="profile-stats-list-item-tab">
+              <div class="profile-stats-list-item">
+                <div class="profile-stats-list-item-title-container">
+                  <span
+                    class="profile-stats-list-item-title"
+                    lang="UserData/Statistics/Title/AllGameWinPercent"
+                  ></span>
+                </div>
+                <div class="profile-stats-list-item-progress-container">
+                  <div class="profile-stats-list-item-progress-level-mask"></div>
+                  <span class="profile-stats-list-item-progress-title">0</span>
+                </div>
+              </div>
+            </div>
+            <div class="profile-stats-list-item-tab">
+              <div class="profile-stats-list-item">
+                <div class="profile-stats-list-item-title-container">
+                  <span
+                    class="profile-stats-list-item-title"
+                    lang="UserData/Statistics/Title/TossModeWinPercent"
+                  ></span>
+                </div>
+                <div class="profile-stats-list-item-progress-container">
+                  <div class="profile-stats-list-item-progress-level-mask"></div>
+                  <span class="profile-stats-list-item-progress-title">0</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="profile-stats-list_second-line">
+            <div class="profile-stats-list-item-tab">
+              <div class="profile-stats-list-item">
+                <div class="profile-stats-list-item-title-container">
+                  <span
+                    class="profile-stats-list-item-title"
+                    lang="UserData/Statistics/Title/TransferModeWinPercent"
+                  ></span>
+                </div>
+                <div class="profile-stats-list-item-progress-container">
+                  <div class="profile-stats-list-item-progress-level-mask"></div>
+                  <span class="profile-stats-list-item-progress-title">0</span>
+                </div>
+              </div>
+            </div>
+            <div class="profile-stats-list-item-tab">
+              <div class="profile-stats-list-item">
+                <div class="profile-stats-list-item-title-container">
+                  <span
+                    class="profile-stats-list-item-title"
+                    lang="UserData/Statistics/Title/TeamModeWinPercent"
+                  ></span>
+                </div>
+                <div class="profile-stats-list-item-progress-container">
+                  <div class="profile-stats-list-item-progress-level-mask"></div>
+                  <span class="profile-stats-list-item-progress-title">0</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="choose-avatar-tab">
+      <div class="choose-avatar_container">
+        <img src="./Sprites/Desktop - дурак- ежедневный бону/close 4x 432381591.png" alt="Close" width="50px" class="choose-avatar_close-icon">
+        <div class="choose-avatar_title-container">
+          <span class="choose-avatar_title" lang="MainMenu/Content/SelectAvatar"></span>
+        </div>
+        <div class="choose-avatar_avatar-picker-container">
+          <img src="./Sprites/Mutual/Frame 4x -1529181733.png" alt="Left-arrow" width="40px" class="choose-avatar_switch-btn arrow-left">
+          <div class="choose-avatar_avatar-container"><img src="./Sprites/Avatars/avatar-1_part1.png" alt="Avatar" width="100px" class="choose-avatar_avatar-icon"></div>
+          <img src="./Sprites/Mutual/Frame 4x -1030786019.png" alt="Right-arrow" width="40px" class="choose-avatar_switch-btn arrow-right">
+        </div>
+      </div>
+    </section>
+    <section class="skins-tab hidden-all">
+      <button class="arrow-back-btn">
+        <img
+          src="../../Sprites/Mutual/button back 4x -525781139.png"
+          width="50px"
+          alt="Arrow-back"
+          class="arrow-back-btn-icon"
+        />
+      </button>
+      <div class="cash-info-container">
+        <span class="cash-info-value">100</span>
+      </div>
+      <nav class="skins-navigation">
+        <ul class="skins-nav-list">
+          <li class="categories-btn-container">
+            <button class="categories-btn categories-btn-title_active" id="skin-sw-button">
+              <div class="categories-btn-title-container">
+                <span class="categories-btn-title" lang="MainMenu/Content/Type/Skins"></span>
+              </div>
+            </button>
+          </li>
+          <li class="categories-btn-container">
+            <button class="categories-btn" id="background-sw-button">
+              <div class="categories-btn-title-container">
+                <span class="categories-btn-title" lang="MainMenu/Content/Type/Backgrounds"></span>
+              </div>
+            </button>
+          </li>
+          <li class="categories-btn-container">
+            <button class="categories-btn" id="skin-back-sw-button">
+              <div class="categories-btn-title-container">
+                <span class="categories-btn-title" lang="MainMenu/Content/Type/Backs"></span>
+              </div>
+            </button>
+          </li>
+        </ul>
+      </nav>
+      <div class="skins-pick-area" id="pick-area-1">
+        <div class="skin-element skin-element_default-skin">
+          <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px" class="checkbox-pick-icon">
+          <img src="./Sprites/Desktop - дурак- ежедневный бону/замок 4x -1037125765.png" alt="Locked" width="40px" class="skin-element_locked-icon">
+        </div>
+        <div class="skin-element skin-element_default-skin skin-element_locked">
+          <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px" class="checkbox-pick-icon">
+          <img src="./Sprites/Desktop - дурак- ежедневный бону/замок 4x -1037125765.png" alt="Locked" width="40px" class="skin-element_locked-icon">
+        </div>
+      </div>
+      <div class="skins-pick-area hidden-all" id="pick-area-2"></div>
+      <div class="skins-pick-area hidden-all" id="pick-area-3"></div>
+    </main>
+  </div>
     </section>
   </body>
 

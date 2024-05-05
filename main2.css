@@ -69,21 +69,21 @@ body {
   position: absolute;
   bottom: 0.5vw;
   right: -0.5vw;
-  animation: scaleUpDown .3s infinite alternate;
-  background: #EF457C;
-  background: -moz-linear-gradient(45deg, #EF457C 0%, #f886ab 100%);
-  background: -webkit-linear-gradient(45deg, #EF457C 0%, #f886ab 100%);
-  background: linear-gradient(45deg, #EF457C 0%, #f886ab 100%);
+  animation: scaleUpDown 0.3s infinite alternate;
+  background: #ef457c;
+  background: -moz-linear-gradient(45deg, #ef457c 0%, #f886ab 100%);
+  background: -webkit-linear-gradient(45deg, #ef457c 0%, #f886ab 100%);
+  background: linear-gradient(45deg, #ef457c 0%, #f886ab 100%);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 @keyframes scaleUpDown {
   0% {
-      transform: scale(1);
+    transform: scale(1);
   }
   100% {
-      transform: scale(1.2);
+    transform: scale(1.2);
   }
 }
 .switch-tab-btn-interactive-counter {
@@ -105,7 +105,7 @@ body {
 .open-profile-tab-btn,
 .open-settings-tab-btn {
   position: absolute;
-  top: 2vw;
+  top: 4vw;
   background: none;
   border: none;
   border-radius: 50%;
@@ -113,10 +113,10 @@ body {
 }
 
 .open-profile-tab-btn {
-  left: 2vw;
+  left: 4vw;
 }
 .open-settings-tab-btn {
-  right: 2vw;
+  right: 4vw;
 }
 
 .open-profile-tab-btn-icon,
@@ -124,16 +124,459 @@ body {
   width: 100%;
 }
 
+.cash-info-container {
+  width: 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 3vw;
+  right: 3vw;
+}
+.cash-info-value::before,
+.cash-info-value {
+  color: #fff3a0;
+  font-size: 1.8vw;
+}
+.cash-info-value::before {
+  content: '$';
+  color: #ffcc00;
+  margin-right: 1vw;
+}
+.arrow-back-btn {
+  position: absolute;
+  bottom: 2vw;
+  right: 2vw;
+  border-radius: 50%;
+  border: none;
+  background: none;
+}
+.profile-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.profile-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 90vh;
+}
+.profile-header-container {
+  width: 30vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2vh;
+}
+.profile-header {
+  color: #fff3a0;
+  font-size: 2.5vw;
+  --target-font-size: 2.5vw;
+}
+.profile-subtab-switch-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 4vw;
+  margin-bottom: 2vh;
+}
+.categories-btn,
+.profile-subtab-switch-btn {
+  background: none;
+  border: none;
+  width: 16vw;
+  height: 5vw;
+  background-image: url('./Sprites/New UI Pack/Buttons/Main Gold Button.png');
+  background-size: 100% 100%;
+  background-position-y: 0.2vw;
+}
+.categories-btn-title,
+.profile-subtab-switch-btn-title {
+  color: #60628e;
+  font-size: 2vw;
+  --target-font-size: 2vw;
+}
+.categories-btn-title_active,
+.profile-subtab-switch-btn_active {
+  background-image: url('./Sprites/New UI Pack/Buttons/Main Gold Button.png');
+}
+.categories-btn-title_active > .categories-btn-title,
+.profile-subtab-switch-btn_active > .profile-subtab-switch-btn-title {
+  color: #a44916;
+}
+.profile-statuses-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  height: 100%;
+}
+.profile-status-item {
+  display: flex;
+  align-items: center;
+  background-image: url('./Sprites/Desktop - дурак- Профиль (статус/Status Back BW 1.png');
+  background-size: 100% 100%;
+  width: 25vw;
+  height: 3.5vw;
+  background-position-y: 0.3vw;
+  position: relative;
+}
+.profile-status-loading {
+  background-color: #707070;
+  width: 60%;
+  height: 85%;
+  scale: 0.8;
+}
+.profile-status-cover-container {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.profile-status-type-icon-container {
+  width: 4vw;
+  height: 4vw;
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ Профиль\ \(статус/Status Reward Back BW.png');
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile-status-type-icon {
+  width: 1.7vw;
+}
+.profile-status-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10vw;
+}
+.profile-status-title {
+  color: #fff;
+  font-size: 1.7vw;
+  --target-font-size: 1.7vw;
+}
+.profile-status-bounty-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ Профиль\ \(статус/Status Cost Back BW.png');
+  background-size: 100% 100%;
+  width: 7vw;
+  height: 3.5vw;
+}
+.profile-statuses-list
+  > .profile-status-item:not(:last-child):not(:nth-child(7))
+  > .profile-status-cover-container
+  > .profile-status-bounty-title-container
+  > .profile-status-bounty-title::after,
+.profile-status-bounty-title::before,
+.profile-status-bounty-title {
+  color: #383838;
+  font-size: 1.4vw;
+  font-weight: 800;
+}
+.profile-status-bounty-title::before {
+  content: '$';
+}
+.profile-statuses-list
+  > .profile-status-item:not(:last-child):not(:nth-child(7))
+  > .profile-status-cover-container
+  > .profile-status-bounty-title-container
+  > .profile-status-bounty-title::after {
+  content: 'K';
+}
+.profile-status-item_completed {
+  background-image: url('./Sprites/Desktop - дурак- Профиль (статус/Group 62 4x 2142765846.png');
+}
+.profile-status-item_completed > .profile-status-loading {
+  background-color: #5bba38;
+}
+.profile-status-item_completed
+  > .profile-status-cover-container
+  > .profile-status-type-icon-container {
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ Профиль\ \(статус/Status View.png');
+  animation: scaleUpDown 0.3s infinite alternate;
+}
+.profile-status-item_completed
+  > .profile-status-cover-container
+  > .profile-status-title-container
+  > .profile-status-title {
+  color: #fff3a0;
+}
+.profile-status-item_completed
+  > .profile-status-cover-container
+  > .profile-status-bounty-title-container {
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ Профиль\ \(статус/Group 4x 2134222544.png');
+}
+.profile-status-item_completed
+  > .profile-status-cover-container
+  > .profile-status-bounty-title-container
+  > .profile-status-bounty-title,
+.profile-status-item_completed
+  > .profile-status-cover-container
+  > .profile-status-bounty-title-container
+  > .profile-status-bounty-title::before,
+.profile-status-item_completed
+  > .profile-status-cover-container
+  > .profile-status-bounty-title-container
+  > .profile-status-bounty-title::after {
+  color: #a75323;
+}
+.profile-stats-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 2vw;
+}
+.profile-stats-list_first-line,
+.profile-stats-list_second-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 2vw;
+}
+.profile-stats-list_first-line {
+  margin-top: 2vw;
+}
+.profile-stats-list-item-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15vw;
+  height: 11vw;
+  border-radius: 1vw;
+  background: #fed35d;
+  background: -moz-linear-gradient(top, #fed35d 0%, #fed35d 30%, #e59109 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #fed35d 0%,
+    #fed35d 30%,
+    #e59109 100%
+  );
+  background: linear-gradient(to bottom, #fed35d 0%, #fed35d 30%, #e59109 100%);
+  -webkit-box-shadow: 0px 5px 10px 0px #000000;
+  box-shadow: 0px 5px 10px 0px #000000;
+}
+.profile-stats-list-item {
+  width: 14vw;
+  height: 10vw;
+  border-radius: 1vw;
+  background: #fff1b2;
+  background: -moz-linear-gradient(left, #fff1b2 0%, #fff1b2 50%, #ffdd53 100%);
+  background: -webkit-linear-gradient(
+    left,
+    #fff1b2 0%,
+    #fff1b2 50%,
+    #ffdd53 100%
+  );
+  background: linear-gradient(to right, #fff1b2 0%, #fff1b2 50%, #ffdd53 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+.profile-stats-list-item-title-container {
+  width: 80%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile-stats-list-item-title {
+  color: #a44916;
+  font-size: 1vw;
+  --target-font-size: 1vw;
+  font-weight: 600;
+}
+.profile-stats-list-item-progress-level-mask {
+  width: 100%;
+  height: 95%;
+  position: absolute;
+  scale: 0.95;
+  border-radius: 1vw;
+  background: #2D5B08;
+  background: -moz-linear-gradient(top, #2D5B08 0%, #326E09 50%, #3b810a 100%);
+  background: -webkit-linear-gradient(top, #2D5B08 0%, #326E09 50%, #3b810a 100%);
+  background: linear-gradient(to bottom, #2D5B08 0%, #326E09 50%, #3b810a 100%);
+}
+.profile-stats-list-item-progress-container {
+  width: 80%;
+  height: 3vw;
+  background: #a55925;
+  background: -moz-linear-gradient(top, #a55925 0%, #c07027 50%, #d27e29 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #a55925 0%,
+    #c07027 50%,
+    #d27e29 100%
+  );
+  background: linear-gradient(to bottom, #a55925 0%, #c07027 50%, #d27e29 100%);
+  -webkit-box-shadow: inset 0px 5px 10px -5px #000000;
+  box-shadow: inset 0px 5px 10px -5px #000000;
+  border-top: 2px solid #a75323;
+  border-bottom: 2px solid #fed35d;
+  border-radius: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.profile-stats-list-item-progress-title::after,
+.profile-stats-list-item-progress-title {
+  color: #fff3a0;
+  font-size: 1.8vw;
+  z-index: 1;
+}
+.profile-stats-list-item-progress-title::after {
+  content: '%';
+}
+.arrow-back-btn-icon {
+  width: 5.5vw;
+}
+
+.choose-avatar-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.choose-avatar_container {
+  width: 38vw;
+  height: 30vw;
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ ежедневный\ бону/Group 48 4x 369162226.png');
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  row-gap: 2vw;
+}
+.choose-avatar_close-icon {
+  position: absolute;
+  width: 5.5vw;
+  top: -7%;
+  right: -7%;
+}
+.choose-avatar_title-container {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.choose-avatar_title {
+  color: #fff1ab;
+  font-size: 2.6vw;
+  --target-font-size: 2.6vw;
+}
+.choose-avatar_avatar-picker-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 1vw;
+}
+.choose-avatar_avatar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15vw;
+  height: 15vw;
+}
+.choose-avatar_avatar-icon {
+  width: 95%;
+}
+.choose-avatar_switch-btn {
+  width: 5vw;
+}
+
+.skins-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+.skins-nav-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 2vw;
+  list-style-type: none;
+  margin-bottom: 6vh;
+}
+.categories-btn {
+  width: 11vw;
+  height: 4vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.categories-btn-title-container {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.skins-pick-area {
+  background-color: #004b1b; /* Потом убрать */
+  min-height: 60vh;
+  max-height: 60vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 10vh;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  width: 75%;
+  padding: 0 2%;
+  overflow-y: scroll;
+  column-gap: 5vw;
+  row-gap: 2vw;
+}
+.skin-element {
+  width: 18vw;
+  height: 8vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #a44916; /* Потом убрать */
+}
+.skin-element_locked-icon {
+  display: none;
+  width: 3vw;
+}
+.skin-element_locked > .checkbox-pick-icon {
+  display: none;
+}
+.skin-element_locked > .skin-element_locked-icon{
+  display: block;
+}
+.checkbox-pick-icon {
+  width: 5vw;
+}
+.skin-element_default-skin {
+  background-image: url(''); /* добавить фоном скин карт */
+}
 .hidden-all {
   display: none;
 }
 
-
 @media only screen and (orientation: portrait) {
+  .background-mask {
+    background-size: 13vh;
+  }
   .switch-tab-btn {
     width: 14vw;
   }
-  .open-profile-tab-btn, .open-settings-tab-btn {
+  .open-profile-tab-btn,
+  .open-settings-tab-btn {
     width: 14vw;
     top: 6vw;
   }
@@ -176,5 +619,103 @@ body {
   }
   .play-btn-container {
     transform: translateY(20vw);
+  }
+  .profile-container {
+    height: 45vh;
+  }
+  .profile-header {
+    font-size: 5.5vw;
+    --target-font-size: 5.5vw;
+  }
+  .profile-subtab-switch-container {
+    column-gap: 8vw;
+  }
+  .profile-subtab-switch-btn {
+    width: 35vw;
+    height: 12vw;
+  }
+  .profile-subtab-switch-btn-title {
+    font-size: 4vw;
+    --target-font-size: 4vw;
+  }
+  .profile-status-item {
+    width: 99vw;
+    height: 6.5vw;
+  }
+  .profile-status-type-icon-container {
+    width: 8.5vw;
+    height: 8.5vw;
+  }
+  .profile-status-type-icon {
+    width: 3.5vw;
+  }
+  .profile-status-title-container {
+    width: 40vw;
+  }
+  .profile-status-title {
+    font-size: 3.3vw;
+    --target-font-size: 3.3vw;
+  }
+  .profile-status-bounty-title-container {
+    width: 15vw;
+    height: 7.5vw;
+  }
+  .profile-statuses-list
+    > .profile-status-item:not(:last-child):not(:nth-child(7))
+    > .profile-status-cover-container
+    > .profile-status-bounty-title-container
+    > .profile-status-bounty-title::after,
+  .profile-status-bounty-title::before,
+  .profile-status-bounty-title {
+    font-size: 2.7vw;
+  }
+  .cash-info-container {
+    width: 10vw;
+    top: 6vw;
+    right: 6vw;
+  }
+  .cash-info-value::before,
+  .cash-info-value {
+    font-size: 3.5vw;
+  }
+  .arrow-back-btn {
+    bottom: 4vw;
+    right: 4vw;
+  }
+  .arrow-back-btn-icon {
+    width: 10.5vw;
+  }
+  .profile-header-container {
+    margin-bottom: 1vh;
+  }
+  .profile-stats-list_first-line,
+  .profile-stats-list_second-line {
+    column-gap: 6vw;
+  }
+  .profile-stats-list {
+    row-gap: 6vw;
+  }
+  .profile-stats-list-item-tab {
+    width: 40vw;
+    height: 22vw;
+  }
+  .profile-stats-list-item {
+    width: 38vw;
+    height: 19vw;
+  }
+  .profile-stats-list-item-title {
+    font-size: 2vw;
+    --target-font-size: 2vw;
+  }
+  .profile-stats-list-item-progress-container {
+    height: 5vw;
+    border-radius: 2vw;
+  }
+  .profile-stats-list-item-progress-title::after,
+  .profile-stats-list-item-progress-title {
+    font-size: 2.8vw;
+  }
+  .profile-stats-list-item-progress-level-mask {
+    border-radius: 2vw;
   }
 }

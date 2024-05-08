@@ -155,7 +155,7 @@
             ></span>
           </button>
         </div>
-        <div class="profile-statuses-list hidden-all">
+        <div class="profile-statuses-list">
           <div class="profile-status-item" id="profile-status-item-1">
             <div class="profile-status-loading"></div>
             <div class="profile-status-cover-container">
@@ -333,7 +333,7 @@
             </div>
           </div>
         </div>
-        <div class="profile-stats-list">
+        <div class="profile-stats-list hidden-all">
           <div class="profile-stats-list_first-line">
             <div class="profile-stats-list-item-tab">
               <div class="profile-stats-list-item">
@@ -397,7 +397,7 @@
         </div>
       </div>
     </section>
-    <section class="choose-avatar-tab">
+    <section class="choose-avatar-tab hidden-all">
       <div class="choose-avatar_container">
         <img src="./Sprites/Desktop - дурак- ежедневный бону/close 4x 432381591.png" alt="Close" width="50px" class="choose-avatar_close-icon">
         <div class="choose-avatar_title-container">
@@ -405,8 +405,350 @@
         </div>
         <div class="choose-avatar_avatar-picker-container">
           <img src="./Sprites/Mutual/Frame 4x -1529181733.png" alt="Left-arrow" width="40px" class="choose-avatar_switch-btn arrow-left">
-          <div class="choose-avatar_avatar-container"><img src="./Sprites/Avatars/avatar-1_part1.png" alt="Avatar" width="100px" class="choose-avatar_avatar-icon"></div>
+          <div class="choose-avatar_avatar-container">
+            <img src="./Sprites/Avatars/avatar-1_part1.png" alt="Avatar" width="100px" class="choose-avatar_avatar-icon">
+          </div>
           <img src="./Sprites/Mutual/Frame 4x -1030786019.png" alt="Right-arrow" width="40px" class="choose-avatar_switch-btn arrow-right">
+        </div>
+      </div>
+    </section>
+    <section class="settings-tab hidden-all">
+      <button class="arrow-back-btn">
+        <img
+          src="../../Sprites/Mutual/button back 4x -525781139.png"
+          width="50px"
+          alt="Arrow-back"
+          class="arrow-back-btn-icon"
+        />
+      </button>
+      <button class="tutorial-btn">
+        <span class="tutorial-btn-title" lang="MainMenu/Content/Tutorial"></span>
+      </button>
+      <div class="version-container">
+        <span class="version-title">0.0.9</span>
+      </div>
+      <div class="settings_header-container">
+        <h2 class="settings_header" lang="MainMenu/MainPanel/SettingsTitle"></h2>
+      </div>
+      <div class="settings_tunes-switch-container">
+        <div class="settings_tune-switch-container">
+          <div class="settings_tune-title-container">
+            <span class="settings_tune-title" lang="MainMenu/SystemSettings/SoundTitle"></span>
+          </div>
+          <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px" class="settings_checkbox">
+        </div>
+        <div class="settings_tune-switch-container">
+          <div class="settings_tune-title-container">
+            <span class="settings_tune-title" lang="MainMenu/SystemSettings/MusicTitle"></span>
+          </div>
+          <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px" class="settings_checkbox">
+        </div>
+      </div>
+      <div class="settings_sliders-container">
+        <div class="settings_slider-block-container">
+          <div class="settings_slider-header-container">
+            <span class="settings_slider-header" lang="MainMenu/SystemSettings/GameSpeedTitle"></span>
+          </div>
+          <div class="settings_slider-container_dark">
+            <div class="settings_slider-container_light">
+              <div class="settings_slider-container">
+                <img src="./Sprites/Mutual/Frame 4x -1529181733.png" alt="Left-arrow" width="20px" class="settings_switch-btn arrow-left">
+                <div class="settings_slider-title-container">
+                  <span class="settings_game-speed">1</span>
+                </div>
+                <img src="./Sprites/Mutual/Frame 4x -1030786019.png" alt="Right-arrow" width="20px" class="settings_switch-btn arrow-right">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="settings_slider-block-container">
+          <div class="settings_slider-header-container">
+            <span class="settings_slider-header" lang="MainMenu/SystemSettings/EnemyDifficultyTitle"></span>
+          </div>
+          <div class="settings_slider-container_dark">
+            <div class="settings_slider-container_light">
+              <div class="settings_slider-container">
+                <img src="./Sprites/Mutual/Frame 4x -1529181733.png" alt="Left-arrow" width="20px" class="settings_switch-btn arrow-left">
+                <div class="settings_slider-title-container">
+                  <span class="settings_difficult" lang="MainMenu/SystemSettings/Difficulty/Easy"></span>
+                </div>
+                <img src="./Sprites/Mutual/Frame 4x -1030786019.png" alt="Right-arrow" width="20px" class="settings_switch-btn arrow-right">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="settings_tunes-switch-container">
+        <div class="settings_tune-switch-container">
+          <div class="settings_tune-title-container">
+            <span class="settings_tune-title" lang="MainMenu/SystemSettings/SortSuitTitle"></span>
+          </div>
+          <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px" class="settings_checkbox">
+        </div>
+        <div class="settings_tune-switch-container">
+          <div class="settings_tune-title-container">
+            <span class="settings_tune-title" lang="MainMenu/SystemSettings/Language"></span>
+          </div>
+          <div class="settings_choose-language-container">
+            <img src="./Sprites/Desktop - дурак- настройки/en.png" alt="EN" width="30px" class="settings_choose-language-icon">
+            <span class="settings_choose-language-title">eng</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="achievements-tab hidden-all">
+      <button class="arrow-back-btn">
+        <img
+          src="../../Sprites/Mutual/button back 4x -525781139.png"
+          width="50px"
+          alt="Arrow-back"
+          class="arrow-back-btn-icon"
+        />
+      </button>
+      <div class="cash-info-container">
+        <span class="cash-info-value">100</span>
+      </div>
+      <div class="achievements_tab-header-container">
+        <h2 class="achievements_tab-header" lang="MainMenu/MainPanel/BonusesTitle"></h2>
+      </div>
+      <div class="achievements_stats-container">
+        <div class="achievements_stats-list-item-tab">
+          <div class="achievements_stats-list-item">
+            <div class="achievements_header-container">
+              <img src="./Sprites/Desktop - дурак- достижения/Achievement Icon 5.png" width="20px" alt="Achievement" class="achievements_header-icon">
+              <div class="achievements_stats-list-item-title-container">
+                <span
+                  class="achievements_stats-list-item-title"
+                  lang="UserData/Achievements/Title/DaysInGame"
+                ></span>
+              </div>
+            </div>
+            <div class="achievements_stats-list-item-progress-container">
+              <div class="achievements_stats-list-item-progress-level-mask"></div>
+              <span class="achievements_stats-list-item-progress-title">0/3</span>
+            </div>
+          </div>
+        </div>
+        <div class="achievements_stats-list-item-tab">
+          <div class="achievements_stats-list-item">
+            <div class="achievements_header-container">
+              <img src="./Sprites/Desktop - дурак- достижения/Achievement Icon 4.png" width="20px" alt="Achievement" class="achievements_header-icon">
+              <div class="achievements_stats-list-item-title-container">
+                <span
+                  class="achievements_stats-list-item-title"
+                  lang="UserData/Achievements/Title/GamesWin"
+                ></span>
+              </div>
+            </div>
+            <div class="achievements_stats-list-item-progress-container">
+              <div class="achievements_stats-list-item-progress-level-mask"></div>
+              <span class="achievements_stats-list-item-progress-title">0/1</span>
+            </div>
+          </div>
+        </div>
+        <div class="achievements_stats-list-item-tab">
+          <div class="achievements_stats-list-item">
+            <div class="achievements_header-container">
+              <img src="./Sprites/Desktop - дурак- достижения/Achievement Icon 1.png" width="20px" alt="Achievement" class="achievements_header-icon">
+              <div class="achievements_stats-list-item-title-container">
+                <span
+                  class="achievements_stats-list-item-title"
+                  lang="UserData/Achievements/Title/TossGamesWin"
+                ></span>
+              </div>
+            </div>
+            <div class="achievements_stats-list-item-progress-container">
+              <div class="achievements_stats-list-item-progress-level-mask"></div>
+              <span class="achievements_stats-list-item-progress-title">0/1</span>
+            </div>
+          </div>
+        </div>
+        <div class="achievements_stats-list-item-tab">
+          <div class="achievements_stats-list-item">
+            <div class="achievements_header-container">
+              <img src="./Sprites/Desktop - дурак- достижения/Achievement Icon 3.png" width="20px" alt="Achievement" class="achievements_header-icon">
+              <div class="achievements_stats-list-item-title-container">
+                <span
+                  class="achievements_stats-list-item-title"
+                  lang="UserData/Achievements/Title/TransitGamesWin"
+                ></span>
+              </div>
+            </div>
+            <div class="achievements_stats-list-item-progress-container">
+              <div class="achievements_stats-list-item-progress-level-mask"></div>
+              <span class="achievements_stats-list-item-progress-title">0/1</span>
+            </div>
+          </div>
+        </div>
+        <div class="achievements_stats-list-item-tab">
+          <div class="achievements_stats-list-item">
+            <div class="achievements_header-container">
+              <img src="./Sprites/Desktop - дурак- достижения/Achievement Icon 3.png" width="20px" alt="Achievement" class="achievements_header-icon">
+              <div class="achievements_stats-list-item-title-container">
+                <span
+                  class="achievements_stats-list-item-title"
+                  lang="UserData/Achievements/Title/TeamGamesWin"
+                ></span>
+              </div>
+            </div>
+            <div class="achievements_stats-list-item-progress-container">
+              <div class="achievements_stats-list-item-progress-level-mask"></div>
+              <span class="achievements_stats-list-item-progress-title">0/1</span>
+            </div>
+          </div>
+        </div>
+        <div class="achievements_stats-list-item-tab">
+          <div class="achievements_stats-list-item">
+            <div class="achievements_header-container">
+              <img src="./Sprites/Desktop - дурак- достижения/Achievement Icon 1.png" width="20px" alt="Achievement" class="achievements_header-icon">
+              <div class="achievements_stats-list-item-title-container">
+                <span
+                  class="achievements_stats-list-item-title"
+                  lang="UserData/Achievements/Title/WinInRow"
+                ></span>
+              </div>
+            </div>
+            <div class="achievements_stats-list-item-progress-container">
+              <div class="achievements_stats-list-item-progress-level-mask"></div>
+              <span class="achievements_stats-list-item-progress-title">0/3</span>
+            </div>
+          </div>
+        </div>
+        <div class="achievements_stats-list-item-tab">
+          <div class="achievements_stats-list-item">
+            <div class="achievements_header-container">
+              <img src="./Sprites/Desktop - дурак- достижения/Achievement Icon 4.png" width="20px" alt="Achievement" class="achievements_header-icon">
+              <div class="achievements_stats-list-item-title-container">
+                <span
+                  class="achievements_stats-list-item-title"
+                  lang="UserData/Achievements/Title/TossWinInRow"
+                ></span>
+              </div>
+            </div>
+            <div class="achievements_stats-list-item-progress-container">
+              <div class="achievements_stats-list-item-progress-level-mask"></div>
+              <span class="achievements_stats-list-item-progress-title">0/3</span>
+            </div>
+          </div>
+        </div>
+        <div class="achievements_stats-list-item-tab">
+          <div class="achievements_stats-list-item">
+            <div class="achievements_header-container">
+              <img src="./Sprites/Desktop - дурак- достижения/Achievement Icon 1.png" width="20px" alt="Achievement" class="achievements_header-icon">
+              <div class="achievements_stats-list-item-title-container">
+                <span
+                  class="achievements_stats-list-item-title"
+                  lang="UserData/Achievements/Title/TransitWinInRow"
+                ></span>
+              </div>
+            </div>
+            <div class="achievements_stats-list-item-progress-container">
+              <div class="achievements_stats-list-item-progress-level-mask"></div>
+              <span class="achievements_stats-list-item-progress-title">0/3</span>
+            </div>
+          </div>
+        </div>
+        <div class="achievements_stats-list-item-tab">
+          <div class="achievements_stats-list-item">
+            <div class="achievements_header-container">
+              <img src="./Sprites/Desktop - дурак- достижения/Achievement Icon 3.png" width="20px" alt="Achievement" class="achievements_header-icon">
+              <div class="achievements_stats-list-item-title-container">
+                <span
+                  class="achievements_stats-list-item-title"
+                  lang="UserData/Achievements/Title/TeamWinInRow"
+                ></span>
+              </div>
+            </div>
+            <div class="achievements_stats-list-item-progress-container">
+              <div class="achievements_stats-list-item-progress-level-mask"></div>
+              <span class="achievements_stats-list-item-progress-title">0/3</span>
+            </div>
+          </div>
+        </div>
+        <div class="achievements_stats-list-item-tab">
+          <div class="achievements_stats-list-item">
+            <div class="achievements_header-container">
+              <img src="./Sprites/Desktop - дурак- достижения/Achievement Icon 2.png" width="20px" alt="Achievement" class="achievements_header-icon">
+              <div class="achievements_stats-list-item-title-container">
+                <span
+                  class="achievements_stats-list-item-title"
+                  lang="UserData/Achievements/Title/EndGameInDraw"
+                ></span>
+              </div>
+            </div>
+            <div class="achievements_stats-list-item-progress-container">
+              <div class="achievements_stats-list-item-progress-level-mask"></div>
+              <span class="achievements_stats-list-item-progress-title">0/1</span>
+            </div>
+          </div>
+        </div>
+        <div class="achievements_stats-list-item-tab">
+          <div class="achievements_stats-list-item">
+            <div class="achievements_header-container">
+              <img src="./Sprites/Desktop - дурак- достижения/Achievement Icon 1.png" width="20px" alt="Achievement" class="achievements_header-icon">
+              <div class="achievements_stats-list-item-title-container">
+                <span
+                  class="achievements_stats-list-item-title"
+                  lang="UserData/Achievements/Title/LoseGameWithAces"
+                ></span>
+              </div>
+            </div>
+            <div class="achievements_stats-list-item-progress-container">
+              <div class="achievements_stats-list-item-progress-level-mask"></div>
+              <span class="achievements_stats-list-item-progress-title">0/1</span>
+            </div>
+          </div>
+        </div>
+        <div class="achievements_stats-list-item-tab">
+          <div class="achievements_stats-list-item">
+            <div class="achievements_header-container">
+              <img src="./Sprites/Desktop - дурак- достижения/Achievement Icon 4.png" width="20px" alt="Achievement" class="achievements_header-icon">
+              <div class="achievements_stats-list-item-title-container">
+                <span
+                  class="achievements_stats-list-item-title"
+                  lang="UserData/Achievements/Title/TossCards"
+                ></span>
+              </div>
+            </div>
+            <div class="achievements_stats-list-item-progress-container">
+              <div class="achievements_stats-list-item-progress-level-mask"></div>
+              <span class="achievements_stats-list-item-progress-title">0/1</span>
+            </div>
+          </div>
+        </div>
+        <div class="achievements_stats-list-item-tab">
+          <div class="achievements_stats-list-item">
+            <div class="achievements_header-container">
+              <img src="./Sprites/Desktop - дурак- достижения/Achievement Icon 3.png" width="20px" alt="Achievement" class="achievements_header-icon">
+              <div class="achievements_stats-list-item-title-container">
+                <span
+                  class="achievements_stats-list-item-title"
+                  lang="UserData/Achievements/Title/TransitCards"
+                ></span>
+              </div>
+            </div>
+            <div class="achievements_stats-list-item-progress-container">
+              <div class="achievements_stats-list-item-progress-level-mask"></div>
+              <span class="achievements_stats-list-item-progress-title">0/5</span>
+            </div>
+          </div>
+        </div>
+        <div class="achievements_stats-list-item-tab">
+          <div class="achievements_stats-list-item">
+            <div class="achievements_header-container">
+              <img src="./Sprites/Desktop - дурак- достижения/Achievement Icon 1.png" width="20px" alt="Achievement" class="achievements_header-icon">
+              <div class="achievements_stats-list-item-title-container">
+                <span
+                  class="achievements_stats-list-item-title"
+                  lang="UserData/Achievements/Title/MoneyEarned"
+                ></span>
+              </div>
+            </div>
+            <div class="achievements_stats-list-item-progress-container">
+              <div class="achievements_stats-list-item-progress-level-mask"></div>
+              <span class="achievements_stats-list-item-progress-title">0/500</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -461,6 +803,134 @@
       <div class="skins-pick-area hidden-all" id="pick-area-3"></div>
     </main>
   </div>
+    </section>
+    <section class="bonuses-tab">
+      <button class="arrow-back-btn">
+        <img
+          src="../../Sprites/Mutual/button back 4x -525781139.png"
+          width="50px"
+          alt="Arrow-back"
+          class="arrow-back-btn-icon"
+        />
+      </button>
+      <div class="cash-info-container">
+        <span class="cash-info-value">100</span>
+      </div>
+      <div class="bonuses_header-container">
+        <h2 class="bonuses_header" lang="MainMenu/MainPanel/BonusesTitle"></h2>
+      </div>
+      <div class="bonuses_bonuses-container">
+        <div class="bonuses_bonus-container checked">
+          <div class="bonuses_locked-mask">
+            <img src="./Sprites/Desktop - дурак- ежедневный бону/замок 4x -1037125765.png" width="30px" alt="" class="bonuses_locked-icon">
+          </div>
+          <div class="bonuses_combine-bonus-icon-container">
+            <div class="custom-white-circle">
+              <div class="custom-color-circle custom-color-circle_pink">
+                <img src="./Sprites/Desktop - дурак- бонусы/Group 28 4x -1324056477.png" width="30px" alt="" class="custom-component-icon">
+                <div class="custom-component-title-container">
+                  <span class="custom-component-title">+100</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bonuses_add-activate-container">
+            <img src="./Sprites/Mutual/accept-icon.png" width="30px" alt="" class="bonuses_check-add-icon">
+            <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="bonuses_add-icon">
+            <img src="./Sprites/Mutual/ads-locked.png" width="30px" alt="" class="bonuses_add-icon_locked">
+            <span class="bonuses_timer">00:00</span>
+            <span class="bonuses_time-limit">24H</span>
+          </div>
+        </div>
+        <div class="bonuses_bonus-container checked">
+          <div class="bonuses_locked-mask">
+            <img src="./Sprites/Desktop - дурак- ежедневный бону/замок 4x -1037125765.png" width="30px" alt="" class="bonuses_locked-icon">
+          </div>
+          <div class="bonuses_combine-bonus-icon-container">
+            <div class="custom-white-circle">
+              <div class="custom-color-circle custom-color-circle_purple">
+                <img src="./Sprites/Desktop - дурак- бонусы/Group 28 4x -1324056477.png" width="30px" alt="" class="custom-component-icon">
+                <div class="custom-component-title-container">
+                  <span class="custom-component-title">+200</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bonuses_add-activate-container">
+            <img src="./Sprites/Mutual/accept-icon.png" width="30px" alt="" class="bonuses_check-add-icon">
+            <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="bonuses_add-icon">
+            <img src="./Sprites/Mutual/ads-locked.png" width="30px" alt="" class="bonuses_add-icon_locked">
+            <span class="bonuses_timer">00:00</span>
+            <span class="bonuses_time-limit">24H</span>
+          </div>
+        </div>
+        <div class="bonuses_bonus-container opened">
+          <div class="bonuses_locked-mask">
+            <img src="./Sprites/Desktop - дурак- ежедневный бону/замок 4x -1037125765.png" width="30px" alt="" class="bonuses_locked-icon">
+          </div>
+          <div class="bonuses_combine-bonus-icon-container">
+            <div class="custom-white-circle">
+              <div class="custom-color-circle custom-color-circle_green">
+                <img src="./Sprites/Desktop - дурак- бонусы/Скины 4x 363070723.png" width="30px" alt="" class="custom-component-icon">
+                <div class="custom-component-title-container">
+                  <span class="custom-component-title" lang="MainMenu/Content/Type/Back"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bonuses_add-activate-container">
+            <img src="./Sprites/Mutual/accept-icon.png" width="30px" alt="" class="bonuses_check-add-icon">
+            <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="bonuses_add-icon">
+            <img src="./Sprites/Mutual/ads-locked.png" width="30px" alt="" class="bonuses_add-icon_locked">
+            <span class="bonuses_timer">00:00</span>
+            <span class="bonuses_time-limit">24H</span>
+          </div>
+        </div>
+        <div class="bonuses_bonus-container locked">
+          <div class="bonuses_locked-mask">
+            <img src="./Sprites/Desktop - дурак- ежедневный бону/замок 4x -1037125765.png" width="30px" alt="" class="bonuses_locked-icon">
+          </div>
+          <div class="bonuses_combine-bonus-icon-container">
+            <div class="custom-white-circle">
+              <div class="custom-color-circle custom-color-circle_yellow">
+                <img src="./Sprites/Desktop - дурак- бонусы/Ð¡Ð»Ð¾Ð¹_1 4x -1416153143.png" width="30px" alt="" class="custom-component-icon">
+                <div class="custom-component-title-container">
+                  <span class="custom-component-title" lang="MainMenu/Content/Type/Background"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bonuses_add-activate-container">
+            <img src="./Sprites/Mutual/accept-icon.png" width="30px" alt="" class="bonuses_check-add-icon">
+            <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="bonuses_add-icon">
+            <img src="./Sprites/Mutual/ads-locked.png" width="30px" alt="" class="bonuses_add-icon_locked">
+            <span class="bonuses_timer">00:00</span>
+            <span class="bonuses_time-limit">24H</span>
+          </div>
+        </div>
+        <div class="bonuses_bonus-container locked">
+          <div class="bonuses_locked-mask">
+            <img src="./Sprites/Desktop - дурак- ежедневный бону/замок 4x -1037125765.png" width="30px" alt="" class="bonuses_locked-icon">
+          </div>
+          <div class="bonuses_combine-bonus-icon-container">
+            <div class="custom-white-circle">
+              <div class="custom-color-circle custom-color-circle_pink">
+                <img src="./Sprites/Desktop - дурак- бонусы/Group 98 4x -298020151.png" width="30px" alt="" class="custom-component-icon">
+                <div class="custom-component-title-container">
+                  <span class="custom-component-title" lang="MainMenu/Content/Type/Skin"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bonuses_add-activate-container">
+            <img src="./Sprites/Mutual/accept-icon.png" width="30px" alt="" class="bonuses_check-add-icon">
+            <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="bonuses_add-icon">
+            <img src="./Sprites/Mutual/ads-locked.png" width="30px" alt="" class="bonuses_add-icon_locked">
+            <span class="bonuses_timer">00:00</span>
+            <span class="bonuses_time-limit">24H</span>
+          </div>
+        </div>
+      </div>
     </section>
   </body>
 

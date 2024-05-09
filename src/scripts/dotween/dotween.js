@@ -235,6 +235,29 @@ function DOChangeValue(start, sendScale, target, duration, ease) {
 
 //#endregion
 
+async function SequencedDelay(callNumber, duration, callback, finishCallback = null) {
+    for (let i = 0; i < callNumber; i++) {
+        await Delay(duration);
+        callback?.(i);
+        if (i == callNumber - 1) {
+            finishCallback?.();
+        }
+    }
+}
+
+async function Delay(duration) {
+    await new Promise((p) => {
+        const tween = new Tween(duration, null, null, null, (tw) => {
+            if (tw.currentTime >= tw.duration) {
+                p();
+                tw.destroy();
+            }
+        });
+
+        tweener.addTween(tween);
+    })
+}
+
 function DelayedCall(duration, callback) {
     const tween = new Tween(duration, null, null, null, (tw) => {
         if (tw.currentTime >= tw.duration) {
@@ -407,4 +430,4 @@ function DOEase(type, t, b, c, d) {
 }
 //#endregion
 
-export { createTweener, DOChangeXY, DOChangeValue, DelayedCall, Ease, Sequence }
+export { createTweener, DOChangeXY, DOChangeValue, DelayedCall, Ease, Sequence, Delay, SequencedDelay }

@@ -6,11 +6,13 @@ class Animator {
         this.lastTimeStamp = -1;
         this.paused = false;
 
+        this.isFramerActive = false;
+
         document.addEventListener("visibilitychange", () => {
             if (document.visibilityState === "hidden") {
                 this.paused = true;
                 this.clearFramer();
-            } else {
+            } else if (!this.isFramerActive) {
                 this.paused = false;
                 this.createFramer();
             }
@@ -44,11 +46,15 @@ class Animator {
     }
 
     createFramer = function () {
-        window.requestAnimationFrame(this.update);
+        if (!this.isFramerActive) {
+            this.isFramerActive = true;
+            window.requestAnimationFrame(this.update);
+        }
     }
 
     clearFramer = function () {
         this.lastTimeStamp = -1;
+        this.isFramerActive = false;
     }
 
     update = (timeStamp) => {

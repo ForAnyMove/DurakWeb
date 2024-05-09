@@ -6,11 +6,6 @@ const Suit = {
 }
 
 const Rank = {
-    Ace: 1,
-    Two: 2,
-    Three: 3,
-    Four: 4,
-    Five: 5,
     Six: 6,
     Seven: 7,
     Eight: 8,
@@ -18,10 +13,11 @@ const Rank = {
     Ten: 10,
     Jack: 11,
     Queen: 12,
-    King: 13
+    King: 13,
+    Ace: 14,
 }
 
-const RanksStringList = ['ace', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king'];
+const RanksStringList = ['six', 'seven', 'eight', 'nine', 'ten', 'jack', 'queen', 'king'];
 const SuitsStringList = ['spades', 'diamonds', 'clubs', 'hearts'];
 
 const CardSide = {

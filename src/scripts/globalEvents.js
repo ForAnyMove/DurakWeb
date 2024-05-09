@@ -43,7 +43,7 @@ function generateLevelResult({ result: res, levelType: lt }) {
     return { result: res, levelType: lt }
 }
 
-let CanInteract = true;
+let CanInteract = false;
 
 function disableInteractions() {
     CanInteract = false;

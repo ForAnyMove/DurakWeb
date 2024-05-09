@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="playground2.css">
   <title>DURAK</title>
 </head>
+
 <body>
+  <div id="card-release-wrapper"></div>
   <a href="../../index.html" class="arrow-back-btn-link">
     <div class="arrow-back-btn-container">
-      <img src="../../Sprites/Mutual/button back 4x -525781139.png" width="50px" alt="Arrow-back" class="arrow-back-btn-icon">
+      <img src="../../Sprites/Mutual/button back 4x -525781139.png" width="50px" alt="Arrow-back"
+        class="arrow-back-btn-icon">
     </div>
   </a>
   <div class="enemies-panel">
     <div class="enemy-container">
+      <div class="enemy-name-container name-container state-container">
+        <span class="enemy-name name state">Attack</span>
+      </div>
       <div class="enemy-name-container name-container">
         <span class="enemy-name name">ChuckTw</span>
       </div>
@@ -24,7 +31,10 @@
       </div>
     </div>
     <div class="enemy-container">
-      <div class="enemy-name-container">
+      <div class="enemy-name-container name-container state-container">
+        <span class="enemy-name name state">Attack</span>
+      </div>
+      <div class="enemy-name-container name-container">
         <span class="enemy-name name">Lirral</span>
       </div>
       <div class="enemy-cards-container">
@@ -34,7 +44,10 @@
       </div>
     </div>
     <div class="enemy-container">
-      <div class="enemy-name-container">
+      <div class="enemy-name-container name-container state-container">
+        <span class="enemy-name name state">Attack</span>
+      </div>
+      <div class="enemy-name-container name-container">
         <span class="enemy-name name">danilkar</span>
       </div>
       <div class="enemy-cards-container">
@@ -57,19 +70,39 @@
       <div class="player-portrait portrait">
         <img src="../../Sprites/Avatars/avatar-2_part1.png" alt="Player" width="50px" class="portrait-icon">
       </div>
-      <div class="player-name-container name-container">
-        <span class="player-name name">Attacks</span>
+      <div class="palyer-name-container name-container">
+        <span class="player-name name">Player</span>
+      </div>
+      <div class="palyer-name-container name-container state-container">
+        <span class="player-name name state">Attack</span>
       </div>
     </div>
-    <div class="player-cards-container"></div>
+    <!-- Player deck-->
+    <div class="player-cards-container">
+    </div>
     <div class="mock"></div>
   </div>
   <div class="cards-deck-container">
-    <div class="cards-deck">
-      <div id="card_eight_spades_01" class="card-element opened first" style="background-size: 100% 100%; background-image: url(&quot;../../Sprites/Card Skins/Release/Skin_01/eight_spades_01.png&quot;); position: relative; left: 0px; top: 0px; scale: 1;"></div>
+    <!-- Main deck -->
+    <div class="cards-deck" id="cards-deck">
     </div>
-    <span class="cards-counter">12</span>
+    <span class="cards-counter"></span>
   </div>
-  <script src="playground2.js"></script>
+  </div>
+  <script>
+    let savesList = [];
+    let user;
+    let platform;
+    let trumpSuit;
+    let globalGameSpeed = 1;
+    let player;
+  </script>
+  <script type="module">
+    import User from '../scripts/userData.js';
+    user = new User();
+
+    import('./playground2.js');
+  </script>
 </body>
+
 </html>

@@ -5,6 +5,9 @@ import { IconsByItem } from "./statics/staticValues.js"
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
+function getRandomFloat(max) {
+    return Math.random() * max;
+}
 
 function createItem(type, count) {
     return {
@@ -588,6 +591,48 @@ async function preloadImagesAsync(urls) {
     return Promise.all(promises);
 }
 
+const getElementRotation = (el) => {
+    var st = window.getComputedStyle(el, null);
+    var tm = st.getPropertyValue("-webkit-transform") ||
+        st.getPropertyValue("-moz-transform") ||
+        st.getPropertyValue("-ms-transform") ||
+        st.getPropertyValue("-o-transform") ||
+        st.getPropertyValue("transform") ||
+        "none";
+    if (tm != "none") {
+        var values = tm.split('(')[1].split(')')[0].split(',');
+        /*
+        a = values[0];
+        b = values[1];
+        angle = Math.round(Math.atan2(b,a) * (180/Math.PI));
+        */
+        //return Math.round(Math.atan2(values[1],values[0]) * (180/Math.PI)); //this would return negative values the OP doesn't wants so it got commented and the next lines of code added
+        var angle = Math.round(Math.atan2(values[1], values[0]) * (180 / Math.PI));
+        return (angle < 0 ? angle + 360 : angle); //adding 360 degrees here when angle < 0 is equivalent to adding (2 * Math.PI) radians before
+    }
+    return 0;
+}
+
+function lerp(start, end, t) {
+    return start * (1 - t) + end * t;
+}
+
+function getRectPosition(rect) {
+    return { x: rect.left, y: rect.top }
+}
+function getRectSize(rect) {
+    return { x: rect.width, y: rect.height }
+}
+
+function isTwoElementsOverlaps(one, two) {
+    const oneRect = one.getBoundingClientRect();
+    const twoRect = two.getBoundingClientRect();
+
+    return !(oneRect.right < twoRect.left ||
+        oneRect.left > twoRect.right ||
+        oneRect.bottom < twoRect.top ||
+        oneRect.top > twoRect.bottom);
+}
 
 export {
     createElement,
@@ -611,6 +656,7 @@ export {
     getIconByContent,
     createVSpace,
     getRandomInt,
+    getRandomFloat,
     isCardHasRange,
     isSameCard,
     compareCards,
@@ -624,5 +670,10 @@ export {
     getPatternLang,
     setDynamicFontSize,
     setDynamicContainerText,
-    preloadImagesAsync
+    preloadImagesAsync,
+    getElementRotation,
+    lerp,
+    getRectPosition,
+    getRectSize,
+    isTwoElementsOverlaps
 }

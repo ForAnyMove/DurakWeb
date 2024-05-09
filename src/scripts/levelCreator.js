@@ -1,40 +1,19 @@
-import { boundsChecker } from './cardBoundsChecker.js';
-import Card, { CardColumn } from './cardModel.js';
-import { cardCollector } from './cardsCollector.js';
-import { SpiderCroupier, SpiderLadyCroupier } from './croupier.js';
-import { getSkinBackImage, getSkinImage } from './data/card_skin_database.js';
-import { compareCards, compareCardsFull, getRandomInt, isCardAtRankLower, isCardHasRange, isSameCard, shuffle } from './helpers.js';
-import { changeRules, selectedRules } from './rules/gameRules.js';
-import { CardSide, ContentType, Pattern, Rank, RanksStringList, Suit, SuitMode } from './statics/enums.js';
+import Card, { CardsDeck } from './cardModel.js';
+import { shuffle } from './helpers.js';
+import { CardSide, ContentType, RanksStringList, Suit } from './statics/enums.js';
 import { Content } from './statics/staticValues.js';
 
-let croupier = null;
 let allCards = [];
-
-function createCollectableCardColumns() {
-    let collectContainers = document.getElementsByClassName('cards-container');
-    let cardColums = [];
-
-    for (let i = 0; i < collectContainers.length; i++) {
-        const container = collectContainers[i];
-
-        const cardColumn = new CardColumn(container);
-        cardColums.push(cardColumn);
-    }
-
-    cardCollector.registerCardColums(cardColums);
-}
-
 
 function generateCards(shuffleTime, fillCardsToMainDeck = true) {
     const skin = 1;
 
     const ranks = RanksStringList;
-    const suits = selectedRules.suits;
-    const decks = selectedRules.deckCount;
+    const suits = [Suit.Clubs, Suit.Diamonds, Suit.Spades, Suit.Hearts];
+    const decks = 1;
 
-    const mainCardsContainer = document.getElementById('extra-cards-container')
-    const mainCardColumn = new CardColumn(mainCardsContainer);
+    const mainCardsContainer = document.getElementById('cards-deck')
+    const mainCardColumn = new CardsDeck(mainCardsContainer);
 
     mainCardColumn.setCantPlace();
     mainCardColumn.setCantRemove();
@@ -65,6 +44,7 @@ function generateCards(shuffleTime, fillCardsToMainDeck = true) {
                 cardModel.setupCardBackImage(selectedBackSkin);
 
                 generatedCards.push(cardModel);
+
                 iteration++;
             }
         }
@@ -89,6 +69,11 @@ function createLevel() {
     const result = generateCards((cards) => {
         shuffle(cards);
         shuffle(cards);
+
+        setTimeout(() => {
+            cards[0].setOpened();
+            trumpSuit = cards[0].suit;
+        }, 0)
     });
 
     user.contentUsageChanged.addListener(() => {
@@ -103,7 +88,7 @@ function createLevel() {
         }
     })
 
-    return { mainCardColumn: result.mainCardColumn }
+    return { mainCardColumn: result.mainCardColumn, cards: result.cards }
 }
 
 export { createLevel }

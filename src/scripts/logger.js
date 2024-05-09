@@ -15,6 +15,7 @@ let logModules = [
             details: false
         }]
     },
+    { battleFlow: true }
 ]
 
 function log(object, module, submodule) {

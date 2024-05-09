@@ -182,6 +182,7 @@ body {
   column-gap: 4vw;
   margin-bottom: 2vh;
 }
+.start-game_switch-mode-btn,
 .categories-btn,
 .tutorial-btn,
 .profile-subtab-switch-btn {
@@ -193,6 +194,7 @@ body {
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
+.start-game_switch-mode-title,
 .tutorial-btn-title,
 .categories-btn-title,
 .profile-subtab-switch-btn-title {
@@ -200,14 +202,17 @@ body {
   font-size: 2vw;
   --target-font-size: 2vw;
   text-transform: uppercase;
+  margin: 0 2vw;
 }
 .tutorial-btn,
 .categories-btn-title_active,
+.start-game_switch-mode-btn_active,
 .profile-subtab-switch-btn_active {
   background-image: url('./Sprites/Mutual/Group 4x 154735546.png');
 }
 .tutorial-btn-title,
 .categories-btn-title_active > .categories-btn-title,
+.start-game_switch-mode-btn_active > .start-game_switch-mode-title,
 .profile-subtab-switch-btn_active > .profile-subtab-switch-btn-title {
   color: #a44916;
 }
@@ -404,10 +409,15 @@ body {
   position: absolute;
   scale: 0.95;
   border-radius: 1vw;
-  background: #2D5B08;
-  background: -moz-linear-gradient(top, #2D5B08 0%, #326E09 50%, #3b810a 100%);
-  background: -webkit-linear-gradient(top, #2D5B08 0%, #326E09 50%, #3b810a 100%);
-  background: linear-gradient(to bottom, #2D5B08 0%, #326E09 50%, #3b810a 100%);
+  background: #2d5b08;
+  background: -moz-linear-gradient(top, #2d5b08 0%, #326e09 50%, #3b810a 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #2d5b08 0%,
+    #326e09 50%,
+    #3b810a 100%
+  );
+  background: linear-gradient(to bottom, #2d5b08 0%, #326e09 50%, #3b810a 100%);
 }
 .profile-stats-list-item-progress-container {
   width: 80%;
@@ -502,7 +512,6 @@ body {
   filter: drop-shadow(0.6vw 0.6vw 0 rgba(0, 0, 0, 0.5));
 }
 
-
 .skins-tab {
   display: flex;
   align-items: center;
@@ -563,7 +572,7 @@ body {
 .skin-element_locked > .checkbox-pick-icon {
   display: none;
 }
-.skin-element_locked > .skin-element_locked-icon{
+.skin-element_locked > .skin-element_locked-icon {
   display: block;
 }
 .checkbox-pick-icon {
@@ -621,6 +630,7 @@ body {
 .settings_checkbox {
   width: 3.5vw;
 }
+.start-game_sliders-container,
 .settings_sliders-container {
   display: flex;
   align-items: center;
@@ -628,12 +638,15 @@ body {
   width: 40vw;
   column-gap: 2vw;
 }
+.start-game_slider-block-container,
 .settings_slider-block-container {
   display: flex;
   align-items: center;
   flex-direction: column;
   width: 45%;
 }
+
+.start-game_slider-header-container,
 .settings_slider-header-container {
   display: flex;
   align-items: center;
@@ -641,16 +654,18 @@ body {
   width: 100%;
   max-height: 100%;
 }
+.start-game_slider-header,
 .settings_slider-header {
   color: #fff1ab;
   font-size: 2.5vw;
   --target-font-size: 2.5vw;
   text-wrap: nowrap;
 }
+.start-game_slider-container_dark,
 .settings_slider-container_dark {
   width: 100%;
   height: 7vw;
-  background-image: url('./Sprites/Mutual/Rectangle 10 4x 1371338122.png');
+  background-image: url('./Sprites/Mutual/Rectangle 10 4x 287632850.png');
   background-size: 100% 100%;
   display: flex;
   align-items: center;
@@ -659,6 +674,7 @@ body {
   -webkit-box-shadow: 0px 0.2vw 0.7vw 0px #00000074;
   box-shadow: 0px 0.2vw 0.7vw 0px #00000074;
 }
+.start-game_slider-container_light,
 .settings_slider-container_light {
   width: 90%;
   height: 80%;
@@ -668,6 +684,7 @@ body {
   align-items: center;
   justify-content: center;
 }
+.start-game_slider-container,
 .settings_slider-container {
   width: 90%;
   height: 85%;
@@ -677,16 +694,19 @@ body {
   align-items: center;
   justify-content: space-between;
 }
+.start-game_switch-btn,
 .settings_switch-btn {
   width: 1.6vw;
   margin: 0 1vw;
 }
+.start-game_slider-title-container,
 .settings_slider-title-container {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 50%;
 }
+.start-game_uptitle,
 .settings_game-speed {
   color: #fff1ab;
   font-size: 3vw;
@@ -696,6 +716,7 @@ body {
   font-size: 2vw;
   --target-font-size: 2vw;
 }
+
 .settings_choose-language-container {
   display: flex;
   align-items: center;
@@ -821,10 +842,15 @@ body {
   position: absolute;
   scale: 0.95;
   border-radius: 1vw;
-  background: #2D5B08;
-  background: -moz-linear-gradient(top, #2D5B08 0%, #326E09 50%, #3b810a 100%);
-  background: -webkit-linear-gradient(top, #2D5B08 0%, #326E09 50%, #3b810a 100%);
-  background: linear-gradient(to bottom, #2D5B08 0%, #326E09 50%, #3b810a 100%);
+  background: #2d5b08;
+  background: -moz-linear-gradient(top, #2d5b08 0%, #326e09 50%, #3b810a 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #2d5b08 0%,
+    #326e09 50%,
+    #3b810a 100%
+  );
+  background: linear-gradient(to bottom, #2d5b08 0%, #326e09 50%, #3b810a 100%);
 }
 .achievements_stats-list-item-progress-container {
   width: 85%;
@@ -897,12 +923,12 @@ body {
   flex-direction: column;
   row-gap: 0.5vw;
 }
-.bonuses_bonuses-container>.checked,
-.bonuses_bonuses-container>.opened {
+.bonuses_bonuses-container > .checked,
+.bonuses_bonuses-container > .opened {
   background-image: url('./Sprites/Desktop\ -\ дурак-\ бонусы/1.png');
 }
 
-.bonuses_bonuses-container>.locked {
+.bonuses_bonuses-container > .locked {
   background-image: url('./Sprites/Desktop\ -\ дурак-\ бонусы/Дней в игре 4x -1394483402.png');
 }
 .bonuses_combine-bonus-icon-container {
@@ -973,13 +999,25 @@ body {
 .custom-component-icon {
   width: 2.7vw;
 }
-.bonuses_bonus-container:nth-child(3)>.bonuses_combine-bonus-icon-container>.custom-white-circle>.custom-color-circle>.custom-component-icon {
+.bonuses_bonus-container:nth-child(3)
+  > .bonuses_combine-bonus-icon-container
+  > .custom-white-circle
+  > .custom-color-circle
+  > .custom-component-icon {
   width: 4.2vw;
 }
-.bonuses_bonus-container:nth-child(4)>.bonuses_combine-bonus-icon-container>.custom-white-circle>.custom-color-circle>.custom-component-icon {
+.bonuses_bonus-container:nth-child(4)
+  > .bonuses_combine-bonus-icon-container
+  > .custom-white-circle
+  > .custom-color-circle
+  > .custom-component-icon {
   width: 3.2vw;
 }
-.bonuses_bonus-container:nth-child(5)>.bonuses_combine-bonus-icon-container>.custom-white-circle>.custom-color-circle>.custom-component-icon {
+.bonuses_bonus-container:nth-child(5)
+  > .bonuses_combine-bonus-icon-container
+  > .custom-white-circle
+  > .custom-color-circle
+  > .custom-component-icon {
   width: 3.7vw;
 }
 .custom-component-title-container {
@@ -995,12 +1033,22 @@ body {
   color: #fff3a0;
   font-size: 1.2vw;
   font-weight: 800;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.414)
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.414);
 }
-.bonuses_bonus-container:nth-child(3)>.bonuses_combine-bonus-icon-container>.custom-white-circle>.custom-color-circle>.custom-component-title-container>.custom-component-title {
+.bonuses_bonus-container:nth-child(3)
+  > .bonuses_combine-bonus-icon-container
+  > .custom-white-circle
+  > .custom-color-circle
+  > .custom-component-title-container
+  > .custom-component-title {
   font-size: 0.8vw;
 }
-.bonuses_bonus-container:nth-child(4)>.bonuses_combine-bonus-icon-container>.custom-white-circle>.custom-color-circle>.custom-component-title-container>.custom-component-title {
+.bonuses_bonus-container:nth-child(4)
+  > .bonuses_combine-bonus-icon-container
+  > .custom-white-circle
+  > .custom-color-circle
+  > .custom-component-title-container
+  > .custom-component-title {
   font-size: 0.9vw;
 }
 
@@ -1012,22 +1060,37 @@ body {
   display: none;
 }
 
-.bonuses_bonuses-container>.checked>.bonuses_add-activate-container>.bonuses_check-add-icon,
-.bonuses_bonuses-container>.checked>.bonuses_add-activate-container>.bonuses_timer {
+.bonuses_bonuses-container
+  > .checked
+  > .bonuses_add-activate-container
+  > .bonuses_check-add-icon,
+.bonuses_bonuses-container
+  > .checked
+  > .bonuses_add-activate-container
+  > .bonuses_timer {
   display: block;
 }
-.bonuses_bonuses-container>.opened>.bonuses_add-activate-container>.bonuses_add-icon {
+.bonuses_bonuses-container
+  > .opened
+  > .bonuses_add-activate-container
+  > .bonuses_add-icon {
   display: block;
 }
-.bonuses_bonuses-container>.locked>.bonuses_add-activate-container>.bonuses_add-icon_locked,
-.bonuses_bonuses-container>.locked>.bonuses_add-activate-container>.bonuses_time-limit {
+.bonuses_bonuses-container
+  > .locked
+  > .bonuses_add-activate-container
+  > .bonuses_add-icon_locked,
+.bonuses_bonuses-container
+  > .locked
+  > .bonuses_add-activate-container
+  > .bonuses_time-limit {
   display: block;
 }
-.bonuses_bonuses-container>.checked>.bonuses_add-activate-container,
-.bonuses_bonuses-container>.opened>.bonuses_add-activate-container {
+.bonuses_bonuses-container > .checked > .bonuses_add-activate-container,
+.bonuses_bonuses-container > .opened > .bonuses_add-activate-container {
   background-color: #fffd9e;
 }
-.bonuses_bonuses-container>.locked>.bonuses_add-activate-container {
+.bonuses_bonuses-container > .locked > .bonuses_add-activate-container {
   background-color: #dfe2f9;
 }
 .bonuses_locked-mask {
@@ -1045,9 +1108,61 @@ body {
   width: 2.5vw;
 }
 
-.bonuses_bonuses-container>.checked>.bonuses_locked-mask,
-.bonuses_bonuses-container>.opened>.bonuses_locked-mask {
+.bonuses_bonuses-container > .checked > .bonuses_locked-mask,
+.bonuses_bonuses-container > .opened > .bonuses_locked-mask {
   display: none;
+}
+
+.start-game-tab {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 0.5vh;
+}
+.start-game_header-container {
+  width: 50vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1vh;
+}
+.start-game_header {
+  color: #fff3a0;
+  font-size: 2.5vw;
+  --target-font-size: 2.5vw;
+}
+.start-game_mode-btns-container {
+  width: 29.5vw;
+  height: 6vw;
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ Профиль\ \(статус/Group 62 4x 2142765846.png');
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 1vw;
+}
+.start-game_switch-mode-btn {
+  transform: translateY(-5%);
+  width: 13vw;
+  height: 4vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.start-game_sliders-container {
+  width: 28vw;
+}
+.start-game_slider-container_dark {
+  height: 5vw;
+}
+.start-game_uptitle {
+  font-size: 2vw;
+  --target-font-size: 2vw;
+}
+.start-game_sliders-container {
+  column-gap: 1.5vw;
 }
 
 .hidden-all {
@@ -1351,7 +1466,9 @@ body {
     width: 10vw;
     height: 10vw;
   }
-  .bonuses_add-icon, .bonuses_add-icon_locked, .bonuses_check-add-icon {
+  .bonuses_add-icon,
+  .bonuses_add-icon_locked,
+  .bonuses_check-add-icon {
     width: 5vw;
   }
   .bonuses_timer {
@@ -1379,20 +1496,41 @@ body {
   .custom-component-title {
     font-size: 2vw;
   }
-  .bonuses_bonus-container:nth-child(3)>.bonuses_combine-bonus-icon-container>.custom-white-circle>.custom-color-circle>.custom-component-icon {
+  .bonuses_bonus-container:nth-child(3)
+    > .bonuses_combine-bonus-icon-container
+    > .custom-white-circle
+    > .custom-color-circle
+    > .custom-component-icon {
     width: 8.2vw;
   }
-  .bonuses_bonus-container:nth-child(4)>.bonuses_combine-bonus-icon-container>.custom-white-circle>.custom-color-circle>.custom-component-icon {
+  .bonuses_bonus-container:nth-child(4)
+    > .bonuses_combine-bonus-icon-container
+    > .custom-white-circle
+    > .custom-color-circle
+    > .custom-component-icon {
     width: 6.2vw;
   }
-  .bonuses_bonus-container:nth-child(5)>.bonuses_combine-bonus-icon-container>.custom-white-circle>.custom-color-circle>.custom-component-icon {
+  .bonuses_bonus-container:nth-child(5)
+    > .bonuses_combine-bonus-icon-container
+    > .custom-white-circle
+    > .custom-color-circle
+    > .custom-component-icon {
     width: 7.7vw;
   }
-  .bonuses_bonus-container:nth-child(3)>.bonuses_combine-bonus-icon-container>.custom-white-circle>.custom-color-circle>.custom-component-title-container>.custom-component-title {
+  .bonuses_bonus-container:nth-child(3)
+    > .bonuses_combine-bonus-icon-container
+    > .custom-white-circle
+    > .custom-color-circle
+    > .custom-component-title-container
+    > .custom-component-title {
     font-size: 1.2vw;
   }
-  .bonuses_bonus-container:nth-child(4)>.bonuses_combine-bonus-icon-container>.custom-white-circle>.custom-color-circle>.custom-component-title-container>.custom-component-title {
+  .bonuses_bonus-container:nth-child(4)
+    > .bonuses_combine-bonus-icon-container
+    > .custom-white-circle
+    > .custom-color-circle
+    > .custom-component-title-container
+    > .custom-component-title {
     font-size: 1.4vw;
   }
-
 }

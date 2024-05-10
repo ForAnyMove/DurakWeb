@@ -1,6 +1,6 @@
 import { ContentType } from "./enums.js"
 
-const locales = ['ru', 'en', 'de', 'ja', 'hi', 'pt', 'es', 'tr'];
+const locales = ['ru', 'en', 'de', 'hi', 'pt', 'es', 'tr'];
 
 const AccessibilityFlags = {
     CanPlace: 1,

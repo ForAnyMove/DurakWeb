@@ -1,0 +1,1536 @@
+body {
+  background-color: #004b1b;
+  background-image: url('../../Sprites/Custom Icons/фон.png');
+  background-size: 100% 100%;
+}
+
+.main-tab {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.logo-container {
+  width: 25vw;
+}
+.logo {
+  width: 100%;
+}
+
+.play-btn {
+  border-radius: 2vw;
+  border: none;
+  width: 18vw;
+  height: 5vw;
+  background: no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2vh 0.7vh 2vh;
+  background-image: url('../../Sprites/Mutual/base 4x -737054888.png');
+}
+.play-btn-title {
+  font-size: 2.6vw;
+  --target-font-size: 2.6vw;
+  font-weight: 600;
+  color: #ab6531;
+}
+
+.switch-tabs-btns-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.switch-tab-btn-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 10vw;
+}
+.switch-tab-btn {
+  background: none;
+  border: none;
+  border-radius: 50%;
+  width: 6vw;
+  position: relative;
+}
+.switch-tab-btn-icon {
+  width: 100%;
+}
+.switch-tab-btn-interactive-counter-container {
+  border-radius: 50%;
+  width: 2.5vw;
+  height: 2.5vw;
+  position: absolute;
+  bottom: 0.5vw;
+  right: -0.5vw;
+  animation: scaleUpDown 0.3s infinite alternate;
+  background: #ef457c;
+  background: -moz-linear-gradient(45deg, #ef457c 0%, #f886ab 100%);
+  background: -webkit-linear-gradient(45deg, #ef457c 0%, #f886ab 100%);
+  background: linear-gradient(45deg, #ef457c 0%, #f886ab 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@keyframes scaleUpDown {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+.switch-tab-btn-interactive-counter {
+  color: #fff;
+  font-size: 2vw;
+}
+.switch-tab-title-container {
+  width: 10vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.switch-tab-title {
+  color: #f0e0a8;
+  font-size: 1vw;
+  --target-font-size: 1vw;
+}
+
+.open-profile-tab-btn,
+.open-settings-tab-btn {
+  position: absolute;
+  top: 4vw;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  width: 6vw;
+}
+
+.open-profile-tab-btn {
+  left: 4vw;
+}
+.open-settings-tab-btn {
+  right: 4vw;
+}
+
+.open-profile-tab-btn-icon,
+.open-settings-tab-btn-icon {
+  width: 100%;
+}
+
+.cash-info-container {
+  width: 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 3vw;
+  right: 3vw;
+}
+.cash-info-value::before,
+.cash-info-value {
+  color: #fff3a0;
+  font-size: 1.8vw;
+}
+.cash-info-value::before {
+  content: '$';
+  color: #ffcc00;
+  margin-right: 1vw;
+}
+.arrow-back-btn {
+  position: absolute;
+  bottom: 2vw;
+  right: 2vw;
+  border-radius: 50%;
+  border: none;
+  background: none;
+}
+.profile-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.profile-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 90vh;
+}
+.profile-header-container {
+  width: 30vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2vh;
+}
+.profile-header {
+  color: #fff3a0;
+  font-size: 2.5vw;
+  --target-font-size: 2.5vw;
+}
+.profile-subtab-switch-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 4vw;
+  margin-bottom: 2vh;
+}
+.start-game_switch-mode-btn,
+.categories-btn,
+.tutorial-btn,
+.profile-subtab-switch-btn {
+  background: none;
+  border: none;
+  width: 16vw;
+  height: 5vw;
+  background-image: url('./Sprites/Mutual/Group 4x -1858867522.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.start-game_switch-mode-title,
+.tutorial-btn-title,
+.categories-btn-title,
+.profile-subtab-switch-btn-title {
+  color: #60628e;
+  font-size: 2vw;
+  --target-font-size: 2vw;
+  text-transform: uppercase;
+  margin: 0 2vw;
+}
+.tutorial-btn,
+.categories-btn-title_active,
+.start-game_switch-mode-btn_active,
+.profile-subtab-switch-btn_active {
+  background-image: url('./Sprites/Mutual/Group 4x 154735546.png');
+}
+.tutorial-btn-title,
+.categories-btn-title_active > .categories-btn-title,
+.start-game_switch-mode-btn_active > .start-game_switch-mode-title,
+.profile-subtab-switch-btn_active > .profile-subtab-switch-btn-title {
+  color: #a44916;
+}
+.profile-statuses-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  height: 100%;
+}
+.profile-status-item {
+  display: flex;
+  align-items: center;
+  background-image: url('./Sprites/Desktop - дурак- Профиль (статус/Status Back BW 1.png');
+  background-size: 100% 100%;
+  width: 25vw;
+  height: 3.5vw;
+  background-position-y: 0.3vw;
+  position: relative;
+}
+.profile-status-loading {
+  background-color: #707070;
+  width: 60%;
+  height: 85%;
+  scale: 0.8;
+}
+.profile-status-cover-container {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.profile-status-type-icon-container {
+  width: 4vw;
+  height: 4vw;
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ Профиль\ \(статус/Status Reward Back BW.png');
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile-status-type-icon {
+  width: 1.7vw;
+}
+.profile-status-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10vw;
+}
+.profile-status-title {
+  color: #fff;
+  font-size: 1.7vw;
+  --target-font-size: 1.7vw;
+}
+.profile-status-bounty-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ Профиль\ \(статус/Status Cost Back BW.png');
+  background-size: 100% 100%;
+  width: 7vw;
+  height: 3.5vw;
+}
+.profile-statuses-list
+  > .profile-status-item:not(:last-child):not(:nth-child(7))
+  > .profile-status-cover-container
+  > .profile-status-bounty-title-container
+  > .profile-status-bounty-title::after,
+.profile-status-bounty-title::before,
+.profile-status-bounty-title {
+  color: #383838;
+  font-size: 1.4vw;
+  font-weight: 800;
+}
+.profile-status-bounty-title::before {
+  content: '$';
+}
+.profile-statuses-list
+  > .profile-status-item:not(:last-child):not(:nth-child(7))
+  > .profile-status-cover-container
+  > .profile-status-bounty-title-container
+  > .profile-status-bounty-title::after {
+  content: 'K';
+}
+.profile-status-item_completed {
+  background-image: url('./Sprites/Desktop - дурак- Профиль (статус/Group 62 4x 2142765846.png');
+}
+.profile-status-item_completed > .profile-status-loading {
+  background-color: #5bba38;
+}
+.profile-status-item_completed
+  > .profile-status-cover-container
+  > .profile-status-type-icon-container {
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ Профиль\ \(статус/Status View.png');
+  animation: scaleUpDown 0.3s infinite alternate;
+}
+.profile-status-item_completed
+  > .profile-status-cover-container
+  > .profile-status-title-container
+  > .profile-status-title {
+  color: #fff3a0;
+}
+.profile-status-item_completed
+  > .profile-status-cover-container
+  > .profile-status-bounty-title-container {
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ Профиль\ \(статус/Group 4x 2134222544.png');
+}
+.profile-status-item_completed
+  > .profile-status-cover-container
+  > .profile-status-bounty-title-container
+  > .profile-status-bounty-title,
+.profile-status-item_completed
+  > .profile-status-cover-container
+  > .profile-status-bounty-title-container
+  > .profile-status-bounty-title::before,
+.profile-status-item_completed
+  > .profile-status-cover-container
+  > .profile-status-bounty-title-container
+  > .profile-status-bounty-title::after {
+  color: #a75323;
+}
+.profile-stats-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 2vw;
+}
+.profile-stats-list_first-line,
+.profile-stats-list_second-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 2vw;
+}
+.profile-stats-list_first-line {
+  margin-top: 2vw;
+}
+.profile-stats-list-item-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15vw;
+  height: 11vw;
+  border-radius: 1vw;
+  background: #fed35d;
+  background: -moz-linear-gradient(top, #fed35d 0%, #fed35d 30%, #e59109 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #fed35d 0%,
+    #fed35d 30%,
+    #e59109 100%
+  );
+  background: linear-gradient(to bottom, #fed35d 0%, #fed35d 30%, #e59109 100%);
+  -webkit-box-shadow: 0px 5px 10px 0px #000000;
+  box-shadow: 0px 5px 10px 0px #000000;
+}
+.profile-stats-list-item {
+  width: 14vw;
+  height: 10vw;
+  border-radius: 1vw;
+  background: #fff1b2;
+  background: -moz-linear-gradient(left, #fff1b2 0%, #fff1b2 50%, #ffdd53 100%);
+  background: -webkit-linear-gradient(
+    left,
+    #fff1b2 0%,
+    #fff1b2 50%,
+    #ffdd53 100%
+  );
+  background: linear-gradient(to right, #fff1b2 0%, #fff1b2 50%, #ffdd53 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+.profile-stats-list-item-title-container {
+  width: 80%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile-stats-list-item-title {
+  color: #a44916;
+  font-size: 1vw;
+  --target-font-size: 1vw;
+  font-weight: 600;
+}
+.profile-stats-list-item-progress-level-mask {
+  width: 100%;
+  height: 95%;
+  position: absolute;
+  scale: 0.95;
+  border-radius: 1vw;
+  background: #2d5b08;
+  background: -moz-linear-gradient(top, #2d5b08 0%, #326e09 50%, #3b810a 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #2d5b08 0%,
+    #326e09 50%,
+    #3b810a 100%
+  );
+  background: linear-gradient(to bottom, #2d5b08 0%, #326e09 50%, #3b810a 100%);
+}
+.profile-stats-list-item-progress-container {
+  width: 80%;
+  height: 3vw;
+  background: #a55925;
+  background: -moz-linear-gradient(top, #a55925 0%, #c07027 50%, #d27e29 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #a55925 0%,
+    #c07027 50%,
+    #d27e29 100%
+  );
+  background: linear-gradient(to bottom, #a55925 0%, #c07027 50%, #d27e29 100%);
+  -webkit-box-shadow: inset 0px 5px 10px -5px #000000;
+  box-shadow: inset 0px 5px 10px -5px #000000;
+  border-top: 2px solid #a75323;
+  border-bottom: 2px solid #fed35d;
+  border-radius: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.profile-stats-list-item-progress-title::after,
+.profile-stats-list-item-progress-title {
+  color: #fff3a0;
+  font-size: 1.8vw;
+  z-index: 1;
+}
+.profile-stats-list-item-progress-title::after {
+  content: '%';
+}
+.arrow-back-btn-icon {
+  width: 5.5vw;
+}
+
+.choose-avatar-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.choose-avatar_container {
+  width: 38vw;
+  height: 30vw;
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ ежедневный\ бону/Group 48 4x 369162226.png');
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  row-gap: 2vw;
+}
+.choose-avatar_close-icon {
+  position: absolute;
+  width: 5.5vw;
+  top: -7%;
+  right: -7%;
+}
+.choose-avatar_title-container {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.choose-avatar_title {
+  color: #fff1ab;
+  font-size: 2.6vw;
+  --target-font-size: 2.6vw;
+}
+.choose-avatar_avatar-picker-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 1vw;
+}
+.choose-avatar_avatar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15vw;
+  height: 15vw;
+}
+.choose-avatar_avatar-icon {
+  width: 95%;
+  filter: drop-shadow(0.6vw 0.6vw 0 rgba(0, 0, 0, 0.5));
+}
+.choose-avatar_switch-btn {
+  width: 5vw;
+  filter: drop-shadow(0.6vw 0.6vw 0 rgba(0, 0, 0, 0.5));
+}
+
+.skins-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+.skins-nav-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 2vw;
+  list-style-type: none;
+  margin-bottom: 6vh;
+}
+.categories-btn {
+  width: 11vw;
+  height: 4vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.categories-btn-title-container {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.skins-pick-area {
+  background-color: #004b1b; /* Потом убрать */
+  min-height: 60vh;
+  max-height: 60vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 10vh;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  width: 75%;
+  padding: 0 2%;
+  overflow-y: scroll;
+  column-gap: 5vw;
+  row-gap: 2vw;
+}
+.skin-element {
+  width: 18vw;
+  height: 8vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #a44916; /* Потом убрать */
+}
+.skin-element_locked-icon {
+  display: none;
+  width: 3vw;
+}
+.skin-element_locked > .checkbox-pick-icon {
+  display: none;
+}
+.skin-element_locked > .skin-element_locked-icon {
+  display: block;
+}
+.checkbox-pick-icon {
+  width: 5vw;
+}
+.skin-element_default-skin {
+  background-image: url(''); /* добавить фоном скин карт */
+}
+
+.settings-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+.settings_header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20vw;
+  margin-bottom: 1vw;
+}
+.settings_header {
+  color: #fff1ab;
+  font-size: 2.6vw;
+  --target-font-size: 2.6vw;
+}
+.settings_tunes-switch-container {
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ настройки/Group 48 4x -1096314688.png');
+  background-size: 100% 100%;
+  width: 40vw;
+  height: 13vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+.settings_tune-switch-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+}
+.settings_tune-title-container {
+  display: flex;
+  align-items: center;
+  width: 20vw;
+}
+.settings_tune-title {
+  color: #fff1ab;
+  font-size: 2.7vw;
+  --target-font-size: 2.7vw;
+}
+.settings_checkbox {
+  width: 3.5vw;
+}
+.start-game_sliders-container,
+.settings_sliders-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40vw;
+  column-gap: 2vw;
+}
+.start-game_slider-block-container,
+.settings_slider-block-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 45%;
+}
+
+.start-game_slider-header-container,
+.settings_slider-header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-height: 100%;
+}
+.start-game_slider-header,
+.settings_slider-header {
+  color: #fff1ab;
+  font-size: 2.5vw;
+  --target-font-size: 2.5vw;
+  text-wrap: nowrap;
+}
+.start-game_slider-container_dark,
+.settings_slider-container_dark {
+  width: 100%;
+  height: 7vw;
+  background-image: url('./Sprites/Mutual/Rectangle 10 4x 287632850.png');
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1vw 0;
+  -webkit-box-shadow: 0px 0.2vw 0.7vw 0px #00000074;
+  box-shadow: 0px 0.2vw 0.7vw 0px #00000074;
+}
+.start-game_slider-container_light,
+.settings_slider-container_light {
+  width: 90%;
+  height: 80%;
+  background-image: url('./Sprites/Mutual/Rectangle 11 4x 1546609023.png');
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.start-game_slider-container,
+.settings_slider-container {
+  width: 90%;
+  height: 85%;
+  background-image: url('./Sprites/Mutual/Rectangle 12 4x -986428251.png');
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.start-game_switch-btn,
+.settings_switch-btn {
+  width: 1.6vw;
+  margin: 0 1vw;
+}
+.start-game_slider-title-container,
+.settings_slider-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+}
+.start-game_uptitle,
+.settings_game-speed {
+  color: #fff1ab;
+  font-size: 3vw;
+}
+.settings_difficult {
+  color: #fff1ab;
+  font-size: 2vw;
+  --target-font-size: 2vw;
+}
+
+.settings_choose-language-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.settings_choose-language-icon {
+  width: 2.8vw;
+  margin-bottom: 0.2vw;
+}
+.settings_choose-language-title {
+  color: #fff1ab;
+  font-size: 1.4vw;
+}
+.tutorial-btn {
+  position: absolute;
+  bottom: 3vw;
+  left: 3vw;
+}
+.version-container {
+  position: absolute;
+  left: 4vw;
+  bottom: 0.5vw;
+}
+.version-title {
+  color: #fff1ab;
+  font-size: 1.5vw;
+}
+
+.achievements-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+.achievements_tab-header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30vw;
+  margin-bottom: 1vw;
+}
+.achievements_tab-header {
+  font-size: 2.5vw;
+  --target-font-size: 2.5vw;
+  color: #fff1ab;
+}
+.achievements_stats-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 32vw;
+  height: 80%;
+  column-gap: 2vw;
+  row-gap: 3vw;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.achievements_stats-container::-webkit-scrollbar {
+  width: 0;
+}
+.achievements_stats-list-item-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15vw;
+  height: 8vw;
+  border-radius: 1vw;
+  background: #fed35d;
+  background: -moz-linear-gradient(top, #fed35d 0%, #fed35d 30%, #e59109 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #fed35d 0%,
+    #fed35d 30%,
+    #e59109 100%
+  );
+  background: linear-gradient(to bottom, #fed35d 0%, #fed35d 30%, #e59109 100%);
+  -webkit-box-shadow: 0px 5px 10px 0px #000000;
+  box-shadow: 0px 5px 10px 0px #000000;
+}
+.achievements_stats-list-item {
+  width: 14vw;
+  height: 7vw;
+  border-radius: 1vw;
+  background: #fff1b2;
+  background: -moz-linear-gradient(left, #fff1b2 0%, #fff1b2 50%, #ffdd53 100%);
+  background: -webkit-linear-gradient(
+    left,
+    #fff1b2 0%,
+    #fff1b2 50%,
+    #ffdd53 100%
+  );
+  background: linear-gradient(to right, #fff1b2 0%, #fff1b2 50%, #ffdd53 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+.achievements_header-container {
+  display: flex;
+  align-items: center;
+  width: 85%;
+}
+.achievements_stats-list-item-title-container {
+  width: 85%;
+  height: 3vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.5vw;
+}
+.achievements_stats-list-item-title {
+  color: #a44916;
+  font-size: 1vw;
+  --target-font-size: 1vw;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.achievements_stats-list-item-progress-level-mask {
+  width: 100%;
+  height: 95%;
+  position: absolute;
+  scale: 0.95;
+  border-radius: 1vw;
+  background: #2d5b08;
+  background: -moz-linear-gradient(top, #2d5b08 0%, #326e09 50%, #3b810a 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #2d5b08 0%,
+    #326e09 50%,
+    #3b810a 100%
+  );
+  background: linear-gradient(to bottom, #2d5b08 0%, #326e09 50%, #3b810a 100%);
+}
+.achievements_stats-list-item-progress-container {
+  width: 85%;
+  height: 3vw;
+  background: #a55925;
+  background: -moz-linear-gradient(top, #a55925 0%, #c07027 50%, #d27e29 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #a55925 0%,
+    #c07027 50%,
+    #d27e29 100%
+  );
+  background: linear-gradient(to bottom, #a55925 0%, #c07027 50%, #d27e29 100%);
+  -webkit-box-shadow: inset 0px 5px 10px -5px #000000;
+  box-shadow: inset 0px 5px 10px -5px #000000;
+  border-top: 2px solid #a75323;
+  border-bottom: 2px solid #fed35d;
+  border-radius: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.achievements_stats-list-item-progress-title {
+  color: #fff3a0;
+  font-size: 1.8vw;
+  z-index: 1;
+}
+.achievements_header-icon {
+  width: 1.7vw;
+}
+.bonuses-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
+.bonuses_header-container {
+  width: 30vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1vw;
+}
+.bonuses_header {
+  color: #fff3a0;
+  font-size: 2.3vw;
+  --target-font-size: 2.3vw;
+}
+.bonuses_bonuses-container {
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ бонусы/Group 48 4x 128278538.png');
+  background-size: 100% 100%;
+  width: 45vw;
+  height: 12.5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 0.5vw;
+}
+.bonuses_bonus-container {
+  position: relative;
+  background-size: 100% 100%;
+  width: 8vw;
+  height: 10vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 0.5vw;
+}
+.bonuses_bonuses-container > .checked,
+.bonuses_bonuses-container > .opened {
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ бонусы/1.png');
+}
+
+.bonuses_bonuses-container > .locked {
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ бонусы/Дней в игре 4x -1394483402.png');
+}
+.bonuses_combine-bonus-icon-container {
+  width: 6vw;
+  height: 6vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: -10%;
+}
+.bonuses_add-activate-container {
+  border-bottom-left-radius: 0.5vw;
+  border-bottom-right-radius: 0.5vw;
+  width: 78%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bonuses_add-icon,
+.bonuses_add-icon_locked,
+.bonuses_check-add-icon {
+  width: 2vw;
+}
+.bonuses_timer {
+  font-size: 1.1vw;
+  font-weight: 800;
+  color: #a55925;
+}
+.bonuses_time-limit {
+  font-size: 0.9vw;
+  font-weight: 800;
+  color: #60628e;
+  margin-left: 1.5vw;
+}
+
+.custom-white-circle {
+  width: 5vw;
+  height: 5vw;
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ бонусы/Ellipse 3 4x -1976248195.png');
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.custom-color-circle {
+  width: 80%;
+  height: 80%;
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.custom-color-circle_pink {
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ бонусы/Ellipse 4 4x -570393785.png');
+}
+.custom-color-circle_purple {
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ бонусы/Ellipse 4 4x -693673681.png');
+}
+.custom-color-circle_green {
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ бонусы/Ellipse 4 4x -836687562.png');
+}
+.custom-color-circle_yellow {
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ бонусы/Ellipse 4 4x 1653323111.png');
+}
+.custom-component-icon {
+  width: 2.7vw;
+}
+.bonuses_bonus-container:nth-child(3)
+  > .bonuses_combine-bonus-icon-container
+  > .custom-white-circle
+  > .custom-color-circle
+  > .custom-component-icon {
+  width: 4.2vw;
+}
+.bonuses_bonus-container:nth-child(4)
+  > .bonuses_combine-bonus-icon-container
+  > .custom-white-circle
+  > .custom-color-circle
+  > .custom-component-icon {
+  width: 3.2vw;
+}
+.bonuses_bonus-container:nth-child(5)
+  > .bonuses_combine-bonus-icon-container
+  > .custom-white-circle
+  > .custom-color-circle
+  > .custom-component-icon {
+  width: 3.7vw;
+}
+.custom-component-title-container {
+  width: 120%;
+  height: 2vw;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  transform: translateY(-25%);
+  text-align: center;
+}
+.custom-component-title {
+  color: #fff3a0;
+  font-size: 1.2vw;
+  font-weight: 800;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.414);
+}
+.bonuses_bonus-container:nth-child(3)
+  > .bonuses_combine-bonus-icon-container
+  > .custom-white-circle
+  > .custom-color-circle
+  > .custom-component-title-container
+  > .custom-component-title {
+  font-size: 0.8vw;
+}
+.bonuses_bonus-container:nth-child(4)
+  > .bonuses_combine-bonus-icon-container
+  > .custom-white-circle
+  > .custom-color-circle
+  > .custom-component-title-container
+  > .custom-component-title {
+  font-size: 0.9vw;
+}
+
+.bonuses_check-add-icon,
+.bonuses_add-icon,
+.bonuses_add-icon_locked,
+.bonuses_timer,
+.bonuses_time-limit {
+  display: none;
+}
+
+.bonuses_bonuses-container
+  > .checked
+  > .bonuses_add-activate-container
+  > .bonuses_check-add-icon,
+.bonuses_bonuses-container
+  > .checked
+  > .bonuses_add-activate-container
+  > .bonuses_timer {
+  display: block;
+}
+.bonuses_bonuses-container
+  > .opened
+  > .bonuses_add-activate-container
+  > .bonuses_add-icon {
+  display: block;
+}
+.bonuses_bonuses-container
+  > .locked
+  > .bonuses_add-activate-container
+  > .bonuses_add-icon_locked,
+.bonuses_bonuses-container
+  > .locked
+  > .bonuses_add-activate-container
+  > .bonuses_time-limit {
+  display: block;
+}
+.bonuses_bonuses-container > .checked > .bonuses_add-activate-container,
+.bonuses_bonuses-container > .opened > .bonuses_add-activate-container {
+  background-color: #fffd9e;
+}
+.bonuses_bonuses-container > .locked > .bonuses_add-activate-container {
+  background-color: #dfe2f9;
+}
+.bonuses_locked-mask {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  background-color: #00000041;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  border-radius: 0.5vw;
+}
+.bonuses_locked-icon {
+  width: 2.5vw;
+}
+
+.bonuses_bonuses-container > .checked > .bonuses_locked-mask,
+.bonuses_bonuses-container > .opened > .bonuses_locked-mask {
+  display: none;
+}
+
+.start-game-tab {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 0.5vh;
+}
+.start-game_header-container {
+  width: 50vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1vh;
+}
+.start-game_header {
+  color: #fff3a0;
+  font-size: 2.5vw;
+  --target-font-size: 2.5vw;
+}
+.start-game_mode-btns-container {
+  width: 29.5vw;
+  height: 6vw;
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ Профиль\ \(статус/Group 62 4x 2142765846.png');
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 1vw;
+}
+.start-game_switch-mode-btn {
+  transform: translateY(-5%);
+  width: 13vw;
+  height: 4vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.start-game_sliders-container {
+  width: 28vw;
+}
+.start-game_slider-container_dark {
+  height: 5vw;
+}
+.start-game_uptitle {
+  font-size: 2vw;
+  --target-font-size: 2vw;
+}
+.start-game_sliders-container {
+  column-gap: 1.5vw;
+}
+
+.hidden-all {
+  display: none;
+}
+
+@media only screen and (orientation: portrait) {
+  .background-mask {
+    background-size: 13vh;
+  }
+  .switch-tab-btn {
+    width: 14vw;
+  }
+  .open-profile-tab-btn,
+  .open-settings-tab-btn {
+    width: 14vw;
+    top: 6vw;
+  }
+  .open-profile-tab-btn {
+    left: 6vw;
+  }
+  .open-settings-tab-btn {
+    right: 6vw;
+  }
+  .switch-tab-btn-interactive-counter-container {
+    width: 5.5vw;
+    height: 5.5vw;
+  }
+  .logo-container {
+    width: 95vw;
+  }
+  .play-btn {
+    width: 35vw;
+    height: 10vw;
+    padding: 0;
+  }
+  .play-btn-title {
+    font-size: 5.6vw;
+    --target-font-size: 5.6vw;
+    font-weight: 700;
+  }
+  .switch-tabs-btns-container {
+    justify-content: space-between;
+    width: 80vw;
+  }
+  .switch-tab-btn-container {
+    width: 15vw;
+  }
+  .switch-tab-title-container {
+    width: 100%;
+  }
+  .switch-tab-title {
+    font-size: 2.5vw;
+    --target-font-size: 2.5vw;
+  }
+  .play-btn-container {
+    transform: translateY(20vw);
+  }
+  .profile-container {
+    height: 45vh;
+  }
+  .profile-header {
+    font-size: 5.5vw;
+    --target-font-size: 5.5vw;
+  }
+  .profile-subtab-switch-container {
+    column-gap: 8vw;
+  }
+  .profile-subtab-switch-btn {
+    width: 35vw;
+    height: 12vw;
+  }
+  .profile-subtab-switch-btn-title {
+    font-size: 4vw;
+    --target-font-size: 4vw;
+  }
+  .profile-status-item {
+    width: 99vw;
+    height: 6.5vw;
+  }
+  .profile-status-type-icon-container {
+    width: 8.5vw;
+    height: 8.5vw;
+  }
+  .profile-status-type-icon {
+    width: 3.5vw;
+  }
+  .profile-status-title-container {
+    width: 40vw;
+  }
+  .profile-status-title {
+    font-size: 3.3vw;
+    --target-font-size: 3.3vw;
+  }
+  .profile-status-bounty-title-container {
+    width: 15vw;
+    height: 7.5vw;
+  }
+  .profile-statuses-list
+    > .profile-status-item:not(:last-child):not(:nth-child(7))
+    > .profile-status-cover-container
+    > .profile-status-bounty-title-container
+    > .profile-status-bounty-title::after,
+  .profile-status-bounty-title::before,
+  .profile-status-bounty-title {
+    font-size: 2.7vw;
+  }
+  .cash-info-container {
+    width: 10vw;
+    top: 6vw;
+    right: 6vw;
+  }
+  .cash-info-value::before,
+  .cash-info-value {
+    font-size: 3.5vw;
+  }
+  .arrow-back-btn {
+    bottom: 4vw;
+    right: 4vw;
+  }
+  .arrow-back-btn-icon {
+    width: 10.5vw;
+  }
+  .profile-header-container {
+    margin-bottom: 1vh;
+  }
+  .profile-stats-list_first-line,
+  .profile-stats-list_second-line {
+    column-gap: 6vw;
+  }
+  .profile-stats-list {
+    row-gap: 6vw;
+  }
+  .profile-stats-list-item-tab {
+    width: 40vw;
+    height: 22vw;
+  }
+  .profile-stats-list-item {
+    width: 38vw;
+    height: 19vw;
+  }
+  .profile-stats-list-item-title {
+    font-size: 2vw;
+    --target-font-size: 2vw;
+  }
+  .profile-stats-list-item-progress-container {
+    height: 5vw;
+    border-radius: 2vw;
+  }
+  .profile-stats-list-item-progress-title::after,
+  .profile-stats-list-item-progress-title {
+    font-size: 2.8vw;
+  }
+  .profile-stats-list-item-progress-level-mask {
+    border-radius: 2vw;
+  }
+  .choose-avatar_container {
+    scale: 2;
+  }
+  .choose-avatar_close-icon {
+    top: -5%;
+    right: -5%;
+  }
+  .tutorial-btn {
+    width: 30vw;
+    height: 10vw;
+    bottom: 6vw;
+    left: 5vw;
+  }
+  .tutorial-btn-title {
+    font-size: 4vw;
+    --target-font-size: 4vw;
+  }
+  .version-container {
+    left: 8vw;
+    bottom: 1vw;
+  }
+  .version-title {
+    color: #fff1ab;
+    font-size: 3vw;
+  }
+  .settings_header-container {
+    width: 55vw;
+    margin-bottom: 4vw;
+  }
+  .settings_header {
+    font-size: 5.6vw;
+    --target-font-size: 5.6vw;
+  }
+  .settings_tunes-switch-container {
+    width: 95vw;
+    height: 27vw;
+    padding: 2vw 0;
+  }
+  .settings_tune-title-container {
+    width: 40vw;
+  }
+  .settings_tune-title {
+    font-size: 5.2vw;
+    --target-font-size: 5.2vw;
+  }
+  .settings_checkbox {
+    width: 7.5vw;
+  }
+  .settings_sliders-container {
+    width: 95%;
+    column-gap: 6vw;
+  }
+  .settings_slider-header {
+    font-size: 5.5vw;
+    --target-font-size: 5.5vw;
+  }
+  .settings_slider-container_dark {
+    height: 14vw;
+    margin: 2vw 0;
+  }
+  .settings_switch-btn {
+    width: 3.6vw;
+  }
+  .settings_game-speed {
+    font-size: 6.5vw;
+  }
+  .settings_difficult {
+    font-size: 5vw;
+    --target-font-size: 5vw;
+  }
+  .settings_choose-language-icon {
+    width: 6.2vw;
+    margin-bottom: 1vw;
+  }
+  .settings_choose-language-title {
+    font-size: 3.4vw;
+  }
+  .achievements-tab {
+    justify-content: flex-start;
+  }
+  .achievements_tab-header-container {
+    width: 50vw;
+  }
+  .achievements_tab-header {
+    margin-top: 2vh;
+    font-size: 5.5vw;
+    --target-font-size: 5.5vw;
+    margin-bottom: 20vh;
+  }
+  .achievements_stats-container {
+    width: 84vw;
+    height: 57%;
+    column-gap: 4vw;
+    row-gap: 6vw;
+  }
+  .achievements_stats-list-item-tab {
+    width: 40vw;
+    height: 15vw;
+    border-radius: 2vw;
+  }
+  .achievements_stats-list-item {
+    width: 38vw;
+    height: 13vw;
+    border-radius: 2vw;
+  }
+  .achievements_header-icon {
+    width: 3.7vw;
+  }
+  .achievements_stats-list-item-title-container {
+    height: 5vw;
+  }
+  .achievements_stats-list-item-title {
+    font-size: 2.5vw;
+    --target-font-size: 2.5vw;
+  }
+  .achievements_stats-list-item-progress-container {
+    height: 5vw;
+    border-radius: 2vw;
+  }
+  .achievements_stats-list-item-progress-level-mask {
+    border-radius: 2vw;
+  }
+  .achievements_stats-list-item-progress-title {
+    font-size: 3.2vw;
+  }
+  .bonuses_header {
+    font-size: 5.3vw;
+    --target-font-size: 5.3vw;
+  }
+  .bonuses_bonuses-container {
+    width: 99vw;
+    height: 23.5vw;
+    column-gap: 1vw;
+  }
+  .bonuses_bonus-container {
+    width: 18vw;
+    height: 20vw;
+    row-gap: 2vw;
+  }
+  .bonuses_combine-bonus-icon-container {
+    width: 10vw;
+    height: 10vw;
+  }
+  .custom-white-circle {
+    width: 10vw;
+    height: 10vw;
+  }
+  .bonuses_add-icon,
+  .bonuses_add-icon_locked,
+  .bonuses_check-add-icon {
+    width: 5vw;
+  }
+  .bonuses_timer {
+    font-size: 2.1vw;
+  }
+  .bonuses_time-limit {
+    font-size: 1.7vw;
+    margin-left: 3.5vw;
+  }
+  .bonuses_locked-mask {
+    transform: translateY(-3%);
+    border-radius: 1vw;
+  }
+  .bonuses_locked-icon {
+    width: 4.5vw;
+  }
+  .custom-component-icon {
+    width: 5.4vw;
+    margin-top: -1vw;
+  }
+  .custom-component-title-container {
+    height: 3vw;
+    transform: translateY(-10%);
+  }
+  .custom-component-title {
+    font-size: 2vw;
+  }
+  .bonuses_bonus-container:nth-child(3)
+    > .bonuses_combine-bonus-icon-container
+    > .custom-white-circle
+    > .custom-color-circle
+    > .custom-component-icon {
+    width: 8.2vw;
+  }
+  .bonuses_bonus-container:nth-child(4)
+    > .bonuses_combine-bonus-icon-container
+    > .custom-white-circle
+    > .custom-color-circle
+    > .custom-component-icon {
+    width: 6.2vw;
+  }
+  .bonuses_bonus-container:nth-child(5)
+    > .bonuses_combine-bonus-icon-container
+    > .custom-white-circle
+    > .custom-color-circle
+    > .custom-component-icon {
+    width: 7.7vw;
+  }
+  .bonuses_bonus-container:nth-child(3)
+    > .bonuses_combine-bonus-icon-container
+    > .custom-white-circle
+    > .custom-color-circle
+    > .custom-component-title-container
+    > .custom-component-title {
+    font-size: 1.2vw;
+  }
+  .bonuses_bonus-container:nth-child(4)
+    > .bonuses_combine-bonus-icon-container
+    > .custom-white-circle
+    > .custom-color-circle
+    > .custom-component-title-container
+    > .custom-component-title {
+    font-size: 1.4vw;
+  }
+}

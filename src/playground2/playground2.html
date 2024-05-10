@@ -62,7 +62,7 @@
     <div class="playground-zone"></div>
     <div class="control-btns-panel">
       <button class="pass-btn">
-        <span class="pass-btn-title">PASS</span>
+        <span class="pass-btn-title" lang="Buttons/Pass">PASS</span>
       </button>
     </div>
   </div>
@@ -97,11 +97,19 @@
     let trumpSuit;
     let globalGameSpeed = 1;
     let player;
+    let languageChangeEvent;
+    let dynamicFontChanger;
   </script>
   <script type="module">
+    import { Action } from '../scripts/globalEvents.js';
     import User from '../scripts/userData.js';
     user = new User();
 
+    languageChangeEvent = new Action();
+    const dfc = await import('../localization/dynamicFontChanger.js')
+    dynamicFontChanger = dfc.getNew();
+
+    languageChangeEvent.invoke('en');
     import('./playground2.js');
   </script>
 </body>

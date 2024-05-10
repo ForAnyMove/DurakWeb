@@ -88,3 +88,9 @@ export default class DynamicFontChanger {
         }
     }
 }
+
+function getNew() {
+    return new DynamicFontChanger();
+}
+
+export { getNew }

@@ -66,8 +66,17 @@ body {
   column-gap: 15vw;
 }
 
+.enemy-portrait.ally {
+  filter: drop-shadow(0px 0px 0.5vw #89ff49) drop-shadow(0px 0px 0.5vw #0b9a00);
+}
+
+.enemy-portrait.enemy {
+  filter: drop-shadow(0px 0px 0.5vw #ff4949) drop-shadow(0px 0px 0.5vw #9a0000);
+}
+
 .enemy-container {
   margin: 2vw;
+  margin-top: 1vw;
   width: 10vw;
   height: 12vw;
   position: relative;
@@ -172,6 +181,7 @@ body {
   align-items: flex-start;
   justify-content: center;
   column-gap: 5vw;
+  margin-bottom: 5vw;
 }
 
 .playground-pare-element {

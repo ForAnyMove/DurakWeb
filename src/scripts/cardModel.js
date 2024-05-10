@@ -3,7 +3,7 @@ import { State } from "./battleFlow.js";
 import { boundsChecker } from "./cardBoundsChecker.js";
 import { cardSelector } from "./cardSelector.js";
 import { getSkinBackImage, getSkinImage } from "./data/card_skin_database.js";
-import { DOChangeValue, DOChangeXY, Ease } from "./dotween/dotween.js";
+import { DOChangeValue, DOChangeXY, Delay, Ease } from "./dotween/dotween.js";
 import { Action, CanInteract, disableInteractions, enableInteractions } from "./globalEvents.js";
 import { getRandomFloat, lerp } from "./helpers.js";
 import { battleground } from "./playgroundBattle.js";
@@ -30,6 +30,7 @@ export default class Card {
         this.dropFinishedEvent = new Action();
 
         this.isFocused = false;
+        this.isUsedAsTrumpTransfare = false;
     }
 
     setClosed = function () {
@@ -270,7 +271,7 @@ export default class Card {
         }
     }
 
-    tryDrop = function (previousColumn, card) {
+    tryDrop = async function (previousColumn, card) {
         this.unfocus();
 
         const playerState = player.state;
@@ -295,9 +296,16 @@ export default class Card {
                 const overlapZone = boundsChecker.getBattleZoneByCard(card);
                 if (overlapZone == null) {
                     if (playerState == State.DefendCanTransfare && battleground.canTransfare(card)) {
+                        if (this.suit == trumpSuit && !this.isUsedAsTrumpTransfare) {
+                            player.cardPlacedByUserEvent.invoke({ transfare: true, card: this });
+                            this.isUsedAsTrumpTransfare = true;
+
+                            return;
+                        }
+
                         const zone = battleground.createZone();
                         zone.wrapper.translateCard(card);
-                        player.cardPlacedByUserEvent.invoke(true);
+                        player.cardPlacedByUserEvent.invoke({ transfare: true, card: null });
                         return;
                     }
                     previousColumn.translateCard(card);
@@ -448,6 +456,16 @@ class CardsWrapper {
         this.cardAddedEvent?.invoke(card);
 
         return true;
+    }
+
+    removeWithTransform(card) {
+        if (this.removeCard(card)) {
+            card.domElement.style.transformOrigin = ''
+
+            const startPosition = { x: parseFloat(card.domElement.style.left), y: parseFloat(card.domElement.style.top) };
+            card.domElement.style.left = `${startPosition.x}px`;
+            card.domElement.style.top = `${startPosition.y}px`;
+        }
     }
 
     async removeCard(card, defaultWay = true) {

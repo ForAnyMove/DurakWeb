@@ -77,7 +77,7 @@ class Battleground {
     }
 
     canTransfareByRule(cards) {
-        return false;
+        // return false;
 
         const zoneCards = this.getCards();
 

@@ -184,6 +184,7 @@ body {
 }
 .start-game_switch-mode-btn,
 .categories-btn,
+.start-game_play-btn,
 .tutorial-btn,
 .profile-subtab-switch-btn {
   background: none;
@@ -196,15 +197,16 @@ body {
 }
 .start-game_switch-mode-title,
 .tutorial-btn-title,
+.start-game_play-btn-title,
 .categories-btn-title,
 .profile-subtab-switch-btn-title {
   color: #60628e;
   font-size: 2vw;
   --target-font-size: 2vw;
   text-transform: uppercase;
-  margin: 0 2vw;
 }
 .tutorial-btn,
+.start-game_play-btn,
 .categories-btn-title_active,
 .start-game_switch-mode-btn_active,
 .profile-subtab-switch-btn_active {
@@ -212,6 +214,7 @@ body {
 }
 .tutorial-btn-title,
 .categories-btn-title_active > .categories-btn-title,
+.categories-btn-title_active > .categories-btn-title-container>.categories-btn-title,
 .start-game_switch-mode-btn_active > .start-game_switch-mode-title,
 .profile-subtab-switch-btn_active > .profile-subtab-switch-btn-title {
   color: #a44916;
@@ -515,7 +518,6 @@ body {
 .skins-tab {
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
   height: 100%;
 }
@@ -525,6 +527,7 @@ body {
   justify-content: center;
   column-gap: 2vw;
   list-style-type: none;
+  margin-top: 8vh;
   margin-bottom: 6vh;
 }
 .categories-btn {
@@ -542,32 +545,30 @@ body {
   justify-content: center;
 }
 .skins-pick-area {
-  background-color: #004b1b; /* Потом убрать */
-  min-height: 60vh;
-  max-height: 60vh;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   margin-bottom: 10vh;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  width: 75%;
-  padding: 0 2%;
+  width: 79vw;
   overflow-y: scroll;
   column-gap: 5vw;
   row-gap: 2vw;
 }
 .skin-element {
-  width: 18vw;
-  height: 8vw;
+  width: 16vw;
+  height: 7.5vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #a44916; /* Потом убрать */
 }
 .skin-element_locked-icon {
   display: none;
   width: 3vw;
+}
+.skin-element_locked {
+  filter: brightness(0.7);
 }
 .skin-element_locked > .checkbox-pick-icon {
   display: none;
@@ -577,10 +578,161 @@ body {
 }
 .checkbox-pick-icon {
   width: 5vw;
+  transform: translateY(15%);
 }
-.skin-element_default-skin {
-  background-image: url(''); /* добавить фоном скин карт */
+.skin-element_skin-1 {
+  background-image: url('./Sprites/Card Skins/Collection Skins/card_skin_preview_01.png');
+  background-size: 100% 100%;
 }
+.skin-element_skin-2 {
+  background-image: url('./Sprites/Card Skins/Collection Skins/card_skin_preview_02.png');
+  background-size: 100% 100%;
+}
+.skin-element_skin-3 {
+  background-image: url('./Sprites/Card Skins/Collection Skins/card_skin_preview_03.png');
+  background-size: 100% 100%;
+}
+.skin-element_skin-4 {
+  background-image: url('./Sprites/Card Skins/Collection Skins/card_skin_preview_04.png');
+  background-size: 100% 100%;
+}
+.skin-element_skin-5 {
+  background-image: url('./Sprites/Card Skins/Collection Skins/card_skin_preview_05.png');
+  background-size: 100% 100%;
+}
+.background-element {
+  background: #FCEDAD;
+  background: -moz-linear-gradient(top, #FCEDAD 0%, #f1b335 50%, #D0860A 100%);
+  background: -webkit-linear-gradient(top, #FCEDAD 0%, #f1b335 50%, #D0860A 100%);
+  background: linear-gradient(to bottom, #FCEDAD 0%, #f1b335 50%, #D0860A 100%);
+  border-radius: 1vw;
+  width: 16vw;
+  height: 9vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+#pick-area-2 {
+  width: 96vw;
+  column-gap: 4vw;
+}
+.background-element>.checkbox-pick-icon {
+  position: absolute;
+  width: 4vw;
+}
+.background-element>.skin-element_locked-icon {
+  position: absolute;
+  width: 2.5vw;
+}
+.background-element_skin-1 {
+  background-image: url('./Sprites/Backgrounds/Release/Background_01.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 95%;
+  height: 90%;
+}
+.background-element_skin-2 {
+  background-image: url('./Sprites/Backgrounds/Release/Background_02.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 95%;
+  height: 90%;
+}
+.background-element_skin-3 {
+  background-image: url('./Sprites/Backgrounds/Release/Background_03.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 95%;
+  height: 90%;
+}
+.background-element_skin-4 {
+  background-image: url('./Sprites/Backgrounds/Release/Background_04.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 95%;
+  height: 90%;
+}
+.background-element_skin-5 {
+  background-image: url('./Sprites/Backgrounds/Release/Background_05.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 95%;
+  height: 90%;
+}
+.background-element_skin-6 {
+  background-image: url('./Sprites/Backgrounds/Release/Background_06.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 95%;
+  height: 90%;
+}
+.background-element_skin-7 {
+  background-image: url('./Sprites/Backgrounds/Release/Background_07.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 95%;
+  height: 90%;
+}
+.background-element_skin-8 {
+  background-image: url('./Sprites/Backgrounds/Release/Background_08.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 95%;
+  height: 90%;
+}
+
+.skin-back-element {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 7.5vw;
+  height: 10vw;
+}
+.skin-back-element>.checkbox-pick-icon {
+  width: 3.5vw;
+}
+#pick-area-3 {
+  width: 53.5vw;
+  column-gap: 4vw;
+}
+.skin-back-element_skin-1 {
+  background-image: url('./Sprites/CardBacks/Card_Back_01.png');
+  background-size: 100% 100%;
+}
+.skin-back-element_skin-2 {
+  background-image: url('./Sprites/CardBacks/Card_Back_02.png');
+  background-size: 100% 100%;
+}
+.skin-back-element_skin-3 {
+  background-image: url('./Sprites/CardBacks/Card_Back_03.png');
+  background-size: 100% 100%;
+}
+.skin-back-element_skin-4 {
+  background-image: url('./Sprites/CardBacks/Card_Back_04.png');
+  background-size: 100% 100%;
+}
+.skin-back-element_skin-5 {
+  background-image: url('./Sprites/CardBacks/Card_Back_05.png');
+  background-size: 100% 100%;
+}
+.skin-back-element_skin-6 {
+  background-image: url('./Sprites/CardBacks/Card_Back_06.png');
+  background-size: 100% 100%;
+}
+.skin-back-element_skin-7 {
+  background-image: url('./Sprites/CardBacks/Card_Back_07.png');
+  background-size: 100% 100%;
+}
+.skin-back-element_skin-8 {
+  background-image: url('./Sprites/CardBacks/Card_Back_08.png');
+  background-size: 100% 100%;
+}
+.skin-back-element_skin-9 {
+  background-image: url('./Sprites/CardBacks/Card_Back_09.png');
+  background-size: 100% 100%;
+}
+
 
 .settings-tab {
   display: flex;
@@ -1138,6 +1290,7 @@ body {
   height: 6vw;
   background-image: url('./Sprites/Desktop\ -\ дурак-\ Профиль\ \(статус/Group 62 4x 2142765846.png');
   background-size: 100% 100%;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1150,6 +1303,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 2vw;
 }
 .start-game_sliders-container {
   width: 28vw;
@@ -1163,6 +1317,83 @@ body {
 }
 .start-game_sliders-container {
   column-gap: 1.5vw;
+}
+.start-game_bet-range-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 35vw;
+  margin-bottom: 2vh;
+}
+.start-game_bet-range-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+}
+.start-game_bet-title-container {
+  width: 20vw;
+  display: flex;
+  align-items: center;
+}
+.start-game_bet-title {
+  color: #fff3a0;
+  font-size: 1.7vw;
+  --target-font-size: 1.7vw;
+  font-weight: 800;
+}
+.start-game_bet-value {
+  color: #fff3a0;
+  font-size: 3.4vw;
+  font-weight: 600;
+}
+.start-game_range-container {
+  width: 100%;
+  height: 4vw;
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ Играть\ \(выбор\ р/Group 117.png');
+  background-size: 90% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+/* Можно двигать через js меняя left в % от 0 до 100 с привязкой к курсору */
+.start-game_range-item {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(0%, -50%);
+  width: 6vw;
+}
+.start-game_play-btn {
+  padding: 0 2vw;
+}
+.start-game_play-btn-title {
+  color: #a44916;
+  font-size: 2.5vw;
+  --target-font-size: 2.5vw;
+}
+.start-game_watch-add-btn {
+  background-image: url('./Sprites/Desktop - дурак- Играть (выбор р/Group 105 4x 2122095409.png');
+  background-size: 100% 100%;
+  background-position-y: 0.2vw;
+  background-repeat: no-repeat;
+  width: 10vw;
+  height: 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 6vw;
+  right: 2vw;
+}
+.start-game_watch-add-btn-icon {
+  width: 3.5vw;
+}
+.start-game_watch-add-btn-title {
+  color: #fff;
+  font-size: 1.8vw;
+  font-weight: 800;
 }
 
 .hidden-all {
@@ -1532,5 +1763,148 @@ body {
     > .custom-component-title-container
     > .custom-component-title {
     font-size: 1.4vw;
+  }
+  .start-game_header {
+    font-size: 5.5vw;
+    --target-font-size: 5.5vw;
+  }
+  .start-game_mode-btns-container {
+    width: 97vw;
+    height: 15vw;
+    column-gap: 3vw;
+  }
+  .start-game_switch-mode-btn {
+    transform: translateY(-15%);
+    width: 44vw;
+    height: 9vw;
+    padding: 0 4vw;
+  }
+  .start-game_switch-mode-btn > .start-game_switch-mode-title {
+    font-size: 4vw;
+    --target-font-size: 4vw;
+    text-wrap: nowrap;
+  }
+  .start-game_sliders-container {
+    width: 97vw;
+    column-gap: 3.5vw;
+  }
+  .start-game_slider-header {
+    font-size: 3vw;
+    --target-font-size: 3vw;
+  }
+  .start-game_slider-container_dark {
+    height: 12vw;
+  }
+  .start-game_switch-btn, .settings_switch-btn {
+    width: 3vw;
+    margin: 0 1.5vw;
+  }
+  .start-game_uptitle {
+    font-size: 4.5vw;
+    --target-font-size: 4.5vw;
+  }
+  .start-game_bet-range-container {
+    width: 70vw;
+    margin-bottom: 1vh;
+  }
+  .start-game_bet-title {
+    font-size: 3.7vw;
+    --target-font-size: 3.7vw;
+  }
+  .start-game_bet-value {
+    font-size: 6.5vw;
+  }
+  .start-game_range-container {
+    height: 8vw;
+  }
+  .start-game_range-item {
+    width: 13vw;
+  }
+  .start-game_play-btn {
+    width: 30vw;
+    height: 9vw;
+    padding: 0 4vw;
+  }
+  .start-game_play-btn-title {
+    font-size: 4.5vw;
+    --target-font-size: 4.5vw;
+  }
+  .start-game_slider-container_light {
+    width: 95%;
+    height: 85%;
+  }   
+  .start-game_watch-add-btn {
+    background-position-y: 0.5vw;
+    width: 17vw;
+    height: 9vw;
+    top: 11vw;
+    right: 5vw;
+  }
+  .start-game_watch-add-btn-icon {
+    width: 5.5vw;
+  }
+  .start-game_watch-add-btn-title {
+    font-size: 2.8vw;
+  }
+  .skins-nav-list {
+    column-gap: 6vw;
+    margin-top: 5vh;
+    margin-bottom: 3vh;
+  }
+  .categories-btn {
+    width: 19vw;
+    height: 7vw;
+  }
+  .categories-btn-title {
+    font-size: 4vw;
+    --target-font-size: 4vw;
+  }
+  .skin-element {
+    width: 36vw;
+    height: 16.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .skins-pick-area {
+    margin-bottom: 10vh;
+    scrollbar-width: none;
+    column-gap: 7vw;
+    row-gap: 5vw;
+  }
+  .checkbox-pick-icon {
+    width: 11vw;
+  }
+  .skin-element_locked-icon {
+    width: 8vw;
+  }
+  .background-element {
+    border-radius: 1vw;
+    width: 35vw;
+    height: 20vw;
+  }
+  #pick-area-2 {
+    width: 77vw;
+    column-gap: 7vw;
+  }   
+  .background-element>.checkbox-pick-icon {
+    width: 8vw;
+  }
+  .background-element>.skin-element_locked-icon {
+    width: 5.5vw;
+  }
+  .skin-back-element {
+    width: 16.5vw;
+    height: 22vw;
+  }
+  .skin-back-element>.checkbox-pick-icon {
+    width: 7.5vw;
+  }
+  .skin-back-element>.skin-element_locked-icon {
+    width: 7vw;
+  }
+  #pick-area-3 {
+    width: 87vw;
+    column-gap: 7vw;
   }
 }

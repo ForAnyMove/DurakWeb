@@ -2,6 +2,7 @@ body {
   background-color: #004b1b;
   background-image: url('../../Sprites/Custom Icons/фон.png');
   background-size: 100% 100%;
+  overflow: hidden;
 }
 
 .main-tab {
@@ -457,12 +458,13 @@ body {
 .arrow-back-btn-icon {
   width: 5.5vw;
 }
-
+.daily-bonuses-tab,
 .choose-avatar-tab {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
+  flex-direction: column;
 }
 .choose-avatar_container {
   width: 38vw;
@@ -1396,6 +1398,133 @@ body {
   font-weight: 800;
 }
 
+.daily-bonuses_container {
+  width: 45vw;
+  height: 37vw;
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ ежедневный\ бону/Group 48 4x 369162226.png');
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  row-gap: 2vw;
+  text-align: center;
+  margin-top: 4vw;
+}
+.daily-bonuses_header-logo-container {
+  background-image: url('./Sprites/Desktop - дурак- ежедневный бону/Label.png');
+  background-size: 100% 100%;
+  width: 15vw;
+  height: 5vw;
+  transform: translateY(-40%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4vw 8.5vw;
+}
+.daily-bonuses_header-title {
+  color: #fff1b2;
+  font-size: 2.3vw;
+  --target-font-size: 2.3vw;
+  text-transform: uppercase;
+}
+
+.daily-bonuses_bounties-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 80%;
+  column-gap: 1.5vw;
+  margin-top: -8vw;
+}
+.bounty-card-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ ежедневный\ бону/Дней в игре 4x -1248971501.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 11vw;
+  height: 14vw;
+  row-gap: 0.3vw;
+  position: relative;
+}
+.bounty-card-container:focus {
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ ежедневный\ бону/Дней в игре 4x -2082729353.png');
+  background-size: 105% 98%;
+  background-position-x: center;
+  background-position-y: -0.5vw;
+}
+.bounty-card-container> .bonuses_locked-mask {
+  transform: translateY(-7%);
+  height: 85%;
+}
+.daily-bonuses_bounties-container > .opened > .bonuses_locked-mask {
+  display: none;
+}
+.bounty-card-header {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: -2vw;
+}
+.add-bounty-value,
+.bounty-card-header-number,
+.bounty-card-header-title {
+  text-transform: uppercase;
+  color: #a44916;
+  font-size: 1.6vw;
+  --target-font-size: 1.6vw;
+}
+.bounty-card-header-number {
+  padding-left: 5%;
+}
+.bounty-card-icon {
+  width: 6.5vw;
+}
+.add-bounty-container {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.add-bounty-icon {
+  width: 2.5vw;
+}
+.daily-bonuses_close-icon {
+  position: absolute;
+  width: 5.5vw;
+  top: -5%;
+  right: -5%;
+}
+.daily-bonuses_multiple-bounty-container {
+  width: 27vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.daily-bonuses_multiple-bounty-icon {
+  width: 5vw;
+}
+.daily-bonuses_multiple-bounty-title-container {
+  width: 22vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  
+  transform: translateY(30%);
+}
+.daily-bonuses_multiple-bounty-title {
+  color: #fff3a0;
+  text-transform: uppercase;
+  font-size: 2vw;
+  --target-font-size: 2vw;
+}
+
 .hidden-all {
   display: none;
 }
@@ -1906,5 +2035,58 @@ body {
   #pick-area-3 {
     width: 87vw;
     column-gap: 7vw;
+  }
+  .daily-bonuses_container {
+    width: 92vw;
+    height: 75vw;
+  }
+  .daily-bonuses_multiple-bounty-icon {
+    width: 12vw;
+  }
+  .daily-bonuses_multiple-bounty-title-container {
+    width: 50vw;
+  }
+  .daily-bonuses_multiple-bounty-title {
+    font-size: 4.5vw;
+    --target-font-size: 4.5vw;
+  }
+  .daily-bonuses_multiple-bounty-container {
+    width: 62vw;
+  }
+  .daily-bonuses_close-icon {
+    width: 12.5vw;
+  }
+  .daily-bonuses_header-logo-container {
+    width: 40vw;
+    height: 20vw;
+    padding: 5vw 14.5vw;
+  }
+  .daily-bonuses_header-title {
+    color: #fff1b2;
+    font-size: 5.3vw;
+    --target-font-size: 5.3vw;
+    text-transform: uppercase;
+  }
+  .daily-bonuses_bounties-container {
+    column-gap: 1.5vw;
+    margin-top: -16vw;
+  }
+  .bounty-card-container {
+    width: 22vw;
+    height: 28vw;
+    row-gap: 0.6vw;
+  }
+  .bounty-card-icon {
+    width: 13.5vw;
+  }
+  .add-bounty-value, .bounty-card-header-number, .bounty-card-header-title {
+    font-size: 3.6vw;
+    --target-font-size: 3.6vw;
+  }
+  .add-bounty-icon {
+    width: 5.5vw;
+  }
+  .bounty-card-header {
+    margin-top: -3vw;
   }
 }

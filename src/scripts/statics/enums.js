@@ -43,30 +43,6 @@ const SuitMode = {
 }
 
 const Rule = {
-    OneSuitSpider: {
-        Pattern: Pattern.Spider,
-        SuitMode: SuitMode.OneSuit
-    },
-    TwoSuitsSpider: {
-        Pattern: Pattern.Spider,
-        SuitMode: SuitMode.TwoSuits
-    },
-    FourSuitsSpider: {
-        Pattern: Pattern.Spider,
-        SuitMode: SuitMode.FourSuits
-    },
-    OneSuitSpiderLady: {
-        Pattern: Pattern.SpiderLady,
-        SuitMode: SuitMode.OneSuit
-    },
-    TwoSuitsSpiderLady: {
-        Pattern: Pattern.SpiderLady,
-        SuitMode: SuitMode.TwoSuits
-    },
-    FourSuitsSpiderLady: {
-        Pattern: Pattern.SpiderLady,
-        SuitMode: SuitMode.FourSuits
-    },
 }
 
 const Statefull = {

@@ -976,4 +976,4 @@ class BattleFlow {
     }
 }
 
-export { Entity, BattleFlow, Player, Bot, DefendResult, State, Rule }
+export { Entity, BattleFlow, Player, Bot, DefendResult, State, Rule, GameMode, EntityMode }

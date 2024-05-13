@@ -10,8 +10,26 @@ class ScreenParameters {
     }
 }
 
+class ScreenLogic {
+    constructor(parameters = { screenRoot: null }) {
+        this.parameters = parameters;
+        this.screenRoot = parameters.screenRoot;
+
+        this.defaultSelectedElement = null;
+        this.selectableElements = [];
+
+        setTimeout(() => {
+            this.onCreate(), 0
+        });
+    }
+
+    onCreate() { }
+    onScreenLoaded = () => { }
+    onScreenUnloaded = () => { }
+}
+
 class Screen {
-    constructor(options = { style, isPopup, isMain, element, openButtons, closeButtons, onFocus, onUnfocus, screenParameters }) {
+    constructor(options = { screenLogic, style, isPopup, isMain, element, openButtons, closeButtons, onFocus, onUnfocus, screenParameters }) {
         this.style = options.style;
         this.screenParameters = options.screenParameters;
         this.element = options.element;
@@ -29,6 +47,7 @@ class Screen {
         this.element.style.transition = `opacity ${navagationDuration}s ease`;
 
         this.styleLink = null;
+        this.screenLogic = options.screenLogic ?? null;
     }
 
     show = function (onShow) {
@@ -39,6 +58,7 @@ class Screen {
                     this.element.style.display = '';
                     setTimeout(() => {
                         this.element.style.opacity = 1;
+                        this.screenLogic?.onScreenLoaded();
                     }, 10)
                     onShow?.();
                     this.isOpened = true;
@@ -47,6 +67,7 @@ class Screen {
                 this.element.style.display = '';
                 setTimeout(() => {
                     this.element.style.opacity = 1;
+                    this.screenLogic?.onScreenLoaded();
                 }, 10);
                 onShow?.();
                 this.isOpened = true;
@@ -89,6 +110,7 @@ class Screen {
             setTimeout(() => {
                 this.element.style.display = 'none';
                 onHide?.();
+                this.screenLogic?.onScreenUnloaded();
 
                 if (this.styleLink != null) {
                     this.styleLink.remove();
@@ -237,4 +259,4 @@ class BackActionHandler {
     }
 }
 
-export { StackNavigation, Screen, BackActionHandler, ScreenParameters }
+export { StackNavigation, Screen, BackActionHandler, ScreenParameters, ScreenLogic }

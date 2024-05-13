@@ -65,11 +65,13 @@ function shuffle(array) {
 }
 
 function secondsToTime(seconds) {
+    const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const remainingSeconds = Math.floor(seconds % 60);
 
     let timeString = '';
 
+    timeString += hours.toString().padStart(2, '0') + ':';
     timeString += minutes.toString().padStart(2, '0') + ':';
     timeString += remainingSeconds.toString().padStart(2, '0');
 
@@ -634,6 +636,15 @@ function isTwoElementsOverlaps(one, two) {
         oneRect.top > twoRect.bottom);
 }
 
+function setRemoveClass(element, className, condition) {
+    if (condition) {
+        if (!element.classList.contains(className))
+            element.classList.add(className);
+    } else {
+        element.classList.remove(className);
+    }
+}
+
 export {
     createElement,
     createTextH3,
@@ -675,5 +686,6 @@ export {
     lerp,
     getRectPosition,
     getRectSize,
-    isTwoElementsOverlaps
+    isTwoElementsOverlaps,
+    setRemoveClass
 }

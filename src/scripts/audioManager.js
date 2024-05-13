@@ -34,13 +34,17 @@ class AudioManager {
             })
         }
 
-        this.soundSwitchButton.addEventListener('click', () => {
-            this.switchSoundState();
-        });
+        if (this.soundSwitchButton) {
+            this.soundSwitchButton.addEventListener('click', () => {
+                this.switchSoundState();
+            });
+        }
 
-        this.musicSwitchButton.addEventListener('click', () => {
-            this.switchMusicState();
-        });
+        if (this.musicSwitchButton) {
+            this.musicSwitchButton.addEventListener('click', () => {
+                this.switchMusicState();
+            });
+        }
 
         this.updateSwitchButtonIcons();
 
@@ -101,8 +105,8 @@ class AudioManager {
     }
 
     updateSwitchButtonIcons = function () {
-        this.soundSwitchButton.children[0].src = this.isSoundEnabled ? this.enabledSoundIcon : this.disabledSoundIcon;
-        this.musicSwitchButton.children[0].src = this.isMusicEnabled ? this.enabledMusicIcon : this.disabledMusicIcon;
+        if (this.soundSwitchButton) this.soundSwitchButton.children[0].src = this.isSoundEnabled ? this.enabledSoundIcon : this.disabledSoundIcon;
+        if (this.musicSwitchButton) this.musicSwitchButton.children[0].src = this.isMusicEnabled ? this.enabledMusicIcon : this.disabledMusicIcon;
     }
 }
 

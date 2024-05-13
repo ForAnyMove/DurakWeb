@@ -196,23 +196,7 @@ function createAchievementInstances() {
     });
     activementsViews.push(element);
 
-    const selectable = {
-      element: element, onSelect: () => {
-        const box = element.getBoundingClientRect();
-        const height = box.height;
-        const yCenter = box.top + height / 2;
 
-        if (yCenter + height / 2 >= achievementsParent.getBoundingClientRect().bottom) {
-          achievementsParent.scrollBy(0, height)
-        } else if (yCenter - height / 2 <= achievementsParent.getBoundingClientRect().top) {
-          achievementsParent.scrollBy(0, -height)
-        }
-      }, onSubmit: () => {
-        if (achievement.completed) {
-          input.updateQueryCustom([], { element: element.getElementsByClassName('get-btn')[0], onBack: () => input.updateQueryCustom(screenParameters.selectableElements, selectable) });
-        }
-      }
-    }
 
     selectables.push(selectable);
 

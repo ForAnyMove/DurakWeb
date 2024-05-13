@@ -239,44 +239,6 @@ function createTrophyInstance(data) {
   return plane;
 }
 
-function setupTabSwitch() {
-  function changeTabsVisibility(index) {
-    if (index > tabScreens.length - 1 || index < 0) return false;
-
-    for (let i = 0; i < tabScreens.length; i++) {
-      const screen = tabScreens[i];
-
-      if (i == index) {
-        if (!screen.classList.contains('hidden')) return false;
-        screen.classList.remove('hidden');
-      } else if (!screen.classList.contains('hidden')) {
-        screen.classList.add('hidden');
-      }
-    }
-
-    return true;
-  }
-  const tabClass = 'categories-btn';
-  const tabs = root.getElementsByClassName(tabClass);
-
-  for (let i = 0; i < tabs.length; i++) {
-    const element = tabs[i];
-    screenParameters.selectableElements.push({ element: element })
-    element.onclick = function () {
-      if (changeTabsVisibility(i)) {
-        for (let j = 0; j < tabs.length; j++) {
-          const element = tabs[j];
-          if (i == j && !element.classList.contains('active-btn')) {
-            element.classList.add('active-btn')
-          } else {
-            element.classList.remove('active-btn')
-          }
-        }
-      }
-    }
-  }
-}
-
 createCardSkins();
 createCardBacks();
 createBackgrounds();

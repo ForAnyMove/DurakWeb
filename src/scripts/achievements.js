@@ -112,8 +112,8 @@ class WinCount extends Achievement {
     constructor(options = {}) {
         super(options);
 
-        this.rule = options.rule;
-        this.levelType = options.levelType;
+        this.gameMode = options.gameMode;
+        this.entityMode = options.entityMode;
         this.trials = options.trials;
 
         this.handle();
@@ -128,11 +128,11 @@ class WinCount extends Achievement {
     }
 
     handle = () => {
-        if (this.rule == null && this.levelType != null) {
-            for (let i = 0; i < statistics.winCount.byLevelType.length; i++) {
-                const element = statistics.winCount.byLevelType[i];
+        if (this.gameMode == null && this.entityMode != null) {
+            for (let i = 0; i < statistics.winCount.byEntityMode.length; i++) {
+                const element = statistics.winCount.byEntityMode[i];
 
-                if (element.type == this.levelType) {
+                if (element.type == this.entityMode) {
                     this.currentValue = element.count;
 
                     this.update();
@@ -140,11 +140,11 @@ class WinCount extends Achievement {
                     return;
                 }
             }
-        } else if (this.rule != null && this.levelType == null) {
-            for (let i = 0; i < statistics.winCount.byRules.length; i++) {
-                const element = statistics.winCount.byRules[i];
+        } else if (this.gameMode != null && this.entityMode == null) {
+            for (let i = 0; i < statistics.winCount.byGameMode.length; i++) {
+                const element = statistics.winCount.byGameMode[i];
 
-                if (element.rule == this.rule) {
+                if (element.gameMode == this.gameMode) {
                     this.currentValue = element.count;
 
                     this.update();
@@ -152,7 +152,7 @@ class WinCount extends Achievement {
                     return;
                 }
             }
-        } else if (this.rule == null && this.levelType == null) {
+        } else if (this.gameMode == null && this.entityMode == null) {
             this.currentValue = statistics.winCount.overall;
 
             this.update();
@@ -166,8 +166,8 @@ class WinInARow extends Achievement {
     constructor(options = {}) {
         super(options);
 
-        this.rule = options.rule;
-        this.levelType = options.levelType;
+        this.gameMode = options.gameMode;
+        this.entityMode = options.entityMode;
         this.trials = options.trials;
 
         this.handle();
@@ -182,11 +182,11 @@ class WinInARow extends Achievement {
     }
 
     handle = () => {
-        if (this.rule == null && this.levelType != null) {
-            for (let i = 0; i < statistics.winInARow.byLevelType.length; i++) {
-                const element = statistics.winInARow.byLevelType[i];
+        if (this.gameMode == null && this.entityMode != null) {
+            for (let i = 0; i < statistics.winInARow.byEntityMode.length; i++) {
+                const element = statistics.winInARow.byEntityMode[i];
 
-                if (element.type == this.levelType) {
+                if (element.type == this.entityMode) {
                     this.currentValue = element.count;
 
                     this.update();
@@ -194,11 +194,11 @@ class WinInARow extends Achievement {
                     return;
                 }
             }
-        } else if (this.rule != null && this.levelType == null) {
-            for (let i = 0; i < statistics.winInARow.byRules.length; i++) {
-                const element = statistics.winInARow.byRules[i];
+        } else if (this.gameMode != null && this.entityMode == null) {
+            for (let i = 0; i < statistics.winInARow.byGameMode.length; i++) {
+                const element = statistics.winInARow.byGameMode[i];
 
-                if (element.rule == this.rule) {
+                if (element.gameMode == this.gameMode) {
                     this.currentValue = element.count;
 
                     this.update();
@@ -206,7 +206,7 @@ class WinInARow extends Achievement {
                     return;
                 }
             }
-        } else if (this.rule == null && this.levelType == null) {
+        } else if (this.gameMode == null && this.entityMode == null) {
             this.currentValue = statistics.winInARow.overall;
 
             this.update();
@@ -216,82 +216,12 @@ class WinInARow extends Achievement {
     }
 }
 
-class WinWithSomeStepCount extends Achievement {
-    constructor(options = {}) {
-        super(options);
-
-        this.isValueInversed = true;
-
-        this.trials = options.trials || [
-            generateTrial(300, Items.Energy, 1),
-            generateTrial(250, Items.Energy, 1),
-            generateTrial(200, Items.Energy, 1),
-            generateTrial(150, Items.Energy, 2),
-            generateTrial(100, Items.Energy, 3),
-        ]
-
-        this.handle();
-    }
-
-    getValueText = function () {
-        return `${this.currentValue == 9999999 ? '∞' : this.currentValue}/${this.trials[this.completedIndex].targetValue}`;
-    }
-
-    getCompletionPercent = function () {
-        return this.currentValue == 9999999 ? 0 : (Math.floor(this.trials[this.completedIndex].targetValue / this.currentValue * 100));
-    }
-
-    onLoad = function () {
-        updateEvent.addListener(this.handle);
-    }
-
-    unload = function () {
-        updateEvent.removeListener(this.handle);
-    }
-    handle = () => {
-        this.currentValue = statistics.leastSteps;
-        this.update();
-
-        this.sendEvent();
-    }
-}
-
-class UsedBoostersCount extends Achievement {
-    constructor(options = {}) {
-        super(options);
-
-        this.trials = options.trials || [
-            generateTrial(10, Items.Energy, 1),
-            generateTrial(20, Items.Energy, 3),
-            generateTrial(30, Items.BoosterMage, 5),
-            generateTrial(40, Items.Energy, 5),
-            generateTrial(50, Items.Energy, 10),
-        ]
-
-        this.handle();
-    }
-
-    onLoad = function () {
-        updateEvent.addListener(this.handle);
-    }
-
-    unload = function () {
-        updateEvent.removeListener(this.handle);
-    }
-    handle = () => {
-        this.currentValue = statistics.boosterUsage;
-        this.update();
-
-        this.sendEvent();
-    }
-}
-
 class GameCount extends Achievement {
     constructor(options = {}) {
         super(options);
 
-        this.rule = options.rule;
-        this.levelType = options.levelType;
+        this.gameMode = options.gameMode;
+        this.entityMode = options.entityMode;
         this.trials = options.trials;
 
         this.handle();
@@ -306,11 +236,11 @@ class GameCount extends Achievement {
     }
 
     handle = () => {
-        if (this.rule == null && this.levelType != null) {
-            for (let i = 0; i < statistics.gameCount.byLevelType.length; i++) {
-                const element = statistics.gameCount.byLevelType[i];
+        if (this.gameMode == null && this.entityMode != null) {
+            for (let i = 0; i < statistics.gameCount.byEntityMode.length; i++) {
+                const element = statistics.gameCount.byEntityMode[i];
 
-                if (element.type == this.levelType) {
+                if (element.type == this.entityMode) {
                     this.currentValue = element.count;
 
                     this.update();
@@ -318,11 +248,11 @@ class GameCount extends Achievement {
                     return;
                 }
             }
-        } else if (this.rule != null && this.levelType == null) {
-            for (let i = 0; i < statistics.gameCount.byRules.length; i++) {
-                const element = statistics.gameCount.byRules[i];
+        } else if (this.gameMode != null && this.entityMode == null) {
+            for (let i = 0; i < statistics.gameCount.byGameMode.length; i++) {
+                const element = statistics.gameCount.byGameMode[i];
 
-                if (element.rule == this.rule) {
+                if (element.gameMode == this.gameMode) {
                     this.currentValue = element.count;
 
                     this.update();
@@ -330,7 +260,7 @@ class GameCount extends Achievement {
                     return;
                 }
             }
-        } else if (this.rule == null && this.levelType == null) {
+        } else if (this.gameMode == null && this.entityMode == null) {
             this.currentValue = statistics.gameCount.overall;
 
             this.update();
@@ -340,46 +270,158 @@ class GameCount extends Achievement {
     }
 }
 
-class WinWithSomeTime extends Achievement {
+class DraftCount extends Achievement {
     constructor(options = {}) {
         super(options);
 
-        this.isValueInversed = true;
-
-        this.trials = options.trials || [
-            generateTrial(900, Items.Energy, 2),
-            generateTrial(600, Items.BoosterHint, 1),
-            generateTrial(480, Items.Energy, 3),
-            generateTrial(300, Items.Energy, 4),
-            generateTrial(180, Items.BoosterTime, 2),
-        ]
+        this.gameMode = options.gameMode;
+        this.entityMode = options.entityMode;
+        this.trials = options.trials;
 
         this.handle();
     }
 
-    getValueText = function () {
-        return `${this.currentValue == 9999999 ? '∞' : this.currentValue}/${this.trials[this.completedIndex].targetValue}`;
-    }
-
-    getCompletionPercent = function () {
-        return this.currentValue == 9999999 ? 0 : (Math.floor(this.trials[this.completedIndex].targetValue / this.currentValue * 100));
-    }
 
     onLoad = function () {
         updateEvent.addListener(this.handle);
     }
-
     unload = function () {
         updateEvent.removeListener(this.handle);
     }
+
     handle = () => {
-        this.currentValue = statistics.leastTime;
+        if (this.gameMode == null && this.entityMode != null) {
+            for (let i = 0; i < statistics.draft.byEntityMode.length; i++) {
+                const element = statistics.draft.byEntityMode[i];
+
+                if (element.type == this.entityMode) {
+                    this.currentValue = element.count;
+
+                    this.update();
+                    this.sendEvent();
+                    return;
+                }
+            }
+        } else if (this.gameMode != null && this.entityMode == null) {
+            for (let i = 0; i < statistics.draft.byGameMode.length; i++) {
+                const element = statistics.draft.byGameMode[i];
+
+                if (element.gameMode == this.gameMode) {
+                    this.currentValue = element.count;
+
+                    this.update();
+                    this.sendEvent();
+                    return;
+                }
+            }
+        } else if (this.gameMode == null && this.entityMode == null) {
+            this.currentValue = statistics.draft.overall;
+
+            this.update();
+            this.sendEvent();
+            return;
+        }
+    }
+}
+
+class AceLose extends Achievement {
+    constructor(options = {}) {
+        super(options);
+
+        this.trials = options.trials;
+
+        this.handle();
+    }
+
+
+    onLoad = function () {
+        updateEvent.addListener(this.handle);
+    }
+    unload = function () {
+        updateEvent.removeListener(this.handle);
+    }
+
+    handle = () => {
+        this.currentValue = statistics.lostWithAces;
         this.update();
 
         this.sendEvent();
     }
 }
 
+class TransfareCards extends Achievement {
+    constructor(options = {}) {
+        super(options);
+
+        this.trials = options.trials;
+
+        this.handle();
+    }
+
+
+    onLoad = function () {
+        updateEvent.addListener(this.handle);
+    }
+    unload = function () {
+        updateEvent.removeListener(this.handle);
+    }
+
+    handle = () => {
+        this.currentValue = statistics.transfaredCards;
+        this.update();
+
+        this.sendEvent();
+    }
+}
+
+class ThrowCards extends Achievement {
+    constructor(options = {}) {
+        super(options);
+
+        this.trials = options.trials;
+
+        this.handle();
+    }
+
+
+    onLoad = function () {
+        updateEvent.addListener(this.handle);
+    }
+    unload = function () {
+        updateEvent.removeListener(this.handle);
+    }
+
+    handle = () => {
+        this.currentValue = statistics.throwedCards;
+        this.update();
+
+        this.sendEvent();
+    }
+}
+
+class CurrencyCollected extends Achievement {
+    constructor(options = {}) {
+        super(options);
+
+        this.trials = options.trials;
+
+        this.handle();
+    }
+
+    onLoad = function () {
+        updateEvent.addListener(this.handle);
+    }
+    unload = function () {
+        updateEvent.removeListener(this.handle);
+    }
+
+    handle = () => {
+        this.currentValue = statistics.maxCurrencyCollected;
+        this.update();
+
+        this.sendEvent();
+    }
+}
 
 function generateTrial(targetValue, rewardType, rewardCount) {
     return {
@@ -391,4 +433,4 @@ function generateTrial(targetValue, rewardType, rewardCount) {
     }
 }
 
-export { WinCount, Achievement, WinInARow, WinWithSomeStepCount, WinWithSomeTime, InGameDayCount, GameCount, UsedBoostersCount, generateTrial };
+export { WinCount, Achievement, WinInARow, InGameDayCount, GameCount, DraftCount, AceLose, TransfareCards, ThrowCards, CurrencyCollected, generateTrial };

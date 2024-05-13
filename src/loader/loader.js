@@ -19,32 +19,19 @@ function disablePreloader() {
     }, 600);
 }
 
-async function preload(middleLoader, callback) {
-
-    //     const body = document.getElementsByTagName('body')[0];
-    //     body.insertAdjacentHTML('afterbegin', `<div class="mask">
-    //     <div class="banter-loader">
-    //       <div class="banter-loader__box"></div>
-    //       <div class="banter-loader__box"></div>
-    //       <div class="banter-loader__box"></div>
-    //       <div class="banter-loader__box"></div>
-    //       <div class="banter-loader__box"></div>
-    //       <div class="banter-loader__box"></div>
-    //       <div class="banter-loader__box"></div>
-    //       <div class="banter-loader__box"></div>
-    //       <div class="banter-loader__box"></div>
-    //     </div>
-    //   </div>`)
-
+async function preload(middleLoader) {
     if (isPreloading) return;
     isPreloading = true;
 
     mask.style.opacity = 1;
     mask.style.display = 'flex';
 
-    window.addEventListener('load', () => {
+    if (document.readyState === "complete")
         isLoaded = true;
-    });
+    else
+        window.addEventListener('load', () => {
+            isLoaded = true;
+        });
 
     await middleLoader?.();
 

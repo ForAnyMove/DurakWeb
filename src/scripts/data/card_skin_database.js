@@ -32,30 +32,6 @@ const skinDatabase = {
             itemPreviewPath: "Sprites/Card Skins/Preview/Skin_05.png",
             unlockDescription: "content_unlock_descr{13}"
         },
-        {
-            id: Content.CardSkin06,
-            previewPath: "Sprites/Card Skins/Preview/Skin_06.png",
-            itemPreviewPath: "Sprites/Card Skins/Preview/Skin_06.png",
-            unlockDescription: "content_unlock_descr{19}"
-        },
-        {
-            id: Content.CardSkin07,
-            previewPath: "Sprites/Card Skins/Preview/Skin_07.png",
-            itemPreviewPath: "Sprites/Card Skins/Preview/Skin_07.png",
-            unlockDescription: "content_unlock_descr{25}"
-        },
-        {
-            id: Content.CardSkin08,
-            previewPath: "Sprites/Card Skins/Preview/Skin_08.png",
-            itemPreviewPath: "Sprites/Card Skins/Preview/Skin_08.png",
-            unlockDescription: "content_unlock_descr{30}"
-        },
-        {
-            id: Content.CardSkin09,
-            previewPath: "Sprites/Card Skins/Preview/Skin_09.png",
-            itemPreviewPath: "Sprites/Card Skins/Preview/Skin_09.png",
-            unlockDescription: "content_unlock_descr{33}"
-        }
     ]
 }
 
@@ -112,30 +88,6 @@ const backSkinDatabase = {
             previewPath: "Sprites/CardBacks/Card_Back_05.png",
             itemPreviewPath: "Sprites/CardBacks/Card_Back_05.png",
             unlockDescription: "content_unlock_descr{15}"
-        },
-        {
-            id: Content.CardBackSkin06,
-            previewPath: "Sprites/CardBacks/Card_Back_06.png",
-            itemPreviewPath: "Sprites/CardBacks/Card_Back_06.png",
-            unlockDescription: "content_unlock_descr{21}"
-        },
-        {
-            id: Content.CardBackSkin07,
-            previewPath: "Sprites/CardBacks/Card_Back_07.png",
-            itemPreviewPath: "Sprites/CardBacks/Card_Back_07.png",
-            unlockDescription: "content_unlock_descr{27}"
-        },
-        {
-            id: Content.CardBackSkin08,
-            previewPath: "Sprites/CardBacks/Card_Back_08.png",
-            itemPreviewPath: "Sprites/CardBacks/Card_Back_08.png",
-            unlockDescription: "content_unlock_descr{31}"
-        },
-        {
-            id: Content.CardBackSkin09,
-            previewPath: "Sprites/CardBacks/Card_Back_09.png",
-            itemPreviewPath: "Sprites/CardBacks/Card_Back_09.png",
-            unlockDescription: "content_unlock_descr{34}"
         }
     ]
 }
@@ -153,57 +105,33 @@ const backgroundDatabase = {
     skinList: [
         {
             id: Content.Background01,
-            previewPath: "Sprites/Backgrounds/Release/Background_01.png",
-            itemPreviewPath: "Sprites/BackgroundPreview/Used_Background_01.png",
+            previewPath: "Sprites/Backgrounds/Preview/Background_01.png",
+            itemPreviewPath: "Sprites/Backgrounds/Preview/Background_01.png",
             unlockDescription: ""
         },
         {
             id: Content.Background02,
-            previewPath: "Sprites/Backgrounds/Release/Background_02.png",
-            itemPreviewPath: "Sprites/BackgroundPreview/Used_Background_02.png",
+            previewPath: "Sprites/Backgrounds/Preview/Background_02.png",
+            itemPreviewPath: "Sprites/Backgrounds/Preview/Background_02.png",
             unlockDescription: ""
         },
         {
             id: Content.Background03,
-            previewPath: "Sprites/Backgrounds/Release/Background_03.png",
-            itemPreviewPath: "Sprites/BackgroundPreview/Used_Background_03.png",
+            previewPath: "Sprites/Backgrounds/Preview/Background_03.png",
+            itemPreviewPath: "Sprites/Backgrounds/Preview/Background_03.png",
             unlockDescription: "content_unlock_descr{5}"
         },
         {
             id: Content.Background04,
-            previewPath: "Sprites/Backgrounds/Release/Background_04.png",
-            itemPreviewPath: "Sprites/BackgroundPreview/Used_Background_04.png",
+            previewPath: "Sprites/Backgrounds/Preview/Background_04.png",
+            itemPreviewPath: "Sprites/Backgrounds/Preview/Background_04.png",
             unlockDescription: "content_unlock_descr{11}"
         },
         {
             id: Content.Background05,
-            previewPath: "Sprites/Backgrounds/Release/Background_05.png",
-            itemPreviewPath: "Sprites/BackgroundPreview/Used_Background_05.png",
+            previewPath: "Sprites/Backgrounds/Preview/Background_05.png",
+            itemPreviewPath: "Sprites/Backgrounds/Preview/Background_05.png",
             unlockDescription: "content_unlock_descr{17}"
-        },
-        {
-            id: Content.Background06,
-            previewPath: "Sprites/Backgrounds/Release/Background_06.png",
-            itemPreviewPath: "Sprites/BackgroundPreview/Used_Background_06.png",
-            unlockDescription: "content_unlock_descr{23}"
-        },
-        {
-            id: Content.Background07,
-            previewPath: "Sprites/Backgrounds/Release/Background_07.png",
-            itemPreviewPath: "Sprites/BackgroundPreview/Used_Background_07.png",
-            unlockDescription: "content_unlock_descr{29}"
-        },
-        {
-            id: Content.Background08,
-            previewPath: "Sprites/Backgrounds/Release/Background_08.png",
-            itemPreviewPath: "Sprites/BackgroundPreview/Used_Background_08.png",
-            unlockDescription: "content_unlock_descr{32}"
-        },
-        {
-            id: Content.Background09,
-            previewPath: "Sprites/Backgrounds/Release/Background_09.png",
-            itemPreviewPath: "Sprites/BackgroundPreview/Used_Background_09.png",
-            unlockDescription: "content_unlock_descr{35}"
         }
     ]
 }

@@ -2,11 +2,6 @@ import { ContentType } from "./enums.js"
 
 const locales = ['ru', 'en', 'de', 'hi', 'pt', 'es', 'tr'];
 
-const AccessibilityFlags = {
-    CanPlace: 1,
-    CanRemove: 2
-}
-
 const Platform = {
     Desktop: 'desktop',
     Mobile: 'mobile',
@@ -15,29 +10,11 @@ const Platform = {
 }
 
 const Items = {
-    Energy: "energy",
-    BoosterHint: "booster_hint",
-    BoosterUndo: "booster_undo",
-    BoosterMage: "booster_mage",
-    BoosterTime: "booster_time",
-    Trophy01: "trophy_01",
-    Trophy02: "trophy_02",
-    Trophy03: "trophy_03",
-    Trophy04: "trophy_04",
-    Trophy05: "trophy_05",
+    Currency: "currency",
 }
 
 const IconsByItem = [
-    { type: Items.Energy, url: 'Sprites/Icons/Icon_Energy.png' },
-    { type: Items.BoosterHint, url: 'Sprites/Icons/Icon_Hint.png' },
-    { type: Items.BoosterUndo, url: 'Sprites/Icons/Icon_Undo.png' },
-    { type: Items.BoosterMage, url: 'Sprites/Icons/Icon_Mage.png' },
-    { type: Items.BoosterTime, url: 'Sprites/Icons/Icon_Time.png' },
-    { type: Items.Trophy01, url: 'Sprites/Trophies/Trophy_01.png' },
-    { type: Items.Trophy02, url: 'Sprites/Trophies/Trophy_02.png' },
-    { type: Items.Trophy03, url: 'Sprites/Trophies/Trophy_03.png' },
-    { type: Items.Trophy05, url: 'Sprites/Trophies/Trophy_04.png' },
-    { type: Items.Trophy05, url: 'Sprites/Trophies/Trophy_05.png' },
+    { type: Items.Currency, url: 'Sprites/Icons/Icon_Energy.png' },
 ]
 
 const Content = {

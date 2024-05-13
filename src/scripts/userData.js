@@ -1,58 +1,33 @@
-import { WinCount, WinInARow, WinWithSomeStepCount, WinWithSomeTime, InGameDayCount, GameCount, UsedBoostersCount, generateTrial } from "./achievements.js";
+import { WinCount, WinInARow, InGameDayCount, generateTrial, DraftCount, AceLose, ThrowCards, TransfareCards, CurrencyCollected } from "./achievements.js";
+import { EntityMode, GameMode } from "./battleFlow.js";
 import { Action } from "./globalEvents.js";
 import { log } from "./logger.js";
 import { load, save } from "./save_system/SaveSystem.js";
-import { LevelType, Rule } from "./statics/enums.js";
 import { Content, Items } from "./statics/staticValues.js";
 
 export default class User {
     constructor() {
         this.items = [{
-            type: Items.Energy,
-            count: 0
-        }, {
-            type: Items.BoosterHint,
-            count: 0
-        }, {
-            type: Items.BoosterUndo,
-            count: 0
-        }, {
-            type: Items.BoosterMage,
-            count: 0
-        }, {
-            type: Items.BoosterTime,
+            type: Items.Currency,
             count: 0
         }]
 
         this.availableContent = [
-            Content.CardSkin01, Content.CardBackSkin01, Content.Background01,
-            Content.CardSkin02, Content.CardBackSkin02, Content.Background02];
-
-        //test data
-        // this.availableContent = [
-        //     Content.CardSkin01, Content.CardBackSkin01, Content.Background01,
-        //     Content.CardSkin02, Content.CardBackSkin02, Content.Background02,
-        //     Content.CardSkin03, Content.CardBackSkin03, Content.Background03,
-        //     Content.CardSkin04, Content.CardBackSkin04, Content.Background04,
-        //     Content.CardSkin05, Content.CardBackSkin05, Content.Background05,
-        //     Content.CardSkin06, Content.CardBackSkin06, Content.Background06,
-        //     Content.CardSkin07, Content.CardBackSkin07, Content.Background07,
-        //     Content.CardSkin08, Content.CardBackSkin08, Content.Background08,
-        //     Content.CardSkin09, Content.CardBackSkin09, Content.Background09];
+            Content.CardSkin01, Content.CardBackSkin01, Content.Background01];
 
         this.usedContent = [Content.CardSkin01, Content.CardBackSkin01, Content.Background01];
 
         this.achievements = [];
         this.achievements.push(new InGameDayCount({
             title: 'Дней в игре',
-            langID: 'day_in_game_a',
-            icon: 'Sprites/Icons/Icon_Calendar.png',
+            langID: 'UserData/Achievements/Title/DaysInGame',
+            icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 5.png',
             loadData: { currentValue: 0, completedIndex: 0 }
         }));
         this.achievements.push(new WinCount({
-            title: 'Количество побед',
-            langID: 'win_count_a',
-            icon: 'Sprites/Icons/Icon_Trophy.png',
+            title: 'Игр выиграно',
+            langID: 'UserData/Achievements/Title/GamesWin',
+            icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 4.png',
             trials: [
                 generateTrial(3, Items.BoosterHint, 1),
                 generateTrial(5, Items.BoosterTime, 1),
@@ -62,10 +37,52 @@ export default class User {
             ],
             loadData: { currentValue: 0, completedIndex: 0 }
         }));
+        this.achievements.push(new WinCount({
+            title: '\"Подкидной\" Игр выиграно',
+            langID: 'UserData/Achievements/Title/TossGamesWin',
+            icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 1.png',
+            trials: [
+                generateTrial(3, Items.BoosterHint, 1),
+                generateTrial(5, Items.BoosterTime, 1),
+                generateTrial(7, Items.BoosterUndo, 1),
+                generateTrial(9, Items.BoosterMage, 2),
+                generateTrial(12, Items.BoosterUndo, 3),
+            ],
+            loadData: { currentValue: 0, completedIndex: 0 },
+            gameMode: GameMode.DurakDefault
+        }));
+        this.achievements.push(new WinCount({
+            title: '\"Переводной\" Игр выиграно',
+            langID: 'UserData/Achievements/Title/TransitGamesWin',
+            icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 3.png',
+            trials: [
+                generateTrial(3, Items.BoosterHint, 1),
+                generateTrial(5, Items.BoosterTime, 1),
+                generateTrial(7, Items.BoosterUndo, 1),
+                generateTrial(9, Items.BoosterMage, 2),
+                generateTrial(12, Items.BoosterUndo, 3),
+            ],
+            loadData: { currentValue: 0, completedIndex: 0 },
+            gameMode: GameMode.DurakTransfare
+        }));
+        this.achievements.push(new WinCount({
+            title: '\"2 на 2\" Игр выиграно',
+            langID: 'UserData/Achievements/Title/TeamGamesWin',
+            icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 3.png',
+            trials: [
+                generateTrial(3, Items.BoosterHint, 1),
+                generateTrial(5, Items.BoosterTime, 1),
+                generateTrial(7, Items.BoosterUndo, 1),
+                generateTrial(9, Items.BoosterMage, 2),
+                generateTrial(12, Items.BoosterUndo, 3),
+            ],
+            loadData: { currentValue: 0, completedIndex: 0 },
+            entityMode: EntityMode.Pair
+        }));
         this.achievements.push(new WinInARow({
             title: 'Побед подряд',
-            langID: 'win_in_row_a',
-            icon: 'Sprites/Icons/Icon_Trophy.png',
+            langID: 'UserData/Achievements/Title/WinInRow',
+            icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 1.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
                 generateTrial(5, Items.Energy, 2),
@@ -75,119 +92,112 @@ export default class User {
             ],
             loadData: { currentValue: 0, completedIndex: 0 }
         }));
-        this.achievements.push(new WinWithSomeStepCount({
-            title: 'Выиграть с заданным количеством шагов',
-            langID: 'win_step_a',
-            icon: 'Sprites/Icons/Icon_Step.png',
-            loadData: { currentValue: 0, completedIndex: 0 }
-        }));
-        this.achievements.push(new UsedBoostersCount({
-            title: 'Использование бустеров',
-            langID: 'booster_use_a',
-            icon: 'Sprites/Icons/Icon_Booster.png',
-            loadData: { currentValue: 0, completedIndex: 0 }
-        }));
-        this.achievements.push(new WinCount({
-            title: 'Количество пройденных испытаний',
-            langID: 'twial_win_count_a',
-            icon: 'Sprites/Icons/Icon_Trial.png',
+        this.achievements.push(new WinInARow({
+            title: '\"Подкидной\" Побед подряд',
+            langID: 'UserData/Achievements/Title/TossWinInRow',
+            icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 4.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
                 generateTrial(5, Items.Energy, 2),
                 generateTrial(7, Items.Energy, 3),
                 generateTrial(9, Items.Energy, 5),
                 generateTrial(12, Items.BoosterHint, 3),
-            ], levelType: LevelType.Trial, loadData: { currentValue: 0, completedIndex: 0 }
-        }));
-        this.achievements.push(new GameCount({
-            title: 'Количество игр в Испытании',
-            langID: 'story_game_count_a',
-            icon: 'Sprites/Icons/Icon_Story.png',
-            trials: [
-                generateTrial(3, Items.Energy, 2),
-                generateTrial(5, Items.Energy, 2),
-                generateTrial(7, Items.Energy, 3),
-                generateTrial(9, Items.Energy, 5),
-                generateTrial(12, Items.BoosterHint, 3),
-            ], levelType: LevelType.Trial, loadData: { currentValue: 0, completedIndex: 0 }
-        }));
-        this.achievements.push(new WinWithSomeTime({
-            title: 'Выиграть за время',
-            langID: 'win_time_a',
-            icon: 'Sprites/Icons/Icon_Stopwatch.png',
-            loadData: { currentValue: 0, completedIndex: 0 }
+            ],
+            loadData: { currentValue: 0, completedIndex: 0 },
+            gameMode: GameMode.DurakDefault
         }));
         this.achievements.push(new WinInARow({
-            title: 'Победы в Пауке одна масть',
-            langID: 'win_s_o_a',
-            icon: 'Sprites/Icons/Icon_WS1.png',
+            title: '\"Переводной\" Побед подряд',
+            langID: 'UserData/Achievements/Title/TransitWinInRow',
+            icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 1.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
                 generateTrial(5, Items.Energy, 2),
                 generateTrial(7, Items.Energy, 3),
                 generateTrial(9, Items.Energy, 5),
                 generateTrial(12, Items.BoosterHint, 3),
-            ], rule: Rule.OneSuitSpider, loadData: { currentValue: 0, completedIndex: 0 }
+            ],
+            loadData: { currentValue: 0, completedIndex: 0 },
+            gameMode: GameMode.DurakTransfare
         }));
         this.achievements.push(new WinInARow({
-            title: 'Победы в Пауке две масти',
-            langID: 'win_s_t_a',
-            icon: 'Sprites/Icons/Icon_WS2.png',
+            title: '\"2 на 2\" Побед подряд',
+            langID: 'UserData/Achievements/Title/TeamWinInRow',
+            icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 3.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
                 generateTrial(5, Items.Energy, 2),
                 generateTrial(7, Items.Energy, 3),
                 generateTrial(9, Items.Energy, 5),
                 generateTrial(12, Items.BoosterHint, 3),
-            ], rule: Rule.TwoSuitsSpider, loadData: { currentValue: 0, completedIndex: 0 }
+            ],
+            loadData: { currentValue: 0, completedIndex: 0 },
+            entityMode: EntityMode.Pair
         }));
-        this.achievements.push(new WinInARow({
-            title: 'Победы в Пауке четыре масти',
-            langID: 'win_s_f_a',
-            icon: 'Sprites/Icons/Icon_WS4.png',
+        this.achievements.push(new DraftCount({
+            title: 'Закончить ничьей',
+            langID: 'UserData/Achievements/Title/EndGameInDraw',
+            icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 2.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
                 generateTrial(5, Items.Energy, 2),
                 generateTrial(7, Items.Energy, 3),
                 generateTrial(9, Items.Energy, 5),
                 generateTrial(12, Items.BoosterHint, 3),
-            ], rule: Rule.FourSuitsSpider, loadData: { currentValue: 0, completedIndex: 0 }
+            ],
+            loadData: { currentValue: 0, completedIndex: 0 },
         }));
-        this.achievements.push(new WinInARow({
-            title: 'Победы в Паучихе одна масть',
-            langID: 'win_sl_o_a',
-            icon: 'Sprites/Icons/Icon_WSL1.png',
+        this.achievements.push(new AceLose({
+            title: 'Остаться в дураках с тузами',
+            langID: 'UserData/Achievements/Title/LoseGameWithAces',
+            icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 1.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
                 generateTrial(5, Items.Energy, 2),
                 generateTrial(7, Items.Energy, 3),
                 generateTrial(9, Items.Energy, 5),
                 generateTrial(12, Items.BoosterHint, 3),
-            ], rule: Rule.OneSuitSpiderLady, loadData: { currentValue: 0, completedIndex: 0 }
+            ],
+            loadData: { currentValue: 0, completedIndex: 0 },
         }));
-        this.achievements.push(new WinInARow({
-            title: 'Победы в Паучихе две масти',
-            langID: 'win_sl_t_a',
-            icon: 'Sprites/Icons/Icon_WSL2.png',
+        this.achievements.push(new ThrowCards({
+            title: 'Подкинуть карт',
+            langID: 'UserData/Achievements/Title/TossCards',
+            icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 4.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
                 generateTrial(5, Items.Energy, 2),
                 generateTrial(7, Items.Energy, 3),
                 generateTrial(9, Items.Energy, 5),
                 generateTrial(12, Items.BoosterHint, 3),
-            ], rule: Rule.TwoSuitsSpiderLady, loadData: { currentValue: 0, completedIndex: 0 }
+            ],
+            loadData: { currentValue: 0, completedIndex: 0 },
         }));
-        this.achievements.push(new WinInARow({
-            title: 'Победы в Паучихе четыре масти',
-            langID: 'win_sl_f_a',
-            icon: 'Sprites/Icons/Icon_WSL4.png',
+        this.achievements.push(new TransfareCards({
+            title: 'Перевод карт',
+            langID: 'UserData/Achievements/Title/TransitCards',
+            icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 3.png',
             trials: [
                 generateTrial(3, Items.Energy, 2),
                 generateTrial(5, Items.Energy, 2),
                 generateTrial(7, Items.Energy, 3),
                 generateTrial(9, Items.Energy, 5),
                 generateTrial(12, Items.BoosterHint, 3),
-            ], rule: Rule.FourSuitsSpiderLady, loadData: { currentValue: 0, completedIndex: 0 }
+            ],
+            loadData: { currentValue: 0, completedIndex: 0 },
+        }));
+        this.achievements.push(new CurrencyCollected({
+            title: 'Накопить монет',
+            langID: 'UserData/Achievements/Title/MoneyEarned',
+            icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 1.png',
+            trials: [
+                generateTrial(3, Items.Energy, 2),
+                generateTrial(5, Items.Energy, 2),
+                generateTrial(7, Items.Energy, 3),
+                generateTrial(9, Items.Energy, 5),
+                generateTrial(12, Items.BoosterHint, 3),
+            ],
+            loadData: { currentValue: 0, completedIndex: 0 },
         }));
 
         this.updateEvent = new Action();

@@ -458,6 +458,9 @@ body {
 .arrow-back-btn-icon {
   width: 5.5vw;
 }
+.end-popup-tab,
+.exit-popup-tab,
+.tutorial-popup-tab,
 .daily-bonuses-tab,
 .choose-avatar-tab {
   display: flex;
@@ -484,12 +487,19 @@ body {
   top: -7%;
   right: -7%;
 }
+.end-popup_title-container,
+.exit-popup_title-container,
+.tutorial-popup_title-container,
 .choose-avatar_title-container {
   width: 80%;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
+.end-popup_title,
+.exit-popup_title,
+.tutorial-popup_title,
 .choose-avatar_title {
   color: #fff1ab;
   font-size: 2.6vw;
@@ -1525,6 +1535,132 @@ body {
   --target-font-size: 2vw;
 }
 
+.end-popup_container,
+.exit-popup_container,
+.tutorial-popup_container {
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ ежедневный\ бону/Group 48 4x 369162226.png');
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  position: relative;
+}
+.tutorial-popup_container {
+  width: 32vw;
+  height: 17vw;
+  padding: 3vw 0;
+}
+.exit-popup_container {
+  width: 32vw;
+  height: 17vw;
+  padding: 3vw 0;
+}
+.end-popup_container {
+  width: 32vw;
+  height: 25vw;
+  padding: 4vw 0;
+}
+.tutorial-popup_title-container {
+  width: 60%;
+  margin-bottom: 1.5vw;
+}
+.exit-popup_title-container {
+  width: 90%;
+}
+.tutorial-popup_title {
+  font-size: 3.2vw;
+  --target-font-size: 3.2vw;
+}
+.exit-popup_subtitle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  text-align: center;
+}
+.exit-popup_title-subtitle {
+  color: #fff1b2;
+  font-size: 1.5vw;
+  --target-font-size: 1.5vw;
+}
+.agree-disagree-panel {
+  width: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tutorial-popup-btn {
+  background: none;
+  border: none;
+  width: 13vw;
+  height: 5vw;
+  background-image: url('./Sprites/Mutual/Group 4x 154735546.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding: 0 2vw;
+}
+.tutorial-popup-btn-title {
+  color: #a44916;
+  font-size: 2vw;
+  --target-font-size: 2vw;
+  text-transform: uppercase;
+}
+
+.win-popup>.end-popup_title-container:not(:nth-child(1)) {
+  display: none;
+}
+.lose-popup>.end-popup_title-container:not(:nth-child(2)) {
+  display: none;
+}
+.draw-popup>.end-popup_title-container:not(:nth-child(3)) {
+  display: none;
+}
+.end-popup_bet-line,
+.end-popup_reward-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+}
+.end-popup_bet-title-container,
+.end-popup_reward-title-container {
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+.end-popup_bet-title,
+.end-popup_reward-title {
+  color: #fff1b2;
+  font-size: 2vw;
+  --target-font-size: 2vw;
+}
+.end-popup_bet-value,
+.end-popup_reward-value {
+  color: #fff1b2;
+  font-size: 2vw;
+}
+.tutorial-popup-btn>.add-bounty-icon {
+  width: 3vw;
+  transform: translateY(-5%);
+}
+.draw-with-ads_btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.draw-without-ads {
+  justify-content: center;
+}
+.draw-without-ads >.draw-with-ads_btn {
+  display: none;
+}
+.draw-without-ads>.tutorial-popup-btn {
+  width: 23vw;
+}
+
+
+
 .hidden-all {
   display: none;
 }
@@ -2088,5 +2224,50 @@ body {
   }
   .bounty-card-header {
     margin-top: -3vw;
+  }
+  .end-popup_container,
+  .exit-popup_container,
+  .tutorial-popup_container {
+    width: 88vw;
+    height: 50vw;
+    padding: 12vw 0;
+  }
+  .end-popup_container {
+    height: 60vw;
+  }
+  .tutorial-popup_title {
+    font-size: 8.2vw;
+    --target-font-size: 8.2vw;
+  }
+  .tutorial-popup-btn {
+    width: 34vw;
+    height: 12vw;
+  }
+  .tutorial-popup-btn-title {
+    font-size: 6vw;
+    --target-font-size: 6vw;
+  }
+  .end-popup_title,
+  .exit-popup_title {
+    font-size: 7vw;
+    --target-font-size: 7vw;
+  }
+  .exit-popup_title-subtitle {
+    font-size: 4.5vw;
+    --target-font-size: 4.5vw;
+  }
+  .tutorial-popup-btn>.add-bounty-icon {
+    width: 9vw;
+    transform: translateY(-5%);
+  }
+  .end-popup_bet-title, .end-popup_reward-title {
+    font-size: 5vw;
+    --target-font-size: 5vw;
+  }
+  .end-popup_bet-value, .end-popup_reward-value {
+    font-size: 5vw;
+  }
+  .draw-without-ads>.tutorial-popup-btn {
+    width: 60vw;
   }
 }

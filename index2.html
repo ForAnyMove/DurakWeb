@@ -789,7 +789,7 @@
           </li>
         </ul>
       </nav>
-      <div class="skins-pick-area hidden-all" id="pick-area-1">
+      <div class="skins-pick-area" id="pick-area-1">
         <div class="skin-element skin-element_skin-1">
           <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px" class="checkbox-pick-icon">
           <img src="./Sprites/Desktop - дурак- ежедневный бону/замок 4x -1037125765.png" alt="Locked" width="40px" class="skin-element_locked-icon">
@@ -853,7 +853,7 @@
           <img src="./Sprites/Desktop - дурак- ежедневный бону/замок 4x -1037125765.png" alt="Locked" width="40px" class="skin-element_locked-icon">
         </div>
       </div>
-      <div class="skins-pick-area" id="pick-area-3">
+      <div class="skins-pick-area hidden-all" id="pick-area-3">
         <div class="skin-back-element skin-back-element_skin-1">
           <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px" class="checkbox-pick-icon">
           <img src="./Sprites/Desktop - дурак- ежедневный бону/замок 4x -1037125765.png" alt="Locked" width="40px" class="skin-element_locked-icon">
@@ -1106,7 +1106,7 @@
         <span class="start-game_play-btn-title" lang="MainMenu/MainPanel/PlayTitle"></span>
       </button>
     </section>
-    <section class="daily-bonuses-tab">
+    <section class="daily-bonuses-tab hidden-all">
       <div class="daily-bonuses_container">
         <img src="./Sprites/Desktop - дурак- ежедневный бону/close 4x 432381591.png" alt="Close" width="50px" class="daily-bonuses_close-icon">
         <div class="daily-bonuses_header-logo-container">
@@ -1203,6 +1203,89 @@
         <img src="./Sprites/Desktop - дурак- ежедневный бону/Group 55 4x 1540056260.png" width="50px" alt="" class="daily-bonuses_multiple-bounty-icon">
         <div class="daily-bonuses_multiple-bounty-title-container">
           <span class="daily-bonuses_multiple-bounty-title" lang="MainMenu/DailyReward/x2when"></span>
+        </div>
+      </div>
+    </section>
+    
+    <section class="tutorial-popup-tab hidden-all">
+      <div class="tutorial-popup_container">
+        <div class="tutorial-popup_title-container">
+          <span class="tutorial-popup_title" lang="PreGamePanelMainMenu/TutorialAsk/DoYouWant"></span>
+        </div>
+        <div class="agree-disagree-panel">
+          <button class="tutorial-popup-btn">
+            <span
+              class="tutorial-popup-btn-title"
+              lang="PreGamePanelMainMenu/TutorialAsk/Yes"
+            ></span>
+          </button>
+          <button class="tutorial-popup-btn">
+            <span
+              class="tutorial-popup-btn-title"
+              lang="PreGamePanelMainMenu/TutorialAsk/No"
+            ></span>
+          </button>
+        </div>
+      </div>
+    </section>
+    <section class="exit-popup-tab hidden-all">
+      <div class="exit-popup_container">
+        <div class="exit-popup_title-container">
+          <span class="exit-popup_title" lang="Panels/Exit/YouSure"></span>
+        </div>
+        <div class="exit-popup_subtitle-container">
+          <span class="exit-popup_title-subtitle" lang="Panels/Exit/YourBetWillBe"></span>
+        </div>
+        <div class="agree-disagree-panel">
+          <button class="tutorial-popup-btn">
+            <span
+              class="tutorial-popup-btn-title"
+              lang="PreGamePanelMainMenu/TutorialAsk/Yes"
+            ></span>
+          </button>
+          <button class="tutorial-popup-btn">
+            <span
+              class="tutorial-popup-btn-title"
+              lang="PreGamePanelMainMenu/TutorialAsk/No"
+            ></span>
+          </button>
+        </div>
+      </div>
+    </section>
+    <section class="end-popup-tab">
+      <!-- Добавить win-popup/lose-popup/draw-popup в зависимости от нужного состояния -->
+      <div class="end-popup_container win-popup"> 
+        <div class="end-popup_title-container">
+          <span class="end-popup_title" lang="Panels/Finish/WonTitle"></span>
+        </div>
+        <div class="end-popup_title-container">
+          <span class="end-popup_title" lang="Panels/Finish/LostTitle"></span>
+        </div>
+        <div class="end-popup_title-container ">
+          <span class="end-popup_title" lang="Panels/Finish/DrawTitle"></span>
+        </div>
+        <div class="end-popup_bet-line">
+          <div class="end-popup_bet-title-container"><span class="end-popup_bet-title" lang="Panels/Finish/BetTitle"></span></div>
+          <span class="end-popup_bet-value">100</span>
+        </div>
+        <div class="end-popup_reward-line">
+          <div class="end-popup_reward-title-container"><span class="end-popup_reward-title" lang="Panels/Finish/RewardTitle"></span></div>
+          <span class="end-popup_reward-value">100</span>
+        </div>
+        <!-- Добавить контейнеру класс draw-without-ads для удаления кнопки рекламы и растяжения оставшейся кнопки на всю ширину-->
+        <div class="agree-disagree-panel draw-without-ads">
+          <button class="tutorial-popup-btn draw-with-ads_btn">
+            <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="add-bounty-icon">
+            <span
+              class="tutorial-popup-btn-title"
+            >X2</span>
+          </button>
+          <button class="tutorial-popup-btn">
+            <span
+              class="tutorial-popup-btn-title"
+              lang="PreGamePanelMainMenu/TutorialAsk/Yes"
+            ></span>
+          </button>
         </div>
       </div>
     </section>

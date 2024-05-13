@@ -12,8 +12,8 @@ class CollectionScreen extends ScreenLogic {
 
     onCreate() {
         const skinParent = this.screenRoot.querySelector('#pick-area-1');
-        const skinBackParent = this.screenRoot.querySelector('#pick-area-2');
-        const backgroundParent = this.screenRoot.querySelector('#pick-area-3');
+        const skinBackParent = this.screenRoot.querySelector('#pick-area-3');
+        const backgroundParent = this.screenRoot.querySelector('#pick-area-2');
 
         const tabScreens = [skinParent, backgroundParent, skinBackParent];
 
@@ -63,7 +63,7 @@ class CollectionScreen extends ScreenLogic {
         }
 
         const createSkinInstance = (data) => {
-            const plane = createElement('div', ['skin-element'], {
+            const plane = createElement('div', ['skin-element', 'skin-element_skin-1'], {
                 backgroundImage: `url('${data.previewPath}')`,
                 backgroundSize: '100% 100%'
             });
@@ -129,7 +129,7 @@ class CollectionScreen extends ScreenLogic {
         }
 
         const createSkinBackInstance = (data) => {
-            const plane = createElement('div', ['skin-back-element'], {
+            const plane = createElement('div', ['skin-back-element', 'skin-back-element_skin-1'], {
                 backgroundImage: `url('${data.previewPath}')`,
                 backgroundSize: '100% 100%'
             });
@@ -194,10 +194,11 @@ class CollectionScreen extends ScreenLogic {
         }
 
         const createBackgroundInstance = (data) => {
-            const plane = createElement('div', ['skin-background-element'], {
+            const plane = createElement('div', ['background-element'], null);
+            createElement('div', ['background-element_skin-1'], {
                 backgroundImage: `url('${data.itemPreviewPath}')`,
                 backgroundSize: '100% 100%'
-            });
+            }, plane);
             plane.id = data.id.id;
             createTextSpan(['collection-skin-timer'], null, plane, '');
 

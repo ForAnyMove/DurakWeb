@@ -738,6 +738,7 @@ button.selected {
   background-repeat: no-repeat;
   width: 95%;
   height: 90%;
+  border-radius: 0.8vw;
 }
 
 .background-element_skin-2 {
@@ -1119,7 +1120,7 @@ button.selected {
     width: 5vw;
     left: 0;
     /* filter: blur(30px); */
-    animation: shine-alt1 1s ease-in-out infinite;
+    animation: shine-alt1 2s ease-in-out infinite;
   }
 
   animation: bounce 1s ease-in-out infinite;
@@ -1142,13 +1143,13 @@ button.selected {
 @keyframes shine-alt1 {
   0% {
     opacity: 0.5;
-    transform: translateX(-100px) skewX(-15deg);
+    transform: translateX(-200%) skewX(-15deg);
     transition-property: opacity, transform;
   }
 
   100% {
     opacity: 0.6;
-    transform: translateX(300px) skewX(-15deg);
+    transform: translateX(800%) skewX(-15deg);
     transition-property: opacity, transform;
   }
 }

@@ -107,6 +107,22 @@ const profileScreen = new Screen({
   screenLogic: new ProfileScreen()
 });
 
+const profileAvatarRoot = document.getElementById('choose-avatar-tab');
+const profileAvatarScreen = new Screen({
+  element: profileAvatarRoot,
+  openButtons: profileRoot.querySelectorAll('.choose-avatar-tab-open-button'),
+  closeButtons: profileAvatarRoot.querySelectorAll('.choose-avatar-tab-close-button'),
+  onFocus: () => {
+    dynamicFontChanger.update();
+    input.updateQueryCustom(profileScreen.screenLogic.selectableElements,
+      profileScreen.screenLogic.defaultSelectedElement);
+  },
+  onUnfocus: () => {
+    navigation.push(profileScreen);
+  },
+  screenLogic: new ProfileScreen()
+});
+
 const settingsRoot = document.getElementById('settings-tab');
 const settingsScreen = new Screen({
   element: settingsRoot,
@@ -139,45 +155,50 @@ const gameSelectionScreen = new Screen({
   screenLogic: null
 });
 
-// const exitScreen = new Screen({
-//   isPopup: true,
-//   element: document.getElementById('exid-game'),
-//   closeButtons: [document.getElementById('exid-game').getElementsByClassName('exid-no')[0]],
-//   onFocus: () => {
-//     dynamicFontChanger.update();
-//     const elements = getInputElements(exitScreen.element, { tags: ['button'] });
-//     input.updateQueryCustom(elements, elements[1]);
-//   }, onUnfocus: () => { }
-// });
+const exitPopupRoot = document.getElementById('exit-popup-tab');
+const exitScreen = new Screen({
+  element: exitPopupRoot,
+  closeButtons: [exitPopupRoot.querySelector('.exit-no')],
+  onFocus: () => {
+    dynamicFontChanger.update();
+    const elements = getInputElements(exitScreen.element, { tags: ['button'] });
+    input.updateQueryCustom(elements, elements[1]);
+  }, onUnfocus: () => {
+    navigation.push(mainScreen);
+  }
+});
 
-// const tutorialOffsetScreen = new Screen({
-//   isPopup: true,
-//   element: document.getElementById('tutorial-offer'),
-//   closeButtons: [document.getElementById('tutorial-offer').getElementsByClassName('exid-no')[0]],
-//   onFocus: () => {
-//     dynamicFontChanger.update();
-//     const elements = getInputElements(tutorialOffsetScreen.element, { tags: ['button'] });
-//     input.updateQueryCustom(elements, elements[0]);
-//   }, onUnfocus: () => { }
-// });
+const tutorialPopupRoot = document.getElementById('tutorial-popup-tab');
+const tutorialOffsetScreen = new Screen({
+  element: tutorialPopupRoot,
+  closeButtons: [tutorialPopupRoot.querySelector('.no')],
+  onFocus: () => {
+    dynamicFontChanger.update();
+    const elements = getInputElements(tutorialOffsetScreen.element, { tags: ['button'] });
+    input.updateQueryCustom(elements, elements[0]);
+  }, onUnfocus: () => {
+    navigation.push(mainScreen);
+  }
+});
 
-// const exitButton = exitScreen.element.getElementsByClassName('exid-yes')[0];
-// if (exitButton != null) {
-//   exitButton.onclick = function () { SDK?.dispatchEvent(SDK.EVENTS.EXIT); }
-// }
+const exitButton = exitScreen.element.getElementsByClassName('exid-yes')[0];
+if (exitButton != null) {
+  exitButton.onclick = function () { SDK?.dispatchEvent(SDK.EVENTS.EXIT); }
+}
 
 navigation.registerScreen(achievementsScreen);
 navigation.registerScreen(collectionScreen);
 navigation.registerScreen(profileScreen);
 navigation.registerScreen(gameSelectionScreen);
+navigation.registerScreen(profileAvatarScreen);
 
 navigation.registerScreen(bonusesScreen);
 navigation.registerScreen(settingsScreen);
-// navigation.registerScreen(exitScreen);
-// navigation.registerScreen(tutorialOffsetScreen);
+navigation.registerScreen(exitScreen);
+navigation.registerScreen(tutorialOffsetScreen);
 
 // if (load('tutorial-offer', false) == false) {
-//   tutorialOffsetScreen.element.getElementsByTagName('button')[0].onclick = function () {
+//   tutorialPopupRoot.querySelector('.yes').onclick = function () {
 //     window.location.href = './src/playground/playground.html?levelID=level_def_s_1&isTutorial=true';
 //   }
 

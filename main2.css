@@ -2,6 +2,7 @@ body {
   background-color: #004b1b;
   background-image: url('../../Sprites/Custom Icons/фон.png');
   background-size: 100% 100%;
+  overflow: hidden;
 }
 
 .main-tab {
@@ -212,6 +213,7 @@ button.selected {
 
 .start-game_switch-mode-btn,
 .categories-btn,
+.start-game_play-btn,
 .tutorial-btn,
 .profile-subtab-switch-btn {
   background: none;
@@ -225,6 +227,7 @@ button.selected {
 
 .start-game_switch-mode-title,
 .tutorial-btn-title,
+.start-game_play-btn-title,
 .categories-btn-title,
 .profile-subtab-switch-btn-title {
   color: #60628e;
@@ -235,6 +238,7 @@ button.selected {
 }
 
 .tutorial-btn,
+.start-game_play-btn,
 .categories-btn-title_active,
 .start-game_switch-mode-btn_active,
 .profile-subtab-switch-btn_active {
@@ -485,11 +489,16 @@ button.selected {
   width: 5.5vw;
 }
 
+.end-popup-tab,
+.exit-popup-tab,
+.tutorial-popup-tab,
+.daily-bonuses-tab,
 .choose-avatar-tab {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
+  flex-direction: column;
 }
 
 .choose-avatar_container {
@@ -512,13 +521,20 @@ button.selected {
   right: -7%;
 }
 
+.end-popup_title-container,
+.exit-popup_title-container,
+.tutorial-popup_title-container,
 .choose-avatar_title-container {
   width: 80%;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
+.end-popup_title,
+.exit-popup_title,
+.tutorial-popup_title,
 .choose-avatar_title {
   color: #fff1ab;
   font-size: 2.6vw;
@@ -553,7 +569,6 @@ button.selected {
 .skins-tab {
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
   height: 100%;
 }
@@ -564,6 +579,7 @@ button.selected {
   justify-content: center;
   column-gap: 2vw;
   list-style-type: none;
+  margin-top: 8vh;
   margin-bottom: 6vh;
 }
 
@@ -590,20 +606,19 @@ button.selected {
   max-height: 60vh;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   margin-bottom: 10vh;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  width: 75%;
-  padding: 0 2%;
+  width: 79vw;
   overflow-y: scroll;
   column-gap: 5vw;
   row-gap: 2vw;
 }
 
 .skin-element {
-  width: 18vw;
-  height: 8vw;
+  width: 16vw;
+  height: 7.5vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -646,6 +661,10 @@ button.selected {
   width: 3vw;
 }
 
+.skin-element_locked {
+  filter: brightness(0.7);
+}
+
 .skin-element_locked>.checkbox-pick-icon {
   display: none;
 }
@@ -656,12 +675,189 @@ button.selected {
 
 .checkbox-pick-icon {
   width: 5vw;
+  transform: translateY(15%);
 }
 
-.skin-element_default-skin {
-  background-image: url('');
-  /* добавить фоном скин карт */
+.skin-element_skin-1 {
+  background-image: url('./Sprites/Card Skins/Collection Skins/card_skin_preview_01.png');
+  background-size: 100% 100%;
 }
+
+.skin-element_skin-2 {
+  background-image: url('./Sprites/Card Skins/Collection Skins/card_skin_preview_02.png');
+  background-size: 100% 100%;
+}
+
+.skin-element_skin-3 {
+  background-image: url('./Sprites/Card Skins/Collection Skins/card_skin_preview_03.png');
+  background-size: 100% 100%;
+}
+
+.skin-element_skin-4 {
+  background-image: url('./Sprites/Card Skins/Collection Skins/card_skin_preview_04.png');
+  background-size: 100% 100%;
+}
+
+.skin-element_skin-5 {
+  background-image: url('./Sprites/Card Skins/Collection Skins/card_skin_preview_05.png');
+  background-size: 100% 100%;
+}
+
+.background-element {
+  background: #FCEDAD;
+  background: -moz-linear-gradient(top, #FCEDAD 0%, #f1b335 50%, #D0860A 100%);
+  background: -webkit-linear-gradient(top, #FCEDAD 0%, #f1b335 50%, #D0860A 100%);
+  background: linear-gradient(to bottom, #FCEDAD 0%, #f1b335 50%, #D0860A 100%);
+  border-radius: 1vw;
+  width: 16vw;
+  height: 9vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+#pick-area-2 {
+  width: 96vw;
+  column-gap: 4vw;
+}
+
+.background-element>.checkbox-pick-icon {
+  position: absolute;
+  width: 4vw;
+}
+
+.background-element>.skin-element_locked-icon {
+  position: absolute;
+  width: 2.5vw;
+}
+
+.background-element_skin-1 {
+  background-image: url('./Sprites/Backgrounds/Release/Background_01.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 95%;
+  height: 90%;
+}
+
+.background-element_skin-2 {
+  background-image: url('./Sprites/Backgrounds/Release/Background_02.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 95%;
+  height: 90%;
+}
+
+.background-element_skin-3 {
+  background-image: url('./Sprites/Backgrounds/Release/Background_03.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 95%;
+  height: 90%;
+}
+
+.background-element_skin-4 {
+  background-image: url('./Sprites/Backgrounds/Release/Background_04.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 95%;
+  height: 90%;
+}
+
+.background-element_skin-5 {
+  background-image: url('./Sprites/Backgrounds/Release/Background_05.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 95%;
+  height: 90%;
+}
+
+.background-element_skin-6 {
+  background-image: url('./Sprites/Backgrounds/Release/Background_06.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 95%;
+  height: 90%;
+}
+
+.background-element_skin-7 {
+  background-image: url('./Sprites/Backgrounds/Release/Background_07.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 95%;
+  height: 90%;
+}
+
+.background-element_skin-8 {
+  background-image: url('./Sprites/Backgrounds/Release/Background_08.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 95%;
+  height: 90%;
+}
+
+.skin-back-element {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 7.5vw;
+  height: 10vw;
+}
+
+.skin-back-element>.checkbox-pick-icon {
+  width: 3.5vw;
+}
+
+#pick-area-3 {
+  width: 53.5vw;
+  column-gap: 4vw;
+}
+
+.skin-back-element_skin-1 {
+  background-image: url('./Sprites/CardBacks/Card_Back_01.png');
+  background-size: 100% 100%;
+}
+
+.skin-back-element_skin-2 {
+  background-image: url('./Sprites/CardBacks/Card_Back_02.png');
+  background-size: 100% 100%;
+}
+
+.skin-back-element_skin-3 {
+  background-image: url('./Sprites/CardBacks/Card_Back_03.png');
+  background-size: 100% 100%;
+}
+
+.skin-back-element_skin-4 {
+  background-image: url('./Sprites/CardBacks/Card_Back_04.png');
+  background-size: 100% 100%;
+}
+
+.skin-back-element_skin-5 {
+  background-image: url('./Sprites/CardBacks/Card_Back_05.png');
+  background-size: 100% 100%;
+}
+
+.skin-back-element_skin-6 {
+  background-image: url('./Sprites/CardBacks/Card_Back_06.png');
+  background-size: 100% 100%;
+}
+
+.skin-back-element_skin-7 {
+  background-image: url('./Sprites/CardBacks/Card_Back_07.png');
+  background-size: 100% 100%;
+}
+
+.skin-back-element_skin-8 {
+  background-image: url('./Sprites/CardBacks/Card_Back_08.png');
+  background-size: 100% 100%;
+}
+
+.skin-back-element_skin-9 {
+  background-image: url('./Sprites/CardBacks/Card_Back_09.png');
+  background-size: 100% 100%;
+}
+
 
 .settings-tab {
   display: flex;
@@ -1296,6 +1492,7 @@ button.selected {
   height: 6vw;
   background-image: url('./Sprites/Desktop\ -\ дурак-\ Профиль\ \(статус/Group 62 4x 2142765846.png');
   background-size: 100% 100%;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1309,6 +1506,7 @@ button.selected {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 2vw;
 }
 
 .start-game_sliders-container {
@@ -1327,6 +1525,387 @@ button.selected {
 .start-game_sliders-container {
   column-gap: 1.5vw;
 }
+
+.start-game_bet-range-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 35vw;
+  margin-bottom: 2vh;
+}
+
+.start-game_bet-range-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.start-game_bet-title-container {
+  width: 20vw;
+  display: flex;
+  align-items: center;
+}
+
+.start-game_bet-title {
+  color: #fff3a0;
+  font-size: 1.7vw;
+  --target-font-size: 1.7vw;
+  font-weight: 800;
+}
+
+.start-game_bet-value {
+  color: #fff3a0;
+  font-size: 3.4vw;
+  font-weight: 600;
+}
+
+.start-game_range-container {
+  width: 100%;
+  height: 4vw;
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ Играть\ \(выбор\ р/Group 117.png');
+  background-size: 90% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+/* Можно двигать через js меняя left в % от 0 до 100 с привязкой к курсору */
+.start-game_range-item {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(0%, -50%);
+  width: 6vw;
+}
+
+.start-game_play-btn {
+  padding: 0 2vw;
+}
+
+.start-game_play-btn-title {
+  color: #a44916;
+  font-size: 2.5vw;
+  --target-font-size: 2.5vw;
+}
+
+.start-game_watch-add-btn {
+  background-image: url('./Sprites/Desktop - дурак- Играть (выбор р/Group 105 4x 2122095409.png');
+  background-size: 100% 100%;
+  background-position-y: 0.2vw;
+  background-repeat: no-repeat;
+  width: 10vw;
+  height: 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 6vw;
+  right: 2vw;
+}
+
+.start-game_watch-add-btn-icon {
+  width: 3.5vw;
+}
+
+.start-game_watch-add-btn-title {
+  color: #fff;
+  font-size: 1.8vw;
+  font-weight: 800;
+}
+
+.daily-bonuses_container {
+  width: 45vw;
+  height: 37vw;
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ ежедневный\ бону/Group 48 4x 369162226.png');
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  row-gap: 2vw;
+  text-align: center;
+  margin-top: 4vw;
+}
+
+.daily-bonuses_header-logo-container {
+  background-image: url('./Sprites/Desktop - дурак- ежедневный бону/Label.png');
+  background-size: 100% 100%;
+  width: 15vw;
+  height: 5vw;
+  transform: translateY(-40%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4vw 8.5vw;
+}
+
+.daily-bonuses_header-title {
+  color: #fff1b2;
+  font-size: 2.3vw;
+  --target-font-size: 2.3vw;
+  text-transform: uppercase;
+}
+
+.daily-bonuses_bounties-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 80%;
+  column-gap: 1.5vw;
+  margin-top: -8vw;
+}
+
+.bounty-card-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ ежедневный\ бону/Дней в игре 4x -1248971501.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 11vw;
+  height: 14vw;
+  row-gap: 0.3vw;
+  position: relative;
+}
+
+.bounty-card-container:focus {
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ ежедневный\ бону/Дней в игре 4x -2082729353.png');
+  background-size: 105% 98%;
+  background-position-x: center;
+  background-position-y: -0.5vw;
+}
+
+.bounty-card-container>.bonuses_locked-mask {
+  transform: translateY(-7%);
+  height: 85%;
+}
+
+.daily-bonuses_bounties-container>.opened>.bonuses_locked-mask {
+  display: none;
+}
+
+.bounty-card-header {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: -2vw;
+}
+
+.add-bounty-value,
+.bounty-card-header-number,
+.bounty-card-header-title {
+  text-transform: uppercase;
+  color: #a44916;
+  font-size: 1.6vw;
+  --target-font-size: 1.6vw;
+}
+
+.bounty-card-header-number {
+  padding-left: 5%;
+}
+
+.bounty-card-icon {
+  width: 6.5vw;
+}
+
+.add-bounty-container {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-bounty-icon {
+  width: 2.5vw;
+}
+
+.daily-bonuses_close-icon {
+  position: absolute;
+  width: 5.5vw;
+  top: -5%;
+  right: -5%;
+}
+
+.daily-bonuses_multiple-bounty-container {
+  width: 27vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.daily-bonuses_multiple-bounty-icon {
+  width: 5vw;
+}
+
+.daily-bonuses_multiple-bounty-title-container {
+  width: 22vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  transform: translateY(30%);
+}
+
+.daily-bonuses_multiple-bounty-title {
+  color: #fff3a0;
+  text-transform: uppercase;
+  font-size: 2vw;
+  --target-font-size: 2vw;
+}
+
+.end-popup_container,
+.exit-popup_container,
+.tutorial-popup_container {
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ ежедневный\ бону/Group 48 4x 369162226.png');
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  position: relative;
+}
+
+.tutorial-popup_container {
+  width: 32vw;
+  height: 17vw;
+  padding: 3vw 0;
+}
+
+.exit-popup_container {
+  width: 32vw;
+  height: 17vw;
+  padding: 3vw 0;
+}
+
+.end-popup_container {
+  width: 32vw;
+  height: 25vw;
+  padding: 4vw 0;
+}
+
+.tutorial-popup_title-container {
+  width: 60%;
+  margin-bottom: 1.5vw;
+}
+
+.exit-popup_title-container {
+  width: 90%;
+}
+
+.tutorial-popup_title {
+  font-size: 3.2vw;
+  --target-font-size: 3.2vw;
+}
+
+.exit-popup_subtitle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  text-align: center;
+}
+
+.exit-popup_title-subtitle {
+  color: #fff1b2;
+  font-size: 1.5vw;
+  --target-font-size: 1.5vw;
+}
+
+.agree-disagree-panel {
+  width: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tutorial-popup-btn {
+  background: none;
+  border: none;
+  width: 13vw;
+  height: 5vw;
+  background-image: url('./Sprites/Mutual/Group 4x 154735546.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding: 0 2vw;
+}
+
+.tutorial-popup-btn-title {
+  color: #a44916;
+  font-size: 2vw;
+  --target-font-size: 2vw;
+  text-transform: uppercase;
+}
+
+.win-popup>.end-popup_title-container:not(:nth-child(1)) {
+  display: none;
+}
+
+.lose-popup>.end-popup_title-container:not(:nth-child(2)) {
+  display: none;
+}
+
+.draw-popup>.end-popup_title-container:not(:nth-child(3)) {
+  display: none;
+}
+
+.end-popup_bet-line,
+.end-popup_reward-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.end-popup_bet-title-container,
+.end-popup_reward-title-container {
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.end-popup_bet-title,
+.end-popup_reward-title {
+  color: #fff1b2;
+  font-size: 2vw;
+  --target-font-size: 2vw;
+}
+
+.end-popup_bet-value,
+.end-popup_reward-value {
+  color: #fff1b2;
+  font-size: 2vw;
+}
+
+.tutorial-popup-btn>.add-bounty-icon {
+  width: 3vw;
+  transform: translateY(-5%);
+}
+
+.draw-with-ads_btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.draw-without-ads {
+  justify-content: center;
+}
+
+.draw-without-ads>.draw-with-ads_btn {
+  display: none;
+}
+
+.draw-without-ads>.tutorial-popup-btn {
+  width: 23vw;
+}
+
+
 
 .hidden-all {
   display: none;
@@ -1757,5 +2336,311 @@ button.selected {
 
   .bonuses_bonus-container:nth-child(4)>.bonuses_combine-bonus-icon-container>.custom-white-circle>.custom-color-circle>.custom-component-title-container>.custom-component-title {
     font-size: 1.4vw;
+  }
+
+  .start-game_header {
+    font-size: 5.5vw;
+    --target-font-size: 5.5vw;
+  }
+
+  .start-game_mode-btns-container {
+    width: 97vw;
+    height: 15vw;
+    column-gap: 3vw;
+  }
+
+  .start-game_switch-mode-btn {
+    transform: translateY(-15%);
+    width: 44vw;
+    height: 9vw;
+    padding: 0 4vw;
+  }
+
+  .start-game_switch-mode-btn>.start-game_switch-mode-title {
+    font-size: 4vw;
+    --target-font-size: 4vw;
+    text-wrap: nowrap;
+  }
+
+  .start-game_sliders-container {
+    width: 97vw;
+    column-gap: 3.5vw;
+  }
+
+  .start-game_slider-header {
+    font-size: 3vw;
+    --target-font-size: 3vw;
+  }
+
+  .start-game_slider-container_dark {
+    height: 12vw;
+  }
+
+  .start-game_switch-btn,
+  .settings_switch-btn {
+    width: 3vw;
+    margin: 0 1.5vw;
+  }
+
+  .start-game_uptitle {
+    font-size: 4.5vw;
+    --target-font-size: 4.5vw;
+  }
+
+  .start-game_bet-range-container {
+    width: 70vw;
+    margin-bottom: 1vh;
+  }
+
+  .start-game_bet-title {
+    font-size: 3.7vw;
+    --target-font-size: 3.7vw;
+  }
+
+  .start-game_bet-value {
+    font-size: 6.5vw;
+  }
+
+  .start-game_range-container {
+    height: 8vw;
+  }
+
+  .start-game_range-item {
+    width: 13vw;
+  }
+
+  .start-game_play-btn {
+    width: 30vw;
+    height: 9vw;
+    padding: 0 4vw;
+  }
+
+  .start-game_play-btn-title {
+    font-size: 4.5vw;
+    --target-font-size: 4.5vw;
+  }
+
+  .start-game_slider-container_light {
+    width: 95%;
+    height: 85%;
+  }
+
+  .start-game_watch-add-btn {
+    background-position-y: 0.5vw;
+    width: 17vw;
+    height: 9vw;
+    top: 11vw;
+    right: 5vw;
+  }
+
+  .start-game_watch-add-btn-icon {
+    width: 5.5vw;
+  }
+
+  .start-game_watch-add-btn-title {
+    font-size: 2.8vw;
+  }
+
+  .skins-nav-list {
+    column-gap: 6vw;
+    margin-top: 5vh;
+    margin-bottom: 3vh;
+  }
+
+  .categories-btn {
+    width: 19vw;
+    height: 7vw;
+  }
+
+  .categories-btn-title {
+    font-size: 4vw;
+    --target-font-size: 4vw;
+  }
+
+  .skin-element {
+    width: 36vw;
+    height: 16.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .skins-pick-area {
+    margin-bottom: 10vh;
+    scrollbar-width: none;
+    column-gap: 7vw;
+    row-gap: 5vw;
+  }
+
+  .checkbox-pick-icon {
+    width: 11vw;
+  }
+
+  .skin-element_locked-icon {
+    width: 8vw;
+  }
+
+  .background-element {
+    border-radius: 1vw;
+    width: 35vw;
+    height: 20vw;
+  }
+
+  #pick-area-2 {
+    width: 77vw;
+    column-gap: 7vw;
+  }
+
+  .background-element>.checkbox-pick-icon {
+    width: 8vw;
+  }
+
+  .background-element>.skin-element_locked-icon {
+    width: 5.5vw;
+  }
+
+  .skin-back-element {
+    width: 16.5vw;
+    height: 22vw;
+  }
+
+  .skin-back-element>.checkbox-pick-icon {
+    width: 7.5vw;
+  }
+
+  .skin-back-element>.skin-element_locked-icon {
+    width: 7vw;
+  }
+
+  #pick-area-3 {
+    width: 87vw;
+    column-gap: 7vw;
+  }
+
+  .daily-bonuses_container {
+    width: 92vw;
+    height: 75vw;
+  }
+
+  .daily-bonuses_multiple-bounty-icon {
+    width: 12vw;
+  }
+
+  .daily-bonuses_multiple-bounty-title-container {
+    width: 50vw;
+  }
+
+  .daily-bonuses_multiple-bounty-title {
+    font-size: 4.5vw;
+    --target-font-size: 4.5vw;
+  }
+
+  .daily-bonuses_multiple-bounty-container {
+    width: 62vw;
+  }
+
+  .daily-bonuses_close-icon {
+    width: 12.5vw;
+  }
+
+  .daily-bonuses_header-logo-container {
+    width: 40vw;
+    height: 20vw;
+    padding: 5vw 14.5vw;
+  }
+
+  .daily-bonuses_header-title {
+    color: #fff1b2;
+    font-size: 5.3vw;
+    --target-font-size: 5.3vw;
+    text-transform: uppercase;
+  }
+
+  .daily-bonuses_bounties-container {
+    column-gap: 1.5vw;
+    margin-top: -16vw;
+  }
+
+  .bounty-card-container {
+    width: 22vw;
+    height: 28vw;
+    row-gap: 0.6vw;
+  }
+
+  .bounty-card-icon {
+    width: 13.5vw;
+  }
+
+  .add-bounty-value,
+  .bounty-card-header-number,
+  .bounty-card-header-title {
+    font-size: 3.6vw;
+    --target-font-size: 3.6vw;
+  }
+
+  .add-bounty-icon {
+    width: 5.5vw;
+  }
+
+  .bounty-card-header {
+    margin-top: -3vw;
+  }
+
+  .end-popup_container,
+  .exit-popup_container,
+  .tutorial-popup_container {
+    width: 88vw;
+    height: 50vw;
+    padding: 12vw 0;
+  }
+
+  .end-popup_container {
+    height: 60vw;
+  }
+
+  .tutorial-popup_title {
+    font-size: 8.2vw;
+    --target-font-size: 8.2vw;
+  }
+
+  .tutorial-popup-btn {
+    width: 34vw;
+    height: 12vw;
+  }
+
+  .tutorial-popup-btn-title {
+    font-size: 6vw;
+    --target-font-size: 6vw;
+  }
+
+  .end-popup_title,
+  .exit-popup_title {
+    font-size: 7vw;
+    --target-font-size: 7vw;
+  }
+
+  .exit-popup_title-subtitle {
+    font-size: 4.5vw;
+    --target-font-size: 4.5vw;
+  }
+
+  .tutorial-popup-btn>.add-bounty-icon {
+    width: 9vw;
+    transform: translateY(-5%);
+  }
+
+  .end-popup_bet-title,
+  .end-popup_reward-title {
+    font-size: 5vw;
+    --target-font-size: 5vw;
+  }
+
+  .end-popup_bet-value,
+  .end-popup_reward-value {
+    font-size: 5vw;
+  }
+
+  .draw-without-ads>.tutorial-popup-btn {
+    width: 60vw;
   }
 }

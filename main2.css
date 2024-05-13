@@ -460,6 +460,7 @@ body {
 }
 .end-popup-tab,
 .exit-popup-tab,
+.exit-game-popup-tab,
 .tutorial-popup-tab,
 .daily-bonuses-tab,
 .choose-avatar-tab {
@@ -489,6 +490,7 @@ body {
 }
 .end-popup_title-container,
 .exit-popup_title-container,
+.exit-game-popup_title-container,
 .tutorial-popup_title-container,
 .choose-avatar_title-container {
   width: 80%;
@@ -499,6 +501,7 @@ body {
 }
 .end-popup_title,
 .exit-popup_title,
+.exit-game-popup_title,
 .tutorial-popup_title,
 .choose-avatar_title {
   color: #fff1ab;
@@ -1537,6 +1540,7 @@ body {
 
 .end-popup_container,
 .exit-popup_container,
+.exit-game-popup_container,
 .tutorial-popup_container {
   background-image: url('./Sprites/Desktop\ -\ дурак-\ ежедневный\ бону/Group 48 4x 369162226.png');
   background-size: 100% 100%;
@@ -1551,7 +1555,8 @@ body {
   height: 17vw;
   padding: 3vw 0;
 }
-.exit-popup_container {
+.exit-popup_container,
+.exit-game-popup_container {
   width: 32vw;
   height: 17vw;
   padding: 3vw 0;
@@ -1565,7 +1570,8 @@ body {
   width: 60%;
   margin-bottom: 1.5vw;
 }
-.exit-popup_title-container {
+.exit-popup_title-container
+.exit-game-popup_title-container {
   width: 90%;
 }
 .tutorial-popup_title {
@@ -2227,6 +2233,7 @@ body {
   }
   .end-popup_container,
   .exit-popup_container,
+  .exit-game-popup_container,
   .tutorial-popup_container {
     width: 88vw;
     height: 50vw;
@@ -2249,6 +2256,10 @@ body {
   }
   .end-popup_title,
   .exit-popup_title {
+    font-size: 7vw;
+    --target-font-size: 7vw;
+  }
+  .exit-game-popup_title {
     font-size: 7vw;
     --target-font-size: 7vw;
   }

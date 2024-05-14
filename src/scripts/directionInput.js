@@ -81,7 +81,7 @@ export default class DirectionalInput {
             return false;
         }
         const computedStyle = window.getComputedStyle(element);
-        return computedStyle.visibility !== 'hidden' && !isElementHidden(element) && computedStyle.pointerEvents != 'none';
+        return computedStyle.visibility !== 'hidden' && !isElementHidden(element) && computedStyle.pointerEvents != 'none' && !element.classList.contains('inactive');
     }
 
     backupCurrentState = function () {

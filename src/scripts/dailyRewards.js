@@ -3,47 +3,30 @@ import { Items } from "./statics/staticValues.js";
 
 const dailyRewards = [
     {
-        item: Items.Energy,
-        count: 2,
+        item: Items.Currency,
+        count: 100,
         completed: false
     }, {
-        item: Items.BoosterHint,
-        count: 3,
+        item: Items.Currency,
+        count: 200,
         completed: false
     }, {
-        item: Items.Energy,
-        count: 5,
+        item: Items.Currency,
+        count: 300,
         completed: false
     }, {
-        item: Items.BoosterMage,
-        count: 3,
+        item: Items.Currency,
+        count: 500,
         completed: false
     }, {
-        item: Items.Energy,
-        count: 10,
+        item: Items.Currency,
+        count: 700,
         completed: false
     }, {
-        item: Items.BoosterUndo,
-        count: 5,
+        item: Items.Currency,
+        count: 1000,
         completed: false
-    }, {
-        item: [
-            {
-                item: Items.Energy,
-                count: 5
-            }, {
-                item: Items.BoosterHint,
-                count: 4
-            }, {
-                item: Items.BoosterMage,
-                count: 2
-            }, {
-                item: Items.BoosterUndo,
-                count: 4
-            }
-        ],
-        completed: false
-    },
+    }
 ]
 
 function loadDailyRewards() {

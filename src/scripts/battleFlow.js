@@ -17,8 +17,8 @@ const EntityMode = {
 }
 
 const CardsCount = {
-    36: 46,
-    54: 54
+    36: 36,
+    52: 52
 }
 
 class Rule {
@@ -26,6 +26,7 @@ class Rule {
         this.gameMode = GameMode.DurakTransfare;
         this.entityMode = EntityMode.Self;
         this.cardsCount = CardsCount[36];
+        this.numberOfPlayers = 2;
     }
 }
 

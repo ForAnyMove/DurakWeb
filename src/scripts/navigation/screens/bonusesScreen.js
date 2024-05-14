@@ -1,4 +1,5 @@
 import { load, save } from "../../save_system/SaveSystem.js";
+import { showRewarded } from "../../sdk/sdk.js";
 import { Content, Items } from "../../statics/staticValues.js";
 import { Timer } from "../../timer.js";
 import { ScreenLogic } from "../navigation.js";
@@ -6,10 +7,11 @@ import { ScreenLogic } from "../navigation.js";
 class BonusesScreen extends ScreenLogic {
 
     onCreate() {
-        const time = 24 * 60 * 60;
-        // const time = 25;
+        this.defaultSelectedElement = { element: this.screenRoot.querySelector('.arrow-back-btn') }
+        this.selectableElements.push(this.defaultSelectedElement);
 
-        // opened locked checked
+        const time = 24 * 60 * 60;
+
         const data = this.loadData();
         const staticData = [
             {
@@ -24,30 +26,30 @@ class BonusesScreen extends ScreenLogic {
                 timers: []
             }, {
                 reward: {
-                    content: [Content.CardBackSkin02]
+                    content: [Content.CardBackSkin05]
                 }, timerFinishCallback: () => {
-                    user.removeContent(Content.CardBackSkin02)
+                    user.removeContent(Content.CardBackSkin05)
                 },
                 timers: [
-                    document.getElementById(Content.CardBackSkin02.id)?.querySelector('.collection-skin-timer')
+                    document.getElementById(Content.CardBackSkin05.id)?.querySelector('.collection-skin-timer')
                 ]
             }, {
                 reward: {
-                    content: [Content.Background02]
+                    content: [Content.Background05]
                 }, timerFinishCallback: () => {
-                    user.removeContent(Content.Background02)
+                    user.removeContent(Content.Background05)
                 },
                 timers: [
-                    document.getElementById(Content.Background02.id)?.querySelector('.collection-skin-timer')
+                    document.getElementById(Content.Background05.id)?.querySelector('.collection-skin-timer')
                 ]
             }, {
                 reward: {
-                    content: [Content.CardSkin02]
+                    content: [Content.CardSkin05]
                 }, timerFinishCallback: () => {
-                    user.removeContent(Content.CardSkin02)
+                    user.removeContent(Content.CardSkin05)
                 },
                 timers: [
-                    document.getElementById(Content.CardSkin02.id)?.querySelector('.collection-skin-timer')
+                    document.getElementById(Content.CardSkin05.id)?.querySelector('.collection-skin-timer')
                 ]
             },
         ]
@@ -55,6 +57,7 @@ class BonusesScreen extends ScreenLogic {
         const views = this.screenRoot.querySelectorAll('.bonuses_bonus-container');
         for (let i = 0; i < views.length; i++) {
             staticData[i].timers.push(views[i].querySelector('.bonuses_timer'))
+            this.selectableElements.push({ element: views[i] });
         }
 
         const updateView = () => {
@@ -112,40 +115,42 @@ class BonusesScreen extends ScreenLogic {
             }
 
             view.onclick = () => {
-                if (dataElement.obtainded || !dataElement.opened) return;
+                showRewarded(null, null, () => {
+                    if (dataElement.obtainded || !dataElement.opened) return;
 
-                if (nextDataElement != null) {
-                    nextDataElement.opened = true;
-                }
-
-                dataElement.obtainded = true;
-                const reward = staticData[i].reward;
-
-                if (reward.items) {
-                    for (let i = 0; i < reward.items.length; i++) {
-                        const element = reward.items[i];
-                        user.addItem(element.type, element.count);
+                    if (nextDataElement != null) {
+                        nextDataElement.opened = true;
                     }
-                }
-                if (reward.content) {
-                    for (let i = 0; i < reward.content.length; i++) {
-                        const element = reward.content[i];
-                        user.addContent(element);
-                        console.log(user.availableContent);
+
+                    dataElement.obtainded = true;
+                    const reward = staticData[i].reward;
+
+                    if (reward.items) {
+                        for (let i = 0; i < reward.items.length; i++) {
+                            const element = reward.items[i];
+                            user.addItem(element.type, element.count);
+                        }
                     }
-                }
+                    if (reward.content) {
+                        for (let i = 0; i < reward.content.length; i++) {
+                            const element = reward.content[i];
+                            user.addContent(element);
+                            console.log(user.availableContent);
+                        }
+                    }
 
-                const currentTime = Date.now();
-                dataElement.time = currentTime;
-                const timer = new Timer(`timer_${i}`, staticData[i].timers);
-                timer.startTimerUnscaled(time, () => {
-                    timer.clear();
+                    const currentTime = Date.now();
+                    dataElement.time = currentTime;
+                    const timer = new Timer(`timer_${i}`, staticData[i].timers);
+                    timer.startTimerUnscaled(time, () => {
+                        timer.clear();
 
-                    finishTimer(i);
-                })
+                        finishTimer(i);
+                    })
 
-                this.save(data);
-                updateView();
+                    this.save(data);
+                    updateView();
+                }, null)
             }
         }
 

@@ -1,6 +1,6 @@
 import { disablePreloader, enablePreloader } from '../../loader/loader.js';
 
-const navagationDuration = 0.2;
+const navagationDuration = 0.15;
 
 class ScreenParameters {
     constructor() {
@@ -44,7 +44,10 @@ class Screen {
         this.isOpened = false;
         this.element.style.display = 'none';
         this.element.style.opacity = 0;
-        this.element.style.transition = `opacity ${navagationDuration}s ease`;
+        this.scaleIn = 1;
+        this.scaleOut = 0.8;
+        this.element.style.scale = this.scaleOut;
+        this.element.style.transition = `opacity ${navagationDuration}s ease, scale ${navagationDuration}s ease`;
 
         this.styleLink = null;
         this.screenLogic = options.screenLogic ?? null;
@@ -58,6 +61,7 @@ class Screen {
                     this.element.style.display = '';
                     setTimeout(() => {
                         this.element.style.opacity = 1;
+                        this.element.style.scale = this.scaleIn;
                         this.screenLogic?.onScreenLoaded();
                     }, 10)
                     onShow?.();
@@ -106,6 +110,7 @@ class Screen {
 
     hide = function (onHide) {
         this.element.style.opacity = 0;
+        this.element.style.scale = this.scaleOut;
         if (!this.element.classList.contains('hidden')) {
             setTimeout(() => {
                 this.element.style.display = 'none';

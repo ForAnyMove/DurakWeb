@@ -1,3 +1,5 @@
+import('./src/scripts/rewardReceiverView.js');
+
 import { Items, locales } from './src/scripts/statics/staticValues.js';
 import { inDayGameCount } from './src/scripts/ingameDayCounter.js';
 import {
@@ -5,34 +7,34 @@ import {
   isCompleted,
   tryCompleteDailyReward,
 } from './src/scripts/dailyRewards.js';
-import { showRewarded } from './src/scripts/sdk/sdk.js';
-import('./src/scripts/rewardReceiverView.js');
+import { load, save } from './src/scripts/save_system/SaveSystem.js';
 
 import DirectionalInput from './src/scripts/directionInput.js';
 import DynamicFontChanger from './src/localization/dynamicFontChanger.js';
-import { createElement, getInputElements } from './src/scripts/helpers.js';
-import { BackActionHandler, Screen, ScreenParameters } from './src/scripts/navigation/navigation.js';
-import { load, save } from './src/scripts/save_system/SaveSystem.js';
+import { getInputElements } from './src/scripts/helpers.js';
+import { BackActionHandler, Screen } from './src/scripts/navigation/navigation.js';
 import { CollectionScreen } from './src/scripts/navigation/screens/collectionScreen.js';
 import { AchievementsScreen } from './src/scripts/navigation/screens/achievementsScreen.js';
 import { BonusesScreen } from './src/scripts/navigation/screens/bonusesScreen.js';
 import { SettingsScreen } from './src/scripts/navigation/screens/settingsScreen.js';
 import { ProfileScreen } from './src/scripts/navigation/screens/profileScreen.js';
+import { GameSettingsScreen } from './src/scripts/navigation/screens/gameSettingsScreen.js';
+import { AvatarSelectionScreen } from './src/scripts/navigation/screens/avatarSelectionScreen.js';
+import { MainScreen } from './src/scripts/navigation/screens/mainScreen.js';
+import { DailyBonusesScreen } from './src/scripts/navigation/screens/dailyBonusesScreen.js';
 
 input ??= new DirectionalInput();
 
-const screenParameters = new ScreenParameters();
-screenParameters.defaultSelectedElement = { element: document.getElementsByClassName('play-btn')[0] };
-screenParameters.selectableElements = getInputElements(document.getElementsByClassName('main-tab')[0], { tags: ['button'] })
-
+const mainScreenRoot = document.getElementsByClassName('main-tab')[0];
 const mainScreen = new Screen({
   isMain: true,
-  element: document.getElementsByClassName('main-tab')[0],
+  element: mainScreenRoot,
   onFocus: () => {
     dynamicFontChanger.update();
-    input.updateQueryCustom(screenParameters.selectableElements, screenParameters.defaultSelectedElement);
+    input.updateQueryCustom(mainScreen.screenLogic.selectableElements, mainScreen.screenLogic.defaultSelectedElement);
   },
-  onUnfocus: () => { }
+  onUnfocus: () => { },
+  screenLogic: new MainScreen({ screenRoot: mainScreenRoot })
 })
 
 const collectionRoot = document.getElementById('skins-tab');
@@ -104,7 +106,7 @@ const profileScreen = new Screen({
   onUnfocus: () => {
     navigation.push(mainScreen);
   },
-  screenLogic: new ProfileScreen()
+  screenLogic: new ProfileScreen({ screenRoot: profileRoot })
 });
 
 const profileAvatarRoot = document.getElementById('choose-avatar-tab');
@@ -114,13 +116,13 @@ const profileAvatarScreen = new Screen({
   closeButtons: profileAvatarRoot.querySelectorAll('.choose-avatar-tab-close-button'),
   onFocus: () => {
     dynamicFontChanger.update();
-    input.updateQueryCustom(profileScreen.screenLogic.selectableElements,
-      profileScreen.screenLogic.defaultSelectedElement);
+    input.updateQueryCustom(profileAvatarScreen.screenLogic.selectableElements,
+      profileAvatarScreen.screenLogic.defaultSelectedElement);
   },
   onUnfocus: () => {
     navigation.push(profileScreen);
   },
-  screenLogic: new ProfileScreen()
+  screenLogic: new AvatarSelectionScreen({ screenRoot: profileAvatarRoot })
 });
 
 const settingsRoot = document.getElementById('settings-tab');
@@ -136,7 +138,22 @@ const settingsScreen = new Screen({
   onUnfocus: () => {
     navigation.push(mainScreen);
   },
-  screenLogic: new SettingsScreen()
+  screenLogic: new SettingsScreen({ screenRoot: settingsRoot })
+});
+
+const dailyBonusesRoot = document.getElementById('daily-bonuses-tab');
+const dailyBonusesScreen = new Screen({
+  element: dailyBonusesRoot,
+  closeButtons: dailyBonusesRoot.querySelectorAll('.daily-bonuses-tab-close-button'),
+  onFocus: () => {
+    dynamicFontChanger.update();
+    input.updateQueryCustom(settingsScreen.screenLogic.selectableElements,
+      settingsScreen.screenLogic.defaultSelectedElement);
+  },
+  onUnfocus: () => {
+    navigation.push(mainScreen);
+  },
+  screenLogic: new DailyBonusesScreen({ screenRoot: dailyBonusesRoot })
 });
 
 const gameSelectionRoot = document.getElementById('start-game-tab');
@@ -152,7 +169,7 @@ const gameSelectionScreen = new Screen({
   onUnfocus: () => {
     navigation.push(mainScreen);
   },
-  screenLogic: null
+  screenLogic: new GameSettingsScreen({ screenRoot: gameSelectionRoot })
 });
 
 const exitPopupRoot = document.getElementById('exit-popup-tab');
@@ -191,6 +208,7 @@ navigation.registerScreen(collectionScreen);
 navigation.registerScreen(profileScreen);
 navigation.registerScreen(gameSelectionScreen);
 navigation.registerScreen(profileAvatarScreen);
+navigation.registerScreen(dailyBonusesScreen);
 
 navigation.registerScreen(bonusesScreen);
 navigation.registerScreen(settingsScreen);
@@ -211,35 +229,10 @@ navigation.push(mainScreen);
 backActionHandler = new BackActionHandler(input, () => {
   navigation.pop();
 }, () => {
-  navigation.push(exitScreen);
+  navigation.push(dailyBonusesScreen);
 });
 
-// function setupReqularBonusesButtons() {
-//   const itemCountPairs = [
-//     { item: Items.Energy, count: 5 },
-//     { item: Items.BoosterHint, count: 4 },
-//     { item: Items.BoosterMage, count: 2 },
-//     { item: Items.BoosterUndo, count: 5 },
-//     { item: Items.BoosterTime, count: 1 },
-//   ];
 
-//   const buttons = document
-//     .getElementsByClassName('regular-boosters-container')[0]
-//     .getElementsByClassName('start-level-btn');
-
-//   for (let i = 0; i < buttons.length; i++) {
-//     const button = buttons[i];
-//     button.onclick = function () {
-//       showRewarded(
-//         null,
-//         null,
-//         () => user.addItem(itemCountPairs[i].item, itemCountPairs[i].count, { isTrue: true, isMonetized: false }),
-//         null
-//       );
-//     };
-//   }
-// }
-// setupReqularBonusesButtons();
 
 // const dayInGame = inDayGameCount();
 

@@ -9,7 +9,7 @@ export default class User {
     constructor() {
         this.items = [{
             type: Items.Currency,
-            count: 0
+            count: 200
         }]
 
         this.availableContent = [

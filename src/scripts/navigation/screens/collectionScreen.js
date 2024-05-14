@@ -11,6 +11,9 @@ class CollectionScreen extends ScreenLogic {
     }
 
     onCreate() {
+        this.defaultSelectedElement = { element: this.screenRoot.querySelector('.arrow-back-btn') }
+        this.selectableElements.push(this.defaultSelectedElement);
+
         const skinParent = this.screenRoot.querySelector('#pick-area-1');
         const skinBackParent = this.screenRoot.querySelector('#pick-area-3');
         const backgroundParent = this.screenRoot.querySelector('#pick-area-2');
@@ -80,9 +83,7 @@ class CollectionScreen extends ScreenLogic {
             audioManager.addClickableToPull(useButton);
 
             this.selectableElements.push({
-                element: useButton, onSubmit: () => {
-                    input.select(input.selectableElements[1]);
-                }
+                element: useButton
             });
 
             const checkbox = createImage(['checkbox-pick-icon'], null, plane, null);
@@ -145,9 +146,7 @@ class CollectionScreen extends ScreenLogic {
             audioManager.addClickableToPull(useButton);
 
             this.selectableElements.push({
-                element: useButton, onSubmit: () => {
-                    input.select(input.selectableElements[1]);
-                }
+                element: useButton
             });
 
             const checkbox = createImage(['checkbox-pick-icon'], null, plane, null);
@@ -211,9 +210,7 @@ class CollectionScreen extends ScreenLogic {
             audioManager.addClickableToPull(useButton);
 
             this.selectableElements.push({
-                element: useButton, onSubmit: () => {
-                    input.select(input.selectableElements[1]);
-                }
+                element: useButton
             });
 
             const checkbox = createImage(['checkbox-pick-icon'], null, plane, null);

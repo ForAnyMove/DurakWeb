@@ -46,7 +46,7 @@ class AchievementsScreen extends ScreenLogic {
                         const statsContainer = createElement('div', ['achievements_stats-list-item-progress-container'], null, container);
                         {
                             const progressBar = createElement('div', ['achievements_stats-list-item-progress-level-mask'], null, statsContainer);
-                            progressBar.style.scale = `${(0.95 * progress)} 0.95`;
+                            progressBar.style.scale = `${Math.min((0.95 * progress), 0.95)} 0.95`;
                             const progressText = createTextSpan(['achievements_stats-list-item-progress-title'], null, statsContainer, valueText);
                         }
                     }

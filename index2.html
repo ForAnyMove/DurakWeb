@@ -675,10 +675,10 @@
       <span class="start-game_play-btn-title" lang="MainMenu/MainPanel/PlayTitle"></span>
     </button>
   </section>
-  <section class="daily-bonuses-tab hidden-all" id="daily-bonuses-tab">
+  <section class="daily-bonuses-tab" id="daily-bonuses-tab">
     <div class="daily-bonuses_container">
       <img src="./Sprites/Desktop - дурак- ежедневный бону/close 4x 432381591.png" alt="Close" width="50px"
-        class="daily-bonuses_close-icon">
+        class="daily-bonuses_close-icon daily-bonuses-tab-close-button">
       <div class="daily-bonuses_header-logo-container">
         <span class="daily-bonuses_header-title" lang="MainMenu/DailyReward/Title"></span>
       </div>
@@ -687,6 +687,7 @@
           <div class="bonuses_locked-mask">
             <img src="./Sprites/Desktop - дурак- ежедневный бону/замок 4x -1037125765.png" width="30px" alt=""
               class="bonuses_locked-icon">
+            <img src="./Sprites/Desktop - дурак- бонусы/OBJECTS (1).png" width="30px" alt="" class="bonuses_check-icon">
           </div>
           <div class="bounty-card-header">
             <span class="bounty-card-header-title" lang="MainMenu/DailyReward/Day"></span>
@@ -703,6 +704,7 @@
           <div class="bonuses_locked-mask">
             <img src="./Sprites/Desktop - дурак- ежедневный бону/замок 4x -1037125765.png" width="30px" alt=""
               class="bonuses_locked-icon">
+            <img src="./Sprites/Desktop - дурак- бонусы/OBJECTS (1).png" width="30px" alt="" class="bonuses_check-icon">
           </div>
           <div class="bounty-card-header">
             <span class="bounty-card-header-title" lang="MainMenu/DailyReward/Day"></span>
@@ -719,6 +721,7 @@
           <div class="bonuses_locked-mask">
             <img src="./Sprites/Desktop - дурак- ежедневный бону/замок 4x -1037125765.png" width="30px" alt=""
               class="bonuses_locked-icon">
+            <img src="./Sprites/Desktop - дурак- бонусы/OBJECTS (1).png" width="30px" alt="" class="bonuses_check-icon">
           </div>
           <div class="bounty-card-header">
             <span class="bounty-card-header-title" lang="MainMenu/DailyReward/Day"></span>
@@ -735,6 +738,7 @@
           <div class="bonuses_locked-mask">
             <img src="./Sprites/Desktop - дурак- ежедневный бону/замок 4x -1037125765.png" width="30px" alt=""
               class="bonuses_locked-icon">
+            <img src="./Sprites/Desktop - дурак- бонусы/OBJECTS (1).png" width="30px" alt="" class="bonuses_check-icon">
           </div>
           <div class="bounty-card-header">
             <span class="bounty-card-header-title" lang="MainMenu/DailyReward/Day"></span>
@@ -751,6 +755,7 @@
           <div class="bonuses_locked-mask">
             <img src="./Sprites/Desktop - дурак- ежедневный бону/замок 4x -1037125765.png" width="30px" alt=""
               class="bonuses_locked-icon">
+            <img src="./Sprites/Desktop - дурак- бонусы/OBJECTS (1).png" width="30px" alt="" class="bonuses_check-icon">
           </div>
           <div class="bounty-card-header">
             <span class="bounty-card-header-title" lang="MainMenu/DailyReward/Day"></span>
@@ -767,6 +772,7 @@
           <div class="bonuses_locked-mask">
             <img src="./Sprites/Desktop - дурак- ежедневный бону/замок 4x -1037125765.png" width="30px" alt=""
               class="bonuses_locked-icon">
+            <img src="./Sprites/Desktop - дурак- бонусы/OBJECTS (1).png" width="30px" alt="" class="bonuses_check-icon">
           </div>
           <div class="bounty-card-header">
             <span class="bounty-card-header-title" lang="MainMenu/DailyReward/Day"></span>
@@ -869,6 +875,9 @@
   let backActionHandler;
   let platform;
   let audioManager;
+  let gameRules;
+  let selectedAvatarIndex;
+
 </script>
 <script type="module">
   import { preload } from './src/loader/loader.js';
@@ -878,13 +887,12 @@
   import { Action } from './src/scripts/globalEvents.js';
   import { StackNavigation } from './src/scripts/navigation/navigation.js';
   import { AudioManager } from './src/scripts/audioManager.js'
+  import { Rule } from "./src/scripts/battleFlow.js"
 
   languageChangeEvent = new Action();
+  gameRules = new Rule();
 
-  audioManager = new AudioManager(
-    ['./Sprites/Icons/Icon_Music_On.png', './Sprites/Icons/Icon_Music_Off.png'],
-    ['./Sprites/Icons/Icon_Sound_On.png', './Sprites/Icons/Icon_Sound_Off.png'],
-  );
+  audioManager = new AudioManager();
   user = new User();
   navigation = new StackNavigation();
 

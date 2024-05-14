@@ -1954,6 +1954,109 @@ button.selected {
   width: 23vw;
 }
 
+.exit-popup_title-container {
+  width: 90%;
+}
+
+
+.popup {
+  display: none;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.popup-content {
+  background-image: url('./Sprites/Desktop\ -\ дурак-\ ежедневный\ бону/Group 48 4x 369162226.png');
+  background-size: 100% 100%;
+  width: 44vw;
+  padding: 1vw;
+  position: relative;
+}
+.popup-content>.choose-avatar_close-icon {
+  top: -5%;
+  right: -10%;
+}
+.languages>.popup-content {
+  width: 50vh;
+  max-width: 90%;
+}
+
+.languages-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1vh;
+}
+
+.language-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  padding: 0.5vh;
+  margin-bottom: 1vh;
+  padding-left: 1vh;
+}
+
+.language-container:hover {
+  background-color: #00bcbf81;
+  border-radius: 1vh;
+}
+
+.language {
+  display: flex;
+  align-items: center;
+}
+
+.language-icon {
+  width: 4vh;
+}
+
+.language-title {
+  color: #fff6c6;
+
+  font-size: 2.5vh;
+  --target-font-size: 2.5vh;
+  padding-left: 1vw;
+}
+
+#popup-fade-close {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #00000044;
+}
+
+.popup-header {
+  height: 8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.close-popup {
+  width: 3vw;
+  position: absolute;
+  right: 0.5vw;
+  top: 0.5vw;
+  z-index: 10;
+}
+
+.popup-header>h3 {
+  color: #fff6c6;
+  font-size: 2.4vw;
+  --target-font-size: 2.4vw;
+  margin: 1vw auto;
+}
+.language-container>.settings_checkbox {
+  width: 3vw;
+}
 
 
 .hidden-all {
@@ -2695,5 +2798,38 @@ button.selected {
 
   .draw-without-ads>.tutorial-popup-btn {
     width: 60vw;
+  }
+  
+  .popup-content {
+    width: 90vw;
+    border-radius: 2.5vw;
+  }
+
+
+  .popup-header {
+    margin-top: 2vh;
+    height: 5vh;
+  }
+
+  .close-popup {
+    width: 4vh;
+    right: 1vw;
+    top: 1vw;
+  }
+
+  .popup-header>h3 {
+    font-size: 8vw;
+    --target-font-size: 8vw;
+  }
+  .popup-content>.choose-avatar_close-icon {
+    width: 14.5vw;
+    top: -3%;
+    right: -5%;
+  }
+  .language-container>.settings_checkbox {
+    width: 8vw;
+  }
+  .languages-list {
+    margin-bottom: 2vh;
   }
 }

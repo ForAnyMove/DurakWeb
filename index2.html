@@ -387,7 +387,7 @@
         <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px"
           class="settings_checkbox">
       </div>
-      <div class="settings_tune-switch-container">
+      <div class="settings_tune-switch-container languages-open-button">
         <div class="settings_tune-title-container">
           <span class="settings_tune-title" lang="MainMenu/SystemSettings/Language"></span>
         </div>
@@ -666,10 +666,7 @@
         </div>
         <span class="start-game_bet-value">100</span>
       </div>
-      <div class="start-game_range-container">
-        <img src="./Sprites/Desktop - дурак- Играть (выбор р/Handler.png" width="40px" alt="Range"
-          class="start-game_range-item">
-      </div>
+      <input type="range" min="1" max="100" value="0" class="start-game_range-container" id="bet-slider">
     </div>
     <button class="start-game_play-btn">
       <span class="start-game_play-btn-title" lang="MainMenu/MainPanel/PlayTitle"></span>
@@ -862,10 +859,12 @@
       </div>
     </div>
   </section>
-  <section class="popup languages hidden-all" id="languages">
+  <section class="popup languages" id="languages">
+    <div class="popup-background-fading"></div>
     <div id="popup-fade-close"></div>
     <div class="popup-content">
-      <img src="./Sprites/Desktop - дурак- ежедневный бону/close 4x 432381591.png" alt="Close" width="50px" class="choose-avatar_close-icon">
+      <img src="./Sprites/Desktop - дурак- ежедневный бону/close 4x 432381591.png" alt="Close" width="50px"
+        class="choose-avatar_close-icon languages-close-button">
       <div class="popup-header">
         <h3 lang="lang">Язык</h3>
       </div>
@@ -875,59 +874,67 @@
             <img src="./Sprites/Desktop - дурак- настройки/Frame 4x 1356641136.png" alt="RU" class="language-icon">
             <span class="language-title">Русский</span>
           </div>
-            <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px" class="settings_checkbox">
+          <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px"
+            class="settings_checkbox">
         </div>
         <div class="language-container">
           <div class="language">
             <img src="./Sprites/Desktop - дурак- настройки/en.png" alt="EN" class="language-icon">
             <span class="language-title">English</span>
           </div>
-            <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px" class="settings_checkbox">
+          <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px"
+            class="settings_checkbox">
         </div>
         <div class="language-container">
           <div class="language">
             <img src="./Sprites/Desktop - дурак- настройки/ger.png" alt="GER" class="language-icon">
             <span class="language-title">German</span>
           </div>
-            <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px" class="settings_checkbox">
-        </div>
-        <div class="language-container">
-          <div class="language">
-            <img src="./Sprites/Desktop - дурак- настройки/jap.png" alt="JAP" class="language-icon">
-            <span class="language-title">Japanese</span>
-          </div>
-            <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px" class="settings_checkbox">
+          <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px"
+            class="settings_checkbox">
         </div>
         <div class="language-container">
           <div class="language">
             <img src="./Sprites/Desktop - дурак- настройки/ind.png" alt="IND" class="language-icon">
             <span class="language-title">Hindi</span>
           </div>
-            <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px" class="settings_checkbox">
+          <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px"
+            class="settings_checkbox">
         </div>
         <div class="language-container">
           <div class="language">
             <img src="./Sprites/Desktop - дурак- настройки/portu.png" alt="PORTU" class="language-icon">
             <span class="language-title">Portuguese</span>
           </div>
-            <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px" class="settings_checkbox">
+          <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px"
+            class="settings_checkbox">
         </div>
         <div class="language-container">
           <div class="language">
             <img src="./Sprites/Desktop - дурак- настройки/esp.png" alt="ESP" class="language-icon">
             <span class="language-title">Spanish</span>
           </div>
-            <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px" class="settings_checkbox">
+          <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px"
+            class="settings_checkbox">
         </div>
         <div class="language-container">
           <div class="language">
             <img src="./Sprites/Desktop - дурак- настройки/turk.png" alt="TURK" class="language-icon">
             <span class="language-title">Turkish</span>
           </div>
-            <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px" class="settings_checkbox">
+          <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px"
+            class="settings_checkbox">
         </div>
       </div>
     </div>
+  </section>
+  <section class="popup reward-receiver active" id="reward-receiver">
+    <div class="reward-receiver-shine"></div>
+    <div class="reward-receiver-container">
+      <img class="reward-receiver-reward hidden-all" src="" />
+      <span class="reward-receiver-reward-text"></span>
+    </div>
+    <!-- <div class="reward-receiver-particle"></div> -->
   </section>
 </body>
 <script>
@@ -944,7 +951,7 @@
   let audioManager;
   let gameRules;
   let selectedAvatarIndex;
-
+  let bet;
 </script>
 <script type="module">
   import { preload } from './src/loader/loader.js';

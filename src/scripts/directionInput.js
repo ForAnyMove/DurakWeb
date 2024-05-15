@@ -26,6 +26,14 @@ export default class DirectionalInput {
         this.keyWasTriggered = new Action();
     }
 
+    loadBackup = function () {
+        if (this.backup == null) return false;
+
+        this.updateQueryCustom(this.backup.selectableElements, this.backup.selected);
+        this.backup = null;
+        return true;
+    }
+
     saveSelectableState = function (key, selectables, selected) {
         this.saveSelectablePull.push({
             key: key,

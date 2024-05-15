@@ -69,10 +69,18 @@ let statistics = {
 
 statistics = load("game_statistics", statistics);
 
+function updateCurrencyStatistics(currentCurrencyValue) {
+    if (statistics.maxCurrencyCollected < currentCurrencyValue) {
+        statistics.maxCurrencyCollected = currentCurrencyValue;
+
+        updateStatistics();
+    }
+}
+
 function updateStatistics() {
     updateEvent.invoke();
 
     save("game_statistics", statistics);
 }
 
-export { statistics, updateStatistics, updateEvent }
+export { statistics, updateStatistics, updateCurrencyStatistics, updateEvent }

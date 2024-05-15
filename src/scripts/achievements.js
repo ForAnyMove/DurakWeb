@@ -44,6 +44,7 @@ class Achievement {
             this.update();
 
             log(`Successed achievement completion, current index ${this.completedIndex}`, "achievements");
+            this.sendEvent();
             return this.trials[temp].reward;
         } else {
             log(`Failed achievement completion try`, "achievements");
@@ -83,11 +84,11 @@ class InGameDayCount extends Achievement {
         super(options);
 
         this.trials = options.trials || [
-            generateTrial(1, Items.Energy, 1),
-            generateTrial(3, Items.Energy, 2),
-            generateTrial(7, Items.BoosterHint, 1),
-            generateTrial(15, Items.Energy, 4),
-            generateTrial(30, Items.BoosterMage, 1),
+            generateTrial(3, Items.Currency, 200),
+            generateTrial(5, Items.Currency, 300),
+            generateTrial(7, Items.Currency, 400),
+            generateTrial(10, Items.Currency, 500),
+            generateTrial(20, Items.Currency, 1000),
         ]
 
         this.handle();

@@ -22,6 +22,8 @@ import { GameSettingsScreen } from './src/scripts/navigation/screens/gameSetting
 import { AvatarSelectionScreen } from './src/scripts/navigation/screens/avatarSelectionScreen.js';
 import { MainScreen } from './src/scripts/navigation/screens/mainScreen.js';
 import { DailyBonusesScreen } from './src/scripts/navigation/screens/dailyBonusesScreen.js';
+import { LanguageSelectionScreen } from './src/scripts/navigation/screens/languageSelectionScreen.js';
+import { RewardReceiveScreen } from './src/scripts/navigation/screens/rewardReceiveScreen.js';
 
 input ??= new DirectionalInput();
 
@@ -31,7 +33,8 @@ const mainScreen = new Screen({
   element: mainScreenRoot,
   onFocus: () => {
     dynamicFontChanger.update();
-    input.updateQueryCustom(mainScreen.screenLogic.selectableElements, mainScreen.screenLogic.defaultSelectedElement);
+    if (!input.loadBackup())
+      input.updateQueryCustom(mainScreen.screenLogic.selectableElements, mainScreen.screenLogic.defaultSelectedElement);
   },
   onUnfocus: () => { },
   screenLogic: new MainScreen({ screenRoot: mainScreenRoot })
@@ -44,8 +47,9 @@ const collectionScreen = new Screen({
   closeButtons: collectionRoot.querySelectorAll('.skins-tab-close-button'),
   onFocus: () => {
     dynamicFontChanger.update();
-    input.updateQueryCustom(collectionScreen.screenLogic.selectableElements,
-      collectionScreen.screenLogic.defaultSelectedElement);
+    if (!input.loadBackup())
+      input.updateQueryCustom(collectionScreen.screenLogic.selectableElements,
+        collectionScreen.screenLogic.defaultSelectedElement);
 
     setTimeout(() => {
       dynamicFontChanger.updateTextFont();
@@ -64,8 +68,9 @@ const achievementsScreen = new Screen({
   closeButtons: achievementsRoot.querySelectorAll('.achievements-tab-close-button'),
   onFocus: () => {
     dynamicFontChanger.update();
-    input.updateQueryCustom(achievementsScreen.screenLogic.selectableElements,
-      achievementsScreen.screenLogic.defaultSelectedElement);
+    if (!input.loadBackup())
+      input.updateQueryCustom(achievementsScreen.screenLogic.selectableElements,
+        achievementsScreen.screenLogic.defaultSelectedElement);
 
     setTimeout(() => {
       dynamicFontChanger.updateTextFont();
@@ -84,8 +89,9 @@ const bonusesScreen = new Screen({
   closeButtons: bonusesRoot.querySelectorAll('.bonuses-tab-close-button'),
   onFocus: () => {
     dynamicFontChanger.update();
-    input.updateQueryCustom(bonusesScreen.screenLogic.selectableElements,
-      bonusesScreen.screenLogic.defaultSelectedElement);
+    if (!input.loadBackup())
+      input.updateQueryCustom(bonusesScreen.screenLogic.selectableElements,
+        bonusesScreen.screenLogic.defaultSelectedElement);
   },
   onUnfocus: () => {
     navigation.push(mainScreen);
@@ -100,8 +106,9 @@ const profileScreen = new Screen({
   closeButtons: profileRoot.querySelectorAll('.profile-tab-close-button'),
   onFocus: () => {
     dynamicFontChanger.update();
-    input.updateQueryCustom(profileScreen.screenLogic.selectableElements,
-      profileScreen.screenLogic.defaultSelectedElement);
+    if (!input.loadBackup())
+      input.updateQueryCustom(profileScreen.screenLogic.selectableElements,
+        profileScreen.screenLogic.defaultSelectedElement);
   },
   onUnfocus: () => {
     navigation.push(mainScreen);
@@ -116,8 +123,9 @@ const profileAvatarScreen = new Screen({
   closeButtons: profileAvatarRoot.querySelectorAll('.choose-avatar-tab-close-button'),
   onFocus: () => {
     dynamicFontChanger.update();
-    input.updateQueryCustom(profileAvatarScreen.screenLogic.selectableElements,
-      profileAvatarScreen.screenLogic.defaultSelectedElement);
+    if (!input.loadBackup())
+      input.updateQueryCustom(profileAvatarScreen.screenLogic.selectableElements,
+        profileAvatarScreen.screenLogic.defaultSelectedElement);
   },
   onUnfocus: () => {
     navigation.push(profileScreen);
@@ -141,14 +149,33 @@ const settingsScreen = new Screen({
   screenLogic: new SettingsScreen({ screenRoot: settingsRoot })
 });
 
+const languagesRoot = document.getElementById('languages');
+const languagesScreen = new Screen({
+  id: 'languagesScreen',
+  isPopup: true,
+  element: languagesRoot,
+  openButtons: settingsScreen.element.querySelectorAll('.languages-open-button'),
+  closeButtons: languagesRoot.querySelectorAll('.languages-close-button'),
+  onFocus: () => {
+    dynamicFontChanger.update();
+    if (!input.loadBackup())
+      input.updateQueryCustom(languagesScreen.screenLogic.selectableElements,
+        languagesScreen.screenLogic.defaultSelectedElement);
+  },
+  onUnfocus: () => {
+  },
+  screenLogic: new LanguageSelectionScreen({ screenRoot: languagesRoot })
+});
+
 const dailyBonusesRoot = document.getElementById('daily-bonuses-tab');
 const dailyBonusesScreen = new Screen({
   element: dailyBonusesRoot,
   closeButtons: dailyBonusesRoot.querySelectorAll('.daily-bonuses-tab-close-button'),
   onFocus: () => {
     dynamicFontChanger.update();
-    input.updateQueryCustom(settingsScreen.screenLogic.selectableElements,
-      settingsScreen.screenLogic.defaultSelectedElement);
+    if (!input.loadBackup())
+      input.updateQueryCustom(settingsScreen.screenLogic.selectableElements,
+        settingsScreen.screenLogic.defaultSelectedElement);
   },
   onUnfocus: () => {
     navigation.push(mainScreen);
@@ -163,8 +190,9 @@ const gameSelectionScreen = new Screen({
   closeButtons: gameSelectionRoot.querySelectorAll('.start-game-tab-close-button'),
   onFocus: () => {
     dynamicFontChanger.update();
-    input.updateQueryCustom(gameSelectionScreen.screenLogic.selectableElements,
-      gameSelectionScreen.screenLogic.defaultSelectedElement);
+    if (!input.loadBackup())
+      input.updateQueryCustom(gameSelectionScreen.screenLogic.selectableElements,
+        gameSelectionScreen.screenLogic.defaultSelectedElement);
   },
   onUnfocus: () => {
     navigation.push(mainScreen);
@@ -198,6 +226,17 @@ const tutorialOffsetScreen = new Screen({
   }
 });
 
+const rewardReceivePopupRoot = document.getElementById('reward-receiver');
+const rewardReceiveOffsetScreen = new Screen({
+  id: 'reward_receiver',
+  isPopup: true,
+  element: rewardReceivePopupRoot,
+  closeButtons: [rewardReceivePopupRoot],
+  onFocus: () => {
+    input.updateQueryCustom({ element: rewardReceivePopupRoot }, { element: rewardReceivePopupRoot });
+  }, screenLogic: new RewardReceiveScreen({ screenRoot: rewardReceivePopupRoot })
+});
+
 const exitButton = exitScreen.element.getElementsByClassName('exid-yes')[0];
 if (exitButton != null) {
   exitButton.onclick = function () { SDK?.dispatchEvent(SDK.EVENTS.EXIT); }
@@ -209,6 +248,8 @@ navigation.registerScreen(profileScreen);
 navigation.registerScreen(gameSelectionScreen);
 navigation.registerScreen(profileAvatarScreen);
 navigation.registerScreen(dailyBonusesScreen);
+navigation.registerScreen(languagesScreen);
+navigation.registerScreen(rewardReceiveOffsetScreen);
 
 navigation.registerScreen(bonusesScreen);
 navigation.registerScreen(settingsScreen);
@@ -231,103 +272,6 @@ backActionHandler = new BackActionHandler(input, () => {
 }, () => {
   navigation.push(dailyBonusesScreen);
 });
-
-
-
-// const dayInGame = inDayGameCount();
-
-// function setupDailyRewards() {
-//   const commonDays = document
-//     .getElementsByClassName('daily-boosters-container')[0]
-//     .getElementsByClassName('booster');
-//   const allDays = [];
-
-//   for (let i = 0; i < commonDays.length; i++) {
-//     const element = commonDays[i];
-//     allDays.push(element);
-//   }
-
-//   allDays.push(document.getElementsByClassName('special-booster')[0]);
-
-//   for (let i = 0; i < allDays.length; i++) {
-//     const element = allDays[i];
-
-//     if (isCompleted(i)) {
-//       element.classList.add('completed');
-//       continue;
-//     }
-
-//     if (dayInGame - 1 >= i) {
-//       // dailyBonuses.style.display = 'flex'; // if tutorial popup was showen and just once per session
-//       element.classList.add('ready');
-//       element.onclick = function () {
-//         if (tryCompleteDailyReward(i)) {
-//           element.classList.remove('ready');
-//           element.classList.add('completed');
-
-//           if (typeof dailyRewards[i].item == 'object') {
-//             const items = [];
-//             for (let j = 0; j < dailyRewards[i].item.length; j++) {
-//               const element = dailyRewards[i].item[j];
-//               items.push({ type: element.item, count: element.count })
-//             }
-//             user.addItems(items, { isTrue: true, isMonetized: true });
-//           } else {
-//             user.addItem(dailyRewards[i].item, dailyRewards[i].count, { isTrue: true, isMonetized: true });
-//           }
-//         }
-//       };
-
-//       audioManager.addClickableToPull(element);
-//     }
-//   }
-// }
-// setupDailyRewards();
-
-// function setupLanguageSelector(initialLocale) {
-//   const selectors = document.getElementsByClassName('language-container');
-
-//   const languageSelectorStructs = [];
-
-//   for (let i = 0; i < selectors.length; i++) {
-//     const selector = selectors[i];
-//     const check = selector.getElementsByClassName('accept-checkbox-icon')[0];
-
-//     const selectorStruct = {
-//       locale: locales[i],
-//       selector: selector,
-//       check: check,
-//       select: () => {
-//         for (let j = 0; j < languageSelectorStructs.length; j++) {
-//           const element = languageSelectorStructs[j];
-//           if (element == selectorStruct) {
-//             element.check.classList.remove('hidden');
-//           } else if (!element.check.classList.contains('hidden')) {
-//             element.check.classList.add('hidden');
-//           }
-//         }
-
-//         languageChangeEvent.invoke(selectorStruct.locale);
-//       }
-//     };
-
-//     selector.onclick = () => {
-//       selectorStruct.select();
-//     };
-//     audioManager.addClickableToPull(selector);
-
-//     languageSelectorStructs.push(selectorStruct)
-//   }
-
-//   for (let i = 0; i < languageSelectorStructs.length; i++) {
-//     const element = languageSelectorStructs[i];
-//     if (element.locale == initialLocale) {
-//       element.select();
-//       break;
-//     }
-//   }
-// }
-
 
 // export { setupLanguageSelector }
 dynamicFontChanger = new DynamicFontChanger();

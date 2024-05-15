@@ -1,5 +1,6 @@
 import { WinCount, WinInARow, InGameDayCount, generateTrial, DraftCount, AceLose, ThrowCards, TransfareCards, CurrencyCollected } from "./achievements.js";
 import { EntityMode, GameMode } from "./battleFlow.js";
+import { updateCurrencyStatistics } from "./gameStatistics.js";
 import { Action } from "./globalEvents.js";
 import { log } from "./logger.js";
 import { load, save } from "./save_system/SaveSystem.js";
@@ -29,11 +30,10 @@ export default class User {
             langID: 'UserData/Achievements/Title/GamesWin',
             icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 4.png',
             trials: [
-                generateTrial(3, Items.BoosterHint, 1),
-                generateTrial(5, Items.BoosterTime, 1),
-                generateTrial(7, Items.BoosterUndo, 1),
-                generateTrial(9, Items.BoosterMage, 2),
-                generateTrial(12, Items.BoosterUndo, 3),
+                generateTrial(1, Items.Currency, 100),
+                generateTrial(5, Items.Currency, 200),
+                generateTrial(10, Items.Currency, 300),
+                generateTrial(15, Items.Currency, 500),
             ],
             loadData: { currentValue: 0, completedIndex: 0 }
         }));
@@ -42,11 +42,10 @@ export default class User {
             langID: 'UserData/Achievements/Title/TossGamesWin',
             icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 1.png',
             trials: [
-                generateTrial(3, Items.BoosterHint, 1),
-                generateTrial(5, Items.BoosterTime, 1),
-                generateTrial(7, Items.BoosterUndo, 1),
-                generateTrial(9, Items.BoosterMage, 2),
-                generateTrial(12, Items.BoosterUndo, 3),
+                generateTrial(1, Items.Currency, 100),
+                generateTrial(5, Items.Currency, 200),
+                generateTrial(10, Items.Currency, 300),
+                generateTrial(15, Items.Currency, 500),
             ],
             loadData: { currentValue: 0, completedIndex: 0 },
             gameMode: GameMode.DurakDefault
@@ -56,11 +55,10 @@ export default class User {
             langID: 'UserData/Achievements/Title/TransitGamesWin',
             icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 3.png',
             trials: [
-                generateTrial(3, Items.BoosterHint, 1),
-                generateTrial(5, Items.BoosterTime, 1),
-                generateTrial(7, Items.BoosterUndo, 1),
-                generateTrial(9, Items.BoosterMage, 2),
-                generateTrial(12, Items.BoosterUndo, 3),
+                generateTrial(1, Items.Currency, 100),
+                generateTrial(5, Items.Currency, 200),
+                generateTrial(10, Items.Currency, 300),
+                generateTrial(15, Items.Currency, 500),
             ],
             loadData: { currentValue: 0, completedIndex: 0 },
             gameMode: GameMode.DurakTransfare
@@ -70,11 +68,10 @@ export default class User {
             langID: 'UserData/Achievements/Title/TeamGamesWin',
             icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 3.png',
             trials: [
-                generateTrial(3, Items.BoosterHint, 1),
-                generateTrial(5, Items.BoosterTime, 1),
-                generateTrial(7, Items.BoosterUndo, 1),
-                generateTrial(9, Items.BoosterMage, 2),
-                generateTrial(12, Items.BoosterUndo, 3),
+                generateTrial(1, Items.Currency, 100),
+                generateTrial(5, Items.Currency, 200),
+                generateTrial(10, Items.Currency, 300),
+                generateTrial(15, Items.Currency, 500),
             ],
             loadData: { currentValue: 0, completedIndex: 0 },
             entityMode: EntityMode.Pair
@@ -84,11 +81,9 @@ export default class User {
             langID: 'UserData/Achievements/Title/WinInRow',
             icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 1.png',
             trials: [
-                generateTrial(3, Items.Energy, 2),
-                generateTrial(5, Items.Energy, 2),
-                generateTrial(7, Items.Energy, 3),
-                generateTrial(9, Items.Energy, 5),
-                generateTrial(12, Items.BoosterHint, 3),
+                generateTrial(3, Items.Currency, 300),
+                generateTrial(7, Items.Currency, 700),
+                generateTrial(10, Items.Currency, 1000),
             ],
             loadData: { currentValue: 0, completedIndex: 0 }
         }));
@@ -97,11 +92,9 @@ export default class User {
             langID: 'UserData/Achievements/Title/TossWinInRow',
             icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 4.png',
             trials: [
-                generateTrial(3, Items.Energy, 2),
-                generateTrial(5, Items.Energy, 2),
-                generateTrial(7, Items.Energy, 3),
-                generateTrial(9, Items.Energy, 5),
-                generateTrial(12, Items.BoosterHint, 3),
+                generateTrial(3, Items.Currency, 300),
+                generateTrial(7, Items.Currency, 700),
+                generateTrial(10, Items.Currency, 1000),
             ],
             loadData: { currentValue: 0, completedIndex: 0 },
             gameMode: GameMode.DurakDefault
@@ -111,11 +104,9 @@ export default class User {
             langID: 'UserData/Achievements/Title/TransitWinInRow',
             icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 1.png',
             trials: [
-                generateTrial(3, Items.Energy, 2),
-                generateTrial(5, Items.Energy, 2),
-                generateTrial(7, Items.Energy, 3),
-                generateTrial(9, Items.Energy, 5),
-                generateTrial(12, Items.BoosterHint, 3),
+                generateTrial(3, Items.Currency, 300),
+                generateTrial(7, Items.Currency, 700),
+                generateTrial(10, Items.Currency, 1000),
             ],
             loadData: { currentValue: 0, completedIndex: 0 },
             gameMode: GameMode.DurakTransfare
@@ -125,11 +116,9 @@ export default class User {
             langID: 'UserData/Achievements/Title/TeamWinInRow',
             icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 3.png',
             trials: [
-                generateTrial(3, Items.Energy, 2),
-                generateTrial(5, Items.Energy, 2),
-                generateTrial(7, Items.Energy, 3),
-                generateTrial(9, Items.Energy, 5),
-                generateTrial(12, Items.BoosterHint, 3),
+                generateTrial(3, Items.Currency, 300),
+                generateTrial(7, Items.Currency, 700),
+                generateTrial(10, Items.Currency, 1000),
             ],
             loadData: { currentValue: 0, completedIndex: 0 },
             entityMode: EntityMode.Pair
@@ -139,11 +128,9 @@ export default class User {
             langID: 'UserData/Achievements/Title/EndGameInDraw',
             icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 2.png',
             trials: [
-                generateTrial(3, Items.Energy, 2),
-                generateTrial(5, Items.Energy, 2),
-                generateTrial(7, Items.Energy, 3),
-                generateTrial(9, Items.Energy, 5),
-                generateTrial(12, Items.BoosterHint, 3),
+                generateTrial(1, Items.Currency, 100),
+                generateTrial(5, Items.Currency, 200),
+                generateTrial(10, Items.Currency, 300),
             ],
             loadData: { currentValue: 0, completedIndex: 0 },
         }));
@@ -152,11 +139,7 @@ export default class User {
             langID: 'UserData/Achievements/Title/LoseGameWithAces',
             icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 1.png',
             trials: [
-                generateTrial(3, Items.Energy, 2),
-                generateTrial(5, Items.Energy, 2),
-                generateTrial(7, Items.Energy, 3),
-                generateTrial(9, Items.Energy, 5),
-                generateTrial(12, Items.BoosterHint, 3),
+                generateTrial(1, Items.Currency, 500),
             ],
             loadData: { currentValue: 0, completedIndex: 0 },
         }));
@@ -165,11 +148,11 @@ export default class User {
             langID: 'UserData/Achievements/Title/TossCards',
             icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 4.png',
             trials: [
-                generateTrial(3, Items.Energy, 2),
-                generateTrial(5, Items.Energy, 2),
-                generateTrial(7, Items.Energy, 3),
-                generateTrial(9, Items.Energy, 5),
-                generateTrial(12, Items.BoosterHint, 3),
+                generateTrial(10, Items.Currency, 100),
+                generateTrial(50, Items.Currency, 200),
+                generateTrial(100, Items.Currency, 300),
+                generateTrial(200, Items.Currency, 400),
+                generateTrial(300, Items.Currency, 500),
             ],
             loadData: { currentValue: 0, completedIndex: 0 },
         }));
@@ -178,11 +161,11 @@ export default class User {
             langID: 'UserData/Achievements/Title/TransitCards',
             icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 3.png',
             trials: [
-                generateTrial(3, Items.Energy, 2),
-                generateTrial(5, Items.Energy, 2),
-                generateTrial(7, Items.Energy, 3),
-                generateTrial(9, Items.Energy, 5),
-                generateTrial(12, Items.BoosterHint, 3),
+                generateTrial(5, Items.Currency, 100),
+                generateTrial(10, Items.Currency, 200),
+                generateTrial(20, Items.Currency, 300),
+                generateTrial(30, Items.Currency, 400),
+                generateTrial(50, Items.Currency, 500),
             ],
             loadData: { currentValue: 0, completedIndex: 0 },
         }));
@@ -191,11 +174,11 @@ export default class User {
             langID: 'UserData/Achievements/Title/MoneyEarned',
             icon: './Sprites/Desktop - дурак- достижения/Achievement Icon 1.png',
             trials: [
-                generateTrial(3, Items.Energy, 2),
-                generateTrial(5, Items.Energy, 2),
-                generateTrial(7, Items.Energy, 3),
-                generateTrial(9, Items.Energy, 5),
-                generateTrial(12, Items.BoosterHint, 3),
+                generateTrial(500, Items.Currency, 100),
+                generateTrial(1000, Items.Currency, 200),
+                generateTrial(2000, Items.Currency, 300),
+                generateTrial(3000, Items.Currency, 400),
+                generateTrial(5000, Items.Currency, 500),
             ],
             loadData: { currentValue: 0, completedIndex: 0 },
         }));
@@ -274,7 +257,7 @@ export default class User {
         return false;
     }
 
-    addContent = function (content) {
+    addContent = function (content, withView = { isTrue: false, isMonetized: false }) {
         if (content == null) return;
 
         for (let i = 0; i < this.availableContent.length; i++) {
@@ -284,6 +267,8 @@ export default class User {
 
         this.availableContent.push(content);
         this.contentListUpdateEvent.invoke(this.availableContent);
+
+        if (withView.isTrue) { this.onItemsPublicReceive.invoke({ content: [content], monetized: withView.isMonetized }); }
 
         log(`Update user content [${content.type.id} (${content.count})]: ${this.availableContent.map(i => ` ${i.id}`)}`, "user", "details");
 
@@ -346,6 +331,10 @@ export default class User {
 
                 log(`Update user items [${type} (${count})]: ${this.items[i].type} (${this.items[i].count})`, "user", "details");
                 this.itemListUpdateEvent.invoke(this.items);
+
+                if (this.items[i].type == Items.Currency) {
+                    updateCurrencyStatistics(this.items[i].count);
+                }
 
                 this.saveData();
                 return true;
@@ -465,6 +454,12 @@ export default class User {
         let data = load("user_01");
 
         if (data == null) {
+
+            for (let i = 0; i < this.items.length; i++) {
+                if (this.items[i].type == Items.Currency) {
+                    updateCurrencyStatistics(this.items[i].count);
+                }
+            }
             return;
         }
 
@@ -476,6 +471,12 @@ export default class User {
             const element = this.achievements[i];
 
             element.completedIndex = data.achievements[i];
+        }
+
+        for (let i = 0; i < this.items.length; i++) {
+            if (this.items[i].type == Items.Currency) {
+                updateCurrencyStatistics(this.items[i].count);
+            }
         }
     }
 }

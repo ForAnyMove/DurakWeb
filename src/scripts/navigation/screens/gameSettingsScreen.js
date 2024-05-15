@@ -7,7 +7,6 @@ import { ScreenLogic } from "../navigation.js";
 
 class GameSettingsScreen extends ScreenLogic {
     onCreate() {
-
         this.defaultSelectedElement = { element: this.screenRoot.querySelector('.arrow-back-btn') }
         this.selectableElements.push(this.defaultSelectedElement);
         const playerNumberContainer = this.screenRoot.querySelectorAll('.start-game_slider-container_dark')[1];
@@ -92,12 +91,73 @@ class GameSettingsScreen extends ScreenLogic {
         const rewardedCurrencyButton = this.screenRoot.querySelector('.start-game_watch-add-btn');
         rewardedCurrencyButton.onclick = () => {
             showRewarded(null, null, () => {
-                user.addItem(Items.Currency, 500);
+                user.addItem(Items.Currency, 500, { isTrue: true });
             }, null);
         }
 
         this.selectableElements.push({ element: rewardedCurrencyButton });
 
+        // bet
+        let betRange = [];
+
+        const betSlider = this.screenRoot.querySelector('#bet-slider');
+        const betText = this.screenRoot.querySelector('.start-game_bet-value');
+        betText.innerText = betSlider.value;
+        betSlider.min = 0;
+        betSlider.value = 0;
+
+        const updateValue = () => {
+            const selectedValue = betSlider.value;
+            const betValue = betRange[selectedValue];
+            betText.innerText = betValue;
+            bet = betValue;
+        }
+
+        betSlider.oninput = () => {
+            updateValue();
+        }
+
+        const updateBet = (currentCurrencyValue) => {
+            const betTemplate = [100, 500, 1000, 2000, 5000, 10000];
+            let maxBetIndex = 0;
+            for (let i = 0; i < betTemplate.length; i++) {
+                const element = betTemplate[i];
+                if (currentCurrencyValue < element) {
+                    break;
+                }
+
+                maxBetIndex++;
+            }
+
+            betSlider.max = maxBetIndex - 1;
+
+            betRange = betTemplate.splice(0, maxBetIndex);
+            setRemoveClass(betSlider, 'inactive', betRange.length == 1);
+
+            updateValue();
+        }
+
+        user.itemListUpdateEvent.addListener(() => {
+            updateBet(user.getItemCount(Items.Currency));
+        })
+
+        const betSelectable = {
+            element: betSlider,
+            onSubmit: () => {
+                const next = parseInt(betSlider.value) + 1;
+                if (next > betSlider.max) {
+                    betSlider.value = 0;
+                } else {
+                    betSlider.value = next;
+                }
+
+                updateValue();
+            }
+        }
+
+        this.selectableElements.push(betSelectable);
+
+        updateBet(user.getItemCount(Items.Currency));
     }
 }
 

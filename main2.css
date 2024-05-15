@@ -32,6 +32,7 @@ span {
   flex-direction: column;
 }
 
+input.selected,
 div.selected,
 img.selected,
 button.selected {
@@ -987,7 +988,7 @@ button.selected {
 }
 
 .start-game_slider-container_dark.inactive {
-  filter: grayscale(100%) brightness(75%);
+  filter: grayscale(100%) brightness(75%) opacity(60%);
 }
 
 .start-game_slider-container_light,
@@ -1130,6 +1131,22 @@ button.selected {
   overflow: hidden;
 }
 
+.achievements_stats-list-item-tab.completed {
+  background: #b2b2b2;
+  background: -moz-linear-gradient(left,
+      #afafaf 0%,
+      #909090 50%,
+      #737373 100%);
+  background: -webkit-linear-gradient(left,
+      #afafaf 0%,
+      #909090 50%,
+      #737373 100%);
+  background: linear-gradient(to right,
+      #afafaf 0%,
+      #909090 50%,
+      #737373 100%);
+}
+
 .shine {
 
   &::before,
@@ -1197,6 +1214,22 @@ button.selected {
   flex-direction: column;
 }
 
+.completed>.achievements_stats-list-item {
+  background: #d6d6d6;
+  background: -moz-linear-gradient(left,
+      #d6d6d6 0%,
+      #bfbfbf 50%,
+      #929292 100%);
+  background: -webkit-linear-gradient(left,
+      #d6d6d6 0%,
+      #bfbfbf 50%,
+      #929292 100%);
+  background: linear-gradient(to right,
+      #d6d6d6 0%,
+      #bfbfbf 50%,
+      #929292 100%);
+}
+
 .achievements_header-container {
   display: flex;
   align-items: center;
@@ -1218,6 +1251,14 @@ button.selected {
   --target-font-size: 1vw;
   font-weight: 600;
   text-transform: uppercase;
+}
+
+.completed>.achievements_stats-list-item>.achievements_header-container>.achievements_stats-list-item-title-container>.achievements_stats-list-item-title {
+  color: #5b5b5b;
+}
+
+.completed>.achievements_stats-list-item>.achievements_header-container>.achievements_header-icon {
+  filter: grayscale(100%);
 }
 
 .achievements_stats-list-item-progress-level-mask {
@@ -1611,13 +1652,41 @@ button.selected {
 }
 
 .start-game_range-container {
-  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 90%;
   height: 4vw;
   background-image: url('./Sprites/Desktop\ -\ дурак-\ Играть\ \(выбор\ р/Group 117.png');
-  background-size: 90% 100%;
+  background-size: 100% 100%;
+  background-color: rgba(0, 0, 0, 0);
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
+}
+
+.start-game_range-container.inactive {
+  filter: grayscale(100%) opacity(60%);
+  ;
+}
+
+.start-game_range-container::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 6vw;
+  height: 4vw;
+  background-image: url('./Sprites/Desktop - дурак- Играть (выбор р/Handler.png');
+  background-size: 100% 100%;
+  cursor: pointer;
+}
+
+.start-game_range-container::-moz-range-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 6vw;
+  height: 4vw;
+  background-image: url('./Sprites/Desktop - дурак- Играть (выбор р/Handler.png');
+  background-size: 100% 100%;
+  cursor: pointer;
 }
 
 /* Можно двигать через js меняя left в % от 0 до 100 с привязкой к курсору */
@@ -1969,7 +2038,17 @@ button.selected {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  left: 0;
+  top: 0;
 }
+
+.popup-background-fading {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 0, 0.5)
+}
+
 .popup-content {
   background-image: url('./Sprites/Desktop\ -\ дурак-\ ежедневный\ бону/Group 48 4x 369162226.png');
   background-size: 100% 100%;
@@ -1977,10 +2056,12 @@ button.selected {
   padding: 1vw;
   position: relative;
 }
+
 .popup-content>.choose-avatar_close-icon {
-  top: -5%;
-  right: -10%;
+  top: -3%;
+  right: -5%;
 }
+
 .languages>.popup-content {
   width: 50vh;
   max-width: 90%;
@@ -2054,14 +2135,71 @@ button.selected {
   --target-font-size: 2.4vw;
   margin: 1vw auto;
 }
+
 .language-container>.settings_checkbox {
   width: 3vw;
 }
 
-
 .hidden-all {
   display: none;
 }
+
+/* <reward-receiver> */
+
+.reward-receiver {
+  background-color: #14A40F99;
+  overflow: hidden;
+}
+
+.reward-receiver-shine {
+  position: absolute;
+  background-image: url('./Sprites/fx_rotate_line.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 90vw;
+  height: 90vw;
+}
+
+.reward-receiver-particle {
+  position: absolute;
+  background-image: url('./Sprites/fx_star_yellow.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: 7vw;
+  height: 7vw;
+}
+
+.reward-receiver.active>.reward-receiver-shine {
+  animation: rotate-constant 5s linear infinite;
+}
+
+.reward-receiver-container {
+  font-weight: 900;
+  font-size: 5vw;
+  color: #ffffff;
+  z-index: 1;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: rgb(0, 0, 0);
+}
+
+.reward-receiver-reward {
+  width: 15vw;
+  height: 15vw;
+  object-fit: contain;
+  filter: drop-shadow(0vw 0vw 0.2vw #00000080);
+}
+
+@keyframes rotate-constant {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* </reward-receiver> */
 
 @media only screen and (orientation: portrait) {
   .background-mask {
@@ -2565,6 +2703,16 @@ button.selected {
     width: 13vw;
   }
 
+  .start-game_range-container::-webkit-slider-thumb {
+    width: 13vw;
+    height: 8vw;
+  }
+
+  .start-game_range-container::-moz-range-thumb {
+    width: 13vw;
+    height: 8vw;
+  }
+
   .start-game_play-btn {
     width: 30vw;
     height: 9vw;
@@ -2799,7 +2947,7 @@ button.selected {
   .draw-without-ads>.tutorial-popup-btn {
     width: 60vw;
   }
-  
+
   .popup-content {
     width: 90vw;
     border-radius: 2.5vw;
@@ -2821,15 +2969,36 @@ button.selected {
     font-size: 8vw;
     --target-font-size: 8vw;
   }
+
   .popup-content>.choose-avatar_close-icon {
     width: 14.5vw;
     top: -3%;
     right: -5%;
   }
+
   .language-container>.settings_checkbox {
     width: 8vw;
   }
+
   .languages-list {
     margin-bottom: 2vh;
   }
+
+  /* <reward-receiver> */
+
+  .reward-receiver-shine {
+    width: 150vw;
+    height: 150vw;
+  }
+
+  .reward-receiver-container {
+    font-size: 5vw;
+  }
+
+  .reward-receiver-reward {
+    width: 25vw;
+    height: 25vw;
+  }
+
+  /* </reward-receiver> */
 }

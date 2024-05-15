@@ -217,6 +217,10 @@ function DOChangeXY(getPosition, sendPosition, targetPosition, duration, ease) {
     return tween;
 }
 
+function DONormalizedValue(onUpdate, duration, ease) {
+    return DOChangeValue(() => 0, (val) => onUpdate?.(val), 1, duration, ease);
+}
+
 function DOChangeValue(start, sendScale, target, duration, ease) {
     const value = start();
 
@@ -430,4 +434,4 @@ function DOEase(type, t, b, c, d) {
 }
 //#endregion
 
-export { createTweener, DOChangeXY, DOChangeValue, DelayedCall, Ease, Sequence, Delay, SequencedDelay }
+export { createTweener, DOChangeXY, DOChangeValue, DONormalizedValue, DelayedCall, Ease, Sequence, Delay, SequencedDelay }

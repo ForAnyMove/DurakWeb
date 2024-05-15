@@ -128,13 +128,13 @@ class BonusesScreen extends ScreenLogic {
                     if (reward.items) {
                         for (let i = 0; i < reward.items.length; i++) {
                             const element = reward.items[i];
-                            user.addItem(element.type, element.count);
+                            user.addItem(element.type, element.count, { isTrue: true });
                         }
                     }
                     if (reward.content) {
                         for (let i = 0; i < reward.content.length; i++) {
                             const element = reward.content[i];
-                            user.addContent(element);
+                            user.addContent(element, { isTrue: true });
                             console.log(user.availableContent);
                         }
                     }

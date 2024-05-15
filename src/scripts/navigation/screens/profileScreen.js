@@ -10,6 +10,7 @@ class ProfileScreen extends ScreenLogic {
         this.selectableElements.push({ element: this.screenRoot.querySelector('.open-profile-tab-btn') });
 
         this.status = new UserStatus(this.screenRoot);
+
         for (let i = 0; i < this.status.views.length; i++) {
             const statusView = this.status.views[i];
             this.selectableElements.push({ element: statusView });

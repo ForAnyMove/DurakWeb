@@ -80,6 +80,14 @@ class SettingsScreen extends ScreenLogic {
         }
 
         this.selectableElements.push({ element: tutorialButton });
+
+        const languageButton = this.screenRoot.querySelector('.languages-open-button');
+        languageButton.onclick = () => {
+            navigation.pushID('languagesScreen');
+        }
+
+        this.selectableElements.push({ element: languageButton });
+
     }
 }
 

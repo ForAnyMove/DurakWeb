@@ -47,6 +47,9 @@ class UserStatus {
                 }, targetValue: 100000,
             }];
 
+        const notificatorBody = document.getElementsByClassName('profile-tab-open-button')[0].querySelector('.switch-tab-btn-interactive-counter-container');
+        const notificatorText = notificatorBody.querySelector('.switch-tab-btn-interactive-counter');
+
         const data = this.loadData();
 
         this.views = Array.from(screenRoot.querySelectorAll('.profile-status-item')).reverse();
@@ -56,18 +59,19 @@ class UserStatus {
             if (reward.items) {
                 for (let i = 0; i < reward.items.length; i++) {
                     const element = reward.items[i];
-                    user.addItem(element.type, element.count);
+                    user.addItem(element.type, element.count, { isTrue: true });
                 }
             }
 
             if (reward.content) {
                 for (let i = 0; i < reward.content.length; i++) {
                     const element = reward.content[i];
-                    user.addContent(element);
+                    user.addContent(element, { isTrue: true });
                 }
             }
 
             data[index] = true;
+            updateNotificator();
             this.saveData(data);
         }
 
@@ -104,12 +108,29 @@ class UserStatus {
             }
         }
 
+        const updateNotificator = () => {
+            const currentCurrecyValue = statistics.maxCurrencyCollected;
+
+            let readyCount = 0;
+            for (let i = 0; i < this.views.length; i++) {
+                if (currentCurrecyValue >= staticData[i].targetValue && !data[i]) {
+                    readyCount++;
+                }
+            }
+
+            setRemoveClass(notificatorBody, 'hidden-all', readyCount == 0);
+            notificatorText.innerText = readyCount;
+        }
+
         updateEvent.addListener(() => {
             updateState();
+            updateNotificator();
         })
 
         initialize();
         updateState();
+
+        updateNotificator();
     }
 
     loadData = () => {

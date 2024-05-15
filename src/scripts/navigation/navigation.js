@@ -29,7 +29,8 @@ class ScreenLogic {
 }
 
 class Screen {
-    constructor(options = { screenLogic, style, isPopup, isMain, element, openButtons, closeButtons, onFocus, onUnfocus, screenParameters }) {
+    constructor(options = { id, screenLogic, style, isPopup, isMain, element, openButtons, closeButtons, onFocus, onUnfocus, screenParameters }) {
+        this.id = options.id;
         this.style = options.style;
         this.screenParameters = options.screenParameters;
         this.element = options.element;
@@ -46,7 +47,8 @@ class Screen {
         this.element.style.opacity = 0;
         this.scaleIn = 1;
         this.scaleOut = 0.8;
-        this.element.style.scale = this.scaleOut;
+        this.popupScaleOut = 1.2;
+        this.element.style.scale = this.isPopup ? this.popupScaleOut : this.scaleOut;
         this.element.style.transition = `opacity ${navagationDuration}s ease, scale ${navagationDuration}s ease`;
 
         this.styleLink = null;
@@ -71,6 +73,7 @@ class Screen {
                 this.element.style.display = '';
                 setTimeout(() => {
                     this.element.style.opacity = 1;
+                    this.element.style.scale = this.scaleIn;
                     this.screenLogic?.onScreenLoaded();
                 }, 10);
                 onShow?.();
@@ -110,7 +113,7 @@ class Screen {
 
     hide = function (onHide) {
         this.element.style.opacity = 0;
-        this.element.style.scale = this.scaleOut;
+        this.element.style.scale = this.isPopup ? this.popupScaleOut : this.scaleOut;
         if (!this.element.classList.contains('hidden')) {
             setTimeout(() => {
                 this.element.style.display = 'none';
@@ -177,6 +180,40 @@ class StackNavigation extends Navigation {
                         navigation.pop();
                     }
                 }
+            }
+        }
+    }
+
+    createNewRouteFromID = function (id) {
+
+        let screen = null;
+
+        for (let i = 0; i < this.registredScreens.length; i++) {
+            const element = this.registredScreens[i];
+            if (element.id == id) {
+                screen = element;
+                break;
+            }
+        }
+
+        if (screen == null) return;
+
+        enablePreloader();
+        setTimeout(() => {
+            for (let i = 0; i < this.registredScreens.length; i++) {
+                const element = this.registredScreens[i];
+                element?.fastHide();
+            }
+            this.push(screen);
+        }, 50)
+    }
+
+    pushID = function (id) {
+        for (let i = 0; i < this.registredScreens.length; i++) {
+            const element = this.registredScreens[i];
+            if (element.id == id) {
+                this.push(element);
+                return;
             }
         }
     }

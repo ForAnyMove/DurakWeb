@@ -24,8 +24,8 @@ class ScreenLogic {
     }
 
     onCreate() { }
-    onScreenLoaded = () => { }
-    onScreenUnloaded = () => { }
+    onScreenLoaded() { }
+    onScreenUnloaded() { }
 }
 
 class Screen {

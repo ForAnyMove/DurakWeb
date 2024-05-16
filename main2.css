@@ -497,6 +497,12 @@ button.selected {
   overflow: hidden;
 }
 
+.profile_bounty-preview-container {
+  background-image: url('./');
+  width: 20vw;
+  height: 20vw;
+}
+
 .profile-stats-list-item-progress-title::after,
 .profile-stats-list-item-progress-title {
   color: #fff3a0;

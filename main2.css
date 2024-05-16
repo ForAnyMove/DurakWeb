@@ -447,6 +447,7 @@ button.selected {
 
 .profile-stats-list-item-title-container {
   width: 80%;
+  height: 3.5vw;
   text-align: center;
   display: flex;
   align-items: center;
@@ -545,6 +546,14 @@ button.selected {
 .tutorial-popup-tab,
 .daily-bonuses-tab,
 .choose-avatar-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+}
+
+.daily-bonuses-tab-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -918,6 +927,13 @@ button.selected {
   flex-direction: column;
   height: 100%;
 }
+.settings_settings-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+}
 
 .settings_header-container {
   display: flex;
@@ -991,6 +1007,7 @@ button.selected {
   justify-content: center;
   width: 100%;
   max-height: 100%;
+  height: 3vw;
 }
 
 .start-game_slider-header,
@@ -1588,7 +1605,15 @@ button.selected {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  row-gap: 0.5vh;
+}
+
+.start-game_start-game-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 0.5vh; 
 }
 
 .start-game_header-container {
@@ -2244,6 +2269,14 @@ button.selected {
   background: -moz-radial-gradient(center, #579E37 0%, #316224 100%);
   background: -webkit-radial-gradient(center, #579E37 0%, #316224 100%);
   background: radial-gradient(ellipse at center, #579E37 0%, #316224 100%);
+}
+.playground-container {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .arrow-back-btn-link {
@@ -3404,4 +3437,187 @@ button.selected {
   }
 
   /* </reward-receiver> */
+}
+
+
+@media (min-aspect-ratio: 11/6) {
+  .logo-container,
+  .play-btn-container,
+  .switch-tabs-btns-container,
+  .open-profile-tab-btn,
+  .open-settings-tab-btn,
+  .arrow-back-btn,
+  .cash-info-container {
+    scale: 0.8;
+  }
+  .profile-container {
+    scale: 0.8;
+    transform: translateY(-10%);
+  }
+  .choose-avatar_container {
+    scale: 0.8;
+  }
+  .tutorial-btn,
+  .version-container,
+  .settings_settings-container {
+    scale: 0.8;
+  }
+  .skins-navigation {
+    scale: 0.8;
+  }
+  .start-game_watch-add-btn {
+    width: 8vw;
+    height: 4vw;
+  }
+  .start-game_watch-add-btn-icon {
+    width: 2.5vw;
+  }
+  .start-game_watch-add-btn-title {
+    font-size: 1.4vw;
+  }
+  .start-game_start-game-container {
+    scale: 0.8;
+  }
+  .daily-bonuses-tab {
+    scale: 0.6;
+  }
+  .daily-bonuses-tab-container {
+    scale: 0.8;
+    height: 120vh;
+  }
+  .playground-container {
+    scale: 0.9;
+    min-height: 115vh;
+    transform: translateY(-10%);
+  }
+  .playground {
+    height: 35vh;
+  }
+  .cards-deck-container {
+    scale: 0.9;
+  }
+}
+@media (min-aspect-ratio: 15/6.5) {
+  .playground-container {
+    scale: 0.8;
+    min-height: 135vh;
+    transform: translateY(-20%);
+  }
+  .cards-deck-container {
+    scale: 0.8;
+  }
+}
+@media (min-aspect-ratio: 15/5) {
+  .playground-container {
+    scale: 0.7;
+    min-height: 155vh;
+    transform: translateY(-30%);
+  }
+  .cards-deck-container {
+    scale: 0.7;
+  }
+}
+@media (min-aspect-ratio: 16/6) {
+  .start-game_start-game-container {
+    scale: 0.6;
+    height: 150vh;
+  }
+  .daily-bonuses-tab-container {
+    scale: 0.6;
+    height: 140vh;
+  }
+}
+@media (min-aspect-ratio: 17/6) {
+  .profile-container {
+    scale: 0.6;
+    transform: translateY(-20%);
+  }
+  .choose-avatar_container {
+    scale: 0.6;
+  }
+  .settings_settings-container {
+    position: absolute;
+    height: 130vh;
+  }
+  .tutorial-btn,
+  .version-container,
+  .settings_settings-container {
+    scale: 0.6;
+  }
+
+  .achievements_stats-container {
+    width: 28vw;
+    row-gap: 2vw;
+  }
+  .achievements_stats-list-item-tab {
+    width: 13vw;
+    height: 7vw;
+  }
+  .achievements_stats-list-item {
+    width: 12vw;
+    height: 6vw;
+  }
+  .achievements_header-icon {
+    width: 1.4vw;
+  }
+  .achievements_stats-list-item-progress-container {
+    width: 85%;
+    height: 2.5vw;
+  }
+
+  .skins-pick-area {
+    width: 78vw;
+    column-gap: 2vw;
+  }
+  .skin-element {
+    width: 14vw;
+    height: 6.5vw;
+  }
+  .background-element {
+    width: 12.5vw;
+    height: 7.5vw;
+  }
+  #pick-area-2 {
+    width: 75vw;
+    column-gap: 3vw;
+  }
+  .skin-back-element {
+    width: 6vw;
+    height: 8vw;
+  }
+  #pick-area-3 {
+    width: 42vw;
+    column-gap: 3vw;
+  }
+  .checkbox-pick-icon {
+    width: 4vw;
+  }
+  .skin-element_locked-icon {
+    width: 2.5vw;
+  }
+  .play-btn-container,
+  .switch-tabs-btns-container,
+  .open-profile-tab-btn,
+  .open-settings-tab-btn,
+  .arrow-back-btn,
+  .cash-info-container {
+    scale: 0.6;
+  }
+  .bonuses_bonuses-container {
+    scale: 0.8;
+  }
+}
+@media (min-aspect-ratio: 15/4.5) {
+  .profile-container {
+    scale: 0.5;
+    transform: translateY(-20%);
+  }
+  .playground-container {
+    scale: 0.6;
+    min-height: 175vh;
+    transform: translateY(-40%);
+  }
+  .cards-deck-container {
+    scale: 0.6;
+  }
 }

@@ -7,6 +7,8 @@ import { ScreenLogic } from "../navigation.js";
 
 class DailyBonusesScreen extends ScreenLogic {
     onCreate() {
+        this.defaultSelectedElement = { element: this.screenRoot.querySelector('.daily-bonuses-tab-close-button') };
+        this.selectableElements.push(this.defaultSelectedElement);
         const dayInGame = inDayGameCount();
         let isForRewarded = false;
 
@@ -16,6 +18,7 @@ class DailyBonusesScreen extends ScreenLogic {
 
         for (let i = 0; i < allDays.length; i++) {
             const element = allDays[i];
+            this.selectableElements.push({ element: element });
 
             if (isCompleted(i)) {
                 setRemoveClass(element, 'completed', true)

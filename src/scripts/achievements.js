@@ -271,7 +271,7 @@ class GameCount extends Achievement {
     }
 }
 
-class DraftCount extends Achievement {
+class DrawCount extends Achievement {
     constructor(options = {}) {
         super(options);
 
@@ -292,8 +292,8 @@ class DraftCount extends Achievement {
 
     handle = () => {
         if (this.gameMode == null && this.entityMode != null) {
-            for (let i = 0; i < statistics.draft.byEntityMode.length; i++) {
-                const element = statistics.draft.byEntityMode[i];
+            for (let i = 0; i < statistics.draw.byEntityMode.length; i++) {
+                const element = statistics.draw.byEntityMode[i];
 
                 if (element.type == this.entityMode) {
                     this.currentValue = element.count;
@@ -304,8 +304,8 @@ class DraftCount extends Achievement {
                 }
             }
         } else if (this.gameMode != null && this.entityMode == null) {
-            for (let i = 0; i < statistics.draft.byGameMode.length; i++) {
-                const element = statistics.draft.byGameMode[i];
+            for (let i = 0; i < statistics.draw.byGameMode.length; i++) {
+                const element = statistics.draw.byGameMode[i];
 
                 if (element.gameMode == this.gameMode) {
                     this.currentValue = element.count;
@@ -316,7 +316,7 @@ class DraftCount extends Achievement {
                 }
             }
         } else if (this.gameMode == null && this.entityMode == null) {
-            this.currentValue = statistics.draft.overall;
+            this.currentValue = statistics.draw.overall;
 
             this.update();
             this.sendEvent();
@@ -434,4 +434,4 @@ function generateTrial(targetValue, rewardType, rewardCount) {
     }
 }
 
-export { WinCount, Achievement, WinInARow, InGameDayCount, GameCount, DraftCount, AceLose, TransfareCards, ThrowCards, CurrencyCollected, generateTrial };
+export { WinCount, Achievement, WinInARow, InGameDayCount, GameCount, DrawCount as DraftCount, AceLose, TransfareCards, ThrowCards, CurrencyCollected, generateTrial };

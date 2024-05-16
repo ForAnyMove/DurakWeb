@@ -1,8 +1,10 @@
 import { ScreenLogic } from "../navigation.js";
-import { BattleFlow, Bot, EntityMode, Player, Rule } from "../../../scripts/battleFlow.js"
+import { BattleFlow, Bot, EntityMode, GameMode, Player, Rule } from "../../../scripts/battleFlow.js"
 import { CardsPlayableDeck } from "../../../scripts/cardModel.js"
 import { createTweener } from "../../../scripts/dotween/dotween.js"
 import { setRemoveClass } from "../../helpers.js";
+import { Items } from "../../statics/staticValues.js";
+import { statistics, updateStatistics } from "../../gameStatistics.js";
 
 class PlaygroundScreen extends ScreenLogic {
     onCreate() {
@@ -14,16 +16,21 @@ class PlaygroundScreen extends ScreenLogic {
 
         createTweener();
 
-        const botCount = rules.entityMove == EntityMode.Pair ? 3 : rules.numberOfPlayers - 1;
-        console.log(botCount);
-        const enemiesList = this.screenRoot.querySelectorAll('.enemy-container');
+        const botCount = rules.entityMode == EntityMode.Pair ? 3 : rules.numberOfPlayers - 1;
+        const enemiesList = Array.from(this.screenRoot.querySelectorAll('.enemy-container'));
+        const portraits = [];
+        enemiesList.forEach(item => {
+            portraits.push(item.querySelector('.enemy-portrait'))
+        })
 
-        console.log(enemiesList);
-        const bots = [];
+        this.bots = [];
 
         for (let i = 0; i < enemiesList.length; i++) {
             const container = enemiesList[i];
             const element = container.querySelector('.enemy-cards-container');
+            setRemoveClass(portraits[i], 'ally', false);
+            setRemoveClass(portraits[i], 'enemy', true);
+
             if (i >= botCount) {
                 container.style.display = 'none';
                 continue;
@@ -37,7 +44,14 @@ class PlaygroundScreen extends ScreenLogic {
             const bot = new Bot(wrapper);
             bot.setStateText(element.parentElement.querySelector('.state'));
             bot.id = `bot_${i + 1}`;
-            bots.push(bot);
+            this.bots.push(bot);
+        }
+        console.log(rules);
+
+        if (rules.entityMode == EntityMode.Pair) {
+            console.log('true');
+            setRemoveClass(portraits[1], 'ally', true);
+            setRemoveClass(portraits[1], 'enemy', false);
         }
 
         const playerCardsDeck = this.screenRoot.querySelector('.player-cards-container');
@@ -46,24 +60,184 @@ class PlaygroundScreen extends ScreenLogic {
         player.setStateText(playerCardsDeck.parentElement.querySelector('.state'));
         player.id = 'player';
 
-        // const playerBot = new Bot(playerCardsWrapper);
-        // playerBot.setStateText(playerCardsDeck.parentElement.querySelector('.state'));
-        // playerBot.id = 'bot_4'
+        const playerBot = new Bot(playerCardsWrapper);
+        playerBot.setStateText(playerCardsDeck.parentElement.querySelector('.state'));
+        playerBot.id = 'player'
 
-        this.battleFlow = new BattleFlow([player].concat(bots), rules);
+        this.battleFlow = new BattleFlow([playerBot].concat(this.bots), rules);
+        this.battleFlow.finishCallback.addListener((result) => {
+            console.log(result);
+            const { winners, loser } = result;
+            if (loser == null) {
+                // draw
+                console.log('draw');
+                navigation.pushID('gameFinishScreen', { state: 'draw' });
+                this.updateStatistics('draw', rules);
+                return;
+            }
+
+            let isWon = false;
+            if (rules.entityMode == EntityMode.Pair) {
+                if ((winners.some(i => i.id == player.id) && winners.some(i => i.id == this.bots[1].id))) {
+                    isWon = true;
+                }
+            } else if (winners.some(i => i.id == player.id)) {
+                isWon = true;
+            }
+            console.log(isWon);
+
+            if (isWon) {
+                let multiplier = botCount + 1;
+                for (let i = 0; i < result.winners.length; i++) {
+                    const winner = result.winners[i];
+
+                    if (winner.id == player.id) break;
+                    multiplier /= 2;
+                }
+
+                const prize = Math.floor(multiplier * bet);
+                this.updateStatistics('win', rules);
+
+                navigation.pushID('gameFinishScreen', { state: 'win', reward: { type: Items.Currency, count: prize } });
+            } else {
+                this.updateStatistics('lose', rules);
+
+                navigation.pushID('gameFinishScreen', { state: 'lose' });
+            }
+        });
+
+        const closeButton = this.screenRoot.querySelector('.playground-tab-close-button');
+        closeButton.onclick = () => {
+            navigation.pushID('exitGameScreen', { isGameExit: true })
+        }
+
+        this.selectableElements.push({ element: closeButton })
+    }
+
+    updateStatistics(state, rules) {
+        statistics.gameCount.overall++;
+        switch (rules.entityMode) {
+            case EntityMode.Self:
+                statistics.gameCount.byEntityMode[0]++;
+                break;
+            case EntityMode.Pair:
+                statistics.gameCount.byEntityMode[1]++;
+                break;
+        }
+
+        switch (rules.gameMode) {
+            case GameMode.DurakDefault:
+                statistics.gameCount.byGameMode[0]++;
+                break;
+            case GameMode.DurakTransfare:
+                statistics.gameCount.byGameMode[1]++;
+                break;
+        }
+
+        switch (state) {
+            case 'win': {
+                switch (rules.entityMode) {
+                    case EntityMode.Self:
+                        statistics.winCount.byEntityMode[0].count++;
+                        statistics.winInARow.byEntityMode[0].count++;
+                        break;
+                    case EntityMode.Pair:
+                        statistics.winCount.byEntityMode[1].count++;
+                        statistics.winInARow.byEntityMode[1].count++;
+                        break;
+                }
+
+                switch (rules.gameMode) {
+                    case GameMode.DurakDefault:
+                        statistics.winCount.byGameMode[0].count++;
+                        statistics.winInARow.byGameMode[0].count++;
+                        break;
+                    case GameMode.DurakTransfare:
+                        statistics.winCount.byGameMode[1].count++;
+                        statistics.winInARow.byGameMode[1].count++;
+                        break;
+                }
+
+                statistics.winCount.overall++;
+                statistics.winInARow.overall++;
+                break;
+            }
+            case 'lose': {
+                switch (rules.entityMode) {
+                    case EntityMode.Self:
+                        statistics.loseCount.byEntityMode[0].count++;
+                        statistics.winInARow.byEntityMode[0].count = 0;
+                        break;
+                    case EntityMode.Pair:
+                        statistics.loseCount.byEntityMode[1].count++;
+                        statistics.winInARow.byEntityMode[1].count = 0;
+                        break;
+                }
+
+                switch (rules.gameMode) {
+                    case GameMode.DurakDefault:
+                        statistics.loseCount.byGameMode[0].count++;
+                        statistics.winInARow.byGameMode[0].count = 0;
+                        break;
+                    case GameMode.DurakTransfare:
+                        statistics.loseCount.byGameMode[1].count++;
+                        statistics.winInARow.byGameMode[1].count = 0;
+                        break;
+                }
+
+                statistics.loseCount.overall++;
+                statistics.winInARow.overall = 0;
+                break;
+            }
+            case 'draw': {
+                switch (rules.entityMode) {
+                    case EntityMode.Self:
+                        statistics.draw.byEntityMode[0].count++;
+                        statistics.winInARow.byEntityMode[0].count = 0;
+                        break;
+                    case EntityMode.Pair:
+                        statistics.draw.byEntityMode[1].count++;
+                        statistics.winInARow.byEntityMode[1].count = 0;
+                        break;
+                }
+
+                switch (rules.gameMode) {
+                    case GameMode.DurakDefault:
+                        statistics.draw.byGameMode[0].count++;
+                        statistics.winInARow.byGameMode[0].count = 0;
+                        break;
+                    case GameMode.DurakTransfare:
+                        statistics.draw.byGameMode[1].count++;
+                        statistics.winInARow.byGameMode[1].count = 0;
+                        break;
+                }
+
+                statistics.draw.overall++;
+                statistics.winInARow.overall = 0;
+                break;
+            }
+        }
+
+        console.log(statistics);
+        updateStatistics();
     }
 
     onScreenUnloaded() {
         if (this.battleFlow) {
             this.battleFlow.clear();
-            const elements = Array.from(document.getElementsByClassName('card-element'))
-                .concat(Array.from(document.getElementsByClassName('playground-pare-element')));
+            const elements = Array.from(document.getElementsByClassName('card-element'));
+            // .concat(Array.from(document.getElementsByClassName('playground-pare-element')));
 
             for (let i = elements.length - 1; i >= 0; i--) {
                 const element = elements[i];
                 element.remove();
             }
+
             this.battleFlow = null;
+            player = null;
+            for (let i = 0; i < this.bots.length; i++) {
+                this.bots[i] = null;
+            }
         }
     }
 }

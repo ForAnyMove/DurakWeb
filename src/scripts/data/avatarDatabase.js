@@ -1,0 +1,28 @@
+const avatars = [
+    './Sprites/Avatars/avatar_01.png',
+    './Sprites/Avatars/avatar_02.png',
+    './Sprites/Avatars/avatar_03.png',
+    './Sprites/Avatars/avatar_04.png',
+    './Sprites/Avatars/avatar_05.png',
+    './Sprites/Avatars/avatar_06.png',
+    './Sprites/Avatars/avatar_07.png',
+    './Sprites/Avatars/avatar_08.png',
+    './Sprites/Avatars/avatar_09.png',
+    './Sprites/Avatars/avatar_10.png',
+    './Sprites/Avatars/avatar_11.png',
+    './Sprites/Avatars/avatar_12.png',
+    './Sprites/Avatars/avatar_13.png',
+    './Sprites/Avatars/avatar_14.png',
+    './Sprites/Avatars/avatar_15.png',
+    './Sprites/Avatars/avatar_16.png',
+    './Sprites/Avatars/avatar_17.png',
+    './Sprites/Avatars/avatar_18.png',
+    './Sprites/Avatars/avatar_19.png',
+    './Sprites/Avatars/avatar_20.png',
+    './Sprites/Avatars/avatar_21.png',
+    './Sprites/Avatars/avatar_22.png',
+    './Sprites/Avatars/avatar_23.png',
+    './Sprites/Avatars/avatar_24.png',
+]
+
+export { avatars }

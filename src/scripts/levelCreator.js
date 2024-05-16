@@ -8,7 +8,6 @@ let allCards = [];
 
 function generateCards(cardsCount, shuffleTime, fillCardsToMainDeck = true) {
     const skin = 1;
-    console.log(cardsCount == CardsCount[36]);
     const ranks = cardsCount == CardsCount[36] ? RanksStringList : FullRanksStringList;
     const suits = [Suit.Clubs, Suit.Diamonds, Suit.Spades, Suit.Hearts];
     const decks = 1;
@@ -52,7 +51,6 @@ function generateCards(cardsCount, shuffleTime, fillCardsToMainDeck = true) {
     }
 
     allCards = generatedCards;
-    console.log(allCards.length);
 
     shuffleTime?.(generatedCards);
 

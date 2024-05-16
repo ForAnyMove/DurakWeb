@@ -24,7 +24,7 @@ class ScreenLogic {
     }
 
     onCreate() { }
-    onScreenLoaded() { }
+    onScreenLoaded(parameters) { }
     onScreenUnloaded() { }
 }
 
@@ -55,7 +55,7 @@ class Screen {
         this.screenLogic = options.screenLogic ?? null;
     }
 
-    show = function (onShow) {
+    show = function (onShow, parameters) {
 
         const mainFlow = () => {
             if (!this.isPopup) {
@@ -64,7 +64,7 @@ class Screen {
                     setTimeout(() => {
                         this.element.style.opacity = 1;
                         this.element.style.scale = this.scaleIn;
-                        this.screenLogic?.onScreenLoaded();
+                        this.screenLogic?.onScreenLoaded(parameters);
                     }, 10)
                     onShow?.();
                     this.isOpened = true;
@@ -74,7 +74,7 @@ class Screen {
                 setTimeout(() => {
                     this.element.style.opacity = 1;
                     this.element.style.scale = this.scaleIn;
-                    this.screenLogic?.onScreenLoaded();
+                    this.screenLogic?.onScreenLoaded(parameters);
                 }, 10);
                 onShow?.();
                 this.isOpened = true;
@@ -136,6 +136,11 @@ class Navigation {
         this.openedScreens = [];
     }
 
+    clear() {
+        this.registredScreens = [];
+        this.openedScreens = [];
+    }
+
     registerScreen(screen) {
         if (this.registredScreens.includes(screen)) return false;
 
@@ -143,10 +148,10 @@ class Navigation {
         return true;
     }
 
-    open = function (screen) {
+    open = function (screen, parameters) {
         screen.show(() => {
             screen.onFocus?.()
-        });
+        }, parameters);
     }
 
     close = function (screen) {
@@ -208,30 +213,30 @@ class StackNavigation extends Navigation {
         }, 50)
     }
 
-    pushID = function (id) {
+    pushID = function (id, parameters) {
         for (let i = 0; i < this.registredScreens.length; i++) {
             const element = this.registredScreens[i];
             if (element.id == id) {
-                this.push(element);
+                this.push(element, parameters);
                 return;
             }
         }
     }
 
-    push = function (screen) {
+    push = function (screen, parameters) {
         if (this.openedScreens.includes(screen)) return;
         if (!screen.isPopup) {
             const last = this.openedScreens.pop();
             if (last != null) {
                 last.hide(() => {
                     this.openedScreens.push(screen);
-                    this.open(screen);
+                    this.open(screen, parameters);
                 });
                 return;
             }
         }
         this.openedScreens.push(screen);
-        this.open(screen);
+        this.open(screen, parameters);
     }
 
     pop = function () {

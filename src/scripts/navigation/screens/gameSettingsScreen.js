@@ -81,12 +81,16 @@ class GameSettingsScreen extends ScreenLogic {
             }
         });
 
-        // const startButton = this.screenRoot.querySelector('.start-game_play-btn');
-        // startButton.onclick = () => {
-        //     // start game scene
-        // }
+        const startButton = this.screenRoot.querySelector('.start-game_play-btn');
+        startButton.addEventListener('click', () => {
+            user.removeItem(Items.Currency, bet);
+            const currency = user.getItemCount(Items.Currency);
+            if (currency < 100) {
+                user.addItem(Items.Currency, 100 - currency);
+            }
+        });
 
-        // this.selectableElements.push({ element: startButton });
+        this.selectableElements.push({ element: startButton });
 
         const rewardedCurrencyButton = this.screenRoot.querySelector('.start-game_watch-add-btn');
         rewardedCurrencyButton.onclick = () => {

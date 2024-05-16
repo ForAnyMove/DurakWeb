@@ -511,17 +511,21 @@ button.selected {
   align-items: center;
   justify-content: center;
 }
+
 .profile_bounty-preview {
   width: 70%;
 }
+
 .profile-status-item:nth-child(1)>.profile_bounty-preview-container>.profile_bounty-preview,
 .profile-status-item:nth-child(4)>.profile_bounty-preview-container>.profile_bounty-preview,
 .profile-status-item:nth-child(7)>.profile_bounty-preview-container>.profile_bounty-preview {
   width: 90%;
 }
+
 .profile-status-item:nth-child(2)>.profile_bounty-preview-container>.profile_bounty-preview {
   width: 65%;
 }
+
 .profile-status-item:hover .profile_bounty-preview-container {
   display: flex;
 }
@@ -2312,7 +2316,7 @@ button.selected {
 
 .enemy-container {
   margin: 2vw;
-  margin-top: 1vw;
+  margin-top: 2.5vw;
   width: 10vw;
   height: 12vw;
   position: relative;
@@ -2324,6 +2328,16 @@ button.selected {
 
 .enemy-name-container {
   height: 15%;
+}
+
+.state-container {
+  position: absolute;
+  bottom: -10%;
+}
+
+.enemy-state-container {
+  position: absolute;
+  top: -10%;
 }
 
 .state-container {
@@ -2367,15 +2381,15 @@ button.selected {
 }
 
 .portrait>.portrait-icon {
-  width: 5.7vw;
-  position: absolute;
-  top: 0%;
-  left: 0%;
+  width: 5.3vw;
+  /* position: absolute; */
+  /* top: 0%; */
+  /* left: 0%; */
 }
 
 .enemy-cards-container {
   position: absolute;
-  top: 120%;
+  /* top: 120%; */
   bottom: 0;
   display: flex;
   justify-content: center;
@@ -2412,8 +2426,9 @@ button.selected {
 }
 
 .playground-zone {
+  height: 50%;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   column-gap: 5vw;
   margin-bottom: 5vw;
@@ -2425,6 +2440,7 @@ button.selected {
   align-items: center;
   justify-content: center;
   position: relative;
+  scale: 0.8;
 }
 
 .pass-btn {
@@ -2463,6 +2479,7 @@ button.selected {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 1.5vw;
 }
 
 .player-cards-container {
@@ -2519,10 +2536,19 @@ button.selected {
   /* scale: 0.9; */
 }
 
+.control-btns-panel {
+  position: absolute;
+  bottom: 20%;
+}
+
 /* #endregion playground */
 
 @media only screen and (orientation: portrait) {
   /* #region playground */
+
+  .control-btns-panel {
+    bottom: 27%;
+  }
 
   .arrow-back-btn-link {
     top: 4vw;
@@ -2562,7 +2588,7 @@ button.selected {
   }
 
   .portrait>.portrait-icon {
-    width: 14.7vw;
+    width: 13.2vw;
   }
 
   .enemy-cards-container>.card-element {
@@ -2573,6 +2599,7 @@ button.selected {
     column-gap: 5vw;
     row-gap: 15vw;
     width: 70vw;
+    height: 60%;
     flex-wrap: wrap;
   }
 

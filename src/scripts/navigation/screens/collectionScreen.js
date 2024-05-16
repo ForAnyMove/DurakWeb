@@ -284,13 +284,6 @@ class CollectionScreen extends ScreenLogic {
         setupTabSwitch();
 
     }
-
-    onScreenLoaded = () => {
-    }
-
-    onScreenUnloaded = () => {
-
-    }
 }
 
 export { CollectionScreen }

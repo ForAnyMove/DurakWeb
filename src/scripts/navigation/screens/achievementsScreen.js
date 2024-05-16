@@ -69,7 +69,7 @@ class AchievementsScreen extends ScreenLogic {
         languageChangeEvent.invoke(initialLocale);
     }
 
-    onScreenLoaded = () => {
+    onScreenLoaded() {
         const achievementsParent = this.screenRoot.querySelector(".achievements_stats-container");
         achievementsParent.scrollTo(0, 0);
     }

@@ -157,9 +157,6 @@ class BonusesScreen extends ScreenLogic {
         updateView();
     }
 
-    onScreenLoaded = () => { }
-    onScreenUnloaded = () => { }
-
     loadData = () => {
         const defaultData = [
             {

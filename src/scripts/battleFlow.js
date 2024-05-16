@@ -390,6 +390,8 @@ class Player extends Entity {
     }
 
     async defend(canTransfare) {
+        this.cardPlacedByUserEvent.removeAllListeners();
+
         await super.defend(canTransfare);
 
         log('[Defend] by "Player"', 'battleFlow');
@@ -459,7 +461,8 @@ class Player extends Entity {
                         await Delay(0.1 / globalGameSpeed);
 
                         passButton.style.display = 'flex';
-                        return await this.defend(false);
+                        result = await this.defend(false);
+                        p();
                     }
                 }
 
@@ -561,6 +564,13 @@ class BattleFlow {
 
         this.winners = [];
         this.rules = rules;
+        this.finishCallback = new Action();
+
+        // setTimeout(() => {
+        //     this.winners.push(this.entities[1]);
+        //     this.entities = [this.entities[0]]
+        //     this.finish();
+        // }, 1000);
     }
 
     async distributeCards() {
@@ -620,15 +630,14 @@ class BattleFlow {
     }
 
     getFirstStepEntity() {
-
         let leastCardRank = 999;
         let entity = null;
 
         for (let i = 0; i < this.entities.length; i++) {
             const entityCards = this.entities[i].wrapper.cards;
 
-            for (let i = 0; i < entityCards.length; i++) {
-                const card = entityCards[i];
+            for (let j = 0; j < entityCards.length; j++) {
+                const card = entityCards[j];
                 if (card.suit == trumpSuit && card.rank < leastCardRank) {
                     entity = this.entities[i];
                     leastCardRank = card.rank;
@@ -643,8 +652,8 @@ class BattleFlow {
         await this.distributeCards();
 
         const firstStepEntity = this.getFirstStepEntity();
-        this.playEntityOrder = firstStepEntity != null ? this.entities.indexOf(firstStepEntity) : 1;
-
+        this.playEntityOrder = firstStepEntity != null ? this.entities.indexOf(firstStepEntity) : 0;
+        this.playEntityOrder = 0;
         this.nextStep(1);
     }
 
@@ -666,9 +675,11 @@ class BattleFlow {
     }
 
     finish() {
-        console.log('Finish');
-        console.log(` - Winners ${this.winners.map((i, index) => `(${index + 1} - ${i.id})`)}`)
-        console.log(` - Durak ${this.entities[0].id}`)
+        // console.log('Finish');
+        // console.log(` - Winners ${this.winners.map((i, index) => `(${index + 1} - ${i.id})`)}`)
+        // console.log(` - Durak ${this.entities[0].id}`)
+
+        this.finishCallback.invoke({ winners: this.winners, loser: this.entities.length == 0 ? null : this.entities[0] })
     }
 
     clearCycle() {
@@ -867,13 +878,11 @@ class BattleFlow {
 
                 const canTransfareByRules = battleground.canTransfareByRule(defendEntities[currentDefenceEntityQueue].wrapper.cards); // remake
                 if (!canTransfareByRules || this.rules.gameMode != GameMode.DurakTransfare) {
-                    console.log('awefjwef');
                     canTransfare = false;
                 }
 
                 const result = await defendEntities[currentDefenceEntityQueue].defend(canTransfare);
                 if (result == DefendResult.DefenceNoCards) {
-                    console.log(`result == DefendResult.DefenceNoCards (${attackEntities.map(i => i.id)})  ${currentTossEntityQueue}`);
                     removeEntity(defendEntities[currentDefenceEntityQueue]);
                     return true;
                 } else if (result == DefendResult.Defence) {
@@ -881,7 +890,6 @@ class BattleFlow {
 
                     const tossResult = await nextToss(false, currentTossEntityQueue);
                     if (tossResult == TossResult.SuccessNoCards) {
-                        console.log(`No cards after toss`);
                         // removeEntity(attackEntities[currentTossEntityQueue], true);
                     }
 
@@ -980,9 +988,16 @@ class BattleFlow {
         const passButton = document.getElementsByClassName('pass-btn')[0];
         passButton.style.display = 'none';
 
+        for (let i = this.result.cards.length - 1; i >= 0; i--) {
+            const element = this.result.cards[i].domElement;
+            element.remove();
+        }
+
         this.entities.forEach(element => {
             element.updateStateText(State.None);
         });
+
+        battleground.clear();
     }
 }
 

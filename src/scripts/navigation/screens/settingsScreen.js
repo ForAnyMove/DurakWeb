@@ -52,6 +52,9 @@ class SettingsScreen extends ScreenLogic {
 
                 const text = gameSpeedButtonContainer.querySelector('.settings_game-speed');
                 text.innerText = gameSpeed;
+
+                // globalGameSpeed = gameSpeed;
+                globalGameSpeed = 8;
             });
 
         const gameDifficultButtonContainer = this.screenRoot.querySelectorAll('.settings_slider-container_dark')[1];

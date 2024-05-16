@@ -718,7 +718,10 @@ class CardsPairWrapper extends CardsWrapper {
             card.wrapper.removeCard(card);
         }
 
+        const lastScale = this.domElement.style.scale;
+        this.domElement.style.scale = 1;
         const wrapperRect = this.domElement.getBoundingClientRect();
+        this.domElement.style.scale = lastScale;
         let callbackInvoked = false;
 
         if (options?.affectInteraction) {
@@ -727,8 +730,13 @@ class CardsPairWrapper extends CardsWrapper {
 
         card.domElement.style.transformOrigin = ''
 
+        const scale = window.getComputedStyle(this.domElement).scale;
+        card.domElement.style.scale = scale;
+
         const startPosition = { x: parseFloat(card.domElement.style.left), y: parseFloat(card.domElement.style.top) };
         const targetPosition = { x: wrapperRect.left, y: wrapperRect.top };
+
+        console.log(scale);
 
         DOChangeValue(() => 0, (value) => {
             const t = value / 1;
@@ -739,6 +747,7 @@ class CardsPairWrapper extends CardsWrapper {
             card.domElement.style.left = `${x}px`;
             card.domElement.style.top = `${y}px`;
         }, 1, duration * 2 * options.durationMultiplier, Ease.SineInOut).onComplete(() => {
+            card.domElement.style.scale = ''
             this.addCard(card);
             // card.domElement.style.scale = ''
             // card.domElement.style.zIndex = '';

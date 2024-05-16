@@ -25,17 +25,41 @@ import { DailyBonusesScreen } from './src/scripts/navigation/screens/dailyBonuse
 import { LanguageSelectionScreen } from './src/scripts/navigation/screens/languageSelectionScreen.js';
 import { RewardReceiveScreen } from './src/scripts/navigation/screens/rewardReceiveScreen.js';
 import { PlaygroundScreen } from './src/scripts/navigation/screens/playgroundScreen.js';
+import { GameFinishScreen } from './src/scripts/navigation/screens/gameFinishScreen.js';
+import { ExitGameScreen } from './src/scripts/navigation/screens/exitGameScreen.js';
 
 input ??= new DirectionalInput();
 
 const mainScreenRoot = document.getElementsByClassName('main-tab')[0];
 const mainScreen = new Screen({
+  id: 'main',
   isMain: true,
   element: mainScreenRoot,
   onFocus: () => {
     dynamicFontChanger.update();
     if (!input.loadBackup())
       input.updateQueryCustom(mainScreen.screenLogic.selectableElements, mainScreen.screenLogic.defaultSelectedElement);
+
+    navigation.registerScreen(achievementsScreen);
+    navigation.registerScreen(collectionScreen);
+    navigation.registerScreen(profileScreen);
+    navigation.registerScreen(gameSelectionScreen);
+    navigation.registerScreen(profileAvatarScreen);
+    navigation.registerScreen(dailyBonusesScreen);
+    navigation.registerScreen(languagesScreen);
+    navigation.registerScreen(rewardReceiveOffsetScreen);
+    navigation.registerScreen(playgroundScreen);
+
+    navigation.registerScreen(bonusesScreen);
+    navigation.registerScreen(settingsScreen);
+    navigation.registerScreen(tutorialOffsetScreen);
+
+    backActionHandler.onSigleBack = () => {
+      navigation.pop();
+    };
+    backActionHandler.onDoubleBack = () => {
+      navigation.push(dailyBonusesScreen);
+    };
   },
   onUnfocus: () => { },
   screenLogic: new MainScreen({ screenRoot: mainScreenRoot })
@@ -168,6 +192,22 @@ const languagesScreen = new Screen({
   screenLogic: new LanguageSelectionScreen({ screenRoot: languagesRoot })
 });
 
+const gameFinishRoot = document.getElementById('end-popup-tab');
+const gameFinishScreen = new Screen({
+  id: 'gameFinishScreen',
+  isPopup: true,
+  element: gameFinishRoot,
+  onFocus: () => {
+    dynamicFontChanger.update();
+    if (!input.loadBackup())
+      input.updateQueryCustom(languagesScreen.screenLogic.selectableElements,
+        languagesScreen.screenLogic.defaultSelectedElement);
+  },
+  onUnfocus: () => {
+  },
+  screenLogic: new GameFinishScreen({ screenRoot: gameFinishRoot })
+});
+
 const dailyBonusesRoot = document.getElementById('daily-bonuses-tab');
 const dailyBonusesScreen = new Screen({
   element: dailyBonusesRoot,
@@ -203,6 +243,8 @@ const gameSelectionScreen = new Screen({
 
 const exitPopupRoot = document.getElementById('exit-popup-tab');
 const exitScreen = new Screen({
+  id: 'exitGameScreen',
+  isPopup: true,
   element: exitPopupRoot,
   closeButtons: [exitPopupRoot.querySelector('.exit-no')],
   onFocus: () => {
@@ -210,8 +252,7 @@ const exitScreen = new Screen({
     const elements = getInputElements(exitScreen.element, { tags: ['button'] });
     input.updateQueryCustom(elements, elements[1]);
   }, onUnfocus: () => {
-    navigation.push(mainScreen);
-  }
+  }, screenLogic: new ExitGameScreen({ screenRoot: exitPopupRoot })
 });
 
 const tutorialPopupRoot = document.getElementById('tutorial-popup-tab');
@@ -243,10 +284,25 @@ const playgroundScreen = new Screen({
   id: 'playground',
   element: playgroundScreenRoot,
   openButtons: gameSelectionScreen.element.querySelectorAll('.playground-tab-open-button'),
-  closeButtons: playgroundScreenRoot.querySelectorAll('.playground-tab-close-button'),
   onFocus: () => {
     dynamicFontChanger.update();
     input.updateQueryCustom(playgroundScreen.screenLogic.selectableElements, playgroundScreen.screenLogic.defaultSelectedElement);
+
+    navigation.clear();
+    navigation.openedScreens.push(playgroundScreen);
+    navigation.registerScreen(gameFinishScreen);
+    navigation.registerScreen(exitScreen);
+
+    backActionHandler.onSigleBack = () => {
+      if (navigation.openedScreens[navigation.openedScreens.length - 1] == playgroundScreen) {
+        return;
+      } else {
+        navigation.pop();
+      }
+    };
+    backActionHandler.onDoubleBack = () => {
+      // navigation.push(dailyBonusesScreen);
+    };
   },
   onUnfocus: () => {
     navigation.push(mainScreen);
@@ -263,21 +319,6 @@ if (exitButton != null) {
   exitButton.onclick = function () { SDK?.dispatchEvent(SDK.EVENTS.EXIT); }
 }
 
-navigation.registerScreen(achievementsScreen);
-navigation.registerScreen(collectionScreen);
-navigation.registerScreen(profileScreen);
-navigation.registerScreen(gameSelectionScreen);
-navigation.registerScreen(profileAvatarScreen);
-navigation.registerScreen(dailyBonusesScreen);
-navigation.registerScreen(languagesScreen);
-navigation.registerScreen(rewardReceiveOffsetScreen);
-navigation.registerScreen(playgroundScreen);
-
-navigation.registerScreen(bonusesScreen);
-navigation.registerScreen(settingsScreen);
-navigation.registerScreen(exitScreen);
-navigation.registerScreen(tutorialOffsetScreen);
-
 // if (load('tutorial-offer', false) == false) {
 //   tutorialPopupRoot.querySelector('.yes').onclick = function () {
 //     window.location.href = './src/playground/playground.html?levelID=level_def_s_1&isTutorial=true';
@@ -288,16 +329,13 @@ navigation.registerScreen(tutorialOffsetScreen);
 // }
 
 navigation.push(mainScreen);
+// navigation.push(gameFinishScreen, { state: 'win', reward: { type: Items.Currency, count: 1000 } });
 
 // setTimeout(() => {
 //   navigation.push(playgroundScreen)
 // }, 1000)
 
-backActionHandler = new BackActionHandler(input, () => {
-  navigation.pop();
-}, () => {
-  navigation.push(dailyBonusesScreen);
-});
+backActionHandler = new BackActionHandler(input);
 
 // export { setupLanguageSelector }
 dynamicFontChanger = new DynamicFontChanger();

@@ -123,6 +123,16 @@ class Battleground {
         await Delay(0.05 / globalGameSpeed);
     }
 
+    clear() {
+        for (let i = 0; i < this.zones.length; i++) {
+            const element = this.zones[i];
+            element.wrapper.domElement.remove();
+            this.zones[i] = null;
+        }
+
+        this.zones = [];
+    }
+
     getCards = function () {
         const cards = [];
         for (let i = 0; i < this.zones.length; i++) {

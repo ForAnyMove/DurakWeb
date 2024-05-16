@@ -1,3 +1,4 @@
+import { animator } from "./animator.js";
 import { CardsDeck } from "./cardModel.js";
 import { DOChangeValue, Delay, Ease, SequencedDelay } from "./dotween/dotween.js";
 import { Action, disableInteractions, enableInteractions } from "./globalEvents.js";
@@ -551,7 +552,7 @@ class BattleFlow {
     constructor(entities, rules) {
         this.entities = entities;
 
-        this.result = createLevel();
+        this.result = createLevel(rules.cardsCount);
         this.mainDeck = this.result.mainCardColumn;
         this.playEntityOrder = 0;
         this.begin();
@@ -641,10 +642,8 @@ class BattleFlow {
     begin = async function () {
         await this.distributeCards();
 
-        // const firstStepEntity = this.getFirstStepEntity();
-        // this.playEntityOrder = firstStepEntity != null ? this.entities.indexOf(firstStepEntity) : 1;
-
-        this.playEntityOrder = 3;
+        const firstStepEntity = this.getFirstStepEntity();
+        this.playEntityOrder = firstStepEntity != null ? this.entities.indexOf(firstStepEntity) : 1;
 
         this.nextStep(1);
     }
@@ -683,7 +682,6 @@ class BattleFlow {
     }
 
     nextStep = async (step) => {
-
         this.clearCycle();
 
         if (this.entities.length == 1) {
@@ -975,6 +973,17 @@ class BattleFlow {
         await this.distributeCards();
         this.nextStep(step + 1);
     }
+
+    clear() {
+        animator.clearAll();
+
+        const passButton = document.getElementsByClassName('pass-btn')[0];
+        passButton.style.display = 'none';
+
+        this.entities.forEach(element => {
+            element.updateStateText(State.None);
+        });
+    }
 }
 
-export { Entity, BattleFlow, Player, Bot, DefendResult, State, Rule, GameMode, EntityMode }
+export { Entity, BattleFlow, Player, Bot, DefendResult, State, Rule, GameMode, EntityMode, CardsCount }

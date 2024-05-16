@@ -1,5 +1,5 @@
 import { animator } from "./animator.js";
-import { State } from "./battleFlow.js";
+import { CardsCount, State } from "./battleFlow.js";
 import { boundsChecker } from "./cardBoundsChecker.js";
 import { cardSelector } from "./cardSelector.js";
 import { getSkinBackImage, getSkinImage } from "./data/card_skin_database.js";
@@ -8,8 +8,10 @@ import { Action, CanInteract, disableInteractions, enableInteractions } from "./
 import { getRandomFloat, lerp } from "./helpers.js";
 import { battleground } from "./playgroundBattle.js";
 import { selectedRules } from "./rules/gameRules.js";
-import { CardSide, RanksStringList } from "./statics/enums.js";
+import { CardSide, FullRanksStringList, RanksStringList } from "./statics/enums.js";
 import { Platform } from "./statics/staticValues.js";
+
+const root = document.querySelector('.playground-tab') ?? document.body;
 
 export default class Card {
     constructor(suit, rank, side, domElement, id) {
@@ -129,7 +131,7 @@ export default class Card {
     setupCardFaceImage = function (faceContent) {
         if (this.lastFaceContent == faceContent) return;
 
-        this.faceImage = getSkinImage(faceContent, this.suit, RanksStringList[this.rank - 1]);
+        this.faceImage = getSkinImage(faceContent, this.suit, gameRules.cardsCount == CardsCount[36] ? RanksStringList[this.rank - 1] : FullRanksStringList[this.rank - 1]);
 
         this.lastFaceContent = faceContent;
         if (this.side == CardSide.Face) {
@@ -412,7 +414,7 @@ export default class Card {
         this.domElement.style.top = `${pos.y}px`;
         this.domElement.style.zIndex = 2;
 
-        document.body.appendChild(this.domElement);
+        root.appendChild(this.domElement);
         return pos;
     }
 }

@@ -1,14 +1,15 @@
+import { CardsCount } from './battleFlow.js';
 import Card, { CardsDeck } from './cardModel.js';
 import { shuffle } from './helpers.js';
-import { CardSide, ContentType, RanksStringList, Suit } from './statics/enums.js';
+import { CardSide, ContentType, FullRanksStringList, RanksStringList, Suit } from './statics/enums.js';
 import { Content } from './statics/staticValues.js';
 
 let allCards = [];
 
-function generateCards(shuffleTime, fillCardsToMainDeck = true) {
+function generateCards(cardsCount, shuffleTime, fillCardsToMainDeck = true) {
     const skin = 1;
-
-    const ranks = RanksStringList;
+    console.log(cardsCount == CardsCount[36]);
+    const ranks = cardsCount == CardsCount[36] ? RanksStringList : FullRanksStringList;
     const suits = [Suit.Clubs, Suit.Diamonds, Suit.Spades, Suit.Hearts];
     const decks = 1;
 
@@ -51,6 +52,7 @@ function generateCards(shuffleTime, fillCardsToMainDeck = true) {
     }
 
     allCards = generatedCards;
+    console.log(allCards.length);
 
     shuffleTime?.(generatedCards);
 
@@ -65,8 +67,8 @@ function generateCards(shuffleTime, fillCardsToMainDeck = true) {
     return { mainCardColumn: mainCardColumn, cards: generatedCards };
 }
 
-function createLevel() {
-    const result = generateCards((cards) => {
+function createLevel(cardsCount) {
+    const result = generateCards(cardsCount, (cards) => {
         shuffle(cards);
         shuffle(cards);
 

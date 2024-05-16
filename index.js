@@ -24,6 +24,7 @@ import { MainScreen } from './src/scripts/navigation/screens/mainScreen.js';
 import { DailyBonusesScreen } from './src/scripts/navigation/screens/dailyBonusesScreen.js';
 import { LanguageSelectionScreen } from './src/scripts/navigation/screens/languageSelectionScreen.js';
 import { RewardReceiveScreen } from './src/scripts/navigation/screens/rewardReceiveScreen.js';
+import { PlaygroundScreen } from './src/scripts/navigation/screens/playgroundScreen.js';
 
 input ??= new DirectionalInput();
 
@@ -237,6 +238,26 @@ const rewardReceiveOffsetScreen = new Screen({
   }, screenLogic: new RewardReceiveScreen({ screenRoot: rewardReceivePopupRoot })
 });
 
+const playgroundScreenRoot = document.getElementById('playground-tab');
+const playgroundScreen = new Screen({
+  id: 'playground',
+  element: playgroundScreenRoot,
+  openButtons: gameSelectionScreen.element.querySelectorAll('.playground-tab-open-button'),
+  closeButtons: playgroundScreenRoot.querySelectorAll('.playground-tab-close-button'),
+  onFocus: () => {
+    dynamicFontChanger.update();
+    input.updateQueryCustom(playgroundScreen.screenLogic.selectableElements, playgroundScreen.screenLogic.defaultSelectedElement);
+  },
+  onUnfocus: () => {
+    navigation.push(mainScreen);
+  },
+  screenLogic: new PlaygroundScreen({ screenRoot: playgroundScreenRoot })
+}); {
+  playgroundScreen.scaleIn = 1;
+  playgroundScreen.scaleOut = 1.2;
+  playgroundScreen.element.style.scale = playgroundScreen.scaleOut;
+}
+
 const exitButton = exitScreen.element.getElementsByClassName('exid-yes')[0];
 if (exitButton != null) {
   exitButton.onclick = function () { SDK?.dispatchEvent(SDK.EVENTS.EXIT); }
@@ -250,6 +271,7 @@ navigation.registerScreen(profileAvatarScreen);
 navigation.registerScreen(dailyBonusesScreen);
 navigation.registerScreen(languagesScreen);
 navigation.registerScreen(rewardReceiveOffsetScreen);
+navigation.registerScreen(playgroundScreen);
 
 navigation.registerScreen(bonusesScreen);
 navigation.registerScreen(settingsScreen);
@@ -266,6 +288,10 @@ navigation.registerScreen(tutorialOffsetScreen);
 // }
 
 navigation.push(mainScreen);
+
+// setTimeout(() => {
+//   navigation.push(playgroundScreen)
+// }, 1000)
 
 backActionHandler = new BackActionHandler(input, () => {
   navigation.pop();

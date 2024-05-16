@@ -81,12 +81,12 @@ class GameSettingsScreen extends ScreenLogic {
             }
         });
 
-        const startButton = this.screenRoot.querySelector('.start-game_play-btn');
-        startButton.onclick = () => {
-            // start game scene
-        }
+        // const startButton = this.screenRoot.querySelector('.start-game_play-btn');
+        // startButton.onclick = () => {
+        //     // start game scene
+        // }
 
-        this.selectableElements.push({ element: startButton });
+        // this.selectableElements.push({ element: startButton });
 
         const rewardedCurrencyButton = this.screenRoot.querySelector('.start-game_watch-add-btn');
         rewardedCurrencyButton.onclick = () => {

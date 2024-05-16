@@ -215,8 +215,8 @@ const dailyBonusesScreen = new Screen({
   onFocus: () => {
     dynamicFontChanger.update();
     if (!input.loadBackup())
-      input.updateQueryCustom(settingsScreen.screenLogic.selectableElements,
-        settingsScreen.screenLogic.defaultSelectedElement);
+      input.updateQueryCustom(dailyBonusesScreen.screenLogic.selectableElements,
+        dailyBonusesScreen.screenLogic.defaultSelectedElement);
   },
   onUnfocus: () => {
     navigation.push(mainScreen);

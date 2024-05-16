@@ -138,23 +138,23 @@ class PlaygroundScreen extends ScreenLogic {
             case 'win': {
                 switch (rules.entityMode) {
                     case EntityMode.Self:
-                        statistics.winCount.byEntityMode[0]++;
-                        statistics.winInARow.byEntityMode[0]++;
+                        statistics.winCount.byEntityMode[0].count++;
+                        statistics.winInARow.byEntityMode[0].count++;
                         break;
                     case EntityMode.Pair:
-                        statistics.winCount.byEntityMode[1]++;
-                        statistics.winInARow.byEntityMode[1]++;
+                        statistics.winCount.byEntityMode[1].count++;
+                        statistics.winInARow.byEntityMode[1].count++;
                         break;
                 }
 
                 switch (rules.gameMode) {
                     case GameMode.DurakDefault:
-                        statistics.winCount.byGameMode[0]++;
-                        statistics.winInARow.byGameMode[0]++;
+                        statistics.winCount.byGameMode[0].count++;
+                        statistics.winInARow.byGameMode[0].count++;
                         break;
                     case GameMode.DurakTransfare:
-                        statistics.winCount.byGameMode[1]++;
-                        statistics.winInARow.byGameMode[1]++;
+                        statistics.winCount.byGameMode[1].count++;
+                        statistics.winInARow.byGameMode[1].count++;
                         break;
                 }
 
@@ -165,23 +165,23 @@ class PlaygroundScreen extends ScreenLogic {
             case 'lose': {
                 switch (rules.entityMode) {
                     case EntityMode.Self:
-                        statistics.loseCount.byEntityMode[0]++;
-                        statistics.winInARow.byEntityMode[0] = 0;
+                        statistics.loseCount.byEntityMode[0].count++;
+                        statistics.winInARow.byEntityMode[0].count = 0;
                         break;
                     case EntityMode.Pair:
-                        statistics.loseCount.byEntityMode[1]++;
-                        statistics.winInARow.byEntityMode[1] = 0;
+                        statistics.loseCount.byEntityMode[1].count++;
+                        statistics.winInARow.byEntityMode[1].count = 0;
                         break;
                 }
 
                 switch (rules.gameMode) {
                     case GameMode.DurakDefault:
-                        statistics.loseCount.byGameMode[0]++;
-                        statistics.winInARow.byGameMode[0] = 0;
+                        statistics.loseCount.byGameMode[0].count++;
+                        statistics.winInARow.byGameMode[0].count = 0;
                         break;
                     case GameMode.DurakTransfare:
-                        statistics.loseCount.byGameMode[1]++;
-                        statistics.winInARow.byGameMode[1] = 0;
+                        statistics.loseCount.byGameMode[1].count++;
+                        statistics.winInARow.byGameMode[1].count = 0;
                         break;
                 }
 
@@ -192,23 +192,23 @@ class PlaygroundScreen extends ScreenLogic {
             case 'draw': {
                 switch (rules.entityMode) {
                     case EntityMode.Self:
-                        statistics.draw.byEntityMode[0]++;
-                        statistics.winInARow.byEntityMode[0] = 0;
+                        statistics.draw.byEntityMode[0].count++;
+                        statistics.winInARow.byEntityMode[0].count = 0;
                         break;
                     case EntityMode.Pair:
-                        statistics.draw.byEntityMode[1]++;
-                        statistics.winInARow.byEntityMode[1] = 0;
+                        statistics.draw.byEntityMode[1].count++;
+                        statistics.winInARow.byEntityMode[1].count = 0;
                         break;
                 }
 
                 switch (rules.gameMode) {
                     case GameMode.DurakDefault:
-                        statistics.draw.byGameMode[0]++;
-                        statistics.winInARow.byGameMode[0] = 0;
+                        statistics.draw.byGameMode[0].count++;
+                        statistics.winInARow.byGameMode[0].count = 0;
                         break;
                     case GameMode.DurakTransfare:
-                        statistics.draw.byGameMode[1]++;
-                        statistics.winInARow.byGameMode[1] = 0;
+                        statistics.draw.byGameMode[1].count++;
+                        statistics.winInARow.byGameMode[1].count = 0;
                         break;
                 }
 
@@ -218,6 +218,7 @@ class PlaygroundScreen extends ScreenLogic {
             }
         }
 
+        console.log(statistics);
         updateStatistics();
     }
 

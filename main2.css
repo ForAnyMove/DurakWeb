@@ -498,9 +498,31 @@ button.selected {
 }
 
 .profile_bounty-preview-container {
-  background-image: url('./');
-  width: 20vw;
-  height: 20vw;
+  background-image: url('./Sprites/Dialog_View.png');
+  background-size: 100% 100%;
+  width: 6vw;
+  height: 6vw;
+  position: absolute;
+  top: -9.5vw;
+  padding: 2vw;
+  right: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.profile_bounty-preview {
+  width: 70%;
+}
+.profile-status-item:nth-child(1)>.profile_bounty-preview-container>.profile_bounty-preview,
+.profile-status-item:nth-child(4)>.profile_bounty-preview-container>.profile_bounty-preview,
+.profile-status-item:nth-child(7)>.profile_bounty-preview-container>.profile_bounty-preview {
+  width: 90%;
+}
+.profile-status-item:nth-child(2)>.profile_bounty-preview-container>.profile_bounty-preview {
+  width: 65%;
+}
+.profile-status-item:hover .profile_bounty-preview-container {
+  display: flex;
 }
 
 .profile-stats-list-item-progress-title::after,

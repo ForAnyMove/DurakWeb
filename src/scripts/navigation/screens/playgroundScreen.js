@@ -1,9 +1,10 @@
 import { ScreenLogic } from "../navigation.js";
-import { BattleFlow, Bot, EntityMode, Player, Rule } from "../../../scripts/battleFlow.js"
+import { BattleFlow, Bot, EntityMode, GameMode, Player, Rule } from "../../../scripts/battleFlow.js"
 import { CardsPlayableDeck } from "../../../scripts/cardModel.js"
 import { createTweener } from "../../../scripts/dotween/dotween.js"
 import { setRemoveClass } from "../../helpers.js";
 import { Items } from "../../statics/staticValues.js";
+import { statistics, updateStatistics } from "../../gameStatistics.js";
 
 class PlaygroundScreen extends ScreenLogic {
     onCreate() {
@@ -71,6 +72,7 @@ class PlaygroundScreen extends ScreenLogic {
                 // draw
                 console.log('draw');
                 navigation.pushID('gameFinishScreen', { state: 'draw' });
+                this.updateStatistics('draw', rules);
                 return;
             }
 
@@ -94,8 +96,12 @@ class PlaygroundScreen extends ScreenLogic {
                 }
 
                 const prize = Math.floor(multiplier * bet);
+                this.updateStatistics('win', rules);
+
                 navigation.pushID('gameFinishScreen', { state: 'win', reward: { type: Items.Currency, count: prize } });
             } else {
+                this.updateStatistics('lose', rules);
+
                 navigation.pushID('gameFinishScreen', { state: 'lose' });
             }
         });
@@ -106,6 +112,113 @@ class PlaygroundScreen extends ScreenLogic {
         }
 
         this.selectableElements.push({ element: closeButton })
+    }
+
+    updateStatistics(state, rules) {
+        statistics.gameCount.overall++;
+        switch (rules.entityMode) {
+            case EntityMode.Self:
+                statistics.gameCount.byEntityMode[0]++;
+                break;
+            case EntityMode.Pair:
+                statistics.gameCount.byEntityMode[1]++;
+                break;
+        }
+
+        switch (rules.gameMode) {
+            case GameMode.DurakDefault:
+                statistics.gameCount.byGameMode[0]++;
+                break;
+            case GameMode.DurakTransfare:
+                statistics.gameCount.byGameMode[1]++;
+                break;
+        }
+
+        switch (state) {
+            case 'win': {
+                switch (rules.entityMode) {
+                    case EntityMode.Self:
+                        statistics.winCount.byEntityMode[0]++;
+                        statistics.winInARow.byEntityMode[0]++;
+                        break;
+                    case EntityMode.Pair:
+                        statistics.winCount.byEntityMode[1]++;
+                        statistics.winInARow.byEntityMode[1]++;
+                        break;
+                }
+
+                switch (rules.gameMode) {
+                    case GameMode.DurakDefault:
+                        statistics.winCount.byGameMode[0]++;
+                        statistics.winInARow.byGameMode[0]++;
+                        break;
+                    case GameMode.DurakTransfare:
+                        statistics.winCount.byGameMode[1]++;
+                        statistics.winInARow.byGameMode[1]++;
+                        break;
+                }
+
+                statistics.winCount.overall++;
+                statistics.winInARow.overall++;
+                break;
+            }
+            case 'lose': {
+                switch (rules.entityMode) {
+                    case EntityMode.Self:
+                        statistics.loseCount.byEntityMode[0]++;
+                        statistics.winInARow.byEntityMode[0] = 0;
+                        break;
+                    case EntityMode.Pair:
+                        statistics.loseCount.byEntityMode[1]++;
+                        statistics.winInARow.byEntityMode[1] = 0;
+                        break;
+                }
+
+                switch (rules.gameMode) {
+                    case GameMode.DurakDefault:
+                        statistics.loseCount.byGameMode[0]++;
+                        statistics.winInARow.byGameMode[0] = 0;
+                        break;
+                    case GameMode.DurakTransfare:
+                        statistics.loseCount.byGameMode[1]++;
+                        statistics.winInARow.byGameMode[1] = 0;
+                        break;
+                }
+
+                statistics.loseCount.overall++;
+                statistics.winInARow.overall = 0;
+                break;
+            }
+            case 'draw': {
+                switch (rules.entityMode) {
+                    case EntityMode.Self:
+                        statistics.draw.byEntityMode[0]++;
+                        statistics.winInARow.byEntityMode[0] = 0;
+                        break;
+                    case EntityMode.Pair:
+                        statistics.draw.byEntityMode[1]++;
+                        statistics.winInARow.byEntityMode[1] = 0;
+                        break;
+                }
+
+                switch (rules.gameMode) {
+                    case GameMode.DurakDefault:
+                        statistics.draw.byGameMode[0]++;
+                        statistics.winInARow.byGameMode[0] = 0;
+                        break;
+                    case GameMode.DurakTransfare:
+                        statistics.draw.byGameMode[1]++;
+                        statistics.winInARow.byGameMode[1] = 0;
+                        break;
+                }
+
+                statistics.draw.overall++;
+                statistics.winInARow.overall = 0;
+                break;
+            }
+        }
+
+        updateStatistics();
     }
 
     onScreenUnloaded() {

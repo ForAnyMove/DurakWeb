@@ -50,7 +50,7 @@ let statistics = {
         ],
         overall: 0
     },
-    draft: {
+    draw: {
         byGameMode: [
             { rule: GameMode.DurakDefault, count: 0 },
             { rule: GameMode.DurakTransfare, count: 0 },

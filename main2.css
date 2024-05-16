@@ -3533,6 +3533,11 @@ button.selected {
   .cards-deck-container {
     scale: 0.8;
   }
+  .end-popup_container,
+  .exit-popup_container,
+  .tutorial-popup_container {
+    scale: 0.8;
+  }
 }
 @media (min-aspect-ratio: 15/5) {
   .playground-container {

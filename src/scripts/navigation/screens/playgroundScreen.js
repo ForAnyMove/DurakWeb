@@ -64,7 +64,7 @@ class PlaygroundScreen extends ScreenLogic {
         playerBot.setStateText(playerCardsDeck.parentElement.querySelector('.state'));
         playerBot.id = 'player'
 
-        this.battleFlow = new BattleFlow([playerBot].concat(this.bots), rules);
+        this.battleFlow = new BattleFlow([player].concat(this.bots), rules);
         this.battleFlow.finishCallback.addListener((result) => {
             console.log(result);
             const { winners, loser } = result;

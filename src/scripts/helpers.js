@@ -644,6 +644,29 @@ function setRemoveClass(element, className, condition) {
         element.classList.remove(className);
     }
 }
+function getGlobalScale(element) {
+    let scale = 1;
+
+    while (element) {
+        const style = window.getComputedStyle(element);
+        const styleScale = style.scale;
+        if (styleScale != 'none') {
+            scale *= parseFloat(styleScale);
+        }
+
+        element = element.parentElement;
+    }
+
+    return scale;
+}
+
+async function setScaleBypassingTransition(element, scale) {
+    const temp = window.getComputedStyle(element).transition;
+    element.style.transition = 'none';
+    element.style.scale = scale;
+    await new Promise((i) => setTimeout(() => i(), 0));
+    element.style.transition = temp;
+}
 
 export {
     createElement,
@@ -687,5 +710,7 @@ export {
     getRectPosition,
     getRectSize,
     isTwoElementsOverlaps,
-    setRemoveClass
+    setRemoveClass,
+    getGlobalScale,
+    setScaleBypassingTransition
 }

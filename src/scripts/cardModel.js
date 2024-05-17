@@ -5,7 +5,7 @@ import { cardSelector } from "./cardSelector.js";
 import { getSkinBackImage, getSkinImage } from "./data/card_skin_database.js";
 import { DOChangeValue, DOChangeXY, Delay, Ease } from "./dotween/dotween.js";
 import { Action, CanInteract, disableInteractions, enableInteractions } from "./globalEvents.js";
-import { getRandomFloat, lerp } from "./helpers.js";
+import { getGlobalScale, getRandomFloat, lerp, setScaleBypassingTransition } from "./helpers.js";
 import { battleground } from "./playgroundBattle.js";
 import { selectedRules } from "./rules/gameRules.js";
 import { CardSide, FullRanksStringList, RanksStringList } from "./statics/enums.js";
@@ -577,8 +577,13 @@ class CardsPlayableDeck extends CardsWrapper {
     }
 
     async removeCard(card, defaultWay = true) {
+        const scale = getGlobalScale(card.domElement);
+
         const result = await super.removeCard(card, defaultWay);
         this.updateCardAngles();
+
+        setScaleBypassingTransition(card.domElement, scale);
+
 
         return result;
     }
@@ -603,7 +608,8 @@ class CardsPlayableDeck extends CardsWrapper {
 
             const startPosition = { x: parseFloat(card.domElement.style.left), y: parseFloat(card.domElement.style.top) };
             card.domElement.style.transformOrigin = ''
-            const scale = window.getComputedStyle(emptyElement.parentElement).scale;
+
+            const scale = getGlobalScale(emptyElement.parentElement);
             card.domElement.style.scale = scale;
 
             DOChangeValue(() => 0, (value) => {
@@ -706,13 +712,17 @@ class CardsPairWrapper extends CardsWrapper {
     }
 
     async removeCard(card, defaultWay = true) {
+        const scale = getGlobalScale(card.domElement);
+
         const result = await super.removeCard(card, defaultWay);
         card.domElement.style.margin = '';
+
+        setScaleBypassingTransition(card.domElement, scale);
 
         return result;
     }
 
-    translateCard(card, options = { affectInteraction: false, openOnFinish: false, closeOnFinish: false, callCallbackOnce: false, durationMultiplier: 1 }, finishCallback = null) {
+    async translateCard(card, options = { affectInteraction: false, openOnFinish: false, closeOnFinish: false, callCallbackOnce: false, durationMultiplier: 1 }, finishCallback = null) {
         const duration = 0.075 / globalGameSpeed;
         if (card.wrapper != null) {
             card.wrapper.removeCard(card);
@@ -730,13 +740,12 @@ class CardsPairWrapper extends CardsWrapper {
 
         card.domElement.style.transformOrigin = ''
 
-        const scale = window.getComputedStyle(this.domElement).scale;
-        card.domElement.style.scale = scale;
+        const scale = getGlobalScale(this.domElement);
 
-        const startPosition = { x: parseFloat(card.domElement.style.left), y: parseFloat(card.domElement.style.top) };
         const targetPosition = { x: wrapperRect.left, y: wrapperRect.top };
+        const startPosition = { x: parseFloat(card.domElement.style.left), y: parseFloat(card.domElement.style.top) };
 
-        console.log(scale);
+        card.domElement.style.scale = scale;
 
         DOChangeValue(() => 0, (value) => {
             const t = value / 1;

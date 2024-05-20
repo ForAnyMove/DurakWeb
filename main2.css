@@ -2270,10 +2270,15 @@ button.selected {
   align-items: center;
   font-family: "Oswald", sans-serif;
 
-  background: #579E37;
+  background-size: 100% 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  /* background: #579E37;
   background: -moz-radial-gradient(center, #579E37 0%, #316224 100%);
   background: -webkit-radial-gradient(center, #579E37 0%, #316224 100%);
-  background: radial-gradient(ellipse at center, #579E37 0%, #316224 100%);
+  background: radial-gradient(ellipse at center, #579E37 0%, #316224 100%); */
 }
 
 .playground-container {
@@ -2405,6 +2410,11 @@ button.selected {
   -webkit-box-shadow: 0.1vw 0.1vw 0.25vw 0 rgba(0, 0, 0, 0.38);
   transition: box-shadow 0.2s ease, -webkit-box-shadow 0.2s ease, transform 0.6s ease, scale 0.2s ease, transform-origin 0.2s ease;
   border-radius: 0.5vw;
+}
+
+.card-element.selected {
+  filter: none;
+  outline: solid 0.25vw rgb(255, 63, 63);
 }
 
 .card-element.focused {
@@ -2546,6 +2556,77 @@ button.selected {
 
 /* #endregion playground */
 
+/* #region tutorial */
+.tutorial-flow {
+  background-color: #00000055;
+}
+
+.tutorial-wrapper {
+  background-color: #ff654455;
+  width: 100%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tutorial-flow-deck-container {}
+
+.tutorial-flow-info-text-container {
+  width: 60%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  text-align: center;
+}
+
+.tutorial-flow-info-text {
+  font-size: 3vw;
+  color: #fff
+}
+
+/* #region tutorial-01 */
+
+#tutorial-01 {}
+
+#tutorial-01>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+  font-size: 3vw;
+}
+
+#tutorial-01>.tutorial-flow-info-text-container {
+  width: 60%;
+  height: 80%;
+}
+
+/* #endregion */
+
+.text-appearance {
+  animation: appearance 0.5s cubic-bezier(0, 0, 0.2, 1) 1;
+}
+
+@keyframes appearance {
+  0% {
+    transform: translateY(50%);
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 0;
+  }
+
+  50% {
+    transform: translateY(-5%);
+  }
+
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+/* #endregion tutorial */
 @media only screen and (orientation: portrait) {
   /* #region playground */
 
@@ -3468,7 +3549,6 @@ button.selected {
 
   /* </reward-receiver> */
 }
-
 
 @media (min-aspect-ratio: 11/6) {
 

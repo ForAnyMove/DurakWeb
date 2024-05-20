@@ -97,6 +97,7 @@ function processExit() {
 
 async function getPlatform() {
     let finalPlatformResult = Platform.Desktop;
+    return Platform.TV; // todo: remove
 
     function returnDefault() {
         const isTv = /SMART-TV|Tizen|Web0S|NetCast|HbbTV|Opera TV|CE-HTML|TV|Television/i.test(navigator.userAgent);

@@ -140,11 +140,6 @@ export default class Card {
     }
 
     applyTVInput = () => {
-        const domElement = this.domElement;
-
-        domElement.onclick = () => {
-            cardSelector.select(this.wrapper, this.wrapper.getCardsFrom(this));
-        }
     }
 
     applyDesktopInput = function () {
@@ -195,34 +190,25 @@ export default class Card {
     applyMobileInput = function () {
         const domElement = this.domElement;
 
-        const handleDragStart = (e) => {
-            if (this.side == CardSide.Back) return;
+        const handleDragStart = async (e) => {
+            if (!CanInteract || this.side == CardSide.Back) return;
 
-            const columnTemp = this.wrapper;
-            if (columnTemp == null) return;
+            const card = this;
+
+            const canRemove = this.wrapper.canRemove;
+            if (!canRemove) return;
 
             const touch = e.targetTouches[0];
 
             const x = touch.clientX;
             const y = touch.clientY;
 
-            const cards = columnTemp.getCardsFrom(this);
+            const wrapperTemp = this.wrapper;
+            const removeResult = await wrapperTemp.removeCard(card, false);
 
-            const canRemove = columnTemp.canRemove && selectedRules.isCanRemove(cards);
-            if (!canRemove) return;
-
-            const offsets = [];
-
-            for (let i = 0; i < cards.length; i++) {
-                const card = cards[i];
-                const offsetX = x - card.domElement.getBoundingClientRect().left;
-                const offsetY = y - card.domElement.getBoundingClientRect().top;
-
-                offsets.push({ x: offsetX, y: offsetY });
-            }
-
-            columnTemp.removeCards(cards);
-
+            const offsetX = x - removeResult.x;
+            const offsetY = y - removeResult.y;
+            const offset = { x: offsetX, y: offsetY };
 
             const handleDragMove = (e) => {
                 const touch = e.targetTouches[0];
@@ -230,11 +216,8 @@ export default class Card {
                 const x = touch.clientX;
                 const y = touch.clientY;
 
-                for (let i = 0; i < cards.length; i++) {
-                    const card = cards[i];
-                    card.domElement.style.left = x - offsets[i].x + 'px';
-                    card.domElement.style.top = y - offsets[i].y + 'px';
-                }
+                card.domElement.style.left = x - offset.x + 'px';
+                card.domElement.style.top = y - offset.y + 'px';
 
                 e.preventDefault();
             }
@@ -242,7 +225,7 @@ export default class Card {
             handleDragMove(e);
 
             const handleDrop = (e) => {
-                this.tryDrop(columnTemp, cards);
+                this.tryDrop(wrapperTemp, card);
 
                 domElement.removeEventListener('touchmove', handleDragMove);
                 domElement.removeEventListener('touchend', handleDrop);
@@ -256,8 +239,8 @@ export default class Card {
     }
 
     subscribeDragAndDrop = () => {
-        this.applyDesktopInput();
-        return;
+        // this.applyTVInput();
+        // return;
 
         switch (platform) {
             case Platform.Desktop:
@@ -358,7 +341,7 @@ export default class Card {
 
             const rect = element.getBoundingClientRect();
             const style = window.getComputedStyle(element);
-            const scale = parseFloat(style.scale);
+            const scale = getGlobalScale(element);
 
             const width = parseFloat(style.width);
             const height = parseFloat(style.height);
@@ -588,16 +571,16 @@ class CardsPlayableDeck extends CardsWrapper {
         return result;
     }
 
-    translateCard(card, options = { affectInteraction: false, openOnFinish: false, closeOnFinish: false, callCallbackOnce: false, durationMultiplier: 1 }, finishCallback = null) {
+    async translateCard(card, options = { affectInteraction: false, openOnFinish: false, closeOnFinish: false, callCallbackOnce: false, durationMultiplier: 1 }, finishCallback = null) {
         const duration = 0.075 / globalGameSpeed;
 
         this.domElement.insertAdjacentHTML('afterbegin', this.emptyCard);
         let emptyElement = this.domElement.children[0];
 
-        const translation = () => {
+        const translation = async () => {
             let callbackInvoked = false;
 
-            if (card.wrapper != null) card.wrapper.removeCard(card);
+            if (card.wrapper != null) await card.wrapper.removeCard(card);
             // card.domElement.style.zIndex = -1;
 
             const style = window.getComputedStyle(card.domElement)
@@ -673,7 +656,7 @@ class CardsPlayableDeck extends CardsWrapper {
         }, 6, duration, Ease.SineInOut).onComplete(() => {
         });
 
-        translation();
+        await translation();
 
         this.updateCardAngles();
     }
@@ -741,11 +724,12 @@ class CardsPairWrapper extends CardsWrapper {
         card.domElement.style.transformOrigin = ''
 
         const scale = getGlobalScale(this.domElement);
+        console.log(scale);
 
         const targetPosition = { x: wrapperRect.left, y: wrapperRect.top };
         const startPosition = { x: parseFloat(card.domElement.style.left), y: parseFloat(card.domElement.style.top) };
 
-        card.domElement.style.scale = scale;
+        setTimeout(() => { card.domElement.style.scale = scale; }, 0)
 
         DOChangeValue(() => 0, (value) => {
             const t = value / 1;

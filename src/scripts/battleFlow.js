@@ -6,6 +6,7 @@ import { getRandomInt, lerp } from "./helpers.js";
 import { createLevel } from "./levelCreator.js";
 import { log } from "./logger.js";
 import { battleground, canBeatCard } from "./playgroundBattle.js";
+import { Platform } from "./statics/staticValues.js";
 
 const GameMode = {
     DurakDefault: 'DurakDefault',
@@ -116,7 +117,7 @@ class Entity {
 
     async toss(isCycled, onToss, checkCanToss) {
         if (!this.isHaveCardsToToss()) {
-            await Delay(0.2 / globalGameSpeed);
+            await Delay(0.1 / globalGameSpeed);
             return false;
         }
 
@@ -197,7 +198,7 @@ class Bot extends Entity {
         const zone = battleground.createZone();
         zone.wrapper.translateCard(selectedCard);
 
-        await Delay(0.25 / globalGameSpeed);
+        await Delay(0.16 / globalGameSpeed);
         this.updateStateText(State.None);
         return this.wrapper.cards.length == 0 ? MoveResult.SuccessNoCards : MoveResult.Success;
     }
@@ -250,11 +251,12 @@ class Bot extends Entity {
         }
         if (suitableCards.length == 0) {
             log(`    - FALSE ${suitableCards}`, 'battleFlow');
-            await Delay(0.2 / globalGameSpeed);
+            // await Delay(0.1 / globalGameSpeed);
             this.updateStateText(State.None);
 
             return TossResult.Fail;
         }
+
         const cycles = isCycled ? suitableCards.length : 1;
 
         for (let i = 0; i < cycles; i++) {
@@ -272,7 +274,7 @@ class Bot extends Entity {
         }
 
         this.updateStateText(State.None);
-        await Delay(0.2 / globalGameSpeed);
+        if (cycles == 0) await Delay(0.2 / globalGameSpeed);
         return this.wrapper.cards.length > 0 ? TossResult.Success : TossResult.SuccessNoCards;
     }
 
@@ -368,6 +370,20 @@ class Player extends Entity {
         await super.move();
         log('[Move] by "Player"', 'battleFlow');
 
+        if (platform == Platform.TV) {
+            this.updateSelectables(async (selected, elements) => {
+                input.deselect();
+                input.updateQueryCustom([], null);
+                const selectedCard = selected.card;
+
+                const zone = battleground.createZone();
+                zone.wrapper.translateCard(selectedCard);
+                player.cardPlacedByUserEvent.invoke();
+
+                elements.forEach(item => item.element.onclick = null);
+            });
+        }
+
         await new Promise((p) => {
             enableInteractions();
 
@@ -426,11 +442,83 @@ class Player extends Entity {
 
         let result = DefendResult.Fail;
 
+        if (platform == Platform.TV) {
+            this.updateSelectables(async (selected, elements) => {
+                const selectedCard = selected.card;
+
+                const zones = battleground.zones;
+
+                const moveZone = (zone) => {
+                    if (battleground.tryBeatZone(selectedCard, zone)) {
+                        zone.wrapper.translateCard(selectedCard);
+                        player.cardPlacedByUserEvent.invoke();
+
+                        zones.forEach((item) => { item.wrapper.domElement.onclick = null });
+                        elements.forEach((item) => { item.element.onclick = null });
+
+                        input.deselect();
+                        input.updateQueryCustom([], null);
+
+                        selected.onUp = selected.customData.upFunctionBackup;
+                        return true;
+                    }
+                    return false;
+                }
+
+                if (zones.length == 1 && this.state != State.DefendCanTransfare) {
+                    moveZone(zones[0]);
+                    return;
+                } else if (zones.length > 1 && this.state != State.DefendCanTransfare) {
+                    let variants = 0;
+                    for (let i = 0; i < zones.length; i++) {
+                        const zone = zones[i];
+                        if (battleground.tryBeatZone(selectedCard, zone)) variants++;
+                    }
+                    if (variants == 0) return;
+
+                    if (variants == 1) {
+                        for (let i = 0; i < zones.length; i++) {
+                            const zone = zones[i];
+                            if (moveZone(zone)) break;
+                        }
+
+                        return;
+                    }
+                }
+
+                const selectables = [];
+                selectables.push(selected);
+
+                for (let i = 0; i < zones.length; i++) {
+                    const zone = zones[i];
+                    if (!battleground.tryBeatZone(selectedCard, zone)) continue;
+                    selectables.push({
+                        element: zone.wrapper.domElement,
+                    });
+
+                    zone.wrapper.domElement.onclick = () => {
+                        moveZone(zone);
+                    }
+                }
+
+                // input.deselect();
+                input.updateQueryCustom(selectables, selectables[1]);
+
+                selected.onUp = null;
+
+                selected.element.onclick = () => {
+                    selected.element.onclick = selected.customData.submitFunctionBackup;
+                    selected.onUp = selected.customData.upFunctionBackup;
+
+                    input.updateQueryCustom(elements, selected);
+                }
+            }, { element: passButton });
+        }
+
         await new Promise((p) => {
 
             passButton.onclick = async () => {
                 result = DefendResult.Fail;
-                await Delay(0.1 / globalGameSpeed);
                 p();
             }
 
@@ -498,6 +586,22 @@ class Player extends Entity {
 
         let result = previousResult ?? TossResult.Fail;
 
+        if (platform == Platform.TV) {
+            this.updateSelectables(async (selected, elements) => {
+                const selectedCard = selected.card;
+                if (battleground.canToss(selectedCard)) {
+                    input.deselect();
+                    input.updateQueryCustom([], null);
+
+                    const zone = battleground.createZone();
+                    zone.wrapper.translateCard(selectedCard);
+                    player.cardPlacedByUserEvent.invoke();
+
+                    elements.forEach(item => item.element.onclick = null);
+                }
+            }, { element: passButton });
+        }
+
         await new Promise((p) => {
             enableInteractions();
 
@@ -548,6 +652,94 @@ class Player extends Entity {
         await super.grabPlaygroundCards();
 
         log('[Grab] by "Player"', 'battleFlow');
+    }
+
+    updateSelectables = (onSubmit, button) => {
+        let currentSelected = 0;
+
+        const elements = this.wrapper.cards.map(i => {
+            const selectable = {
+                card: i,
+                element: i.domElement,
+                customData: {
+                    upFunctionBackup: () => {
+                        input.selectFromPull(button);
+
+                        return { preventDefault: true };
+                    },
+                    submitFunctionBackup: () => {
+                        onSubmit(selectable, elements);
+                    }
+                },
+                onSelect: () => {
+                    selectable.card.focus();
+                },
+                onDeselect: () => {
+                    selectable.card.unfocus();
+                },
+                onRight: () => {
+                    currentSelected = Math.min(Math.max((currentSelected + 1), 0), elements.length - (button != null ? 2 : 1));
+                    const next = elements[currentSelected];
+
+                    input.selectFromPull(next);
+
+                    return { preventDefault: true };
+                },
+                onLeft: () => {
+                    currentSelected = Math.min(Math.max((currentSelected - 1), 0), elements.length - (button != null ? 2 : 1));
+                    const next = elements[currentSelected];
+
+                    input.selectFromPull(next);
+
+                    return { preventDefault: true };
+                },
+                onUp: () => {
+                    input.selectFromPull(button);
+
+                    return { preventDefault: true };
+                }
+            };
+            return selectable;
+        });
+        elements.forEach((item) => {
+            item.element.onclick = () =>
+                onSubmit(item, elements)
+        })
+        elements.reverse();
+
+        if (button != null) {
+            button.onDown = () => {
+                input.selectFromPull(elements[currentSelected]);
+                return { preventDefault: true };
+            }
+            button.onLeft = () => {
+                return { preventDefault: true };
+            }
+            button.onRight = () => {
+                return { preventDefault: true };
+            }
+            button.onUp = () => {
+                return { preventDefault: true };
+            }
+
+            elements.push(button);
+        }
+
+        console.log('Going to save');
+        console.log(`${elements.map(i => `\n${i.element.id}`)}`.replaceAll(',', ''));
+        console.log('\n');
+        input.saveSelectableState('tv-gameplay', elements, () => {
+            return elements[currentSelected]
+        })
+
+        setTimeout(() => {
+            if (input.selected == null)
+                input.updateQueryCustom(elements, elements[currentSelected]);
+        }, 0)
+    }
+
+    clearSelectables = () => {
+        input.updateQueryCustom([], null);
     }
 }
 
@@ -653,7 +845,7 @@ class BattleFlow {
 
         const firstStepEntity = this.getFirstStepEntity();
         this.playEntityOrder = firstStepEntity != null ? this.entities.indexOf(firstStepEntity) : 0;
-        this.playEntityOrder = 0;
+        this.playEntityOrder = 1;
         this.nextStep(1);
     }
 
@@ -819,6 +1011,7 @@ class BattleFlow {
                     return tossCount < maxTossCount
                 });
 
+
                 return result;
             }
 
@@ -929,6 +1122,7 @@ class BattleFlow {
                     return await defend(true);
                 } else {
                     if (currentDefenceEntityQueue >= defendEntities.length - 1) {
+
                         await nextToss(true, 0);
                         await defendEntities[0].grabPlaygroundCards();
                         await battleground.clearZones();

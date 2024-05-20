@@ -1,6 +1,6 @@
 import('./src/scripts/rewardReceiverView.js');
 
-import { Items, locales } from './src/scripts/statics/staticValues.js';
+import { Items, Platform, locales } from './src/scripts/statics/staticValues.js';
 import { inDayGameCount } from './src/scripts/ingameDayCounter.js';
 import {
   dailyRewards,
@@ -286,7 +286,8 @@ const playgroundScreen = new Screen({
   openButtons: gameSelectionScreen.element.querySelectorAll('.playground-tab-open-button'),
   onFocus: () => {
     dynamicFontChanger.update();
-    input.updateQueryCustom(playgroundScreen.screenLogic.selectableElements, playgroundScreen.screenLogic.defaultSelectedElement);
+    input.deselect();
+    input.updateQueryCustom([], null);
 
     navigation.clear();
     navigation.openedScreens.push(playgroundScreen);
@@ -295,7 +296,11 @@ const playgroundScreen = new Screen({
 
     backActionHandler.onSigleBack = () => {
       if (navigation.openedScreens[navigation.openedScreens.length - 1] == playgroundScreen) {
-        return;
+        if (platform == Platform.TV) {
+          navigation.push(exitScreen, { isGameExit: true });
+        } else {
+          return;
+        }
       } else {
         navigation.pop();
       }
@@ -303,6 +308,8 @@ const playgroundScreen = new Screen({
     backActionHandler.onDoubleBack = () => {
       // navigation.push(dailyBonusesScreen);
     };
+
+    input.loadFromSavedPull('tv-gameplay');
   },
   onUnfocus: () => {
     navigation.push(mainScreen);

@@ -1,10 +1,12 @@
 import { SequentlyChoosingButton } from "../../button.js";
 import { avatars } from "../../data/avatarDatabase.js";
-import { save } from "../../save_system/SaveSystem.js";
+import { load, save } from "../../save_system/SaveSystem.js";
 import { ScreenLogic } from "../navigation.js";
 
 class AvatarSelectionScreen extends ScreenLogic {
     onCreate() {
+        selectedAvatarIndex = load('user_avatar', 0);
+
         this.defaultSelectedElement = { element: this.screenRoot.querySelector('.choose-avatar-tab-close-button'), }
         this.selectableElements.push(this.defaultSelectedElement);
 

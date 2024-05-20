@@ -105,31 +105,31 @@ const backgroundDatabase = {
     skinList: [
         {
             id: Content.Background01,
-            previewPath: "Sprites/Backgrounds/Preview/Background_01.png",
+            previewPath: "Sprites/Backgrounds/Release/Background_01.png",
             itemPreviewPath: "Sprites/Backgrounds/Preview/Background_01.png",
             unlockDescription: ""
         },
         {
             id: Content.Background02,
-            previewPath: "Sprites/Backgrounds/Preview/Background_02.png",
+            previewPath: "Sprites/Backgrounds/Release/Background_02.png",
             itemPreviewPath: "Sprites/Backgrounds/Preview/Background_02.png",
             unlockDescription: ""
         },
         {
             id: Content.Background03,
-            previewPath: "Sprites/Backgrounds/Preview/Background_03.png",
+            previewPath: "Sprites/Backgrounds/Release/Background_03.png",
             itemPreviewPath: "Sprites/Backgrounds/Preview/Background_03.png",
             unlockDescription: "content_unlock_descr{5}"
         },
         {
             id: Content.Background04,
-            previewPath: "Sprites/Backgrounds/Preview/Background_04.png",
+            previewPath: "Sprites/Backgrounds/Release/Background_04.png",
             itemPreviewPath: "Sprites/Backgrounds/Preview/Background_04.png",
             unlockDescription: "content_unlock_descr{11}"
         },
         {
             id: Content.Background05,
-            previewPath: "Sprites/Backgrounds/Preview/Background_05.png",
+            previewPath: "Sprites/Backgrounds/Release/Background_05.png",
             itemPreviewPath: "Sprites/Backgrounds/Preview/Background_05.png",
             unlockDescription: "content_unlock_descr{17}"
         }

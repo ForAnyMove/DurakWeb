@@ -1,4 +1,5 @@
 import { Action } from "./globalEvents.js";
+import { setRemoveClass } from "./helpers.js";
 import { Platform } from "./statics/staticValues.js";
 
 export default class DirectionalInput {
@@ -35,6 +36,13 @@ export default class DirectionalInput {
     }
 
     saveSelectableState = function (key, selectables, selected) {
+        if (this.saveSelectablePull.some(item => item.key == key)) {
+            this.saveSelectablePull.selectables = selectables;
+            this.saveSelectablePull.selected = selected;
+            console.log('wporijgpwoeirjgpoweirjgpweoirjgwpoeirjgwpoeirjgp');
+            return;
+        }
+
         this.saveSelectablePull.push({
             key: key,
             selectables: selectables,
@@ -46,7 +54,7 @@ export default class DirectionalInput {
         for (let i = 0; i < this.saveSelectablePull.length; i++) {
             const element = this.saveSelectablePull[i];
             if (element.key == key) {
-                this.updateQueryCustom(element.selectables, element.selected);
+                this.updateQueryCustom(element.selectables, element.selected?.() ?? element.selected);
                 return;
             }
         }
@@ -119,19 +127,25 @@ export default class DirectionalInput {
     deselect = function () {
         if (this.selected == null || this.selected.element == null) return;
 
-        this.selected.element.classList.remove('selected');
+        setRemoveClass(this.selected.element, 'selected', false);
+        this.selected.onDeselect?.();
+        this.selected = null;
     }
 
     select = function (element) {
         if (element == null || element.element == null) return;
 
-        if (this.selected != null) {
-            this.selected.element.classList.remove('selected');
-        }
+        this.deselect();
 
         this.selected = element;
-        this.selected.element.classList.add('selected');
+        setRemoveClass(this.selected.element, 'selected', true);
         this.selected.onSelect?.();
+    }
+
+    selectFromPull = function (element) {
+        if (element == null || element.element == null || !this.selectableElements.some(item => item.element == element.element)) return;
+
+        this.select(element)
     }
 
     findClosestToDirection = (direction) => {
@@ -254,7 +268,7 @@ export default class DirectionalInput {
             case "Enter":
                 if (this.selected != null) {
                     this.selected.element?.click();
-                    this.selected.onSubmit?.();
+                    this.selected?.onSubmit?.();
                 }
                 break;
             case "Escape":

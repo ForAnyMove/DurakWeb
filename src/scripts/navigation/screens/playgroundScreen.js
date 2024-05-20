@@ -1,10 +1,16 @@
 import { ScreenLogic } from "../navigation.js";
-import { BattleFlow, Bot, EntityMode, GameMode, Player, Rule } from "../../../scripts/battleFlow.js"
+import { BattleFlow, Bot, EntityMode, GameMode, Player } from "../../../scripts/battleFlow.js"
 import { CardsPlayableDeck } from "../../../scripts/cardModel.js"
 import { createTweener } from "../../../scripts/dotween/dotween.js"
-import { setRemoveClass } from "../../helpers.js";
-import { Items } from "../../statics/staticValues.js";
+import { getRandomInt, setRemoveClass } from "../../helpers.js";
+import { Items, Platform, locales } from "../../statics/staticValues.js";
 import { statistics, updateStatistics } from "../../gameStatistics.js";
+import { ContentType } from "../../statics/enums.js";
+import { getBackgroundImage } from "../../data/card_skin_database.js";
+import { initialLocale } from "../../../localization/translator.js";
+import { nicknames } from "../../data/namesDatabase.js";
+import { avatars } from "../../data/avatarDatabase.js";
+import { TutorialFlow } from "../../tutorialFlow.js";
 
 class PlaygroundScreen extends ScreenLogic {
     onCreate() {
@@ -13,8 +19,21 @@ class PlaygroundScreen extends ScreenLogic {
 
     onScreenLoaded() {
         const rules = gameRules;
-
         createTweener();
+
+        const getRandomNickname = () => {
+            if (initialLocale == locales[0]) {
+                return nicknames.ru[getRandomInt(nicknames.ru.length - 1)];
+            }
+
+            return nicknames.en[getRandomInt(nicknames.en.length - 1)];
+        }
+
+        const getRandomAvatar = () => {
+            return avatars[getRandomInt(avatars.length - 1)];
+        }
+
+        const background = this.screenRoot;
 
         const botCount = rules.entityMode == EntityMode.Pair ? 3 : rules.numberOfPlayers - 1;
         const enemiesList = Array.from(this.screenRoot.querySelectorAll('.enemy-container'));
@@ -28,6 +47,14 @@ class PlaygroundScreen extends ScreenLogic {
         for (let i = 0; i < enemiesList.length; i++) {
             const container = enemiesList[i];
             const element = container.querySelector('.enemy-cards-container');
+            const name = container.querySelector('.name-container>.name');
+            if (name) {
+                name.innerText = getRandomNickname();
+            }
+            const icon = container.querySelector('.portrait>.portrait-icon');
+            if (icon) {
+                icon.src = getRandomAvatar();
+            }
             setRemoveClass(portraits[i], 'ally', false);
             setRemoveClass(portraits[i], 'enemy', true);
 
@@ -64,54 +91,76 @@ class PlaygroundScreen extends ScreenLogic {
         playerBot.setStateText(playerCardsDeck.parentElement.querySelector('.state'));
         playerBot.id = 'player'
 
-        this.battleFlow = new BattleFlow([player].concat(this.bots), rules);
-        this.battleFlow.finishCallback.addListener((result) => {
-            console.log(result);
-            const { winners, loser } = result;
-            if (loser == null) {
-                // draw
-                console.log('draw');
-                navigation.pushID('gameFinishScreen', { state: 'draw' });
-                this.updateStatistics('draw', rules);
-                return;
-            }
+        this.battleFlow = new TutorialFlow([player].concat(this.bots), rules);
 
-            let isWon = false;
-            if (rules.entityMode == EntityMode.Pair) {
-                if ((winners.some(i => i.id == player.id) && winners.some(i => i.id == this.bots[1].id))) {
-                    isWon = true;
-                }
-            } else if (winners.some(i => i.id == player.id)) {
-                isWon = true;
-            }
-            console.log(isWon);
+        // this.battleFlow = new BattleFlow([player].concat(this.bots), rules);
+        // this.battleFlow.finishCallback.addListener((result) => {
+        //     console.log(result);
+        //     const { winners, loser } = result;
+        //     if (loser == null) {
+        //         // draw
+        //         console.log('draw');
+        //         navigation.pushID('gameFinishScreen', { state: 'draw' });
+        //         this.updateStatistics('draw', rules);
+        //         return;
+        //     }
 
-            if (isWon) {
-                let multiplier = botCount + 1;
-                for (let i = 0; i < result.winners.length; i++) {
-                    const winner = result.winners[i];
+        //     let isWon = false;
+        //     if (rules.entityMode == EntityMode.Pair) {
+        //         if ((winners.some(i => i.id == player.id) && winners.some(i => i.id == this.bots[1].id))) {
+        //             isWon = true;
+        //         }
+        //     } else if (winners.some(i => i.id == player.id)) {
+        //         isWon = true;
+        //     }
+        //     console.log(isWon);
 
-                    if (winner.id == player.id) break;
-                    multiplier /= 2;
-                }
+        //     if (isWon) {
+        //         let multiplier = botCount + 1;
+        //         for (let i = 0; i < result.winners.length; i++) {
+        //             const winner = result.winners[i];
 
-                const prize = Math.floor(multiplier * bet);
-                this.updateStatistics('win', rules);
+        //             if (winner.id == player.id) break;
+        //             multiplier /= 2;
+        //         }
 
-                navigation.pushID('gameFinishScreen', { state: 'win', reward: { type: Items.Currency, count: prize } });
-            } else {
-                this.updateStatistics('lose', rules);
+        //         const prize = Math.floor(multiplier * bet);
+        //         this.updateStatistics('win', rules);
 
-                navigation.pushID('gameFinishScreen', { state: 'lose' });
-            }
-        });
+        //         navigation.pushID('gameFinishScreen', { state: 'win', reward: { type: Items.Currency, count: prize } });
+        //     } else {
+        //         this.updateStatistics('lose', rules);
+
+        //         navigation.pushID('gameFinishScreen', { state: 'lose' });
+        //     }
+        // });
 
         const closeButton = this.screenRoot.querySelector('.playground-tab-close-button');
         closeButton.onclick = () => {
             navigation.pushID('exitGameScreen', { isGameExit: true })
         }
 
+        setRemoveClass(closeButton, 'hidden-all', platform == Platform.TV)
+
         this.selectableElements.push({ element: closeButton })
+
+        const updateBackground = () => {
+            const skin = user.getContentOfType(ContentType.Background);
+            console.log(skin);
+            background.style.backgroundImage = getBackgroundImage(skin);
+        }
+        user.contentUsageChanged.addListener(() => updateBackground());
+
+        updateBackground();
+
+        const updatePlayerAvatar = () => {
+            const icon = this.screenRoot.querySelector('.player-portrait>.portrait-icon');
+            if (icon) {
+                icon.src = avatars[selectedAvatarIndex];
+            }
+        }
+
+        updatePlayerAvatar();
     }
 
     updateStatistics(state, rules) {

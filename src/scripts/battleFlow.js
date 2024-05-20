@@ -183,6 +183,8 @@ class Entity {
 }
 
 class Bot extends Entity {
+    // Функция move() вызывается 1 раз в начале хода заходящим.
+    // для бота это может быть либо рандомная карта, либо если уровень по сложнее, мб выбор, основанный на картах в руке или другая логика
     async move() {
         await super.move();
 
@@ -190,11 +192,16 @@ class Bot extends Entity {
 
         if (this.wrapper.cards.length == 0) return MoveResult.SuccessNoCards;
 
-        // write decisions
-
+        // selectedCard - карта для хода
+        // this.wrapper.cards - карты в руке
+        // карты на столе в данном случае не нужны, т.к. это первый ход. Если нужно будет брать карты у других игроков/ботов, для чит режима, напиши, я реализую
         const selectedCard = this.wrapper.cards[getRandomInt(this.wrapper.cards.length - 1)];
         selectedCard.setOpened();
 
+        // когда ходим, подкидываем или любая ситуация, когда действие добавляет карту на стол, создаем zone
+        // zone - это обертка для двух карт, первыя - которой походили, вторая - которой отбились
+        // zone.wrapper.translateCard(selectedCard); - функция переноса карты с зону.
+        // для принятия решение для бота это не нужно
         const zone = battleground.createZone();
         zone.wrapper.translateCard(selectedCard);
 
@@ -203,33 +210,8 @@ class Bot extends Entity {
         return this.wrapper.cards.length == 0 ? MoveResult.SuccessNoCards : MoveResult.Success;
     }
 
-    getSuitableCard(compareTo) {
-        if (this.wrapper.cards.length == 0) return null;
-
-        const suitableDefaultCards = [];
-        const suitableTrumpCards = [];
-        for (let i = 0; i < this.wrapper.cards.length; i++) {
-            const card = this.wrapper.cards[i];
-            if (canBeatCard(card, compareTo)) {
-                if (card.suit == trumpSuit) {
-                    suitableTrumpCards.push(card);
-                } else {
-                    suitableDefaultCards.push(card);
-                }
-            }
-        }
-
-        if (suitableDefaultCards.length > 0) return suitableDefaultCards[getRandomInt(suitableDefaultCards.length - 1)];
-        if (suitableTrumpCards.length > 0) return suitableTrumpCards[getRandomInt(suitableTrumpCards.length - 1)];
-        return null;
-    }
-
-    async grabPlaygroundCards() {
-        log(`[Grab] "Bot_${this.id}"`, 'battleFlow');
-
-        await super.grabPlaygroundCards();
-    }
-
+    // Функция toss() вызывается в ситуациях, нужно подкидывать карты отбивающему.
+    // для бота это может быть либо рандомная карта, либо если уровень по сложнее, мб выбор, основанный на картах в руке или другая логика
     async toss(isCycled, onToss, checkCanToss) {
         const canToss = await super.toss(isCycled, onToss, checkCanToss);
 
@@ -251,11 +233,23 @@ class Bot extends Entity {
         }
         if (suitableCards.length == 0) {
             log(`    - FALSE ${suitableCards}`, 'battleFlow');
-            // await Delay(0.1 / globalGameSpeed);
             this.updateStateText(State.None);
 
             return TossResult.Fail;
         }
+
+        // suitableCards - выбранные карты, который будут подкинуты, на данный момент берутся все подходящие
+
+        // [Выноска 1]
+        // Для получения карт на столе, для более сложных решений, можно сделать так: 
+        // Все играбельные зоны на столе:
+        const zones = battleground.zones;
+        // Карты в этой зоне, их можно быть 2. 
+        // zoneCards[0] - карта, которой походили или подкинули
+        // zoneCards[1] - карта, которой отбились. 
+        // Если zoneCards.length == 0, то карту еще не побили, и на основе карты zoneCards[0] можно принимать решения, это полезно для защиты
+        const zoneCards = zones[index].cards;
+        // Если нужно будет брать карты у других игроков/ботов, для чит режима, напиши, я реализую
 
         const cycles = isCycled ? suitableCards.length : 1;
 
@@ -278,15 +272,8 @@ class Bot extends Entity {
         return this.wrapper.cards.length > 0 ? TossResult.Success : TossResult.SuccessNoCards;
     }
 
-    getTransfareCard() {
-        for (let i = 0; i < this.wrapper.cards.length; i++) {
-            const card = this.wrapper.cards[i];
-            if (battleground.canTransfare(card)) return card;
-        }
-
-        return null;
-    }
-
+    // Функция defend() вызывается в ситуациях, когда нужно отбиваться.
+    // для бота это может быть либо рандомная подходящая карта, либо если уровень по сложнее, мб выбор, основанный на картах в руке или картах на столе, прочее.
     async defend(canTransfare) {
         await super.defend(canTransfare);
 
@@ -294,8 +281,14 @@ class Bot extends Entity {
 
         if (this.wrapper.cards.length == 0) return;
 
+        // canTransfare - показывает, что в данном случае можно сделать перевод 
         if (canTransfare) {
+
+            // transfareCard - выбранная карта, которой осуществится перевод
+            // this.getTransfareCard() - фукнция выбора подходящей карты. Пока реализован простой выбор первой подходящей карты.
+            // для принятия решения на основе карт стола смотри в поиске: [Выноска 1]
             const transfareCard = this.getTransfareCard();
+
             if (transfareCard != null) {
                 await Delay(0.1 / globalGameSpeed);
                 if (transfareCard.suit == trumpSuit && !transfareCard.isUsedAsTrumpTransfare) {
@@ -323,6 +316,10 @@ class Bot extends Entity {
                 if (zone.cards.length == 1) {
                     const card = zone.cards[0];
 
+                    // cardToAttack - выбранная карта, которой осуществится защита
+                    // this.getSuitableCard(card) - выбор подходящей карты. Пока выбор сделан рандомно из подходящих с приоритетом на некозырные карты.
+                    // логику выбора можно делать в методе getSuitableCard
+                    // для принятия решения на основе карт стола смотри в поиске: [Выноска 1]
                     const cardToAttack = this.getSuitableCard(card);
                     if (cardToAttack == null) {
                         continue;
@@ -355,6 +352,43 @@ class Bot extends Entity {
             log(`    - FALSE`, 'battleFlow');
         }
         return result;
+    }
+
+    getTransfareCard() {
+        for (let i = 0; i < this.wrapper.cards.length; i++) {
+            const card = this.wrapper.cards[i];
+            // battleground.canTransfare(card) - автоматически проверяет подходит ли карта для перевода.
+            if (battleground.canTransfare(card)) return card;
+        }
+
+        return null;
+    }
+
+    getSuitableCard(compareTo) {
+        if (this.wrapper.cards.length == 0) return null;
+
+        const suitableDefaultCards = [];
+        const suitableTrumpCards = [];
+        for (let i = 0; i < this.wrapper.cards.length; i++) {
+            const card = this.wrapper.cards[i];
+            if (canBeatCard(card, compareTo)) {
+                if (card.suit == trumpSuit) {
+                    suitableTrumpCards.push(card);
+                } else {
+                    suitableDefaultCards.push(card);
+                }
+            }
+        }
+
+        if (suitableDefaultCards.length > 0) return suitableDefaultCards[getRandomInt(suitableDefaultCards.length - 1)];
+        if (suitableTrumpCards.length > 0) return suitableTrumpCards[getRandomInt(suitableTrumpCards.length - 1)];
+        return null;
+    }
+
+    async grabPlaygroundCards() {
+        log(`[Grab] "Bot_${this.id}"`, 'battleFlow');
+
+        await super.grabPlaygroundCards();
     }
 }
 

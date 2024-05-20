@@ -91,49 +91,49 @@ class PlaygroundScreen extends ScreenLogic {
         playerBot.setStateText(playerCardsDeck.parentElement.querySelector('.state'));
         playerBot.id = 'player'
 
-        this.battleFlow = new TutorialFlow([player].concat(this.bots), rules);
+        // this.battleFlow = new TutorialFlow([player].concat(this.bots), rules);
 
-        // this.battleFlow = new BattleFlow([player].concat(this.bots), rules);
-        // this.battleFlow.finishCallback.addListener((result) => {
-        //     console.log(result);
-        //     const { winners, loser } = result;
-        //     if (loser == null) {
-        //         // draw
-        //         console.log('draw');
-        //         navigation.pushID('gameFinishScreen', { state: 'draw' });
-        //         this.updateStatistics('draw', rules);
-        //         return;
-        //     }
+        this.battleFlow = new BattleFlow([player].concat(this.bots), rules);
+        this.battleFlow.finishCallback.addListener((result) => {
+            console.log(result);
+            const { winners, loser } = result;
+            if (loser == null) {
+                // draw
+                console.log('draw');
+                navigation.pushID('gameFinishScreen', { state: 'draw' });
+                this.updateStatistics('draw', rules);
+                return;
+            }
 
-        //     let isWon = false;
-        //     if (rules.entityMode == EntityMode.Pair) {
-        //         if ((winners.some(i => i.id == player.id) && winners.some(i => i.id == this.bots[1].id))) {
-        //             isWon = true;
-        //         }
-        //     } else if (winners.some(i => i.id == player.id)) {
-        //         isWon = true;
-        //     }
-        //     console.log(isWon);
+            let isWon = false;
+            if (rules.entityMode == EntityMode.Pair) {
+                if ((winners.some(i => i.id == player.id) && winners.some(i => i.id == this.bots[1].id))) {
+                    isWon = true;
+                }
+            } else if (winners.some(i => i.id == player.id)) {
+                isWon = true;
+            }
+            console.log(isWon);
 
-        //     if (isWon) {
-        //         let multiplier = botCount + 1;
-        //         for (let i = 0; i < result.winners.length; i++) {
-        //             const winner = result.winners[i];
+            if (isWon) {
+                let multiplier = botCount + 1;
+                for (let i = 0; i < result.winners.length; i++) {
+                    const winner = result.winners[i];
 
-        //             if (winner.id == player.id) break;
-        //             multiplier /= 2;
-        //         }
+                    if (winner.id == player.id) break;
+                    multiplier /= 2;
+                }
 
-        //         const prize = Math.floor(multiplier * bet);
-        //         this.updateStatistics('win', rules);
+                const prize = Math.floor(multiplier * bet);
+                this.updateStatistics('win', rules);
 
-        //         navigation.pushID('gameFinishScreen', { state: 'win', reward: { type: Items.Currency, count: prize } });
-        //     } else {
-        //         this.updateStatistics('lose', rules);
+                navigation.pushID('gameFinishScreen', { state: 'win', reward: { type: Items.Currency, count: prize } });
+            } else {
+                this.updateStatistics('lose', rules);
 
-        //         navigation.pushID('gameFinishScreen', { state: 'lose' });
-        //     }
-        // });
+                navigation.pushID('gameFinishScreen', { state: 'lose' });
+            }
+        });
 
         const closeButton = this.screenRoot.querySelector('.playground-tab-close-button');
         closeButton.onclick = () => {

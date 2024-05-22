@@ -1033,7 +1033,7 @@
       <div class="playground">
         <div class="control-btns-panel"></div>
         <div class="playground-zone"></div>
-        <div class="control-btns-panel">
+        <div class="control-btns-panel player-button-container">
           <button class="pass-btn">
             <span class="pass-btn-title" lang="Buttons/Pass">PASS</span>
           </button>
@@ -1064,18 +1064,110 @@
       <span class="cards-counter"></span>
     </div>
   </section>
-  <!-- <section class="popup tutorial-flow" id="tutorial-flow">
-    <div class="tutorial-wrapper" id="tutorial-01">
-      <div class="tutorial-flow-deck-container"></div>
+  <section class="popup tutorial-flow hidden-all" id="tutorial-flow">
+    <div class="tutorial-wrapper hidden-all" id="tutorial-01">
       <div class="tutorial-flow-info-text-container">
         <span class="tutorial-flow-info-text text-appearance" lang="Tutorial/TossDurak"></span>
       </div>
     </div>
 
-    <button class="play-btn start-game-tab-open-button">
+    <div class="tutorial-wrapper hidden-all" id="tutorial-02">
+      <div class="tutorial-flow-deck-container"></div>
+      <div class="tutorial-flow-info-text-container">
+        <span class="tutorial-flow-info-text text-appearance" lang="Tutorial/Text1"></span>
+      </div>
+    </div>
+
+    <div class="tutorial-wrapper hidden-all" id="tutorial-03">
+      <div class="tutorial-flow-info-text-container">
+        <span class="tutorial-flow-info-text text-appearance" lang="Tutorial/Text2"></span>
+      </div>
+      <div class="tutorial-flow-deck-container"></div>
+    </div>
+
+    <div class="tutorial-wrapper hidden-all" id="tutorial-04">
+      <div class="tutorial-flow-info-text-container">
+        <span class="tutorial-flow-info-text text-appearance" lang="Tutorial/Text3"></span>
+      </div>
+    </div>
+
+    <div class="tutorial-wrapper hidden-all" id="tutorial-05">
+      <div class="tutorial-flow-info-text-container">
+        <span class="tutorial-flow-info-text text-appearance" lang="Tutorial/Text4"></span>
+      </div>
+      <div class="tutorial-flow-deck-container"></div>
+    </div>
+
+    <div class="tutorial-wrapper hidden-all" id="tutorial-06">
+      <div class="tutorial-flow-info-text-container">
+        <span class="tutorial-flow-info-text text-appearance" lang="Tutorial/Text5"></span>
+      </div>
+    </div>
+
+    <div class="tutorial-wrapper hidden-all" id="tutorial-07">
+      <div class="tutorial-flow-info-text-container">
+        <span class="tutorial-flow-info-text text-appearance" lang="Tutorial/Text6"></span>
+      </div>
+      <div class="tutorial-flow-deck-container">
+        <div class="tutorial-flow-card-container"></div>
+        <div class="tutorial-flow-card-container"></div>
+        <div class="tutorial-flow-card-container"></div>
+        <div class="tutorial-flow-card-container"></div>
+        <div class="tutorial-flow-card-container"></div>
+      </div>
+    </div>
+
+    <div class="tutorial-wrapper hidden-all" id="tutorial-08">
+      <div class="tutorial-flow-info-text-container">
+        <span class="tutorial-flow-info-text text-appearance" lang="Tutorial/Text7"></span>
+      </div>
+    </div>
+
+    <div class="tutorial-wrapper hidden-all" id="tutorial-09">
+      <div class="tutorial-flow-info-text-container">
+        <span class="tutorial-flow-info-text text-appearance" lang="Tutorial/Text8"></span>
+      </div>
+      <div class="tutorial-flow-deck-container">
+        <div class="tutorial-flow-card-container"></div>
+        <div class="tutorial-flow-card-container"></div>
+        <div class="tutorial-flow-card-container"></div>
+        <div class="tutorial-flow-card-container"></div>
+        <div class="tutorial-flow-card-container"></div>
+        <div class="tutorial-flow-card-container"></div>
+      </div>
+    </div>
+
+    <div class="tutorial-wrapper hidden-all" id="tutorial-09p2">
+      <div class="tutorial-flow-info-text-container">
+        <span class="tutorial-flow-info-text"></span>
+      </div>
+    </div>
+
+    <div class="tutorial-wrapper hidden-all" id="tutorial-10">
+      <div class="tutorial-flow-info-text-container">
+        <span class="tutorial-flow-info-text" lang="Tutorial/Text9"></span>
+      </div>
+    </div>
+
+    <div class="tutorial-wrapper hidden-all" id="tutorial-11">
+      <div class="tutorial-flow-info-text-container">
+        <span class="tutorial-flow-info-text text-appearance" lang="Tutorial/TransitDurak"></span>
+      </div>
+    </div>
+
+    <div class="tutorial-wrapper hidden-all" id="tutorial-12">
+      <div class="tutorial-flow-info-text-container">
+        <span class="tutorial-flow-info-text text-appearance" lang="Tutorial/Text10"></span>
+      </div>
+      <div class="tutorial-flow-deck-container">
+        <div class="card-transfare-hint"></div>
+      </div>
+    </div>
+
+    <button class="play-btn tutorial-continue-button">
       <span class="play-btn-title" lang="Tutorial/Continue"></span>
     </button>
-  </section> -->
+  </section>
 </body>
 <script>
   let savesList = [];
@@ -1095,8 +1187,10 @@
 
   let trumpSuit;
   let globalGameSpeed = 1;
+  let isTutorial;
 </script>
 <script type="module">
+  import { createEvent } from "./src/localization/translator.js";
   import { preload } from './src/loader/loader.js';
   import { initializeSDK, getPlatform } from './src/scripts/sdk/sdk.js';
   import { initialize } from './src/scripts/save_system/SaveSystem.js';
@@ -1106,7 +1200,7 @@
   import { AudioManager } from './src/scripts/audioManager.js'
   import { Rule } from "./src/scripts/battleFlow.js"
 
-  languageChangeEvent = new Action();
+  createEvent();
   gameRules = new Rule();
 
   audioManager = new AudioManager();

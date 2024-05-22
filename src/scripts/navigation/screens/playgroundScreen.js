@@ -1,5 +1,5 @@
 import { ScreenLogic } from "../navigation.js";
-import { BattleFlow, Bot, EntityMode, GameMode, Player } from "../../../scripts/battleFlow.js"
+import { BattleFlow, Bot, EntityMode, GameMode, Player, Rule } from "../../../scripts/battleFlow.js"
 import { CardsPlayableDeck } from "../../../scripts/cardModel.js"
 import { createTweener } from "../../../scripts/dotween/dotween.js"
 import { getRandomInt, setRemoveClass } from "../../helpers.js";
@@ -14,11 +14,20 @@ import { TutorialFlow } from "../../tutorialFlow.js";
 
 class PlaygroundScreen extends ScreenLogic {
     onCreate() {
+        const updateBackground = () => {
+            const background = this.screenRoot;
+            const skin = user.getContentOfType(ContentType.Background);
+            console.log(skin);
+            background.style.backgroundImage = getBackgroundImage(skin);
+        }
+        user.contentUsageChanged.addListener(() => updateBackground());
 
+        updateBackground();
     }
 
     onScreenLoaded() {
-        const rules = gameRules;
+        isTutorial = true;
+        const rules = isTutorial ? new Rule() : gameRules;
         createTweener();
 
         const getRandomNickname = () => {
@@ -33,7 +42,6 @@ class PlaygroundScreen extends ScreenLogic {
             return avatars[getRandomInt(avatars.length - 1)];
         }
 
-        const background = this.screenRoot;
 
         const botCount = rules.entityMode == EntityMode.Pair ? 3 : rules.numberOfPlayers - 1;
         const enemiesList = Array.from(this.screenRoot.querySelectorAll('.enemy-container'));
@@ -73,7 +81,6 @@ class PlaygroundScreen extends ScreenLogic {
             bot.id = `bot_${i + 1}`;
             this.bots.push(bot);
         }
-        console.log(rules);
 
         if (rules.entityMode == EntityMode.Pair) {
             console.log('true');
@@ -91,49 +98,51 @@ class PlaygroundScreen extends ScreenLogic {
         playerBot.setStateText(playerCardsDeck.parentElement.querySelector('.state'));
         playerBot.id = 'player'
 
-        this.battleFlow = new TutorialFlow([player].concat(this.bots), rules);
+        if (isTutorial) {
+            this.battleFlow = new TutorialFlow([player].concat(this.bots), rules);
+        } else {
+            this.battleFlow = new BattleFlow([player].concat(this.bots), rules);
+            this.battleFlow.finishCallback.addListener((result) => {
+                console.log(result);
+                const { winners, loser } = result;
+                if (loser == null) {
+                    // draw
+                    console.log('draw');
+                    navigation.pushID('gameFinishScreen', { state: 'draw' });
+                    this.updateStatistics('draw', rules);
+                    return;
+                }
 
-        // this.battleFlow = new BattleFlow([player].concat(this.bots), rules);
-        // this.battleFlow.finishCallback.addListener((result) => {
-        //     console.log(result);
-        //     const { winners, loser } = result;
-        //     if (loser == null) {
-        //         // draw
-        //         console.log('draw');
-        //         navigation.pushID('gameFinishScreen', { state: 'draw' });
-        //         this.updateStatistics('draw', rules);
-        //         return;
-        //     }
+                let isWon = false;
+                if (rules.entityMode == EntityMode.Pair) {
+                    if ((winners.some(i => i.id == player.id) && winners.some(i => i.id == this.bots[1].id))) {
+                        isWon = true;
+                    }
+                } else if (winners.some(i => i.id == player.id)) {
+                    isWon = true;
+                }
+                console.log(isWon);
 
-        //     let isWon = false;
-        //     if (rules.entityMode == EntityMode.Pair) {
-        //         if ((winners.some(i => i.id == player.id) && winners.some(i => i.id == this.bots[1].id))) {
-        //             isWon = true;
-        //         }
-        //     } else if (winners.some(i => i.id == player.id)) {
-        //         isWon = true;
-        //     }
-        //     console.log(isWon);
+                if (isWon) {
+                    let multiplier = botCount + 1;
+                    for (let i = 0; i < result.winners.length; i++) {
+                        const winner = result.winners[i];
 
-        //     if (isWon) {
-        //         let multiplier = botCount + 1;
-        //         for (let i = 0; i < result.winners.length; i++) {
-        //             const winner = result.winners[i];
+                        if (winner.id == player.id) break;
+                        multiplier /= 2;
+                    }
 
-        //             if (winner.id == player.id) break;
-        //             multiplier /= 2;
-        //         }
+                    const prize = Math.floor(multiplier * bet);
+                    this.updateStatistics('win', rules);
 
-        //         const prize = Math.floor(multiplier * bet);
-        //         this.updateStatistics('win', rules);
+                    navigation.pushID('gameFinishScreen', { state: 'win', reward: { type: Items.Currency, count: prize } });
+                } else {
+                    this.updateStatistics('lose', rules);
 
-        //         navigation.pushID('gameFinishScreen', { state: 'win', reward: { type: Items.Currency, count: prize } });
-        //     } else {
-        //         this.updateStatistics('lose', rules);
-
-        //         navigation.pushID('gameFinishScreen', { state: 'lose' });
-        //     }
-        // });
+                    navigation.pushID('gameFinishScreen', { state: 'lose' });
+                }
+            });
+        }
 
         const closeButton = this.screenRoot.querySelector('.playground-tab-close-button');
         closeButton.onclick = () => {
@@ -144,15 +153,6 @@ class PlaygroundScreen extends ScreenLogic {
 
         this.selectableElements.push({ element: closeButton })
 
-        const updateBackground = () => {
-            const skin = user.getContentOfType(ContentType.Background);
-            console.log(skin);
-            background.style.backgroundImage = getBackgroundImage(skin);
-        }
-        user.contentUsageChanged.addListener(() => updateBackground());
-
-        updateBackground();
-
         const updatePlayerAvatar = () => {
             const icon = this.screenRoot.querySelector('.player-portrait>.portrait-icon');
             if (icon) {
@@ -161,6 +161,8 @@ class PlaygroundScreen extends ScreenLogic {
         }
 
         updatePlayerAvatar();
+
+        isTutorial = false;
     }
 
     updateStatistics(state, rules) {

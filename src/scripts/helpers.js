@@ -660,12 +660,162 @@ function getGlobalScale(element) {
     return scale;
 }
 
+function getRotationDegrees(element) {
+    const style = window.getComputedStyle(element);
+    const transform = style.transform || style.webkitTransform || style.mozTransform;
+
+    if (transform === 'none') {
+        const rotate = style.rotate;
+        if (rotate == 'none') return 0;
+
+        return parseFloat(rotate);
+    }
+
+    const angle = parseFloat(transform.match(/-?\d+(\.\d+)?/)) * Math.PI * -2;
+
+    return angle;
+}
+
+function getGlobalRotation(element) {
+    let rotation = 0;
+
+    while (element) {
+        const angle = getRotationDegrees(element);
+        rotation += angle;
+
+        element = element.parentElement;
+    }
+
+    return rotation;
+}
+
 async function setScaleBypassingTransition(element, scale) {
     const temp = window.getComputedStyle(element).transition;
     element.style.transition = 'none';
     element.style.scale = scale;
     await new Promise((i) => setTimeout(() => i(), 0));
     element.style.transition = temp;
+}
+
+function elementSize(element) {
+    const style = window.getComputedStyle(element);
+    return { width: style.width, height: style.height };
+}
+
+function pullOutElement(element, zIndex, saveParent) {
+    const rotation = getGlobalRotation(element);
+    const data = {
+        transform: null,
+        position: null,
+        zIndex: null,
+        parent: saveParent ? element.parentElement : null
+    }
+
+    const pos = getRectData(element).position;
+    const rect = element.getBoundingClientRect();
+    const style = window.getComputedStyle(element);
+    const scale = getGlobalScale(element);
+
+    element.style.position = 'absolute';
+    document.body.appendChild(element);
+
+    element.style.scale = scale;
+
+    const left = (pos.x - parseFloat(style.marginLeft)) - rect.width * ((1 / scale - 1) / 2);
+    console.log(left);
+    const top = (pos.y - parseFloat(style.marginTop)) - rect.height * ((1 / scale - 1) / 2);
+
+    element.style.left = left + 'px';
+    element.style.top = top + 'px';
+    element.style.rotate = `${rotation}deg`;
+    data.transform = element.style.transform;
+
+    element.style.transform = 'none';
+
+    data.zIndex = element.style.zIndex;
+    element.style.zIndex = zIndex;
+
+    return data;
+}
+
+function pullOutClear(element, data) {
+    element.style.position = data.position;
+    element.style.zIndex = data.zIndex;
+    element.style.transform = data.transform;
+    element.style.rotate = '';
+    element.style.scale = '';
+    element.style.left = '';
+    element.style.top = '';
+    if (data.parent != null) {
+        data.parent.appendChild(element)
+    }
+}
+
+function getRectData(element) {
+    const data = {
+        position: { x: 0, y: 0 },
+        size: { x: 0, y: 0 },
+        center: { x: 0, y: 0 }
+    }
+
+    const rect = element.getBoundingClientRect();
+
+    data.position.x = rect.left;
+    data.position.y = rect.top;
+
+    data.size.x = rect.width;
+    data.size.y = rect.height;
+
+    data.center.x = data.position.x + data.size.x / 2;
+    data.center.y = data.position.y + data.size.y / 2;
+
+    return data;
+}
+
+function getTargetPosition(elementToTranslate, elementTranslateTo) {
+    const from = getRectData(elementToTranslate);
+    const to = getRectData(elementTranslateTo);
+
+    return { x: to.center.x - from.size.x / 2, y: to.center.y - from.size.y / 2 };
+}
+
+async function removeCard(element) {
+    const currentTransition = element.style.transition;
+    const currentTransform = element.style.transform;
+
+    element.style.transition = 'none';
+    element.style.transform = '';
+
+    const rect = element.getBoundingClientRect();
+    const style = window.getComputedStyle(element);
+    const scale = getGlobalScale(element);
+
+    const width = parseFloat(style.width);
+    const height = parseFloat(style.height);
+
+
+    const point = { x: rect.left, y: rect.top };
+    const origin = { x: point.x + width / 2, y: point.y + height };
+
+    if (!isNaN(scale) && scale > 0) {
+        let direction = { x: point.x - origin.x, y: point.y - origin.y };
+
+        point.x = origin.x + direction.x / scale;
+        point.y = origin.y + direction.y / scale;
+    }
+
+    element.style.transform = currentTransform;
+    await new Promise(p => setTimeout(p, 0));
+
+    element.style.transition = currentTransition;
+
+    element.style.position = 'absolute';
+    element.style.left = `${point.x}px`;
+    element.style.top = `${point.y}px`;
+
+    document.body.appendChild(element);
+
+    return point;
 }
 
 export {
@@ -712,5 +862,11 @@ export {
     isTwoElementsOverlaps,
     setRemoveClass,
     getGlobalScale,
-    setScaleBypassingTransition
+    setScaleBypassingTransition,
+    elementSize,
+    pullOutElement,
+    pullOutClear,
+    getRectData,
+    getTargetPosition,
+    removeCard
 }

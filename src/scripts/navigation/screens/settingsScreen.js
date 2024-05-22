@@ -80,6 +80,8 @@ class SettingsScreen extends ScreenLogic {
         const tutorialButton = this.screenRoot.querySelector('.tutorial-btn');
         tutorialButton.onclick = () => {
             // start tutorial
+            isTutorial = true;
+            navigation.pushID('playground');
         }
 
         this.selectableElements.push({ element: tutorialButton });

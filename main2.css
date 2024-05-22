@@ -2198,10 +2198,6 @@ button.selected {
   width: 3vw;
 }
 
-.hidden-all {
-  display: none;
-}
-
 /* #region reward-receiver */
 
 .reward-receiver {
@@ -2562,7 +2558,7 @@ button.selected {
 }
 
 .tutorial-wrapper {
-  background-color: #ff654455;
+  /* background-color: #ff654455; */
   width: 100%;
   height: 70%;
   display: flex;
@@ -2578,7 +2574,7 @@ button.selected {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #000;
+  /* background-color: #00000055; */
   text-align: center;
 }
 
@@ -2601,6 +2597,262 @@ button.selected {
 }
 
 /* #endregion */
+
+/* #region tutorial-02 */
+
+#tutorial-02 {}
+
+#tutorial-02>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+  font-size: 1.5vw;
+}
+
+#tutorial-02>.tutorial-flow-info-text-container {
+  width: 20%;
+  height: 80%;
+  padding: 0vw 4vw;
+}
+
+.tutorial-flow-deck-container {
+  /* background-color: #55ff5555; */
+  width: 20%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* #endregion */
+
+/* #region tutorial-03 */
+
+#tutorial-03 {
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#tutorial-03>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+  font-size: 1.5vw;
+}
+
+#tutorial-03>.tutorial-flow-info-text-container {
+  width: 40%;
+  height: 20%;
+}
+
+#tutorial-03>.tutorial-flow-deck-container {
+  /* background-color: #55ff5555; */
+  width: 40%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* #endregion */
+
+/* #region tutorial-04 */
+
+#tutorial-04 {}
+
+#tutorial-04>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+  font-size: 2vw;
+}
+
+#tutorial-04>.tutorial-flow-info-text-container {
+  width: 40%;
+  height: 80%;
+}
+
+/* #endregion */
+
+/* #region tutorial-05 */
+
+#tutorial-05 {
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#tutorial-05>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+  font-size: 1.5vw;
+}
+
+#tutorial-05>.tutorial-flow-info-text-container {
+  width: 40%;
+  height: 20%;
+  max-height: 20%;
+}
+
+#tutorial-05>.tutorial-flow-deck-container {
+  /* background-color: #55ff5555; */
+  width: 40%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tutorial-continue-button.tutorial-05 {
+  margin-bottom: 14%;
+}
+
+/* #endregion */
+
+/* #region tutorial-07 */
+
+#tutorial-07 {
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#tutorial-07>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+  font-size: 1.5vw;
+}
+
+#tutorial-07>.tutorial-flow-info-text-container {
+  width: 40%;
+  height: 20%;
+  max-height: 20%;
+}
+
+#tutorial-07>.tutorial-flow-deck-container {
+  /* background-color: #55ff5555; */
+  width: 40%;
+  height: 50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: end;
+}
+
+.tutorial-flow-card-container {
+  /* background-color: #55ff5555; */
+  width: 6vw;
+  height: 8vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tutorial-flow-card-container.suitable::after {
+  content: "";
+  background-image: url('./Sprites/Custom Icons/Check_Green.Png');
+  background-size: 100% 100%;
+  width: 5vw;
+  height: 5vw;
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: block;
+}
+
+.tutorial-flow-card-container.non-suitable::after {
+  content: "";
+  background-image: url('./Sprites/Custom Icons/Close_Red.Png');
+  background-size: 100% 100%;
+  width: 5vw;
+  height: 5vw;
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: block;
+}
+
+/* #endregion */
+
+/* #region tutorial-09 */
+
+#tutorial-09 {
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#tutorial-09>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+  font-size: 1.5vw;
+}
+
+#tutorial-09>.tutorial-flow-info-text-container {
+  width: 40%;
+  height: 20%;
+  max-height: 20%;
+}
+
+#tutorial-09>.tutorial-flow-deck-container {
+  /* background-color: #55ff5555; */
+  width: 40%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+/* #endregion */
+
+/* #region tutorial-12 */
+
+#tutorial-12 {
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#tutorial-12>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+  font-size: 1.5vw;
+}
+
+#tutorial-12>.tutorial-flow-info-text-container {
+  width: 40%;
+  height: 20%;
+  max-height: 20%;
+}
+
+#tutorial-12>.tutorial-flow-deck-container {
+  /* background-color: #55ff5555; */
+  width: 40%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tutorial-continue-button.tutorial-12 {
+  margin-bottom: 14%;
+}
+
+.card-transfare-hint {
+  width: 6vw;
+  height: 8vw;
+  background-color: #ffffff11;
+  border-radius: 1vw;
+  border: solid .4vw #ffffffaa;
+  filter: drop-shadow(0 0 0.2vw #72c7ff) drop-shadow(0 0 1vw #72c7ff);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+.card-transfare-hint::after {
+  content: "";
+  background-image: url('./Sprites/Custom Icons/Reverse.Png');
+  background-size: 100% 100%;
+  width: 4vw;
+  height: 4vw;
+  animation: delayed-spin 1s ease infinite;
+}
+
+@keyframes delayed-spin {
+  0% {
+    rotate: 0deg;
+  }
+
+  100% {
+    rotate: 180deg;
+  }
+}
+
+/* #endregion */
+
 
 .text-appearance {
   animation: appearance 0.5s cubic-bezier(0, 0, 0.2, 1) 1;
@@ -2627,6 +2879,12 @@ button.selected {
 }
 
 /* #endregion tutorial */
+
+
+.hidden-all {
+  display: none;
+}
+
 @media only screen and (orientation: portrait) {
   /* #region playground */
 

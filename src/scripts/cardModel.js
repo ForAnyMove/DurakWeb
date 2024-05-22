@@ -26,6 +26,7 @@ export default class Card {
         this.side = side;
         this.domElement = domElement;
 
+        this.locked = false;
         this.wrapper = null;
         this.subscribeDragAndDrop();
         this.subscribeFocus();
@@ -99,7 +100,7 @@ export default class Card {
     }
 
     focus = () => {
-        if (!CanInteract || this.wrapper == null || !this.wrapper.canRemove) return;
+        if (!CanInteract || this.wrapper == null || !this.wrapper.canRemove || this.locked) return;
 
         if (!this.domElement.classList.contains('focused')) {
             this.domElement.classList.add('focused');
@@ -131,7 +132,7 @@ export default class Card {
     setupCardFaceImage = function (faceContent) {
         if (this.lastFaceContent == faceContent) return;
 
-        this.faceImage = getSkinImage(faceContent, this.suit, gameRules.cardsCount == CardsCount[36] ? RanksStringList[this.rank - 1] : FullRanksStringList[this.rank - 1]);
+        this.faceImage = getSkinImage(faceContent, this.suit, FullRanksStringList[this.rank - 2]);
 
         this.lastFaceContent = faceContent;
         if (this.side == CardSide.Face) {
@@ -146,7 +147,7 @@ export default class Card {
 
         const domElement = this.domElement;
         domElement.onmousedown = async (e) => {
-            if (!CanInteract || this.side == CardSide.Back) return;
+            if (!CanInteract || this.side == CardSide.Back || this.locked) return;
 
             const card = this;
 
@@ -191,7 +192,7 @@ export default class Card {
         const domElement = this.domElement;
 
         const handleDragStart = async (e) => {
-            if (!CanInteract || this.side == CardSide.Back) return;
+            if (!CanInteract || this.side == CardSide.Back || this.locked) return;
 
             const card = this;
 

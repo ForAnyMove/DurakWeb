@@ -1,3 +1,4 @@
+import { Action } from "../scripts/globalEvents.js";
 import { load, save } from "../scripts/save_system/SaveSystem.js";
 import { getDefaultLanguage } from "../scripts/sdk/sdk.js";
 import { translations } from "./translations.js";
@@ -165,10 +166,13 @@ function updatePage(locale) {
     updateInContainer(document, locale);
 }
 
-languageChangeEvent.addListener((locale) => {
-    initialLocale = locale;
-    updatePage(locale);
-    save(saveKey, locale);
-});
+function createEvent() {
+    languageChangeEvent = new Action();
+    languageChangeEvent.addListener((locale) => {
+        initialLocale = locale;
+        updatePage(locale);
+        save(saveKey, locale);
+    });
+}
 
-export { initialLocale, updateInContainer }
+export { initialLocale, updateInContainer, createEvent }

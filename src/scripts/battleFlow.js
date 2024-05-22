@@ -1,3 +1,4 @@
+import { initialLocale } from "../localization/translator.js";
 import { animator } from "./animator.js";
 import { CardsDeck } from "./cardModel.js";
 import { DOChangeValue, Delay, Ease, SequencedDelay } from "./dotween/dotween.js";
@@ -25,6 +26,7 @@ const CardsCount = {
 
 class Rule {
     constructor() {
+        this.isTutorial = false;
         this.gameMode = GameMode.DurakTransfare;
         this.entityMode = EntityMode.Self;
         this.cardsCount = CardsCount[36];
@@ -193,6 +195,37 @@ class Bot extends Entity {
         // write decisions
 
         const selectedCard = this.wrapper.cards[getRandomInt(this.wrapper.cards.length - 1)];
+        selectedCard.setOpened();
+
+        const zone = battleground.createZone();
+        zone.wrapper.translateCard(selectedCard);
+
+        await Delay(0.16 / globalGameSpeed);
+        this.updateStateText(State.None);
+        return this.wrapper.cards.length == 0 ? MoveResult.SuccessNoCards : MoveResult.Success;
+    }
+
+    async moveSelected(cardRank, cardSuit) {
+        await super.move();
+
+        log(`[Move] by "Bot_${this.id}"`, 'battleFlow');
+
+        if (this.wrapper.cards.length == 0) return MoveResult.SuccessNoCards;
+
+        // write decisions
+        let selectedCard = null;
+
+        for (let i = 0; i < this.wrapper.cards.length; i++) {
+            const card = this.wrapper.cards[i];
+            if (card.rank == cardRank && card.suit == cardSuit) {
+                selectedCard = card;
+                break
+            }
+        }
+        if (selectedCard == null) {
+            return MoveResult.Fail;
+        }
+
         selectedCard.setOpened();
 
         const zone = battleground.createZone();
@@ -435,9 +468,11 @@ class Player extends Entity {
 
         const passButton = document.getElementsByClassName('pass-btn')[0];
         const passButtonText = document.getElementsByClassName('pass-btn-title')[0];
-        passButtonText.innerText = 'TAKE ALL';
-
         passButton.style.display = 'flex';
+
+        passButtonText.lang = 'Buttons/TakeAll';
+        languageChangeEvent?.invoke(initialLocale);
+
         enableInteractions();
 
         let result = DefendResult.Fail;
@@ -465,6 +500,7 @@ class Player extends Entity {
                     return false;
                 }
 
+                console.log(this.state);
                 if (zones.length == 1 && this.state != State.DefendCanTransfare) {
                     moveZone(zones[0]);
                     return;
@@ -581,8 +617,10 @@ class Player extends Entity {
 
         const passButton = document.getElementsByClassName('pass-btn')[0];
         const passButtonText = document.getElementsByClassName('pass-btn-title')[0];
-        passButtonText.innerText = 'PASS';
         passButton.style.display = 'flex';
+
+        passButtonText.lang = 'Buttons/Pass';
+        languageChangeEvent?.invoke(initialLocale);
 
         let result = previousResult ?? TossResult.Fail;
 
@@ -657,50 +695,58 @@ class Player extends Entity {
     updateSelectables = (onSubmit, button) => {
         let currentSelected = 0;
 
-        const elements = this.wrapper.cards.map(i => {
-            const selectable = {
-                card: i,
-                element: i.domElement,
-                customData: {
-                    upFunctionBackup: () => {
-                        input.selectFromPull(button);
+        const elements = [];
+        for (let i = 0; i < this.wrapper.cards.length; i++) {
+            const card = this.wrapper.cards[i];
+            if (!card.locked) {
+                const selectable = {
+                    card: card,
+                    element: card.domElement,
+                    customData: {
+                        upFunctionBackup: () => {
+                            input.selectFromPull(button);
+
+                            return { preventDefault: true };
+                        },
+                        submitFunctionBackup: () => {
+                            onSubmit(selectable, elements);
+                        }
+                    },
+                    onSelect: () => {
+                        selectable.card.focus();
+                    },
+                    onDeselect: () => {
+                        selectable.card.unfocus();
+                    },
+                    onRight: () => {
+                        currentSelected = Math.min(Math.max((currentSelected + 1), 0), elements.length - (button != null ? 2 : 1));
+                        const next = elements[currentSelected];
+
+                        input.selectFromPull(next);
 
                         return { preventDefault: true };
                     },
-                    submitFunctionBackup: () => {
-                        onSubmit(selectable, elements);
+                    onLeft: () => {
+                        currentSelected = Math.min(Math.max((currentSelected - 1), 0), elements.length - (button != null ? 2 : 1));
+                        const next = elements[currentSelected];
+
+                        input.selectFromPull(next);
+
+                        return { preventDefault: true };
+                    },
+                    onUp: () => {
+                        input.selectFromPull(button);
+
+                        return { preventDefault: true };
                     }
-                },
-                onSelect: () => {
-                    selectable.card.focus();
-                },
-                onDeselect: () => {
-                    selectable.card.unfocus();
-                },
-                onRight: () => {
-                    currentSelected = Math.min(Math.max((currentSelected + 1), 0), elements.length - (button != null ? 2 : 1));
-                    const next = elements[currentSelected];
+                };
 
-                    input.selectFromPull(next);
+                elements.push(selectable);
+            }
+        }
 
-                    return { preventDefault: true };
-                },
-                onLeft: () => {
-                    currentSelected = Math.min(Math.max((currentSelected - 1), 0), elements.length - (button != null ? 2 : 1));
-                    const next = elements[currentSelected];
+        console.log(elements);
 
-                    input.selectFromPull(next);
-
-                    return { preventDefault: true };
-                },
-                onUp: () => {
-                    input.selectFromPull(button);
-
-                    return { preventDefault: true };
-                }
-            };
-            return selectable;
-        });
         elements.forEach((item) => {
             item.element.onclick = () =>
                 onSubmit(item, elements)

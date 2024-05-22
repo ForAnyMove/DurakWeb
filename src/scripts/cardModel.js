@@ -5,7 +5,7 @@ import { cardSelector } from "./cardSelector.js";
 import { getSkinBackImage, getSkinImage } from "./data/card_skin_database.js";
 import { DOChangeValue, DOChangeXY, Delay, Ease } from "./dotween/dotween.js";
 import { Action, CanInteract, disableInteractions, enableInteractions } from "./globalEvents.js";
-import { getGlobalScale, getRandomFloat, lerp, setScaleBypassingTransition } from "./helpers.js";
+import { getGlobalScale, getRandomFloat, getRectData, lerp, setScaleBypassingTransition } from "./helpers.js";
 import { battleground } from "./playgroundBattle.js";
 import { selectedRules } from "./rules/gameRules.js";
 import { CardSide, FullRanksStringList, RanksStringList } from "./statics/enums.js";
@@ -272,6 +272,7 @@ export default class Card {
             case State.Attack:
                 const zone = battleground.createZone();
                 if (battleground.tryBeatZone(card, zone)) {
+                    player.cardPrePlacedByUserEvent.invoke();
                     zone.wrapper.translateCard(card);
                     player.cardPlacedByUserEvent.invoke();
                     return;
@@ -283,12 +284,14 @@ export default class Card {
                 if (overlapZone == null) {
                     if (playerState == State.DefendCanTransfare && battleground.canTransfare(card)) {
                         if (this.suit == trumpSuit && !this.isUsedAsTrumpTransfare) {
+                            player.cardPrePlacedByUserEvent.invoke();
                             player.cardPlacedByUserEvent.invoke({ transfare: true, card: this });
                             this.isUsedAsTrumpTransfare = true;
 
                             return;
                         }
 
+                        player.cardPrePlacedByUserEvent.invoke();
                         const zone = battleground.createZone();
                         zone.wrapper.translateCard(card);
                         player.cardPlacedByUserEvent.invoke({ transfare: true, card: null });
@@ -297,6 +300,7 @@ export default class Card {
                     previousColumn.translateCard(card);
                     return;
                 } else if (battleground.tryBeatZone(card, overlapZone)) {
+                    player.cardPrePlacedByUserEvent.invoke();
                     overlapZone.wrapper.translateCard(card, { durationMultiplier: 0.4 });
                     player.cardPlacedByUserEvent.invoke();
                     return;
@@ -307,6 +311,7 @@ export default class Card {
             }
             case State.Toss:
                 if (battleground.canToss(card)) {
+                    player.cardPrePlacedByUserEvent.invoke();
                     const zone = battleground.createZone();
                     zone.wrapper.translateCard(card);
                     player.cardPlacedByUserEvent.invoke();
@@ -725,9 +730,8 @@ class CardsPairWrapper extends CardsWrapper {
         card.domElement.style.transformOrigin = ''
 
         const scale = getGlobalScale(this.domElement);
-        console.log(scale);
 
-        const targetPosition = { x: wrapperRect.left, y: wrapperRect.top };
+        const targetPosition = getRectData(this.domElement, true).position;
         const startPosition = { x: parseFloat(card.domElement.style.left), y: parseFloat(card.domElement.style.top) };
 
         setTimeout(() => { card.domElement.style.scale = scale; }, 0)

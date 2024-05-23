@@ -72,7 +72,10 @@ class PlaygroundScreen extends ScreenLogic {
 
             container.style.display = 'flex';
 
-            const wrapper = new CardsPlayableDeck(element, { angle: 20, offset: -3 });
+            const elementStyle = window.getComputedStyle(element);
+            const margin = parseFloat(elementStyle.getPropertyValue('--cards-margin'));
+            const width = parseFloat(elementStyle.getPropertyValue('--cards-width'));
+            const wrapper = new CardsPlayableDeck(element, { angle: 20, offset: margin, cardWidth: width });
             wrapper.canRemove = false;
 
             const bot = new Bot(wrapper);
@@ -88,7 +91,11 @@ class PlaygroundScreen extends ScreenLogic {
         }
 
         const playerCardsDeck = this.screenRoot.querySelector('.player-cards-container');
-        const playerCardsWrapper = new CardsPlayableDeck(playerCardsDeck);
+
+        const elementStyle = window.getComputedStyle(playerCardsDeck);
+        const margin = parseFloat(elementStyle.getPropertyValue('--cards-margin'));
+        const width = parseFloat(elementStyle.getPropertyValue('--cards-width'));
+        const playerCardsWrapper = new CardsPlayableDeck(playerCardsDeck, { angle: 35, offset: margin, cardWidth: width });
         player = new Player(playerCardsWrapper);
         player.setStateText(playerCardsDeck.parentElement.querySelector('.state'));
         player.id = 'player';

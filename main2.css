@@ -2401,6 +2401,8 @@ button.selected {
   justify-content: center;
   rotate: 180deg;
   scale: 0.8;
+  --cards-margin: -3vw;
+  --cards-width: 6vw;
 }
 
 .card-element {
@@ -2509,6 +2511,8 @@ button.selected {
   justify-content: center;
   width: 25vw;
   transform: translateY(-30%);
+  --cards-margin: -2vw;
+  --cards-width: 6vw;
 }
 
 .player-cards-container>.card-element {
@@ -2933,6 +2937,8 @@ button.selected {
 
   .enemy-cards-container {
     scale: 0.7;
+    --cards-margin: -9vw;
+    --cards-width: 18vw;
   }
 
   .enemy-container {
@@ -3015,10 +3021,12 @@ button.selected {
 
   .player-cards-container {
     width: 100vw;
+    --cards-margin: -6.5vw;
+    --cards-width: 18vw;
   }
 
   .player-cards-container>.card-element {
-    margin: 0px -3.7vw;
+    margin: 0px -6.5vw;
   }
 
   .card-element {
@@ -3843,6 +3851,7 @@ button.selected {
   #tutorial-01>.tutorial-flow-info-text-container {
     width: 80%;
   }
+
   #tutorial-01>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
     font-size: 6vw;
     --target-font-size: 6vw;
@@ -3851,9 +3860,11 @@ button.selected {
   .tutorial-flow-deck-container {
     width: 40%;
   }
+
   #tutorial-02>.tutorial-flow-info-text-container {
     width: 45%;
   }
+
   #tutorial-02>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
     font-size: 3.8vw;
     --target-font-size: 3.8vw;
@@ -3864,6 +3875,7 @@ button.selected {
     height: 15%;
     transform: translateY(15vw);
   }
+
   #tutorial-03>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
     font-size: 4.5vw;
     --target-font-size: 4.5vw;
@@ -3874,6 +3886,7 @@ button.selected {
     height: 35%;
     transform: translateY(-20vw);
   }
+
   #tutorial-04>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
     font-size: 4vw;
     --target-font-size: 4vw;
@@ -3882,16 +3895,20 @@ button.selected {
   #tutorial-05 {
     height: 50%;
   }
+
   #tutorial-05>.tutorial-flow-info-text-container {
     width: 85%;
   }
+
   #tutorial-05>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
     font-size: 3.5vw;
     --target-font-size: 3.5vw;
   }
+
   .tutorial-continue-button.tutorial-05 {
     margin-bottom: 30%;
   }
+
   /* </tutorial-wrapper> */
 }
 

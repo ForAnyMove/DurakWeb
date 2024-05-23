@@ -536,12 +536,14 @@ class CardsDeck extends CardsWrapper {
 }
 
 class CardsPlayableDeck extends CardsWrapper {
-    constructor(domElement, options = { angle: 35, offset: -2 }) {
+    constructor(domElement, options = { angle: 35, offset: -2, animationOffset: -2, cardWidth: 6 }) {
         super(domElement);
 
         this.angle = options.angle;
         this.defaultOffset = options.offset;
+        this.animationOffset = options.animationOffset;
         this.offset = options.offset;
+        this.cardWidth = options.cardWidth;
         this.canRemove = true;
 
         this.emptyCard = `<div id="card_king_clubs_01" class="card-element empty"
@@ -670,11 +672,12 @@ class CardsPlayableDeck extends CardsWrapper {
         }
 
         const etm = this.getCurrentMargin(this.cards.length + 1);
+        console.log(`etm ${etm}`);
         DOChangeValue(() => 0, (newValue) => {
-            emptyElement.style.width = newValue + 'vw';
-            emptyElement.style.minWidth = newValue + 'vw';
-            emptyElement.style.margin = `0 ${lerp(0, etm, newValue / 6)}vw`;
-        }, 6, duration, Ease.SineInOut).onComplete(() => {
+            emptyElement.style.width = (newValue) + 'vw';
+            emptyElement.style.minWidth = (newValue) + 'vw';
+            emptyElement.style.margin = `0 ${lerp(0, etm, newValue / this.cardWidth)}vw`;
+        }, this.cardWidth, duration, Ease.SineInOut).onComplete(() => {
         });
 
         await translation();

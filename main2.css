@@ -2301,7 +2301,7 @@ button.selected {
 #card-release-wrapper {
   position: absolute;
   top: 50%;
-  right: -10%;
+  right: -30%;
   scale: 0.7;
 }
 
@@ -2975,10 +2975,6 @@ button.selected {
     width: 70vw;
     height: 60%;
     flex-wrap: wrap;
-  }
-
-  .playground-pare-element>.card-element:not(:first-child) {
-    margin-top: -30vw;
   }
 
   .pass-btn {

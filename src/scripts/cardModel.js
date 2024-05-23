@@ -736,8 +736,8 @@ class CardsPairWrapper extends CardsWrapper {
 
             card.lastTransition = window.getComputedStyle(card.domElement).transition;
             const transition = card.lastTransition + ', margin 0.2s ease'
-            card.domElement.style.position = 'absolute';
             card.domElement.style.transition = transition;
+            card.domElement.style.position = 'absolute';
             card.domElement.style.margin = `${getRandomFloat(2) - 1}vw ${getRandomFloat(2) - 1}vw`
             card.domElement.style.transform = `rotate(${(this.cards.length > 1 ? 15 : -15) + getRandomFloat(10) - 5}deg)`
         }

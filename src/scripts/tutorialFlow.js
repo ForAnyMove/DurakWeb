@@ -1,3 +1,4 @@
+import { animator } from "./animator.js";
 import { State } from "./battleFlow.js";
 import { CardsDeck } from "./cardModel.js";
 import { DONormalizedValue, Delay, DelayedCall, Ease, Sequence, SequencedDelay } from "./dotween/dotween.js";
@@ -675,21 +676,6 @@ class TutorialFlow {
             });
         }
 
-
-        // await this.distributeCards([this.entities[0], this.entities[1]]);
-        // await SequencedDelay(2, 0.02, (i) => {
-        //     const card = this.mainDeck.cards[this.mainDeck.cards.length - 1];
-        //     this.entities[0].wrapper.translateCard(card)
-        //     card.setOpened();
-        // });
-        // await Delay(0.2);
-        // await tutorial11p2();
-        // await tutorial12p2();
-        // await tutorial11();
-        // await tutorial12();
-        // // await tutorial11p2();
-        // return;
-
         setRemoveClass(screen, 'hidden-all', false);
         await tutorial01();
         await tutorial02();
@@ -772,6 +758,8 @@ class TutorialFlow {
     }
 
     clear() {
+        animator.clearAll();
+
         setRemoveClass(document.querySelector('.tutorial-flow'), 'hidden-all', true);
 
         const passContainer = document.querySelector('.player-button-container');

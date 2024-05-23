@@ -399,20 +399,6 @@ async function setDynamicContainerText(locale, struct, recursive = true) {
     struct.maxFontSizes = [];
     struct.fontSizes = [];
 
-
-    const containerStyle = window.getComputedStyle(struct.container);
-
-    const containerPadding = {
-        width: parseFloat(containerStyle.paddingLeft) + parseFloat(containerStyle.paddingRight),
-        height: parseFloat(containerStyle.paddingTop) + parseFloat(containerStyle.paddingBottom)
-    }
-    const containerSize = {
-        width: struct.container.offsetWidth - containerPadding.width,
-        height: struct.container.offsetHeight - containerPadding.height
-    }
-
-    containerSize.width *= customWidthMultiplier;
-
     const textSize = { width: struct.elements[0].offsetWidth, height: 0 }
     let overalFontSize = 0;
 
@@ -436,7 +422,7 @@ async function setDynamicContainerText(locale, struct, recursive = true) {
         const targetFontSize = parseFloat(maxFontSize) * (maxFontSize.toString().includes('vh') ? (window.innerHeight / 100) : (window.innerWidth / 100));
 
         if (maxFontSize == '') {
-            if (recursive) { setDynamicContainerText(locale, struct, false) }
+            // if (recursive) { setDynamicContainerText(locale, struct, false) }
             return;
         }
 
@@ -448,6 +434,19 @@ async function setDynamicContainerText(locale, struct, recursive = true) {
 
         overalFontSize += parseFloat(maxFontSize);
     }
+
+    const containerStyle = window.getComputedStyle(struct.container);
+
+    const containerPadding = {
+        width: parseFloat(containerStyle.paddingLeft) + parseFloat(containerStyle.paddingRight),
+        height: parseFloat(containerStyle.paddingTop) + parseFloat(containerStyle.paddingBottom)
+    }
+    const containerSize = {
+        width: struct.container.offsetWidth - containerPadding.width,
+        height: struct.container.offsetHeight - containerPadding.height
+    }
+
+    containerSize.width *= customWidthMultiplier;
 
     let needToRecursive = false;
 
@@ -751,7 +750,7 @@ function pullOutClear(element, data) {
     }
 }
 
-function getRectData(element) {
+function getRectData(element, scaleBased = false) {
     const data = {
         position: { x: 0, y: 0 },
         size: { x: 0, y: 0 },
@@ -765,6 +764,12 @@ function getRectData(element) {
 
     data.size.x = rect.width;
     data.size.y = rect.height;
+
+    if (scaleBased) {
+        const scale = getGlobalScale(element);
+        data.position.x -= data.size.x * ((1 / scale - 1) / 2);
+        data.position.y -= data.size.y * ((1 / scale - 1) / 2);
+    }
 
     data.center.x = data.position.x + data.size.x / 2;
     data.center.y = data.position.y + data.size.y / 2;

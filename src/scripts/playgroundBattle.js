@@ -53,6 +53,7 @@ class BattleZone {
 class Battleground {
     constructor() {
         this.zones = [];
+        this.playgroundZone = document.getElementsByClassName('playground-zone')[0]
     }
 
     createZone() {

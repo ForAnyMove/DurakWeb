@@ -11,7 +11,7 @@ class BoundsChecker {
     }
 
     isCardInPlayground = function (card) {
-        const playground = document.getElementsByClassName('playground')[0];
+        const playground = document.getElementsByClassName('playground-zone')[0];
         const isOperlap = isTwoElementsOverlaps(playground, card.domElement);
 
         return isOperlap;

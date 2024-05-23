@@ -1,14 +1,11 @@
-import { animator } from "./animator.js";
-import { CardsCount, State } from "./battleFlow.js";
+import { State } from "./battleFlow.js";
 import { boundsChecker } from "./cardBoundsChecker.js";
-import { cardSelector } from "./cardSelector.js";
 import { getSkinBackImage, getSkinImage } from "./data/card_skin_database.js";
-import { DOChangeValue, DOChangeXY, Delay, Ease } from "./dotween/dotween.js";
+import { DOChangeValue, Ease } from "./dotween/dotween.js";
 import { Action, CanInteract, disableInteractions, enableInteractions } from "./globalEvents.js";
 import { getGlobalScale, getRandomFloat, getRectData, lerp, setScaleBypassingTransition } from "./helpers.js";
 import { battleground } from "./playgroundBattle.js";
-import { selectedRules } from "./rules/gameRules.js";
-import { CardSide, FullRanksStringList, RanksStringList } from "./statics/enums.js";
+import { CardSide, FullRanksStringList } from "./statics/enums.js";
 import { Platform } from "./statics/staticValues.js";
 
 const root = document.querySelector('.playground-tab') ?? document.body;
@@ -380,7 +377,6 @@ export default class Card {
 
             function rotate(origin, point, angle) {
                 let radians = (Math.PI / 180) * angle;
-                console.log(radians);
 
                 let cos = Math.cos(radians);
                 let sin = Math.sin(radians);
@@ -396,6 +392,7 @@ export default class Card {
         }
 
         // const pos = await getRotatedElementPosition(this.domElement);
+        this.domElement.style.margin = '';
         let pos = defaultWay ? { x: this.domElement.getBoundingClientRect().left, y: this.domElement.getBoundingClientRect().top } : await getRotatedElementPosition(this.domElement);
         this.domElement.style.position = 'absolute';
 
@@ -463,6 +460,7 @@ class CardsWrapper {
         if (!this.hasCards()) return;
 
         if (this.cards.includes(card)) {
+            card.domElement.style.margin = '';
             this.cards.splice(this.cards.indexOf(card), 1);
             // this.cardRemovedEvent.invoke(card);
 
@@ -542,12 +540,26 @@ class CardsPlayableDeck extends CardsWrapper {
         super(domElement);
 
         this.angle = options.angle;
+        this.defaultOffset = options.offset;
         this.offset = options.offset;
         this.canRemove = true;
 
         this.emptyCard = `<div id="card_king_clubs_01" class="card-element empty"
-        style="background-size: 100% 100%; background-image: none; position: relative; left: 0px; top: 0px; width: 0vw; min-width: 0vw; margin:0 0; box-shadow:none">
+        style="background-size: 100% 100%; background-image: none; position: relative; left: 0px; top: 0px; width: 0vw; min-width: 0vw; margin:0 0; box-shadow:none; transition: 'none">
         </div>`;
+    }
+
+    getCurrentMargin = (cardsLength) => {
+        const overoverfilled = Math.max(0, cardsLength - 6);
+        const offset = this.defaultOffset / 35;
+        const max = this.defaultOffset - 0.6;
+        this.offset = this.defaultOffset + overoverfilled * offset;
+        if (this.offset > this.defaultOffset) {
+            this.offset = theis.defaultOffset;
+        } else if (this.offset < max) {
+            this.offset = max;
+        }
+        return this.offset;
     }
 
     addCard(card) {
@@ -637,6 +649,8 @@ class CardsPlayableDeck extends CardsWrapper {
                 card.domElement.style.scale = ''
                 card.domElement.style.zIndex = '';
 
+                this.updateMargins(this.cards.length);
+
                 if (options?.openOnFinish) {
                     card.open();
                 }
@@ -655,16 +669,42 @@ class CardsPlayableDeck extends CardsWrapper {
             });
         }
 
+        const etm = this.getCurrentMargin(this.cards.length + 1);
         DOChangeValue(() => 0, (newValue) => {
             emptyElement.style.width = newValue + 'vw';
             emptyElement.style.minWidth = newValue + 'vw';
-            emptyElement.style.margin = `0 ${lerp(0, this.offset, newValue / 6)}vw`;
+            emptyElement.style.margin = `0 ${lerp(0, etm, newValue / 6)}vw`;
         }, 6, duration, Ease.SineInOut).onComplete(() => {
         });
 
         await translation();
 
         this.updateCardAngles();
+    }
+
+    updateMargins = (cardsCount) => {
+        const duration = 0.075 / globalGameSpeed / 2;
+        this.updateTween?.destroy();
+
+        let margins = {};
+        const element = this.cards[0].domElement;
+        const elementStyleMargin = element.style.margin;
+        if (elementStyleMargin == 'none' || elementStyleMargin == '' || elementStyleMargin == undefined) {
+            const style = window.getComputedStyle(element);
+            const margin = parseFloat(style.margin.substring(4, style.margin.length));
+            margins = { current: margin / (window.innerWidth / 100), target: this.getCurrentMargin(cardsCount) }
+        } else {
+            margins = { current: parseFloat(elementStyleMargin.substring(4, elementStyleMargin.length)), target: this.getCurrentMargin(cardsCount) }
+        }
+
+        this.updateTween = DOChangeValue(() => 0, (newValue) => {
+            const newMargin = `0 ${lerp(margins.current, margins.target, newValue)}vw`;
+            for (let i = 0; i < this.cards.length; i++) {
+                const element = this.cards[i].domElement;
+
+                element.style.margin = newMargin;
+            }
+        }, 1, duration, Ease.SineInOut)
     }
 
     updateCardAngles() {
@@ -691,8 +731,8 @@ class CardsPairWrapper extends CardsWrapper {
         if (super.addCard(card)) {
             this.domElement.appendChild(card.domElement);
 
-            let transition = window.getComputedStyle(card.domElement).transition;
-            transition += ', margin 0.2s ease'
+            card.lastTransition = window.getComputedStyle(card.domElement).transition;
+            const transition = card.lastTransition + ', margin 0.2s ease'
             card.domElement.style.position = 'absolute';
             card.domElement.style.transition = transition;
             card.domElement.style.margin = `${getRandomFloat(2) - 1}vw ${getRandomFloat(2) - 1}vw`
@@ -705,6 +745,7 @@ class CardsPairWrapper extends CardsWrapper {
 
         const result = await super.removeCard(card, defaultWay);
         card.domElement.style.margin = '';
+        card.domElement.style.transition = card.lastTransition;
 
         setScaleBypassingTransition(card.domElement, scale);
 

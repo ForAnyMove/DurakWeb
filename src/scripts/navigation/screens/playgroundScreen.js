@@ -26,7 +26,6 @@ class PlaygroundScreen extends ScreenLogic {
     }
 
     onScreenLoaded() {
-        isTutorial = true;
         const rules = isTutorial ? new Rule() : gameRules;
         createTweener();
 

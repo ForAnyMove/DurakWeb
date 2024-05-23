@@ -970,6 +970,7 @@ button.selected {
   align-items: center;
   justify-content: space-between;
   width: 80%;
+  text-wrap: nowrap;
 }
 
 .settings_tune-title-container {
@@ -2433,6 +2434,16 @@ button.selected {
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
+  position: relative;
+}
+
+.playground-overlap-zone {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 30%;
+  pointer-events: none;
 }
 
 .playground-zone {
@@ -2828,6 +2839,7 @@ button.selected {
   margin-bottom: 14%;
 }
 
+.card-transfare-hint-static,
 .card-transfare-hint {
   width: 6vw;
   height: 8vw;
@@ -2839,10 +2851,14 @@ button.selected {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.card-transfare-hint {
   animation: bounce 1s ease-in-out infinite;
 }
 
-.card-transfare-hint::after {
+.card-transfare-hint::after,
+.card-transfare-hint-static::after {
   content: "";
   background-image: url('./Sprites/Custom Icons/Reverse.Png');
   background-size: 100% 100%;

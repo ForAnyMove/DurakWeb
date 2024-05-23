@@ -3,7 +3,7 @@ import { animator } from "./animator.js";
 import { CardsDeck } from "./cardModel.js";
 import { DOChangeValue, Delay, Ease, SequencedDelay } from "./dotween/dotween.js";
 import { Action, disableInteractions, enableInteractions } from "./globalEvents.js";
-import { getRandomInt, lerp } from "./helpers.js";
+import { createElement, getRandomInt, lerp } from "./helpers.js";
 import { createLevel } from "./levelCreator.js";
 import { log } from "./logger.js";
 import { battleground, canBeatCard } from "./playgroundBattle.js";
@@ -396,6 +396,7 @@ class Player extends Entity {
         super(wrapper);
 
         this.cardPlacedByUserEvent = new Action();
+        this.cardPrePlacedByUserEvent = new Action();
         this.isUser = true;
     }
 
@@ -405,6 +406,7 @@ class Player extends Entity {
 
         if (platform == Platform.TV) {
             this.updateSelectables(async (selected, elements) => {
+                player.cardPrePlacedByUserEvent.invoke();
                 input.deselect();
                 input.updateQueryCustom([], null);
                 const selectedCard = selected.card;
@@ -440,6 +442,7 @@ class Player extends Entity {
 
     async defend(canTransfare) {
         this.cardPlacedByUserEvent.removeAllListeners();
+        this.cardPrePlacedByUserEvent.removeAllListeners();
 
         await super.defend(canTransfare);
 
@@ -551,11 +554,19 @@ class Player extends Entity {
             }, { element: passButton });
         }
 
+        let transfareView;
         await new Promise((p) => {
+            if (canTransfare) {
+                transfareView = createElement('div', ['playground-pare-element', 'card-transfare-hint-static'], null, battleground.playgroundZone);
+            }
 
             passButton.onclick = async () => {
                 result = DefendResult.Fail;
                 p();
+            }
+
+            const userPreMoved = () => {
+                transfareView?.remove();
             }
 
             const userMoved = async (moveResult) => {
@@ -593,10 +604,12 @@ class Player extends Entity {
             }
 
             this.cardPlacedByUserEvent.addListener(userMoved);
+            this.cardPrePlacedByUserEvent.addListener(userPreMoved);
         })
 
         // this.updateStateText(State.None);
         this.cardPlacedByUserEvent.removeAllListeners();
+        this.cardPrePlacedByUserEvent.removeAllListeners();
         passButton.style.display = 'none';
         return result;
     }
@@ -811,13 +824,13 @@ class BattleFlow {
         // }, 1000);
     }
 
-    async distributeCards() {
+    async distributeCards(entities) {
         let distributionCount = 0
         const distributionDelay = 0.02
         const distributions = [];
 
-        for (let i = 0; i < this.entities.length; i++) {
-            const entity = this.entities[i];
+        for (let i = 0; i < entities.length; i++) {
+            const entity = entities[i];
             const cardsCount = entity.wrapper.cards.length;
 
             const requiredCardsCount = Math.max((6 - cardsCount), 0);
@@ -834,7 +847,9 @@ class BattleFlow {
         let currentDistribution = 0;
         distributionCount = Math.min(distributionCount, this.mainDeck.cards.length);
 
+        log('Try distribute')
         await SequencedDelay(distributionCount, distributionDelay / globalGameSpeed, (i) => {
+            log('upd distribute')
             let distribution = distributions[currentDistribution];
             if (distribution.placed == distribution.count) {
                 currentDistribution++;
@@ -843,7 +858,7 @@ class BattleFlow {
                 distribution = distributions[currentDistribution];
             }
 
-            const entity = this.entities[distribution.index];
+            const entity = entities[distribution.index];
             const card = this.mainDeck.cards[this.mainDeck.cards.length - 1];
 
             if (this.mainDeck.cards.length == 1) {
@@ -887,7 +902,7 @@ class BattleFlow {
     }
 
     begin = async function () {
-        await this.distributeCards();
+        await this.distributeCards(this.entities);
 
         const firstStepEntity = this.getFirstStepEntity();
         this.playEntityOrder = firstStepEntity != null ? this.entities.indexOf(firstStepEntity) : 0;
@@ -1175,6 +1190,7 @@ class BattleFlow {
                         return false;
                     } else {
                         currentDefenceEntityQueue++;
+                        currentDefenceEntityQueue = currentDefenceEntityQueue % defendEntities.length;
                         return await defend(false);
                     }
                 }
@@ -1218,7 +1234,18 @@ class BattleFlow {
             }
         }
 
-        await this.distributeCards();
+        const getEntitiesFrom = (entity) => {
+            const index = this.entities.indexOf(entity);
+            const array = [];
+            for (let i = 0; i < this.entities.length; i++) {
+                const entity = this.entities[(index + i) % this.entities.length];
+                array.push(entity);
+            }
+
+            return array;
+        }
+
+        await this.distributeCards(getEntitiesFrom(defendEntities[0]));
         this.nextStep(step + 1);
     }
 

@@ -336,7 +336,6 @@ if (exitButton != null) {
 // }
 
 navigation.push(mainScreen);
-navigation.push(playgroundScreen);
 // navigation.push(gameFinishScreen, { state: 'win', reward: { type: Items.Currency, count: 1000 } });
 
 // setTimeout(() => {

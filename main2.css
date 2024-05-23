@@ -2230,6 +2230,7 @@ button.selected {
 .reward-receiver-container {
   font-weight: 900;
   font-size: 5vw;
+  --target-font-size: 5vw;
   color: #ffffff;
   z-index: 1;
   -webkit-text-stroke-width: 2px;
@@ -2580,6 +2581,7 @@ button.selected {
 
 .tutorial-flow-info-text {
   font-size: 3vw;
+  --target-font-size: 3vw;
   color: #fff
 }
 
@@ -2589,6 +2591,7 @@ button.selected {
 
 #tutorial-01>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
   font-size: 3vw;
+  --target-font-size: 3vw;
 }
 
 #tutorial-01>.tutorial-flow-info-text-container {
@@ -2604,6 +2607,7 @@ button.selected {
 
 #tutorial-02>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
   font-size: 1.5vw;
+  --target-font-size: 1.5vw;
 }
 
 #tutorial-02>.tutorial-flow-info-text-container {
@@ -2632,6 +2636,7 @@ button.selected {
 
 #tutorial-03>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
   font-size: 1.5vw;
+  --target-font-size: 1.5vw;
 }
 
 #tutorial-03>.tutorial-flow-info-text-container {
@@ -2656,6 +2661,7 @@ button.selected {
 
 #tutorial-04>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
   font-size: 2vw;
+  --target-font-size: 2vw;
 }
 
 #tutorial-04>.tutorial-flow-info-text-container {
@@ -2674,6 +2680,7 @@ button.selected {
 
 #tutorial-05>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
   font-size: 1.5vw;
+  --target-font-size: 1.5vw;
 }
 
 #tutorial-05>.tutorial-flow-info-text-container {
@@ -2706,6 +2713,7 @@ button.selected {
 
 #tutorial-07>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
   font-size: 1.5vw;
+  --target-font-size: 1.5vw;
 }
 
 #tutorial-07>.tutorial-flow-info-text-container {
@@ -2769,6 +2777,7 @@ button.selected {
 
 #tutorial-09>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
   font-size: 1.5vw;
+  --target-font-size: 1.5vw;
 }
 
 #tutorial-09>.tutorial-flow-info-text-container {
@@ -2797,6 +2806,7 @@ button.selected {
 
 #tutorial-12>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
   font-size: 1.5vw;
+  --target-font-size: 1.5vw;
 }
 
 #tutorial-12>.tutorial-flow-info-text-container {
@@ -2988,7 +2998,7 @@ button.selected {
   }
 
   .player-cards-container {
-    width: 80vw;
+    width: 100vw;
   }
 
   .player-cards-container>.card-element {
@@ -3041,7 +3051,7 @@ button.selected {
   .play-btn {
     width: 35vw;
     height: 10vw;
-    padding: 0;
+    padding: 0 3vw;
   }
 
   .play-btn-title {
@@ -3806,6 +3816,67 @@ button.selected {
   }
 
   /* </reward-receiver> */
+
+  .playground-pare-element {
+    width: 18vw;
+    height: 24vw;
+  }
+
+  /* <tutorial-wrapper> */
+
+  #tutorial-01>.tutorial-flow-info-text-container {
+    width: 80%;
+  }
+  #tutorial-01>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+    font-size: 6vw;
+    --target-font-size: 6vw;
+  }
+
+  .tutorial-flow-deck-container {
+    width: 40%;
+  }
+  #tutorial-02>.tutorial-flow-info-text-container {
+    width: 45%;
+  }
+  #tutorial-02>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+    font-size: 3.8vw;
+    --target-font-size: 3.8vw;
+  }
+
+  #tutorial-03>.tutorial-flow-info-text-container {
+    width: 90%;
+    height: 15%;
+    transform: translateY(15vw);
+  }
+  #tutorial-03>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+    font-size: 4.5vw;
+    --target-font-size: 4.5vw;
+  }
+
+  #tutorial-04>.tutorial-flow-info-text-container {
+    width: 80%;
+    height: 35%;
+    transform: translateY(-20vw);
+  }
+  #tutorial-04>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+    font-size: 4vw;
+    --target-font-size: 4vw;
+  }
+
+  #tutorial-05 {
+    height: 50%;
+  }
+  #tutorial-05>.tutorial-flow-info-text-container {
+    width: 85%;
+  }
+  #tutorial-05>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+    font-size: 3.5vw;
+    --target-font-size: 3.5vw;
+  }
+  .tutorial-continue-button.tutorial-05 {
+    margin-bottom: 30%;
+  }
+  /* </tutorial-wrapper> */
 }
 
 @media (min-aspect-ratio: 11/6) {

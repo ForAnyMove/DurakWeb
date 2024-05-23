@@ -122,8 +122,14 @@ class TutorialFlow {
         const passContainer = document.querySelector('.player-button-container');
         setRemoveClass(passContainer, 'hidden-all', true);
 
-        button.children[0].lang = 'Tutorial/Continue';
-        languageChangeEvent.invoke('ru');
+        const updateButtonText = (lang) => {
+            setTimeout(() => {
+                button.children[0].lang = lang;
+                languageChangeEvent.invoke('ru');
+            }, 0);
+        }
+
+        updateButtonText('Tutorial/Continue');
 
         // await Delay(0.2);
 
@@ -411,8 +417,7 @@ class TutorialFlow {
             setRemoveClass(container, 'hidden-all', false);
             setRemoveClass(screen, 'hidden-all', false);
 
-            button.children[0].lang = 'Buttons/Pass';
-            languageChangeEvent.invoke('ru');
+            updateButtonText('Buttons/Pass');
 
             await waitContinue();
             setRemoveClass(container, 'hidden-all', true);
@@ -431,9 +436,7 @@ class TutorialFlow {
             setRemoveClass(container, 'hidden-all', false);
             setRemoveClass(screen, 'hidden-all', false);
 
-
-            button.children[0].lang = 'Tutorial/Continue';
-            languageChangeEvent.invoke('ru');
+            updateButtonText('Tutorial/Continue');
 
             const cards = this.entities[0].wrapper.cards;
 
@@ -508,14 +511,12 @@ class TutorialFlow {
             await this.entities[0].defend();
             await this.entities[1].moveSelected(Rank.Ten, Suit.Spades);
 
-            button.children[0].lang = 'Buttons/TakeAll';
+            updateButtonText('Buttons/TakeAll');
 
             const container = screen.querySelector('#tutorial-09p2');
             setRemoveClass(container, 'hidden-all', false);
             setRemoveClass(screen, 'hidden-all', false);
             screen.style.backgroundColor = '#00000000';
-
-            languageChangeEvent.invoke('ru');
 
             await waitContinue();
 
@@ -552,8 +553,8 @@ class TutorialFlow {
             sequence.onComplete(() => loop());
             loop();
 
-            button.children[0].lang = 'Tutorial/Continue';
-            languageChangeEvent.invoke('ru');
+            updateButtonText('Tutorial/Continue');
+
             await waitContinue();
             sequence.kill();
             enemyContainer.style.scale = '';

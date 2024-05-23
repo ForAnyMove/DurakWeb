@@ -70,6 +70,10 @@ class Entity {
         this.id = '';
 
         this.stateText = null;
+
+        this.mainDeck = null;
+        this.startDeckCount = 36;
+        this.discardPile = null;
     }
 
     setStateText = function (element) {
@@ -97,7 +101,27 @@ class Entity {
         }
     }
 
-    async move() {
+    getMainDeckCards = () => {
+        if (this.mainDeck == null) return null;
+        const cardsData = [];
+
+        for (let i = 0; i < this.mainDeck.cards.length; i++) {
+            const card = this.mainDeck.cards[i];
+            cardsData.push({
+                rank: card.rank,
+                suit: card.suit
+            })
+        }
+
+        return cardsData;
+    }
+
+    getReleasedCards = () => {
+        if (this.discardPile == null) return null;
+        return discardPile.cards;
+    }
+
+    async move(defendEntity) {
         this.state = State.Attack;
         this.updateStateText(this.state);
     }
@@ -115,7 +139,7 @@ class Entity {
         return false;
     }
 
-    async toss(isCycled, onToss, checkCanToss) {
+    async toss(defendEntity, isCycled, onToss, checkCanToss) {
         if (!this.isHaveCardsToToss()) {
             await Delay(0.1 / globalGameSpeed);
             return false;
@@ -182,21 +206,237 @@ class Entity {
     }
 }
 
+class AIDefenceData {
+    constructor(zone, defendCard) {
+        this.zone = zone;
+        this.defendCard = defendCard;
+        this.differencePower = this.calculateDifferencePower(zone.wrapper.cards[0], defendCard);
+    }
+
+    calculateDifferencePower(attackCard, defendCard) {
+        var power = defendCard.rank - attackCard.rank;
+
+        if (defendCard.suit === trumpSuit && attackCard.suit !== trumpSuit) {
+            power += this.startDeckCount / 4;
+        }
+
+        return power;
+    }
+}
+
 class Bot extends Entity {
+    constructor(wrapper) {
+        super(wrapper);
+
+        this.lateGameRatio = 0.25;
+        this.luck = 0.85;
+        this.maxTossCount = 4;
+    }
+
+    lerp(a, b, t) {
+        return a + t * (b - a);
+    }
+
+    inverseLerp(a, b, value) {
+        return (value - a) / (b - a);
+    }
+
+    getCardRankPower(card){
+        var rank = card.rank;
+        
+        if(card.suit == trumpSuit)
+            rank += this.startDeckCount / 4;
+
+        return rank;
+    }
+
+    checkCanCardDefend(attackCard, defendCard){
+        if(defendCard.suit == trumpSuit && attackCard.suit != trumpSuit)
+            return true;
+
+        if(attackCard.suit != defendCard.suit)
+            return false;
+
+        if(attackCard.rank < defendCard.rank)
+            return true;
+        else 
+            return false;
+    }
+
+    sortCards(unsortedCards){
+
+        let sortedCards = unsortedCards.filter(card => card.suit !== trumpSuit).sort((a, b) => a.rank - b.rank);
+        let sortedTrumpCards = unsortedCards.filter(card => card.suit === trumpSuit).sort((a, b) => a.rank - b.rank);
+
+        return sortedCards.concat(sortedTrumpCards);
+    }
+
+    getBestAttackCard(attackCards, defendCards, minRankPower){
+        let nonDefendableCards = [];
+        let defendableCardsPower = new Map();
+
+        attackCards.forEach(attackCard => 
+            {
+                if(this.getCardRankPower(attackCard) > minRankPower)
+                    return;
+
+                var nonDefendable = true;
+
+                defendCards.forEach(defendCard =>
+                    {
+                        if(this.checkCanCardDefend(attackCard, defendCard))
+                        {
+                            nonDefendable = false;
+
+                            var power = defendCard.rank - attackCard.rank;
+
+                            if(defendCard.suit == trumpSuit && attackCard.suit != trumpSuit){
+                                power += this.startDeckCount / 4;
+                            }
+                        
+                            if (defendableCardsPower.has(attackCard)) {
+                                if (power < defendableCardsPower.get(attackCard)) {
+                                    defendableCardsPower.delete(attackCard);
+                                    defendableCardsPower.set(attackCard, power);
+                                }
+                            }
+                            else {
+                                defendableCardsPower.set(attackCard, power);
+                            }
+                        }
+                    });
+
+                if (nonDefendable) {
+                    nonDefendableCards.push(attackCard);
+                }
+            });      
+         
+        if (nonDefendableCards.length > 0) {
+            return this.sortCards(nonDefendableCards)[0];
+        }
+        
+        if (defendableCardsPower.size > 0) {
+            var maxPowerCard = null;
+            var max = 0;
+
+            defendableCardsPower.forEach((card, power) => {
+                if (card > max) {
+                    max = card ;
+                    maxPowerCard = power;
+                }
+            });
+            return maxPowerCard;
+        }
+
+        return this.getLowestAttackCard(attackCards);
+    }
+
+    getLowestAttackCard(attackCards){
+        let sortedCards = this.sortCards(attackCards);
+
+        var attackCard = sortedCards[0]
+        var maxCardRankRepeat = 0;
+
+        for (let i = 0; i < sortedCards.length / 2; i++) {
+            const card = sortedCards[i];
+            var repeatCount = 0;
+
+            if(card.suit == trumpSuit)
+                continue;
+        
+            for (let j = 0; j < sortedCards.length; j++){
+                const checkCard = sortedCards[j];
+
+                if(card == checkCard){
+                    continue;
+                }
+                    
+                if(card.rank == checkCard.rank && checkCard.suit != trumpSuit){
+                    repeatCount++;
+                }
+            }
+
+            if(maxCardRankRepeat < repeatCount){
+                maxCardRankRepeat = repeatCount;
+                attackCard = card;
+            }
+        }
+
+        return attackCard;
+    }
+
     // Функция move() вызывается 1 раз в начале хода заходящим.
     // для бота это может быть либо рандомная карта, либо если уровень по сложнее, мб выбор, основанный на картах в руке или другая логика
-    async move() {
-        await super.move();
-
+    async move(defendEntity) {
+        await super.move(defendEntity);
+ 
         log(`[Move] by "Bot_${this.id}"`, 'battleFlow');
 
         if (this.wrapper.cards.length == 0) return MoveResult.SuccessNoCards;
+      
+        let myCards = [];
+
+        for (let index = 0; index < this.wrapper.cards.length; index++) {
+            const card = this.wrapper.cards[index];         
+            myCards.push(card);
+        }
+
+        let defenderCards = [];
+
+        for (let index = 0; index < defendEntity.wrapper.cards.length; index++) {
+            const card = defendEntity.wrapper.cards[index];         
+            defenderCards.push(card);
+        }
+
+        var selectedCard = this.getLowestAttackCard(myCards);
+
+        if(this.mainDeck.cards.length <= this.startDeckCount * this.lateGameRatio){
+            const inverceLerp = this.inverseLerp(14, 2, defenderCards.length);
+            const minRank = 6;
+            const maxRank = 15 + (this.startDeckCount / 4);
+            const minRankPower = this.lerp(minRank, maxRank, inverceLerp);
+
+            const rand = Math.random();
+
+            log('RANDOM ' + this.luck * inverceLerp + " - " + rand);
+
+            if(this.luck * inverceLerp >= rand){
+                
+                selectedCard = this.getBestAttackCard(myCards, defenderCards, Math.round(minRankPower));
+            }
+        }
+        
+        /*
+        if(this.mainDeck.cards.length > this.startDeckCount * this.lateGameRatio){
+            // Lowest Card Attack
+
+            selectedCard = this.getLowestAttackCard(myCards);
+        }
+        else{
+            // Best Card Attack
+
+            const inverceLerp = this.inverseLerp(12, 4, defenderCards.length);
+            const minRank = 9;
+            const maxRank = 15 + (this.startDeckCount / 4);
+            const minRankPower = this.lerp(minRank, maxRank, inverceLerp);
+
+            if(this.luck * inverceLerp >= Math.random())
+                selectedCard = this.getBestAttackCard(myCards, defenderCards, Math.round(minRankPower));
+            else
+                selectedCard = this.getLowestAttackCard(myCards);
+        }
+        */
+
+        selectedCard.setOpened();
 
         // selectedCard - карта для хода
         // this.wrapper.cards - карты в руке
         // карты на столе в данном случае не нужны, т.к. это первый ход. Если нужно будет брать карты у других игроков/ботов, для чит режима, напиши, я реализую
-        const selectedCard = this.wrapper.cards[getRandomInt(this.wrapper.cards.length - 1)];
-        selectedCard.setOpened();
+
+
+        //const selectedCard = this.wrapper.cards[getRandomInt(this.wrapper.cards.length - 1)];
+        //selectedCard.setOpened();
+
 
         // когда ходим, подкидываем или любая ситуация, когда действие добавляет карту на стол, создаем zone
         // zone - это обертка для двух карт, первыя - которой походили, вторая - которой отбились
@@ -210,10 +450,12 @@ class Bot extends Entity {
         return this.wrapper.cards.length == 0 ? MoveResult.SuccessNoCards : MoveResult.Success;
     }
 
+    
+
     // Функция toss() вызывается в ситуациях, нужно подкидывать карты отбивающему.
     // для бота это может быть либо рандомная карта, либо если уровень по сложнее, мб выбор, основанный на картах в руке или другая логика
-    async toss(isCycled, onToss, checkCanToss) {
-        const canToss = await super.toss(isCycled, onToss, checkCanToss);
+    async toss(defendEntity, isCycled, onToss, checkCanToss) {
+        const canToss = await super.toss(defendEntity, isCycled, onToss, checkCanToss);
 
         log(`[Toss] "Bot_${this.id}"`, 'battleFlow');
 
@@ -231,10 +473,34 @@ class Bot extends Entity {
                 suitableCards.push(card);
             }
         }
+
+        /*
         if (suitableCards.length == 0) {
             log(`    - FALSE ${suitableCards}`, 'battleFlow');
             this.updateStateText(State.None);
 
+            return TossResult.Fail;
+        }
+        */
+
+        const zones = battleground.zones;
+
+        let tossCards = [];
+
+        for (let i = 0; i < suitableCards.length; i++){
+            const card = suitableCards[i];
+
+            if(card.suit == trumpSuit && this.mainDeck.cards.length != 0)
+                continue;
+
+            if((zones.length + tossCards.length) > this.maxTossCount)
+                continue;
+
+            tossCards.push(card);
+        }
+
+        if (tossCards.length == 0) {
+            this.updateStateText(State.None);
             return TossResult.Fail;
         }
 
@@ -243,19 +509,19 @@ class Bot extends Entity {
         // [Выноска 1]
         // Для получения карт на столе, для более сложных решений, можно сделать так: 
         // Все играбельные зоны на столе:
-        const zones = battleground.zones;
+        
         // Карты в этой зоне, их можно быть 2. 
         // zoneCards[0] - карта, которой походили или подкинули
         // zoneCards[1] - карта, которой отбились. 
-        // Если zoneCards.length == 0, то карту еще не побили, и на основе карты zoneCards[0] можно принимать решения, это полезно для защиты
+        // Если zoneCards.length == 1, то карту еще не побили, и на основе карты zoneCards[0] можно принимать решения, это полезно для защиты
         const index = 0;
         const zoneCards = zones[index].cards;
         // Если нужно будет брать карты у других игроков/ботов, для чит режима, напиши, я реализую
 
-        const cycles = isCycled ? suitableCards.length : 1;
+        const cycles = isCycled ? tossCards.length : 1;
 
         for (let i = 0; i < cycles; i++) {
-            const card = suitableCards[i];
+            const card = tossCards[i];
 
             card.setOpened();
             const zone = battleground.createZone();
@@ -271,6 +537,51 @@ class Bot extends Entity {
         this.updateStateText(State.None);
         if (cycles == 0) await Delay(0.2 / globalGameSpeed);
         return this.wrapper.cards.length > 0 ? TossResult.Success : TossResult.SuccessNoCards;
+    }
+
+    getAllDefenceVariants() {
+        let targetCards = [];
+        let zones = [];
+        let defendCards = [];
+
+        const playgorundZones = battleground.zones;
+
+        for (let i = 0; i < playgorundZones.length; i++) {
+            const zone = playgorundZones[i];
+            if (zone.cards.length == 1) {
+                zones.push(zone);
+            }
+        }
+        
+        for (let i = 0; i < this.wrapper.cards.length; i++){
+            const card = this.wrapper.cards[i];
+            defendCards.push(card);
+        }
+
+        zones.forEach(zone => {
+            const attackCard = zone.cards[0];
+            defendCards.forEach(defendCard => {
+                if (this.checkCanCardDefend(attackCard, defendCard)) {
+                    const defenceData = new AIDefenceData(zone, defendCard);
+                    targetCards.push(defenceData);
+                }
+            });
+        });
+
+        return targetCards;
+    }
+
+    checkAllZonesDefended(){
+        const playgorundZones = battleground.zones;
+
+        for (let i = 0; i < playgorundZones.length; i++) {
+            const zone = playgorundZones[i];
+            if (zone.cards.length == 1) {   
+                return false;
+            }
+        }
+
+        return true;
     }
 
     // Функция defend() вызывается в ситуациях, когда нужно отбиваться.
@@ -310,6 +621,33 @@ class Bot extends Entity {
         }
 
         const tryDefend = async () => {
+
+            if(this.checkAllZonesDefended())
+                return DefendResult.Defence;
+
+            let targetCards = this.getAllDefenceVariants();
+
+            if(targetCards.length == 0){
+                return DefendResult.Fail;
+            }
+                
+            const bestDefendData = targetCards.sort((a, b) => a.differencePower - b.differencePower)[0];
+            const minDifferencePower = 16;
+
+            if (bestDefendData.differencePower >= minDifferencePower && this.mainDeck.length > this.startDeckCount * this.lateGameRatio) {
+                return DefendResult.Fail;
+            }
+
+            const zone = bestDefendData.zone;
+            const cardToAttack = bestDefendData.defendCard;
+
+            cardToAttack.setOpened();
+            zone.wrapper.translateCard(cardToAttack);
+
+            await Delay(0.2 / globalGameSpeed);
+            return await tryDefend();
+            
+            /*
             const playgorundZones = battleground.zones;
 
             for (let i = 0; i < playgorundZones.length; i++) {
@@ -340,6 +678,7 @@ class Bot extends Entity {
             }
 
             return DefendResult.Defence;
+            */
         }
 
         let result = await tryDefend();
@@ -401,8 +740,8 @@ class Player extends Entity {
         this.isUser = true;
     }
 
-    async move() {
-        await super.move();
+    async move(defendEntity) {
+        await super.move(defendEntity);
         log('[Move] by "Player"', 'battleFlow');
 
         if (platform == Platform.TV) {
@@ -600,12 +939,12 @@ class Player extends Entity {
         return result;
     }
 
-    async toss(isCycled, onToss, checkCanToss, previousResult, tossCount) {
+    async toss(defendEntity, isCycled, onToss, checkCanToss, previousResult, tossCount) {
         if (tossCount == null) {
             tossCount = 0;
         }
 
-        const canToss = await super.toss(isCycled, onToss, checkCanToss);
+        const canToss = await super.toss(defendEntity, isCycled, onToss, checkCanToss);
 
         if (!canToss) {
             this.updateStateText(State.None);
@@ -671,7 +1010,7 @@ class Player extends Entity {
         }
 
         if (result != TossResult.Fail && result != TossResult.Skip && isCycled && checkCanToss?.()) {
-            return await this.toss(isCycled, onToss, checkCanToss, result, tossCount);
+            return await this.toss(defendEntity, isCycled, onToss, checkCanToss, result, tossCount);
         }
 
         this.updateStateText(State.None);
@@ -793,6 +1132,19 @@ class BattleFlow {
         this.rules = rules;
         this.finishCallback = new Action();
 
+        for (let i = 0; i < this.entities.length; i++) {
+            const entity = this.entities[i];
+            entity.mainDeck = this.mainDeck;
+            entity.startDeckCountb = this.mainDeck.cards.length;
+        }
+
+        this.discardPile = { cards: [] };
+        
+        for (let i = 0; i < this.entities.length; i++) {
+            const entity = this.entities[i];
+            entity.discardPile = this.discardPile;
+        }
+
         // setTimeout(() => {
         //     this.winners.push(this.entities[1]);
         //     this.entities = [this.entities[0]]
@@ -895,6 +1247,12 @@ class BattleFlow {
 
         for (let i = 0; i < cards.length; i++) {
             const element = cards[i];
+
+            this.discardPile.cards.push({
+                rank: element.rank,
+                suit: element.suit
+            })
+
             element.domElement.remove();
             cards[i] = null;
         }
@@ -1040,7 +1398,7 @@ class BattleFlow {
 
                 log(`toss by: ${entity?.id} ${attackEntities.map(i => i.id)} ${currentTossEntityQueue}`, 'battleFlow')
 
-                const result = await entity.toss(cycled, () => {
+                const result = await entity.toss(this.entities.indexOf(defendEntities[0]), cycled, () => {
                     tossCount++;
                 }, () => {
                     return tossCount < maxTossCount
@@ -1169,7 +1527,7 @@ class BattleFlow {
                 }
             }
 
-            const result = await attackEntities[0].move();
+            const result = await attackEntities[0].move(defendEntities[0]);
             const tossResult = await toss(true);
 
             if (result == MoveResult.SuccessNoCards) { // || tossResult == TossResult.SuccessNoCards

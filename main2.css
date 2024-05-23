@@ -2675,8 +2675,8 @@ button.selected {
 #tutorial-04 {}
 
 #tutorial-04>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
-  font-size: 2vw;
-  --target-font-size: 2vw;
+  font-size: 1.7vw;
+  --target-font-size: 1.7vw;
 }
 
 #tutorial-04>.tutorial-flow-info-text-container {
@@ -2715,6 +2715,26 @@ button.selected {
 
 .tutorial-continue-button.tutorial-05 {
   margin-bottom: 14%;
+  z-index: 1;
+}
+
+/* #endregion */
+
+/* #region tutorial-06 */
+
+#tutorial-06 {
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#tutorial-06>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+  font-size: 2vw;
+  --target-font-size: 2vw;
+}
+
+#tutorial-06>.tutorial-flow-info-text-container {
+  width: 40%;
+  height: 20%;
 }
 
 /* #endregion */
@@ -2724,6 +2744,7 @@ button.selected {
 #tutorial-07 {
   flex-direction: column;
   justify-content: space-around;
+  transform: translateY(5vw);
 }
 
 #tutorial-07>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
@@ -2733,17 +2754,18 @@ button.selected {
 
 #tutorial-07>.tutorial-flow-info-text-container {
   width: 40%;
-  height: 20%;
-  max-height: 20%;
+  height: 30%;
+  max-height: 30%;
 }
 
 #tutorial-07>.tutorial-flow-deck-container {
   /* background-color: #55ff5555; */
-  width: 40%;
+  width: 60%;
   height: 50%;
   display: flex;
   justify-content: space-around;
   align-items: end;
+  transform: translateY(-5vw);
 }
 
 .tutorial-flow-card-container {
@@ -2783,6 +2805,19 @@ button.selected {
 
 /* #endregion */
 
+/* #region tutorial-08 */
+
+#tutorial-08>.tutorial-flow-deck-container {
+  width: 40%;
+}
+
+#tutorial-07>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+  font-size: 1.5vw;
+  --target-font-size: 1.5vw;
+}
+
+/* #endregion */
+
 /* #region tutorial-09 */
 
 #tutorial-09 {
@@ -2796,7 +2831,7 @@ button.selected {
 }
 
 #tutorial-09>.tutorial-flow-info-text-container {
-  width: 40%;
+  width: 60%;
   height: 20%;
   max-height: 20%;
 }
@@ -2808,6 +2843,18 @@ button.selected {
   display: flex;
   justify-content: center;
   align-items: end;
+}
+
+/* #endregion */
+
+/* #region tutorial-10 */
+
+#tutorial-10>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+  font-size: 2vw;
+  --target-font-size: 2vw;
+}
+#tutorial-10>.tutorial-flow-info-text-container {
+  width: 40%;
 }
 
 /* #endregion */
@@ -2828,6 +2875,7 @@ button.selected {
   width: 40%;
   height: 20%;
   max-height: 20%;
+  transform: translateY(5vw);
 }
 
 #tutorial-12>.tutorial-flow-deck-container {
@@ -3843,6 +3891,9 @@ button.selected {
   }
 
   /* <tutorial-wrapper> */
+  .tutorial-wrapper {
+    height: 50%;
+  }
 
   #tutorial-01>.tutorial-flow-info-text-container {
     width: 80%;
@@ -3897,14 +3948,126 @@ button.selected {
   }
 
   #tutorial-05>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
-    font-size: 3.5vw;
-    --target-font-size: 3.5vw;
+    font-size: 4vw;
+    --target-font-size: 4vw;
   }
 
   .tutorial-continue-button.tutorial-05 {
     margin-bottom: 30%;
   }
 
+  
+  #tutorial-06>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+    font-size: 4.5vw;
+    --target-font-size: 4.5vw;
+  }
+
+  #tutorial-06>.tutorial-flow-info-text-container {
+    width: 90%;
+    height: 20%;
+  }
+  
+  #tutorial-07 {
+    transform: translateY(0);
+  }
+  #tutorial-07>.tutorial-flow-info-text-container,
+  #tutorial-09>.tutorial-flow-info-text-container {
+    width: 90%;
+    height: 30%;
+    max-height: 30%;
+    transform: translateY(15vw);
+  }
+  #tutorial-07>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+    font-size: 3.5vw;
+    --target-font-size: 3.5vw;
+  }
+  #tutorial-07>.tutorial-flow-deck-container, 
+  #tutorial-09>.tutorial-flow-deck-container {
+    width: 100%;
+    transform: translateY(0);
+  }
+  
+  #tutorial-09>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+    font-size: 4vw;
+    --target-font-size: 4vw;
+  }
+  #tutorial-09>.tutorial-flow-deck-container {
+    width: 110%;
+    scale: 0.9;
+  }
+  .tutorial-flow-card-container {
+    width: 18vw;
+    height: 24vw;
+  }
+  .tutorial-flow-card-container.non-suitable::after,
+  .tutorial-flow-card-container.suitable::after {
+    width: 15vw;
+    height: 10vw;
+  }
+  
+  #tutorial-08>.tutorial-flow-deck-container {
+    width: 80%;
+  }
+  #tutorial-07>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+    font-size: 4vw;
+    --target-font-size: 4vw;
+  }
+
+  #tutorial-08 {
+    height: 50%;
+  }
+  #tutorial-08>.tutorial-flow-info-text-container {
+    width: 80%;
+    align-items: flex-start;
+  }
+  #tutorial-08>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+    font-size: 4vw;
+    --target-font-size: 4vw;
+  }
+  #tutorial-09p2 {
+    height: 55%;
+  }
+  #tutorial-10 {
+    height: 50%;
+  }
+  #tutorial-10>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+    font-size: 4vw;
+    --target-font-size: 4vw;
+  }
+  #tutorial-10>.tutorial-flow-info-text-container {
+    width: 80%;
+  }
+  
+  #tutorial-11>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+    font-size: 6vw;
+    --target-font-size: 6vw;
+  }
+
+  #tutorial-12>.tutorial-flow-info-text-container {
+    width: 80%;
+    transform: translateY(0);
+  }
+  #tutorial-12>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
+    font-size: 3vw;
+    --target-font-size: 3vw;
+  }
+  .card-transfare-hint {
+    width: 18vw;
+    height: 24vw;
+    border-radius: 2vw;
+    border: 1vw solid #ffffffaa;
+    transform: translate(-1vw, 8vw);
+  }
+  .card-transfare-hint-static {
+    width: 18vw;
+    height: 24vw;
+    border-radius: 2vw;
+    border: 1vw solid #ffffffaa;
+  }
+  .card-transfare-hint::after, .card-transfare-hint-static::after {
+    width: 11vw;
+    height: 11vw;
+  }
   /* </tutorial-wrapper> */
 }
 

@@ -2595,8 +2595,8 @@ button.selected {
 }
 
 .tutorial-flow-info-text {
-  font-size: 3vw;
-  --target-font-size: 3vw;
+  font-size: 2.5vw;
+  --target-font-size: 2.5vw;
   color: #fff
 }
 
@@ -2702,6 +2702,7 @@ button.selected {
   width: 40%;
   height: 20%;
   max-height: 20%;
+  transform: translateY(10vh);
 }
 
 #tutorial-05>.tutorial-flow-deck-container {
@@ -3945,6 +3946,7 @@ button.selected {
 
   #tutorial-05>.tutorial-flow-info-text-container {
     width: 85%;
+    transform: translateY(0);
   }
 
   #tutorial-05>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
@@ -3965,6 +3967,7 @@ button.selected {
   #tutorial-06>.tutorial-flow-info-text-container {
     width: 90%;
     height: 20%;
+    transform: translateY(-15vh);
   }
   
   #tutorial-07 {
@@ -3975,7 +3978,7 @@ button.selected {
     width: 90%;
     height: 30%;
     max-height: 30%;
-    transform: translateY(15vw);
+    transform: translateY(0);
   }
   #tutorial-07>.tutorial-flow-info-text-container>.tutorial-flow-info-text {
     font-size: 3.5vw;

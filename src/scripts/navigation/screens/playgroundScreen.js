@@ -90,6 +90,17 @@ class PlaygroundScreen extends ScreenLogic {
             setRemoveClass(portraits[1], 'enemy', false);
         }
 
+        const configureBots = () => {
+            for (let i = 0; i < this.bots.length; i++) {
+                const bot = this.bots[i];
+                bot.lateGameRatio = botsConfiguration.lateGameRatio;
+                bot.luck = botsConfiguration.luck;
+                bot.maxTossCount = botsConfiguration.maxTossCount;
+
+                console.log(bot);
+            }
+        }
+
         const playerCardsDeck = this.screenRoot.querySelector('.player-cards-container');
 
         const elementStyle = window.getComputedStyle(playerCardsDeck);
@@ -107,6 +118,9 @@ class PlaygroundScreen extends ScreenLogic {
         if (isTutorial) {
             this.battleFlow = new TutorialFlow([player].concat(this.bots), rules);
         } else {
+
+            configureBots();
+
             this.battleFlow = new BattleFlow([player].concat(this.bots), rules);
             this.battleFlow.finishCallback.addListener((result) => {
                 console.log(result);

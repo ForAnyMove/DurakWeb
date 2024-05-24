@@ -1288,7 +1288,7 @@ class BattleFlow {
 
         const firstStepEntity = this.getFirstStepEntity();
         this.playEntityOrder = firstStepEntity != null ? this.entities.indexOf(firstStepEntity) : 0;
-        this.playEntityOrder = 1;
+
         this.nextStep(1);
     }
 

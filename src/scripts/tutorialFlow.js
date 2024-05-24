@@ -46,45 +46,6 @@ const pattern = [
     { rank: Rank.Seven, suit: Suit.Clubs },
     { rank: Rank.Nine, suit: Suit.Spades },
 ]
-const pattern2 = [
-    { rank: Rank.Queen, suit: Suit.Spades },
-    { rank: Rank.King, suit: Suit.Spades },
-    { rank: Rank.Ten, suit: Suit.Diamonds },
-    { rank: Rank.King, suit: Suit.Clubs },
-    { rank: Rank.Nine, suit: Suit.Clubs },
-    { rank: Rank.Nine, suit: Suit.Hearts },
-    { rank: Rank.Queen, suit: Suit.Hearts },
-    { rank: Rank.Jack, suit: Suit.Hearts },
-    { rank: Rank.Eight, suit: Suit.Spades },
-    { rank: Rank.Ace, suit: Suit.Diamonds },
-    { rank: Rank.Jack, suit: Suit.Clubs },
-    { rank: Rank.Six, suit: Suit.Clubs },
-    { rank: Rank.Queen, suit: Suit.Clubs },
-    { rank: Rank.King, suit: Suit.Hearts },
-    { rank: Rank.Six, suit: Suit.Spades },
-    { rank: Rank.Seven, suit: Suit.Spades },
-    { rank: Rank.Ace, suit: Suit.Spades },
-    { rank: Rank.Eight, suit: Suit.Diamonds },
-    { rank: Rank.Ace, suit: Suit.Clubs },
-    { rank: Rank.Nine, suit: Suit.Diamonds },
-    { rank: Rank.Six, suit: Suit.Hearts },
-    { rank: Rank.Eight, suit: Suit.Clubs },
-    { rank: Rank.Seven, suit: Suit.Hearts },
-    { rank: Rank.Jack, suit: Suit.Spades },
-    { rank: Rank.Jack, suit: Suit.Diamonds },
-    { rank: Rank.Seven, suit: Suit.Diamonds },
-    { rank: Rank.Six, suit: Suit.Diamonds },
-    { rank: Rank.Seven, suit: Suit.Clubs },
-    { rank: Rank.Eight, suit: Suit.Hearts },
-    { rank: Rank.Ten, suit: Suit.Hearts },
-    { rank: Rank.Ace, suit: Suit.Hearts },
-    { rank: Rank.Nine, suit: Suit.Diamonds },
-    { rank: Rank.Queen, suit: Suit.Diamonds },
-    { rank: Rank.King, suit: Suit.Diamonds },
-    { rank: Rank.Ten, suit: Suit.Clubs },
-    { rank: Rank.Nine, suit: Suit.Spades },
-    { rank: Rank.Ten, suit: Suit.Spades },
-]
 
 class TutorialFlow {
     constructor(entities, rules) {
@@ -92,6 +53,11 @@ class TutorialFlow {
 
         this.result = createLevel(rules.cardsCount, pattern);
         this.mainDeck = this.result.mainCardColumn;
+
+        for (let i = 0; i < this.mainDeck.cards.length; i++) {
+            const element = this.mainDeck.cards[i];
+            element.locked = true;
+        }
 
         this.cardRreleaseWrapper = new CardsDeck(document.getElementById('card-release-wrapper'));
 
@@ -354,11 +320,13 @@ class TutorialFlow {
 
                 cardParent.insertBefore(cardEmptyElement, cardParent.children[1]);
 
-                const ccRect = cardContainer.getBoundingClientRect();
+                const ccRect = getRectData(cardContainer, true);
                 const startPosition = { x: parseFloat(card.style.left), y: parseFloat(card.style.top) };
-                const finishPosition = { x: parseFloat(ccRect.left), y: parseFloat(ccRect.top) };
+                const finishPosition = { x: ccRect.position.x, y: ccRect.position.y };
 
                 card.style.transform = '';
+                card.style.margin = '';
+
                 DONormalizedValue(t => {
                     card.style.left = lerp(startPosition.x, finishPosition.x, t) + 'px';
                     card.style.top = lerp(startPosition.y, finishPosition.y, t) + 'px';

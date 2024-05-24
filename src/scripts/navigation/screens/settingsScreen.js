@@ -57,6 +57,27 @@ class SettingsScreen extends ScreenLogic {
                 // globalGameSpeed = 8;
             });
 
+
+        const bostDifficult = [
+            {
+                lateGameRatio: 0,
+                luck: 0,
+                maxTossCount: 0
+            }, {
+                lateGameRatio: 0,
+                luck: 0.25,
+                maxTossCount: 1
+            }, {
+                lateGameRatio: 0.1,
+                luck: 0.5,
+                maxTossCount: 2
+            }, {
+                lateGameRatio: 0.2,
+                luck: 0.85,
+                maxTossCount: 4
+            },
+        ]
+
         const gameDifficultButtonContainer = this.screenRoot.querySelectorAll('.settings_slider-container_dark')[1];
         const gameDifficultSelector = new SequentlyChoosingButton(
             this.selectableElements,
@@ -73,6 +94,7 @@ class SettingsScreen extends ScreenLogic {
                     'MainMenu/SystemSettings/Difficulty/Hard',
                     'MainMenu/SystemSettings/Difficulty/Ultra'
                 ]
+                botsConfiguration = bostDifficult[level];
                 text.lang = innerText[level];
                 languageChangeEvent.invoke(initialLocale);
             });

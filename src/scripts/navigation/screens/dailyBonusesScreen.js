@@ -7,6 +7,9 @@ import { ScreenLogic } from "../navigation.js";
 
 class DailyBonusesScreen extends ScreenLogic {
     onCreate() {
+
+        let rewardAvailable = false;
+
         this.defaultSelectedElement = { element: this.screenRoot.querySelector('.daily-bonuses-tab-close-button') };
         this.selectableElements.push(this.defaultSelectedElement);
         const dayInGame = inDayGameCount();
@@ -29,6 +32,8 @@ class DailyBonusesScreen extends ScreenLogic {
             setRemoveClass(element, 'locked', !(dayInGame - 1 >= i));
 
             if (dayInGame - 1 >= i) {
+                rewardAvailable = true;
+
                 element.onclick = function () {
                     if (!isCompleted(i)) {
                         const get = (rewardMultiplier = 1) => {
@@ -62,6 +67,10 @@ class DailyBonusesScreen extends ScreenLogic {
 
                 isForRewarded = stateIsTrue;
             });
+
+        if (rewardAvailable) {
+            this.parameters?.onRewardAvailable?.()
+        }
     }
 }
 

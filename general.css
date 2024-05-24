@@ -14,11 +14,13 @@ button {
   font-weight: bold;
   /*LoadedFont_Default, */
 }
+
 .body {
   background-color: #004b1b;
 }
+
 .background-mask {
-  background-image: url('../../Sprites/Custom Icons/Фон 2.png');
+  background-image: url('./Sprites/Custom Icons/Background2.png');
   opacity: 0.2;
   position: absolute;
   width: 100%;

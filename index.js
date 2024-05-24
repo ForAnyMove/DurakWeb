@@ -221,7 +221,11 @@ const dailyBonusesScreen = new Screen({
   onUnfocus: () => {
     navigation.push(mainScreen);
   },
-  screenLogic: new DailyBonusesScreen({ screenRoot: dailyBonusesRoot })
+  screenLogic: new DailyBonusesScreen({
+    screenRoot: dailyBonusesRoot, onRewardAvailable: () => {
+      navigation.push(dailyBonusesScreen);
+    }
+  })
 });
 
 const gameSelectionRoot = document.getElementById('start-game-tab');

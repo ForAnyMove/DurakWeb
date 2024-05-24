@@ -907,11 +907,11 @@
     <div class="popup-background-fading"></div>
     <div id="popup-fade-close"></div>
     <div class="popup-content">
-      <img src="./Sprites/Desktop - дурак- ежедневный бону/close 4x 432381591.png" alt="Close" width="50px"
-        class="choose-avatar_close-icon languages-close-button">
       <div class="popup-header">
         <h3 lang="lang">Язык</h3>
       </div>
+      <img src="./Sprites/Desktop - дурак- ежедневный бону/close 4x 432381591.png" alt="Close" width="50px"
+        class="choose-avatar_close-icon languages-close-button">
       <div class="languages-list">
         <div class="language-container">
           <div class="language">
@@ -1189,6 +1189,11 @@
   let trumpSuit;
   let globalGameSpeed = 1;
   let isTutorial;
+  let botsConfiguration = {
+    lateGameRatio: 0,
+    luck: 0,
+    maxTossCount: 0
+  }
 </script>
 <script type="module">
   import { createEvent } from "./src/localization/translator.js";

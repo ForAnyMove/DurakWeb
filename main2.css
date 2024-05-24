@@ -2968,7 +2968,7 @@ button.selected {
   /* #region playground */
 
   .control-btns-panel {
-    bottom: 27%;
+    bottom: 10%;
   }
 
   .arrow-back-btn-link {
@@ -3148,7 +3148,7 @@ button.selected {
   }
 
   .play-btn-container {
-    transform: translateY(20vw);
+    /* transform: translateY(20vw); */
   }
 
   .profile-container {

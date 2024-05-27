@@ -257,4 +257,4 @@ async function initializeSDK() {
     player = await getPlayer(SDK);
 }
 
-export { saveUserData, loadUserData, getPlatform, showRewarded, showInterstitial, initializeSDK, getDefaultLanguage }
+export { saveUserData, loadUserData, getPlatform, showRewarded, showInterstitial, initializeSDK, getDefaultLanguage, processExit }

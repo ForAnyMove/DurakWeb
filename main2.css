@@ -1,6 +1,6 @@
 body {
   background-color: #004b1b;
-  background-image: url('../../Sprites/Custom Icons/Background.png');
+  background-image: url('./Sprites/Custom Icons/Background.png');
   background-size: 100% 100%;
   overflow: hidden;
 }
@@ -58,7 +58,7 @@ button.selected {
   justify-content: center;
   align-items: center;
   padding: 0 2vh 0.7vh 2vh;
-  background-image: url('../../Sprites/Mutual/base 4x -737054888.png');
+  background-image: url('./Sprites/Mutual/base 4x -737054888.png');
 }
 
 .play-btn-title {
@@ -309,7 +309,7 @@ button.selected {
 .profile-status-type-icon-container {
   width: 4vw;
   height: 4vw;
-  background-image: url('./Sprites/Desktop\ -\ дурак-\ Профиль\ \(статус/Status Reward Back BW.png');
+  background-image: url('./Sprites/Desktop - дурак- Профиль (статус/Status Reward Back BW.png');
   background-size: 100% 100%;
   display: flex;
   align-items: center;
@@ -337,7 +337,7 @@ button.selected {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('./Sprites/Desktop\ -\ дурак-\ Профиль\ \(статус/Status Cost Back BW.png');
+  background-image: url('./Sprites/Desktop - дурак- Профиль (статус/Status Cost Back BW.png');
   background-size: 100% 100%;
   width: 7vw;
   height: 3.5vw;
@@ -368,7 +368,7 @@ button.selected {
 }
 
 .profile-status-item_completed>.profile-status-cover-container>.profile-status-type-icon-container {
-  background-image: url('./Sprites/Desktop\ -\ дурак-\ Профиль\ \(статус/Status View.png');
+  background-image: url('./Sprites/Desktop - дурак- Профиль (статус/Status View.png');
   animation: scaleUpDown 0.3s infinite alternate;
 }
 
@@ -381,7 +381,7 @@ button.selected {
 }
 
 .profile-status-item_completed>.profile-status-cover-container>.profile-status-bounty-title-container {
-  background-image: url('./Sprites/Desktop\ -\ дурак-\ Профиль\ \(статус/Group 4x 2134222544.png');
+  background-image: url('./Sprites/Desktop - дурак- Профиль (статус/Group 4x 2134222544.png');
 }
 
 .profile-status-item_completed>.profile-status-cover-container>.profile-status-bounty-title-container>.profile-status-bounty-title,
@@ -568,7 +568,7 @@ button.selected {
 .choose-avatar_container {
   width: 38vw;
   height: 30vw;
-  background-image: url('./Sprites/Desktop\ -\ дурак-\ ежедневный\ бону/Group 48 4x 369162226.png');
+  background-image: url('./Sprites/Desktop - дурак- ежедневный бону/Group 48 4x 369162226.png');
   background-size: 100% 100%;
   display: flex;
   align-items: center;
@@ -930,7 +930,7 @@ button.selected {
 }
 
 .settings_tunes-switch-container {
-  background-image: url('./Sprites/Desktop\ -\ дурак-\ настройки/Group 48 4x -1096314688.png');
+  background-image: url('./Sprites/Desktop - дурак- настройки/Group 48 4x -1096314688.png');
   background-size: 100% 100%;
   width: 40vw;
   height: 13vw;
@@ -1359,7 +1359,7 @@ button.selected {
 }
 
 .bonuses_bonuses-container {
-  background-image: url('./Sprites/Desktop\ -\ дурак-\ бонусы/Group 48 4x 128278538.png');
+  background-image: url('./Sprites/Desktop - дурак- бонусы/Group 48 4x 128278538.png');
   background-size: 100% 100%;
   width: 45vw;
   height: 12.5vw;
@@ -1383,11 +1383,11 @@ button.selected {
 
 .bonuses_bonuses-container>.checked,
 .bonuses_bonuses-container>.opened {
-  background-image: url('./Sprites/Desktop\ -\ дурак-\ бонусы/1.png');
+  background-image: url('./Sprites/Desktop - дурак- бонусы/1.png');
 }
 
 .bonuses_bonuses-container>.locked {
-  background-image: url('./Sprites/Desktop\ -\ дурак-\ бонусы/Дней в игре 4x -1394483402.png');
+  background-image: url('./Sprites/Desktop - дурак- бонусы/Дней в игре 4x -1394483402.png');
 }
 
 .bonuses_combine-bonus-icon-container {
@@ -1432,7 +1432,7 @@ button.selected {
 .custom-white-circle {
   width: 5vw;
   height: 5vw;
-  background-image: url('./Sprites/Desktop\ -\ дурак-\ бонусы/Ellipse 3 4x -1976248195.png');
+  background-image: url('./Sprites/Desktop - дурак- бонусы/Ellipse 3 4x -1976248195.png');
   background-size: 100% 100%;
   display: flex;
   align-items: center;
@@ -1450,19 +1450,19 @@ button.selected {
 }
 
 .custom-color-circle_pink {
-  background-image: url('./Sprites/Desktop\ -\ дурак-\ бонусы/Ellipse 4 4x -570393785.png');
+  background-image: url('./Sprites/Desktop - дурак- бонусы/Ellipse 4 4x -570393785.png');
 }
 
 .custom-color-circle_purple {
-  background-image: url('./Sprites/Desktop\ -\ дурак-\ бонусы/Ellipse 4 4x -693673681.png');
+  background-image: url('./Sprites/Desktop - дурак- бонусы/Ellipse 4 4x -693673681.png');
 }
 
 .custom-color-circle_green {
-  background-image: url('./Sprites/Desktop\ -\ дурак-\ бонусы/Ellipse 4 4x -836687562.png');
+  background-image: url('./Sprites/Desktop - дурак- бонусы/Ellipse 4 4x -836687562.png');
 }
 
 .custom-color-circle_yellow {
-  background-image: url('./Sprites/Desktop\ -\ дурак-\ бонусы/Ellipse 4 4x 1653323111.png');
+  background-image: url('./Sprites/Desktop - дурак- бонусы/Ellipse 4 4x 1653323111.png');
 }
 
 .custom-component-icon {
@@ -1614,7 +1614,7 @@ button.selected {
 .start-game_mode-btns-container {
   width: 29.5vw;
   height: 6vw;
-  background-image: url('./Sprites/Desktop\ -\ дурак-\ Профиль\ \(статус/Group 62 4x 2142765846.png');
+  background-image: url('./Sprites/Desktop - дурак- Профиль (статус/Group 62 4x 2142765846.png');
   background-size: 100% 100%;
   background-position: center;
   display: flex;
@@ -1690,7 +1690,7 @@ button.selected {
   appearance: none;
   width: 90%;
   height: 4vw;
-  background-image: url('./Sprites/Desktop\ -\ дурак-\ Играть\ \(выбор\ р/Group 117.png');
+  background-image: url('./Sprites/Desktop - дурак- Играть (выбор р/Group 117.png');
   background-size: 100% 100%;
   background-color: rgba(0, 0, 0, 0);
   background-position: center;
@@ -1770,7 +1770,7 @@ button.selected {
 .daily-bonuses_container {
   width: 45vw;
   height: 37vw;
-  background-image: url('./Sprites/Desktop\ -\ дурак-\ ежедневный\ бону/Group 48 4x 369162226.png');
+  background-image: url('./Sprites/Desktop - дурак- ежедневный бону/Group 48 4x 369162226.png');
   background-size: 100% 100%;
   display: flex;
   align-items: center;
@@ -1814,7 +1814,7 @@ button.selected {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-image: url('./Sprites/Desktop\ -\ дурак-\ ежедневный\ бону/Дней в игре 4x -1248971501.png');
+  background-image: url('./Sprites/Desktop - дурак- ежедневный бону/Дней в игре 4x -1248971501.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
   width: 11vw;
@@ -1824,7 +1824,7 @@ button.selected {
 }
 
 .bounty-card-container:focus {
-  background-image: url('./Sprites/Desktop\ -\ дурак-\ ежедневный\ бону/Дней в игре 4x -2082729353.png');
+  background-image: url('./Sprites/Desktop - дурак- ежедневный бону/Дней в игре 4x -2082729353.png');
   background-size: 105% 98%;
   background-position-x: center;
   background-position-y: -0.5vw;
@@ -1914,7 +1914,7 @@ button.selected {
 .end-popup_container,
 .exit-popup_container,
 .tutorial-popup_container {
-  background-image: url('./Sprites/Desktop\ -\ дурак-\ ежедневный\ бону/Group 48 4x 369162226.png');
+  background-image: url('./Sprites/Desktop - дурак- ежедневный бону/Group 48 4x 369162226.png');
   background-size: 100% 100%;
   display: flex;
   align-items: center;
@@ -2084,7 +2084,7 @@ button.selected {
 }
 
 .popup-content {
-  background-image: url('./Sprites/Desktop\ -\ дурак-\ ежедневный\ бону/Group 48 4x 369162226.png');
+  background-image: url('./Sprites/Desktop - дурак- ежедневный бону/Group 48 4x 369162226.png');
   background-size: 100% 100%;
   width: 44vw;
   padding: 1vw;
@@ -2452,7 +2452,7 @@ button.selected {
   justify-content: center;
   align-items: center;
   padding: 0 2vh 0.7vh 2vh;
-  background-image: url('../../Sprites/Mutual/base 4x -737054888.png');
+  background-image: url('./Sprites/Mutual/base 4x -737054888.png');
   transform: translateY(-85%);
   text-wrap: nowrap;
 }

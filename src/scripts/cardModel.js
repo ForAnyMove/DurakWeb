@@ -536,7 +536,7 @@ class CardsDeck extends CardsWrapper {
 }
 
 class CardsPlayableDeck extends CardsWrapper {
-    constructor(domElement, options = { angle: 35, offset: -2, animationOffset: -2, cardWidth: 6 }) {
+    constructor(domElement, options = { angle: 35, offset: -2, animationOffset: -2, cardWidth: 6, needToRecalculateMargins: false }) {
         super(domElement);
 
         this.angle = options.angle;
@@ -544,6 +544,8 @@ class CardsPlayableDeck extends CardsWrapper {
         this.animationOffset = options.animationOffset;
         this.offset = options.offset;
         this.cardWidth = options.cardWidth;
+        this.needToRecalculateMargins = options.needToRecalculateMargins;
+
         this.canRemove = true;
 
         this.emptyCard = `<div id="card_king_clubs_01" class="card-element empty"
@@ -651,7 +653,8 @@ class CardsPlayableDeck extends CardsWrapper {
                 card.domElement.style.scale = ''
                 card.domElement.style.zIndex = '';
 
-                this.updateMargins(this.cards.length);
+                if (this.needToRecalculateMargins)
+                    this.updateMargins(this.cards.length);
 
                 if (options?.openOnFinish) {
                     card.open();
@@ -671,8 +674,8 @@ class CardsPlayableDeck extends CardsWrapper {
             });
         }
 
-        const etm = this.getCurrentMargin(this.cards.length + 1);
-        console.log(`etm ${etm}`);
+        const etm = this.needToRecalculateMargins ? this.getCurrentMargin(this.cards.length + 1) : this.offset;
+
         DOChangeValue(() => 0, (newValue) => {
             emptyElement.style.width = (newValue) + 'vw';
             emptyElement.style.minWidth = (newValue) + 'vw';

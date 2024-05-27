@@ -27,6 +27,7 @@ import { RewardReceiveScreen } from './src/scripts/navigation/screens/rewardRece
 import { PlaygroundScreen } from './src/scripts/navigation/screens/playgroundScreen.js';
 import { GameFinishScreen } from './src/scripts/navigation/screens/gameFinishScreen.js';
 import { ExitGameScreen } from './src/scripts/navigation/screens/exitGameScreen.js';
+import { GlobalExitGameScreen } from './src/scripts/navigation/screens/globalGameExitScreen.js';
 
 input ??= new DirectionalInput();
 
@@ -53,12 +54,13 @@ const mainScreen = new Screen({
     navigation.registerScreen(bonusesScreen);
     navigation.registerScreen(settingsScreen);
     navigation.registerScreen(tutorialOffsetScreen);
+    navigation.registerScreen(exitGameScreen);
 
     backActionHandler.onSigleBack = () => {
       navigation.pop();
     };
     backActionHandler.onDoubleBack = () => {
-      navigation.push(dailyBonusesScreen);
+      navigation.push(exitGameScreen);
     };
   },
   onUnfocus: () => { },
@@ -259,6 +261,20 @@ const exitScreen = new Screen({
   }, screenLogic: new ExitGameScreen({ screenRoot: exitPopupRoot })
 });
 
+const exitGamePopupRoot = document.getElementById('global-exit-popup-tab');
+const exitGameScreen = new Screen({
+  id: 'exitGlobalGameScreen',
+  isPopup: true,
+  element: exitGamePopupRoot,
+  closeButtons: [exitGamePopupRoot.querySelector('.exit-no')],
+  onFocus: () => {
+    dynamicFontChanger.update();
+    const elements = getInputElements(exitGameScreen.element, { tags: ['button'] });
+    input.updateQueryCustom(elements, elements[1]);
+  }, onUnfocus: () => {
+  }, screenLogic: new GlobalExitGameScreen({ screenRoot: exitGamePopupRoot })
+});
+
 const tutorialPopupRoot = document.getElementById('tutorial-popup-tab');
 const tutorialOffsetScreen = new Screen({
   element: tutorialPopupRoot,
@@ -297,6 +313,7 @@ const playgroundScreen = new Screen({
     navigation.openedScreens.push(playgroundScreen);
     navigation.registerScreen(gameFinishScreen);
     navigation.registerScreen(exitScreen);
+    navigation.registerScreen(exitGameScreen);
 
     backActionHandler.onSigleBack = () => {
       if (navigation.openedScreens[navigation.openedScreens.length - 1] == playgroundScreen) {
@@ -309,8 +326,9 @@ const playgroundScreen = new Screen({
         navigation.pop();
       }
     };
+    
     backActionHandler.onDoubleBack = () => {
-      // navigation.push(dailyBonusesScreen);
+      navigation.push(exitGameScreen);
     };
 
     input.loadFromSavedPull('tv-gameplay');
@@ -340,13 +358,7 @@ if (exitButton != null) {
 // }
 
 navigation.push(mainScreen);
-// navigation.push(gameFinishScreen, { state: 'win', reward: { type: Items.Currency, count: 1000 } });
-
-// setTimeout(() => {
-//   navigation.push(playgroundScreen)
-// }, 1000)
 
 backActionHandler = new BackActionHandler(input);
 
-// export { setupLanguageSelector }
 dynamicFontChanger = new DynamicFontChanger();

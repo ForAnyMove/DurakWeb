@@ -106,7 +106,7 @@ class PlaygroundScreen extends ScreenLogic {
         const elementStyle = window.getComputedStyle(playerCardsDeck);
         const margin = parseFloat(elementStyle.getPropertyValue('--cards-margin'));
         const width = parseFloat(elementStyle.getPropertyValue('--cards-width'));
-        const playerCardsWrapper = new CardsPlayableDeck(playerCardsDeck, { angle: 35, offset: margin, cardWidth: width });
+        const playerCardsWrapper = new CardsPlayableDeck(playerCardsDeck, { angle: 35, offset: margin, cardWidth: width, needToRecalculateMargins: true });
         player = new Player(playerCardsWrapper);
         player.setStateText(playerCardsDeck.parentElement.querySelector('.state'));
         player.id = 'player';

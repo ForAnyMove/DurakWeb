@@ -1427,6 +1427,7 @@ class BattleFlow {
             let tossCanBeCycled = false;
 
             const removeEntity = (entity, isAttack) => {
+                if (this.mainDeck.cards.length > 0) return;
                 log(`No cards in entity ${entity.id} CC:${entity.wrapper.cards.length}`, 'battleFlow');
                 if (isAttack && attackEntities.includes(entity)) {
                     attackEntities.splice(attackEntities.indexOf(entity), 1);

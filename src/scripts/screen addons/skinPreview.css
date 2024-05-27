@@ -43,7 +43,7 @@ a.selected>button {
 .skin-card-back,
 .background-card {
     background-color: #ffffff48;
-    background-image: url('../../../Sprites/Frames/Used_Frame_04.png');
+    background-image: url('./Sprites/Frames/Used_Frame_04.png');
     background-size: 150%;
     background-position: center;
     width: 18vh;
@@ -62,14 +62,14 @@ a.selected>button {
 .skin-card-back {
     height: 25vh;
     justify-content: flex-end;
-    background-image: url('../../../Sprites/Card Backs/Card_Backs.png');
+    background-image: url('./Sprites/Card Backs/Card_Backs.png');
 }
 
 .background-card {
     height: 20vh;
     width: 36vh;
     justify-content: flex-end;
-    background-image: url('../../../Sprites/Card Backs/Card_Backs.png');
+    background-image: url('./Sprites/Card Backs/Card_Backs.png');
 }
 
 .check-icon,
@@ -105,7 +105,7 @@ a.selected>button {
 }
 
 #play-btn {
-    background-image: url('../../../Sprites/Buttons/Used_Button_03.png');
+    background-image: url('./Sprites/Buttons/Used_Button_03.png');
     font-size: 1.8vh;
 }
 

@@ -99,6 +99,7 @@ class PlaygroundScreen extends ScreenLogic {
 
                 console.log(bot);
             }
+
         }
 
         const playerCardsDeck = this.screenRoot.querySelector('.player-cards-container');
@@ -189,19 +190,19 @@ class PlaygroundScreen extends ScreenLogic {
         statistics.gameCount.overall++;
         switch (rules.entityMode) {
             case EntityMode.Self:
-                statistics.gameCount.byEntityMode[0]++;
+                statistics.gameCount.byEntityMode[0].count++;
                 break;
             case EntityMode.Pair:
-                statistics.gameCount.byEntityMode[1]++;
+                statistics.gameCount.byEntityMode[1].count++;
                 break;
         }
 
         switch (rules.gameMode) {
             case GameMode.DurakDefault:
-                statistics.gameCount.byGameMode[0]++;
+                statistics.gameCount.byGameMode[0].count++;
                 break;
             case GameMode.DurakTransfare:
-                statistics.gameCount.byGameMode[1]++;
+                statistics.gameCount.byGameMode[1].count++;
                 break;
         }
 
@@ -289,7 +290,6 @@ class PlaygroundScreen extends ScreenLogic {
             }
         }
 
-        console.log(statistics);
         updateStatistics();
     }
 

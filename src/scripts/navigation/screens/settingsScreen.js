@@ -30,14 +30,14 @@ class SettingsScreen extends ScreenLogic {
 
                 audioManager.setMusicState(stateIsTrue);
             });
-        const sortButton = new StateButton(
-            this.selectableElements,
-            this.screenRoot.querySelectorAll('.settings_tune-switch-container')[2],
-            false,
-            (stateIsTrue) => {
-                const checkbox = sortButton.element.querySelector('.settings_checkbox');
-                checkbox.src = stateIsTrue ? checkedIcon : uncheckedIcon;
-            });
+        // const sortButton = new StateButton(
+        //     this.selectableElements,
+        //     this.screenRoot.querySelectorAll('.settings_tune-switch-container')[2],
+        //     false,
+        //     (stateIsTrue) => {
+        //         const checkbox = sortButton.element.querySelector('.settings_checkbox');
+        //         checkbox.src = stateIsTrue ? checkedIcon : uncheckedIcon;
+        //     });
 
         const gameSpeedButtonContainer = this.screenRoot.querySelectorAll('.settings_slider-container_dark')[0];
         const gameSpeedSelector = new SequentlyChoosingButton(

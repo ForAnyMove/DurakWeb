@@ -35,12 +35,25 @@ export default class DirectionalInput {
         return true;
     }
 
+    clearSavedState = function (key) {
+        for (let i = 0; i < this.saveSelectablePull.length; i++) {
+            const pull = this.saveSelectablePull[i];
+            if (pull.key == key) {
+                this.saveSelectablePull.splice(i, 1);
+                return;
+            }
+        }
+    }
+
     saveSelectableState = function (key, selectables, selected) {
-        if (this.saveSelectablePull.some(item => item.key == key)) {
-            this.saveSelectablePull.selectables = selectables;
-            this.saveSelectablePull.selected = selected;
-            console.log('wporijgpwoeirjgpoweirjgpweoirjgwpoeirjgwpoeirjgp');
-            return;
+        for (let i = 0; i < this.saveSelectablePull.length; i++) {
+            const pull = this.saveSelectablePull[i];
+            if (pull.key == key) {
+                this.saveSelectablePull[i].selectables = selectables;
+                this.saveSelectablePull[i].selected = selected;
+                console.log('wporijgpwoeirjgpoweirjgpweoirjgwpoeirjgwpoeirjgp');
+                return;
+            }
         }
 
         this.saveSelectablePull.push({

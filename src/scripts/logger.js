@@ -9,7 +9,7 @@ let logModules = [
     },
     { saveSystem: false },
     { achievements: false },
-    { levelStarter: true },
+    { levelStarter: false },
     {
         user: [{
             details: false

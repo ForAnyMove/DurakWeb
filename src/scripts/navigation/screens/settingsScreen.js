@@ -40,7 +40,7 @@ class SettingsScreen extends ScreenLogic {
         //     });
 
         const gameSpeedButtonContainer = this.screenRoot.querySelectorAll('.settings_slider-container_dark')[0];
-        const gameSpeedSelector = new SequentlyChoosingButton(
+        this.gameSpeedSelector = new SequentlyChoosingButton(
             this.selectableElements,
             gameSpeedButtonContainer,
             gameSpeedButtonContainer.querySelector('.arrow-left'),
@@ -115,6 +115,10 @@ class SettingsScreen extends ScreenLogic {
 
         this.selectableElements.push({ element: languageButton });
 
+    }
+
+    onScreenLoaded() {
+        this.gameSpeedSelector.select(globalGameSpeed - 1);
     }
 }
 

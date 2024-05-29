@@ -806,6 +806,7 @@ class Player extends Entity {
             this.cardPlacedByUserEvent.addListener(userMoved);
         })
 
+        this.clearSelectables();
         return this.wrapper.cards.length == 0 ? MoveResult.SuccessNoCards : MoveResult.Success;
     }
 
@@ -857,8 +858,9 @@ class Player extends Entity {
 
                 const moveZone = (zone) => {
                     if (battleground.tryBeatZone(selectedCard, zone)) {
+                        this.cardPrePlacedByUserEvent.invoke();
                         zone.wrapper.translateCard(selectedCard);
-                        player.cardPlacedByUserEvent.invoke();
+                        this.cardPlacedByUserEvent.invoke();
 
                         zones.forEach((item) => { item.wrapper.domElement.onclick = null });
                         elements.forEach((item) => { item.element.onclick = null });
@@ -872,11 +874,26 @@ class Player extends Entity {
                     return false;
                 }
 
-                console.log(this.state);
-                if (zones.length == 1 && this.state != State.DefendCanTransfare) {
+                const transfare = () => {
+                    if (selectedCard.suit == trumpSuit && !selectedCard.isUsedAsTrumpTransfare) {
+                        this.cardPrePlacedByUserEvent.invoke();
+                        this.cardPlacedByUserEvent.invoke({ transfare: true, card: selectedCard });
+                        selectedCard.isUsedAsTrumpTransfare = true;
+
+                        return;
+                    }
+
+                    this.cardPrePlacedByUserEvent.invoke();
+                    const zone = battleground.createZone();
+                    zone.wrapper.translateCard(selectedCard);
+                    this.cardPlacedByUserEvent.invoke({ transfare: true, card: null });
+                    return;
+                }
+
+                if (zones.length == 1 && (this.state != State.DefendCanTransfare || !battleground.canTransfare(selectedCard))) {
                     moveZone(zones[0]);
                     return;
-                } else if (zones.length > 1 && this.state != State.DefendCanTransfare) {
+                } else if (zones.length > 1 && (this.state != State.DefendCanTransfare || !battleground.canTransfare(selectedCard))) {
                     let variants = 0;
                     for (let i = 0; i < zones.length; i++) {
                         const zone = zones[i];
@@ -908,6 +925,18 @@ class Player extends Entity {
                         moveZone(zone);
                     }
                 }
+                if (this.state == State.DefendCanTransfare && battleground.canTransfare(selectedCard)) {
+                    if (selectables.length > 1) {
+                        selectables.push({
+                            element: battleground.playgroundZone.querySelector('.card-transfare-hint-static'),
+                            onSubmit: () => {
+                                transfare();
+                            }
+                        });
+                    } else {
+                        transfare();
+                    }
+                }
 
                 // input.deselect();
                 input.updateQueryCustom(selectables, selectables[1]);
@@ -930,6 +959,7 @@ class Player extends Entity {
             }
 
             passButton.onclick = async () => {
+                transfareView?.remove();
                 result = DefendResult.Fail;
                 p();
             }
@@ -980,6 +1010,7 @@ class Player extends Entity {
         this.cardPlacedByUserEvent.removeAllListeners();
         this.cardPrePlacedByUserEvent.removeAllListeners();
         passButton.style.display = 'none';
+        this.clearSelectables();
         return result;
     }
 
@@ -1065,6 +1096,7 @@ class Player extends Entity {
             result = TossResult.Success;
         }
 
+        this.clearSelectables();
         return result;
     }
 
@@ -1157,7 +1189,8 @@ class Player extends Entity {
         console.log(`${elements.map(i => `\n${i.element.id}`)}`.replaceAll(',', ''));
         console.log('\n');
         input.saveSelectableState('tv-gameplay', elements, () => {
-            return elements[currentSelected]
+            console.log(`Loading from save to INPUT ${elements}`);
+            return elements[currentSelected];
         })
 
         setTimeout(() => {
@@ -1168,12 +1201,15 @@ class Player extends Entity {
 
     clearSelectables = () => {
         input.updateQueryCustom([], null);
+        input.deselect();
+        input.clearSavedState('tv-gameplay');
     }
 }
 
 class BattleFlow {
     constructor(entities, rules) {
         this.entities = entities;
+        this.staticEntities = [].concat(entities);
 
         this.result = createLevel(rules.cardsCount);
         this.mainDeck = this.result.mainCardColumn;
@@ -1323,6 +1359,10 @@ class BattleFlow {
         this.finishCallback.invoke({ winners: this.winners, loser: this.entities.length == 0 ? null : this.entities[0] })
     }
 
+    playerFinish() {
+        this.finishCallback.invoke({ winners: this.winners, loser: this.entities.length == 0 ? null : this.entities[this.entities.length - 1] })
+    }
+
     clearCycle() {
         for (let i = 0; i < this.entities.length; i++) {
             const entity = this.entities[i];
@@ -1338,6 +1378,11 @@ class BattleFlow {
 
         if (this.entities.length == 1) {
             this.finish();
+            return;
+        }
+
+        if (this.rules.entityMode == EntityMode.Self ? this.winners.some(i => i.id == 'player') : (this.winners.some(i => i.id == 'player') && this.winners.some(i => i.id == 'playerSupport'))) {
+            this.playerFinish();
             return;
         }
 
@@ -1421,9 +1466,9 @@ class BattleFlow {
             let currentDefenceEntityQueue = 0;
 
             let tossCount = 0;
-            // let maxTossCount = Math.min(defendEntities.wrapper.cards.length - 1, 5);
+            let maxTossCount = Math.min(defendEntities[0].wrapper.cards.length - 1, 5);
 
-            let maxTossCount = this.rules.entityMode == EntityMode.Self ? Math.min(defendEntities[0].wrapper.cards.length - 1, 5) : 5;
+            // let maxTossCount = this.rules.entityMode == EntityMode.Self ? Math.min(defendEntities[0].wrapper.cards.length - 1, 5) : 5;
             let tossCanBeCycled = false;
 
             const removeEntity = (entity, isAttack) => {
@@ -1519,7 +1564,7 @@ class BattleFlow {
 
             const defend = async (canTransfare) => {
 
-                const canTransfareByRules = battleground.canTransfareByRule(defendEntities[currentDefenceEntityQueue].wrapper.cards); // remake
+                const canTransfareByRules = battleground.canTransfareByRule((defendEntities.length > 1 ? defendEntities[(currentDefenceEntityQueue + 1) % defendEntities.length] : attackEntities[attackEntities.length - 1]).wrapper.cards); // remake
                 if (!canTransfareByRules || this.rules.gameMode != GameMode.DurakTransfare) {
                     canTransfare = false;
                 }
@@ -1624,10 +1669,10 @@ class BattleFlow {
         }
 
         const getEntitiesFrom = (entity) => {
-            const index = this.entities.indexOf(entity);
+            const index = this.staticEntities.indexOf(entity);
             const array = [];
-            for (let i = 0; i < this.entities.length; i++) {
-                const entity = this.entities[(index + i) % this.entities.length];
+            for (let i = 0; i < this.staticEntities.length; i++) {
+                const entity = this.staticEntities[(index + i) % this.staticEntities.length];
                 array.push(entity);
             }
 
@@ -1654,6 +1699,7 @@ class BattleFlow {
         });
 
         battleground.clear();
+        battleground.playgroundZone.querySelector('.card-transfare-hint-static')?.remove();
     }
 }
 

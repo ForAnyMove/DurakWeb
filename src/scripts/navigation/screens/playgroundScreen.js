@@ -11,6 +11,7 @@ import { initialLocale } from "../../../localization/translator.js";
 import { nicknames } from "../../data/namesDatabase.js";
 import { avatars } from "../../data/avatarDatabase.js";
 import { TutorialFlow } from "../../tutorialFlow.js";
+import { showInterstitial } from "../../sdk/sdk.js";
 
 class PlaygroundScreen extends ScreenLogic {
     onCreate() {
@@ -80,7 +81,7 @@ class PlaygroundScreen extends ScreenLogic {
 
             const bot = new Bot(wrapper);
             bot.setStateText(element.parentElement.querySelector('.state'));
-            bot.id = `bot_${i + 1}`;
+            bot.id = (rules.entityMode == EntityMode.Pair && i == 1) ? 'playerSupport' : `bot_${i + 1}`;
             this.bots.push(bot);
         }
 
@@ -117,6 +118,7 @@ class PlaygroundScreen extends ScreenLogic {
         playerBot.id = 'player'
 
         if (isTutorial) {
+            globalGameSpeed = 1;
             this.battleFlow = new TutorialFlow([player].concat(this.bots), rules);
         } else {
 
@@ -124,7 +126,8 @@ class PlaygroundScreen extends ScreenLogic {
 
             this.battleFlow = new BattleFlow([player].concat(this.bots), rules);
             this.battleFlow.finishCallback.addListener((result) => {
-                console.log(result);
+                input.clearSavedState('tv-gameplay');
+
                 const { winners, loser } = result;
                 if (loser == null) {
                     // draw
@@ -136,7 +139,7 @@ class PlaygroundScreen extends ScreenLogic {
 
                 let isWon = false;
                 if (rules.entityMode == EntityMode.Pair) {
-                    if ((winners.some(i => i.id == player.id) && winners.some(i => i.id == this.bots[1].id))) {
+                    if ((winners.some(i => i.id == player.id) && winners.some(i => i.id == 'playerSupport'))) {
                         isWon = true;
                     }
                 } else if (winners.some(i => i.id == player.id)) {
@@ -291,6 +294,7 @@ class PlaygroundScreen extends ScreenLogic {
         }
 
         updateStatistics();
+        showInterstitial();
     }
 
     onScreenUnloaded() {

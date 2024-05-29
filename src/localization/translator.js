@@ -4,12 +4,7 @@ import { getDefaultLanguage } from "../scripts/sdk/sdk.js";
 import { translations } from "./translations.js";
 
 const saveKey = 'language';
-let initialLocale = load(saveKey, null);
-
-if (initialLocale == null) {
-    initialLocale = await getDefaultLanguage();
-    save(saveKey, initialLocale);
-}
+let initialLocale = null;
 
 function getTranslation(language, key) {
     const concreteLanguageTranslation = translations[language];
@@ -166,7 +161,14 @@ function updatePage(locale) {
     updateInContainer(document, locale);
 }
 
-function createEvent() {
+async function createEvent() {
+    initialLocale = load(saveKey, null);
+
+    if (initialLocale == null) {
+        initialLocale = await getDefaultLanguage();
+        save(saveKey, initialLocale);
+    }
+
     languageChangeEvent = new Action();
     languageChangeEvent.addListener((locale) => {
         initialLocale = locale;

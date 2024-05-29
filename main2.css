@@ -4,6 +4,9 @@ body {
   background-size: 100% 100%;
   overflow: hidden;
 }
+:focus {
+  outline: none;
+}
 
 h1,
 h2,
@@ -2755,7 +2758,7 @@ button.selected {
 
 .tutorial-flow-card-container.suitable::after {
   content: "";
-  background-image: url('./Sprites/Custom Icons/Check_Green.Png');
+  background-image: url('./Sprites/Custom Icons/Check_Green.png');
   background-size: 100% 100%;
   width: 5vw;
   height: 5vw;
@@ -2768,7 +2771,7 @@ button.selected {
 
 .tutorial-flow-card-container.non-suitable::after {
   content: "";
-  background-image: url('./Sprites/Custom Icons/Close_Red.Png');
+  background-image: url('./Sprites/Custom Icons/Close_Red.png');
   background-size: 100% 100%;
   width: 5vw;
   height: 5vw;
@@ -2889,7 +2892,7 @@ button.selected {
 .card-transfare-hint::after,
 .card-transfare-hint-static::after {
   content: "";
-  background-image: url('./Sprites/Custom Icons/Reverse.Png');
+  background-image: url('./Sprites/Custom Icons/Reverse.png');
   background-size: 100% 100%;
   width: 4vw;
   height: 4vw;

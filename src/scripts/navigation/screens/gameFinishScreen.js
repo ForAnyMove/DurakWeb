@@ -2,14 +2,21 @@ import { setRemoveClass } from "../../helpers.js";
 import { ScreenLogic } from "../navigation.js";
 
 class GameFinishScreen extends ScreenLogic {
+    onCreate() {
+        const continueButton = this.screenRoot.querySelector('.continue-button');
+
+        this.defaultSelectedElement = { element: continueButton }
+        this.selectableElements.push(this.defaultSelectedElement);
+
+        continueButton.onclick = () => {
+            navigation.pop();
+            navigation.pop();
+        }
+    }
+
     onScreenLoaded(parameters) {
         if (parameters == null) return;
         const { state, reward } = parameters;
-
-        const continueButton = this.screenRoot.querySelector('.continue-button');
-
-        this.defaultSelectedElement = { element: continueButton };
-        this.selectableElements.push(this.defaultSelectedElement);
 
         const popupContainer = this.screenRoot.querySelector('.end-popup_container');
         const betText = this.screenRoot.querySelector('.end-popup_bet-value');
@@ -26,11 +33,6 @@ class GameFinishScreen extends ScreenLogic {
         if (reward != null) {
             user.addItem(reward.type, reward.count);
             parameters.reward = null;
-        }
-
-        continueButton.onclick = () => {
-            navigation.pop();
-            navigation.pop();
         }
     }
 }

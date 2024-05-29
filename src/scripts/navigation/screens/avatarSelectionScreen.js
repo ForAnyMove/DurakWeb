@@ -5,6 +5,7 @@ import { ScreenLogic } from "../navigation.js";
 
 class AvatarSelectionScreen extends ScreenLogic {
     onCreate() {
+        const icon = this.screenRoot.querySelector('.choose-avatar_avatar-icon');
         selectedAvatarIndex = load('user_avatar', 0);
 
         this.defaultSelectedElement = { element: this.screenRoot.querySelector('.choose-avatar-tab-close-button'), }
@@ -15,10 +16,9 @@ class AvatarSelectionScreen extends ScreenLogic {
             null,
             this.screenRoot.querySelector('.arrow-left'),
             this.screenRoot.querySelector('.arrow-right'),
-            0,
+            selectedAvatarIndex,
             avatars.length,
             (level) => {
-                const icon = this.screenRoot.querySelector('.choose-avatar_avatar-icon');
                 icon.src = avatars[level];
 
                 selectedAvatarIndex = level;

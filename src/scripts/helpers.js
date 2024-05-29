@@ -155,6 +155,7 @@ function getIconByPattern(pattern) {
 
 function createElement(id, classList, styleList, parent) {
     const element = document.createElement(id);
+    element.tabIndex = "-1";
 
     if (element == null) return null;
 
@@ -190,6 +191,7 @@ function createImage(classList, styleList, parent, src) {
 
 function createButton(classList, styleList, parent, onClick) {
     const element = createElement('button', classList, styleList, parent);
+
     if (onClick != null) {
         element.onclick = function () {
             onClick();

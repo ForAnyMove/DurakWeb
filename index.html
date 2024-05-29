@@ -4,10 +4,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <title>Durak</title>
   <link rel="stylesheet" href="general.css" />
   <link rel="stylesheet" href="src/loader/loader.css">
   <link rel="stylesheet" href="main2.css" />
+
+  <script src="https://yandex.ru/games/sdk/v2"></script>
 </head>
 
 <body>
@@ -33,14 +35,14 @@
   </div>
   <div class="background-mask"></div>
   <section class="main-tab" id="main-tab">
-    <button class="open-profile-tab-btn profile-tab-open-button">
+    <button tabindex="-1" class="open-profile-tab-btn profile-tab-open-button">
       <img src="./Sprites/Desktop - дурак main/Профиль 4x -2007492933.png" width="50px" alt="Profile"
         class="open-profile-tab-btn-icon" />
       <div class="switch-tab-btn-interactive-counter-container">
         <span class="switch-tab-btn-interactive-counter">1</span>
       </div>
     </button>
-    <button class="open-settings-tab-btn settings-tab-open-button">
+    <button tabindex="-1" class="open-settings-tab-btn settings-tab-open-button">
       <img src="./Sprites/Desktop - дурак main/Настройки 4x -192305961.png" width="50px" alt="Settings"
         class="open-settings-tab-btn-icon" />
       <div class="switch-tab-btn-interactive-counter-container hidden-all">
@@ -51,13 +53,13 @@
       <img src="./Sprites/Desktop - дурак main/Logo/EN.png" alt="Logo" width="200px" class="logo" />
     </div>
     <div class="play-btn-container">
-      <button class="play-btn start-game-tab-open-button">
+      <button tabindex="-1" class="play-btn start-game-tab-open-button">
         <span class="play-btn-title" lang="MainMenu/MainPanel/PlayTitle"></span>
       </button>
     </div>
     <div class="switch-tabs-btns-container">
       <div class="switch-tab-btn-container">
-        <button class="switch-tab-btn achievements-tab-open-button">
+        <button tabindex="-1" class="switch-tab-btn achievements-tab-open-button">
           <img src="./Sprites/Desktop - дурак main/Режим Испытания 4x 689633518.png" alt="" class="switch-tab-btn-icon"
             width="50px" />
           <div class="switch-tab-btn-interactive-counter-container">
@@ -69,7 +71,7 @@
         </div>
       </div>
       <div class="switch-tab-btn-container">
-        <button class="switch-tab-btn skins-tab-open-button">
+        <button tabindex="-1" class="switch-tab-btn skins-tab-open-button">
           <img src="./Sprites/Desktop - дурак main/Скины 4x -906074328.png" alt="" class="switch-tab-btn-icon"
             width="50px" />
           <div class="switch-tab-btn-interactive-counter-container hidden-all">
@@ -81,7 +83,7 @@
         </div>
       </div>
       <div class="switch-tab-btn-container">
-        <button class="switch-tab-btn bonuses-tab-open-button">
+        <button tabindex="-1" class="switch-tab-btn bonuses-tab-open-button">
           <img src="./Sprites/Desktop - дурак main/Бонусы 4x -1211469916.png" alt="" class="switch-tab-btn-icon"
             width="50px" />
           <div class="switch-tab-btn-interactive-counter-container hidden-all">
@@ -95,11 +97,11 @@
     </div>
   </section>
   <section class="profile-tab" id="profile-tab">
-    <button class="open-profile-tab-btn choose-avatar-tab-open-button" id="choose-avatar">
+    <button tabindex="-1" class="open-profile-tab-btn choose-avatar-tab-open-button" id="choose-avatar">
       <img src="./Sprites/Desktop - дурак main/Профиль 4x -2007492933.png" width="50px" alt="Profile"
         class="open-profile-tab-btn-icon" />
     </button>
-    <button class="arrow-back-btn profile-tab-close-button">
+    <button tabindex="-1" class="arrow-back-btn profile-tab-close-button">
       <img src="./Sprites/Mutual/button back 4x -525781139.png" width="50px" alt="Arrow-back"
         class="arrow-back-btn-icon" />
     </button>
@@ -111,10 +113,10 @@
         <h2 class="profile-header" lang="MainMenu/MainPanel/ProfileTitle"></h2>
       </div>
       <div class="profile-subtab-switch-container">
-        <button class="profile-subtab-switch-btn profile-subtab-switch-btn_active">
+        <button tabindex="-1" class="profile-subtab-switch-btn profile-subtab-switch-btn_active">
           <span class="profile-subtab-switch-btn-title" lang="MainMenu/MainPanel/Status"></span>
         </button>
-        <button class="profile-subtab-switch-btn">
+        <button tabindex="-1" class="profile-subtab-switch-btn">
           <span class="profile-subtab-switch-btn-title" lang="MainMenu/MainPanel/Statisics"></span>
         </button>
       </div>
@@ -342,11 +344,11 @@
     </div>
   </section>
   <section class="settings-tab" id="settings-tab">
-    <button class="arrow-back-btn settings-tab-close-button">
+    <button tabindex="-1" class="arrow-back-btn settings-tab-close-button">
       <img src="./Sprites/Mutual/button back 4x -525781139.png" width="50px" alt="Arrow-back"
         class="arrow-back-btn-icon" />
     </button>
-    <button class="tutorial-btn">
+    <button tabindex="-1" class="tutorial-btn">
       <span class="tutorial-btn-title" lang="MainMenu/Content/Tutorial"></span>
     </button>
     <div class="version-container">
@@ -432,7 +434,7 @@
     </div>
   </section>
   <section class="achievements-tab" id="achievements-tab">
-    <button class="arrow-back-btn achievements-tab-close-button">
+    <button tabindex="-1" class="arrow-back-btn achievements-tab-close-button">
       <img src="./Sprites/Mutual/button back 4x -525781139.png" width="50px" alt="Arrow-back"
         class="arrow-back-btn-icon" />
     </button>
@@ -446,7 +448,7 @@
     </div>
   </section>
   <section class="skins-tab" id="skins-tab">
-    <button class="arrow-back-btn skins-tab-close-button">
+    <button tabindex="-1" class="arrow-back-btn skins-tab-close-button">
       <img src="./Sprites/Mutual/button back 4x -525781139.png" width="50px" alt="Arrow-back"
         class="arrow-back-btn-icon" />
     </button>
@@ -456,21 +458,21 @@
     <nav class="skins-navigation">
       <ul class="skins-nav-list">
         <li class="categories-btn-container">
-          <button class="categories-btn categories-btn-title_active" id="skin-sw-button">
+          <button tabindex="-1" class="categories-btn categories-btn-title_active" id="skin-sw-button">
             <div class="categories-btn-title-container">
               <span class="categories-btn-title" lang="MainMenu/Content/Type/Skins"></span>
             </div>
           </button>
         </li>
         <li class="categories-btn-container">
-          <button class="categories-btn" id="background-sw-button">
+          <button tabindex="-1" class="categories-btn" id="background-sw-button">
             <div class="categories-btn-title-container">
               <span class="categories-btn-title" lang="MainMenu/Content/Type/Backgrounds"></span>
             </div>
           </button>
         </li>
         <li class="categories-btn-container">
-          <button class="categories-btn" id="skin-back-sw-button">
+          <button tabindex="-1" class="categories-btn" id="skin-back-sw-button">
             <div class="categories-btn-title-container">
               <span class="categories-btn-title" lang="MainMenu/Content/Type/Backs"></span>
             </div>
@@ -489,7 +491,7 @@
     </div>
   </section>
   <section class="bonuses-tab" id="bonuses-tab">
-    <button class="arrow-back-btn bonuses-tab-close-button">
+    <button tabindex="-1" class="arrow-back-btn bonuses-tab-close-button">
       <img src="./Sprites/Mutual/button back 4x -525781139.png" width="50px" alt="Arrow-back"
         class="arrow-back-btn-icon" />
     </button>
@@ -623,7 +625,7 @@
     </div>
   </section>
   <section class="start-game-tab" id="start-game-tab">
-    <button class="arrow-back-btn start-game-tab-close-button">
+    <button tabindex="-1" class="arrow-back-btn start-game-tab-close-button">
       <img src="./Sprites/Mutual/button back 4x -525781139.png" width="50px" alt="Arrow-back"
         class="arrow-back-btn-icon" />
     </button>
@@ -639,18 +641,18 @@
         <h2 class="start-game_header" lang="MainMenu/PreGamePanel/Title"></h2>
       </div>
       <div class="start-game_mode-btns-container">
-        <button class="start-game_switch-mode-btn start-game_switch-mode-btn_active">
+        <button tabindex="-1" class="start-game_switch-mode-btn start-game_switch-mode-btn_active">
           <span class="start-game_switch-mode-title" lang="MainMenu/PreGamePanel/Tilting"></span>
         </button>
-        <button class="start-game_switch-mode-btn">
+        <button tabindex="-1" class="start-game_switch-mode-btn">
           <span class="start-game_switch-mode-title" lang="MainMenu/PreGamePanel/Transit"></span>
         </button>
       </div>
       <div class="start-game_mode-btns-container">
-        <button class="start-game_switch-mode-btn start-game_switch-mode-btn_active">
+        <button tabindex="-1" class="start-game_switch-mode-btn start-game_switch-mode-btn_active">
           <span class="start-game_switch-mode-title" lang="MainMenu/PreGamePanel/Single"></span>
         </button>
-        <button class="start-game_switch-mode-btn">
+        <button tabindex="-1" class="start-game_switch-mode-btn">
           <span class="start-game_switch-mode-title" lang="MainMenu/PreGamePanel/2x2ModeTitle"></span>
         </button>
       </div>
@@ -699,9 +701,10 @@
           </div>
           <span class="start-game_bet-value">100</span>
         </div>
-        <input type="range" min="1" max="100" value="0" class="start-game_range-container" id="bet-slider">
+        <input tabindex="-1" type="range" min="1" max="100" value="0" class="start-game_range-container"
+          id="bet-slider">
       </div>
-      <button class="start-game_play-btn playground-tab-open-button">
+      <button tabindex="-1" class="start-game_play-btn playground-tab-open-button">
         <span class="start-game_play-btn-title" lang="MainMenu/MainPanel/PlayTitle"></span>
       </button>
     </div>
@@ -840,10 +843,10 @@
         <span class="tutorial-popup_title" lang="PreGamePanelMainMenu/TutorialAsk/DoYouWant"></span>
       </div>
       <div class="agree-disagree-panel">
-        <button class="tutorial-popup-btn yes">
+        <button tabindex="-1" class="tutorial-popup-btn yes">
           <span class="tutorial-popup-btn-title" lang="PreGamePanelMainMenu/TutorialAsk/Yes"></span>
         </button>
-        <button class="tutorial-popup-btn no">
+        <button tabindex="-1" class="tutorial-popup-btn no">
           <span class="tutorial-popup-btn-title" lang="PreGamePanelMainMenu/TutorialAsk/No"></span>
         </button>
       </div>
@@ -859,10 +862,10 @@
         <span class="exit-popup_title-subtitle" lang="Panels/Exit/YourBetWillBe"></span>
       </div>
       <div class="agree-disagree-panel">
-        <button class="tutorial-popup-btn exit-yes">
+        <button tabindex="-1" class="tutorial-popup-btn exit-yes">
           <span class="tutorial-popup-btn-title" lang="PreGamePanelMainMenu/TutorialAsk/Yes"></span>
         </button>
-        <button class="tutorial-popup-btn exit-no">
+        <button tabindex="-1" class="tutorial-popup-btn exit-no">
           <span class="tutorial-popup-btn-title" lang="PreGamePanelMainMenu/TutorialAsk/No"></span>
         </button>
       </div>
@@ -875,10 +878,10 @@
         <span class="exit-popup_title" lang="Panels/Exit/YouSure"></span>
       </div>
       <div class="agree-disagree-panel">
-        <button class="tutorial-popup-btn exit-yes">
+        <button tabindex="-1" class="tutorial-popup-btn exit-yes">
           <span class="tutorial-popup-btn-title" lang="PreGamePanelMainMenu/TutorialAsk/Yes"></span>
         </button>
-        <button class="tutorial-popup-btn exit-no">
+        <button tabindex="-1" class="tutorial-popup-btn exit-no">
           <span class="tutorial-popup-btn-title" lang="PreGamePanelMainMenu/TutorialAsk/No"></span>
         </button>
       </div>
@@ -909,11 +912,11 @@
       </div>
       <!-- Добавить контейнеру класс draw-without-ads для удаления кнопки рекламы и растяжения оставшейся кнопки на всю ширину-->
       <div class="agree-disagree-panel draw-without-ads">
-        <button class="tutorial-popup-btn draw-with-ads_btn">
+        <button tabindex="-1" class="tutorial-popup-btn draw-with-ads_btn">
           <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="add-bounty-icon">
           <span class="tutorial-popup-btn-title">X2</span>
         </button>
-        <button class="tutorial-popup-btn continue-button">
+        <button tabindex="-1" class="tutorial-popup-btn continue-button">
           <span class="tutorial-popup-btn-title" lang="PreGamePanelMainMenu/TutorialAsk/Yes"></span>
         </button>
       </div>
@@ -998,7 +1001,7 @@
   </section>
   <section class="playground-tab" id="playground-tab">
     <div id="card-release-wrapper"></div>
-    <a class="arrow-back-btn-link playground-tab-close-button">
+    <a tabindex="-1" class="arrow-back-btn-link playground-tab-close-button">
       <div class="arrow-back-btn-container">
         <img src="./Sprites/Mutual/button back 4x -525781139.png" width="50px" alt="Arrow-back"
           class="arrow-back-btn-icon">
@@ -1051,7 +1054,7 @@
         <div class="control-btns-panel"></div>
         <div class="playground-zone"></div>
         <div class="control-btns-panel player-button-container">
-          <button class="pass-btn">
+          <button tabindex="-1" class="pass-btn">
             <span class="pass-btn-title" lang="Buttons/Pass">PASS</span>
           </button>
         </div>
@@ -1181,72 +1184,75 @@
       </div>
     </div>
 
-    <button class="play-btn tutorial-continue-button">
+    <button tabindex="-1" class="play-btn tutorial-continue-button">
       <span class="play-btn-title" lang="Tutorial/Continue"></span>
     </button>
   </section>
+
+  <script>
+    let savesList = [];
+    let SDK = null;
+    let player = null;
+    let user = null;
+    let input = null;
+    let languageChangeEvent;
+    let dynamicFontChanger;
+    let navigation;
+    let backActionHandler;
+    let platform;
+    let audioManager;
+    let gameRules;
+    let selectedAvatarIndex;
+    let bet;
+
+    let trumpSuit;
+    let globalGameSpeed = 1;
+    let isTutorial;
+    let botsConfiguration = {
+      lateGameRatio: 0,
+      luck: 0,
+      maxTossCount: 0
+    }
+  </script>
+  <script type="module">
+    import { createEvent } from "./src/localization/translator.js";
+    import { preload } from './src/loader/loader.js';
+    import { initializeSDK, getPlatform } from './src/scripts/sdk/sdk.js';
+    import { initialize } from './src/scripts/save_system/SaveSystem.js';
+    import User from './src/scripts/userData.js';
+    import { Action } from './src/scripts/globalEvents.js';
+    import { StackNavigation } from './src/scripts/navigation/navigation.js';
+    import { AudioManager } from './src/scripts/audioManager.js'
+    import { Rule } from "./src/scripts/battleFlow.js"
+    document.addEventListener('focusin', function (event) {
+      event.target.blur();
+    });
+
+    gameRules = new Rule();
+
+    audioManager = new AudioManager();
+    user = new User();
+    navigation = new StackNavigation();
+
+    const dfc = await import('./src/localization/dynamicFontChanger.js');
+    dynamicFontChanger = dfc.getNew();
+
+    preload(async () => {
+      new Promise((p) => { setTimeout(() => p(), 200) });
+      await initializeSDK();
+      platform = await getPlatform();
+      await initialize();
+      await createEvent();
+      user.loadData();
+      await import('./index.js');
+      const images = document.querySelectorAll('img');
+
+      images.forEach(image => {
+        image.draggable = false;
+      });
+    })
+  </script>
 </body>
-<script>
-  let savesList = [];
-  let SDK = null;
-  let player = null;
-  let user = null;
-  let input = null;
-  let languageChangeEvent;
-  let dynamicFontChanger;
-  let navigation;
-  let backActionHandler;
-  let platform;
-  let audioManager;
-  let gameRules;
-  let selectedAvatarIndex;
-  let bet;
-
-  let trumpSuit;
-  let globalGameSpeed = 1;
-  let isTutorial;
-  let botsConfiguration = {
-    lateGameRatio: 0,
-    luck: 0,
-    maxTossCount: 0
-  }
-</script>
-<script type="module">
-  import { createEvent } from "./src/localization/translator.js";
-  import { preload } from './src/loader/loader.js';
-  import { initializeSDK, getPlatform } from './src/scripts/sdk/sdk.js';
-  import { initialize } from './src/scripts/save_system/SaveSystem.js';
-  import User from './src/scripts/userData.js';
-  import { Action } from './src/scripts/globalEvents.js';
-  import { StackNavigation } from './src/scripts/navigation/navigation.js';
-  import { AudioManager } from './src/scripts/audioManager.js'
-  import { Rule } from "./src/scripts/battleFlow.js"
-
-  createEvent();
-  gameRules = new Rule();
-
-  audioManager = new AudioManager();
-  user = new User();
-  navigation = new StackNavigation();
-
-  const dfc = await import('./src/localization/dynamicFontChanger.js');
-  dynamicFontChanger = dfc.getNew();
-
-  const images = document.querySelectorAll('img');
-
-  images.forEach(image => {
-    image.draggable = false;
-  });
-
-  languageChangeEvent.invoke('ru');
-  preload(async () => {
-    await initializeSDK();
-    platform = await getPlatform();
-    await initialize();
-    user.loadData();
-    await import('./index.js');
-  })
-</script>
 
 
 </html>

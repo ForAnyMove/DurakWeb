@@ -41,6 +41,7 @@ const mainScreen = new Screen({
     if (!input.loadBackup())
       input.updateQueryCustom(mainScreen.screenLogic.selectableElements, mainScreen.screenLogic.defaultSelectedElement);
 
+    input.clearSavedState('tv-gameplay');
     navigation.registerScreen(achievementsScreen);
     navigation.registerScreen(collectionScreen);
     navigation.registerScreen(profileScreen);
@@ -202,8 +203,8 @@ const gameFinishScreen = new Screen({
   onFocus: () => {
     dynamicFontChanger.update();
     if (!input.loadBackup())
-      input.updateQueryCustom(languagesScreen.screenLogic.selectableElements,
-        languagesScreen.screenLogic.defaultSelectedElement);
+      input.updateQueryCustom(gameFinishScreen.screenLogic.selectableElements,
+        gameFinishScreen.screenLogic.defaultSelectedElement);
   },
   onUnfocus: () => {
   },
@@ -255,8 +256,10 @@ const exitScreen = new Screen({
   closeButtons: [exitPopupRoot.querySelector('.exit-no')],
   onFocus: () => {
     dynamicFontChanger.update();
-    const elements = getInputElements(exitScreen.element, { tags: ['button'] });
-    input.updateQueryCustom(elements, elements[1]);
+    if (!input.loadBackup()) {
+      input.updateQueryCustom(exitScreen.screenLogic.selectableElements,
+        exitScreen.screenLogic.defaultSelectedElement);
+    }
   }, onUnfocus: () => {
   }, screenLogic: new ExitGameScreen({ screenRoot: exitPopupRoot })
 });
@@ -270,6 +273,7 @@ const exitGameScreen = new Screen({
   onFocus: () => {
     dynamicFontChanger.update();
     const elements = getInputElements(exitGameScreen.element, { tags: ['button'] });
+    console.log(`${elements}`);
     input.updateQueryCustom(elements, elements[1]);
   }, onUnfocus: () => {
   }, screenLogic: new GlobalExitGameScreen({ screenRoot: exitGamePopupRoot })
@@ -326,7 +330,7 @@ const playgroundScreen = new Screen({
         navigation.pop();
       }
     };
-    
+
     backActionHandler.onDoubleBack = () => {
       navigation.push(exitGameScreen);
     };

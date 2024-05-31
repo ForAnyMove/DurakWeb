@@ -558,6 +558,7 @@ button.selected {
   justify-content: center;
   height: 100%;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .daily-bonuses-tab-container {
@@ -670,7 +671,6 @@ button.selected {
 
 .skins-pick-area {
   min-height: 60vh;
-  max-height: 60vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -982,6 +982,7 @@ button.selected {
   align-items: center;
   flex-direction: column;
   width: 45%;
+  max-width: 45%;
 }
 
 .start-game_slider-header-container,
@@ -2077,6 +2078,7 @@ button.selected {
   flex-direction: column;
   left: 0;
   top: 0;
+  overflow: hidden;
 }
 
 .popup-background-fading {
@@ -2944,6 +2946,13 @@ button.selected {
 }
 
 @media only screen and (orientation: portrait) {
+  .cards-deck>.card-element:first-child {
+    transform: rotate(90deg) translate(0%, -30%);
+  }
+  .skins-navigation {
+    margin-top: 3vh;
+  }
+
   /* #region playground */
 
   .control-btns-panel {
@@ -3027,8 +3036,8 @@ button.selected {
   .cards-deck-container {
     width: 18vw;
     height: 24vw;
-    bottom: 40%;
-    left: -10%;
+    bottom: 50%;
+    left: -15%;
     scale: 1;
   }
 
@@ -3110,20 +3119,21 @@ button.selected {
 
   .switch-tabs-btns-container {
     justify-content: space-between;
-    width: 80vw;
+    width: 100%;
   }
 
   .switch-tab-btn-container {
-    width: 15vw;
+    width: 30%;
   }
 
   .switch-tab-title-container {
     width: 100%;
+    height: 2vh;
   }
 
   .switch-tab-title {
-    font-size: 2.5vw;
-    --target-font-size: 2.5vw;
+    font-size: 3.5vw;
+    --target-font-size: 3.5vw;
   }
 
   .play-btn-container {
@@ -3131,7 +3141,7 @@ button.selected {
   }
 
   .profile-container {
-    height: 45vh;
+    height: 50vh;
   }
 
   .profile-header {
@@ -3154,8 +3164,8 @@ button.selected {
   }
 
   .profile-status-item {
-    width: 99vw;
-    height: 6.5vw;
+    width: 95vw;
+    height: 7.5vw;
   }
 
   .profile-status-type-icon-container {
@@ -3172,8 +3182,8 @@ button.selected {
   }
 
   .profile-status-title {
-    font-size: 3.3vw;
-    --target-font-size: 3.3vw;
+    font-size: 4.4vw;
+    --target-font-size: 4.4vw;
   }
 
   .profile-status-bounty-title-container {
@@ -3209,6 +3219,7 @@ button.selected {
 
   .profile-header-container {
     margin-bottom: 1vh;
+    transform: translateY(-2vh);
   }
 
   .profile-stats-list_first-line,
@@ -3310,13 +3321,17 @@ button.selected {
   }
 
   .settings_sliders-container {
-    width: 95%;
+    width: 95vw;
     column-gap: 6vw;
   }
 
   .settings_slider-header {
-    font-size: 5.5vw;
-    --target-font-size: 5.5vw;
+    font-size: 5vw;
+    --target-font-size: 5vw;
+  }
+
+  .start-game_slider-header-container, .settings_slider-header-container {
+    height: 6vw;
   }
 
   .settings_slider-container_dark {
@@ -3352,31 +3367,32 @@ button.selected {
 
   .achievements_tab-header-container {
     width: 50vw;
+    margin-top: 4vh;
   }
 
   .achievements_tab-header {
     margin-top: 2vh;
     font-size: 5.5vw;
     --target-font-size: 5.5vw;
-    margin-bottom: 20vh;
+    margin-bottom: 10vh;
   }
 
   .achievements_stats-container {
     width: 84vw;
-    height: 57%;
+    height: 59%;
     column-gap: 4vw;
     row-gap: 6vw;
   }
 
   .achievements_stats-list-item-tab {
     width: 40vw;
-    height: 15vw;
+    height: 20vw;
     border-radius: 2vw;
   }
 
   .achievements_stats-list-item {
     width: 38vw;
-    height: 13vw;
+    height: 18vw;
     border-radius: 2vw;
   }
 
@@ -3495,6 +3511,10 @@ button.selected {
     font-size: 1.4vw;
   }
 
+  .start-game_start-game-container {
+    row-gap: 1.5vh;
+  }
+
   .start-game_header {
     font-size: 5.5vw;
     --target-font-size: 5.5vw;
@@ -3502,14 +3522,14 @@ button.selected {
 
   .start-game_mode-btns-container {
     width: 97vw;
-    height: 15vw;
+    height: 20vw;
     column-gap: 3vw;
   }
 
   .start-game_switch-mode-btn {
     transform: translateY(-15%);
     width: 44vw;
-    height: 9vw;
+    height: 13vw;
     padding: 0 4vw;
   }
 
@@ -3525,8 +3545,8 @@ button.selected {
   }
 
   .start-game_slider-header {
-    font-size: 3vw;
-    --target-font-size: 3vw;
+    font-size: 5vw;
+    --target-font-size: 5vw;
   }
 
   .start-game_slider-container_dark {
@@ -3577,8 +3597,8 @@ button.selected {
   }
 
   .start-game_play-btn {
-    width: 30vw;
-    height: 9vw;
+    width: 40vw;
+    height: 11vw;
     padding: 0 4vw;
   }
 
@@ -3625,8 +3645,8 @@ button.selected {
   }
 
   .skin-element {
-    width: 36vw;
-    height: 16.5vw;
+    width: 40vw;
+    height: 18.5vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3637,6 +3657,8 @@ button.selected {
     scrollbar-width: none;
     column-gap: 7vw;
     row-gap: 5vw;
+    min-height: 30vh;
+    width: 87vw;
   }
 
   .checkbox-pick-icon {
@@ -3649,13 +3671,13 @@ button.selected {
 
   .background-element {
     border-radius: 1vw;
-    width: 35vw;
-    height: 20vw;
+    width: 42vw;
+    height: 25vw;
   }
 
   #pick-area-2 {
-    width: 77vw;
-    column-gap: 7vw;
+    width: 89vw;
+    column-gap: 5vw;
   }
 
   .background-element>.checkbox-pick-icon {
@@ -3667,8 +3689,8 @@ button.selected {
   }
 
   .skin-back-element {
-    width: 16.5vw;
-    height: 22vw;
+    width: 19.5vw;
+    height: 26vw;
   }
 
   .skin-back-element>.checkbox-pick-icon {
@@ -3680,8 +3702,8 @@ button.selected {
   }
 
   #pick-area-3 {
-    width: 87vw;
-    column-gap: 7vw;
+    width: 77vw;
+    column-gap: 9vw;
   }
 
   .daily-bonuses_container {

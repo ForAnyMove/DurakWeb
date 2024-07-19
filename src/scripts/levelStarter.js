@@ -1,4 +1,3 @@
-import { statistics, updateStatistics } from "./gameStatistics.js";
 import { levelManagement } from "./levelManagement.js";
 import { log } from "./logger.js";
 import { LevelType } from "./statics/enums.js";
@@ -9,8 +8,6 @@ function startLevel(database) {
 
     if (selectionOptions == null) return;
 
-    let message = `Start level №_${levelManagement.selectedOrder}`;
-    console.log(message);
 
     // let pass = selectionOptions.pass;
 
@@ -50,8 +47,6 @@ function startLevel(database) {
 }
 
 function completeMode(rule) {
-    let message = `Win level ${rule}`;
-    console.log(message);
 
     levelManagement.udpateGameCount(LevelType.Default, rule);
     levelManagement.udpateGameRowCount(LevelType.Default, rule, true);
@@ -78,8 +73,6 @@ function completeMode(rule) {
 }
 
 function failMode(rule) {
-    let message = `Lose level ${rule}`;
-    console.log(message);
 
     levelManagement.udpateGameCount(LevelType.Default, rule);
     levelManagement.udpateGameRowCount(LevelType.Default, rule, false);

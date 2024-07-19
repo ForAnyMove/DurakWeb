@@ -4,6 +4,7 @@ body {
   background-size: 100% 100%;
   overflow: hidden;
 }
+
 :focus {
   outline: none;
 }
@@ -349,7 +350,6 @@ button.selected {
 .profile-statuses-list>.profile-status-item:not(:last-child):not(:nth-child(7))>.profile-status-cover-container>.profile-status-bounty-title-container>.profile-status-bounty-title::after,
 .profile-status-bounty-title::before,
 .profile-status-bounty-title {
-  color: #383838;
   font-size: 1.4vw;
   font-weight: 800;
 }
@@ -385,6 +385,12 @@ button.selected {
 
 .profile-status-item_completed>.profile-status-cover-container>.profile-status-bounty-title-container {
   background-image: url('./Sprites/Desktop - дурак- Профиль (статус/Group 4x 2134222544.png');
+}
+
+.profile-status-item>.profile-status-cover-container>.profile-status-bounty-title-container>.profile-status-bounty-title,
+.profile-status-item>.profile-status-cover-container>.profile-status-bounty-title-container>.profile-status-bounty-title::before,
+.profile-status-item>.profile-status-cover-container>.profile-status-bounty-title-container>.profile-status-bounty-title::after {
+  color: #383838;
 }
 
 .profile-status-item_completed>.profile-status-cover-container>.profile-status-bounty-title-container>.profile-status-bounty-title,
@@ -1130,7 +1136,8 @@ button.selected {
   align-items: center;
   flex-wrap: wrap;
   width: 32vw;
-  height: 80%;
+  padding: 2vw 2vw;
+  height: 70%;
   column-gap: 2vw;
   row-gap: 3vw;
   overflow: hidden;
@@ -1905,7 +1912,7 @@ button.selected {
   justify-content: center;
   text-align: center;
 
-  transform: translateY(30%);
+  /* transform: translateY(30%); */
 }
 
 .daily-bonuses_multiple-bounty-title {
@@ -3380,6 +3387,8 @@ button.selected {
   .achievements_stats-container {
     width: 84vw;
     height: 59%;
+    padding: 0 2vw;
+    padding-bottom: 3vw;
     column-gap: 4vw;
     row-gap: 6vw;
   }
@@ -4152,9 +4161,9 @@ button.selected {
   }
 
   .playground-container {
-    scale: 0.9;
+    scale: 0.85;
     min-height: 115vh;
-    transform: translateY(-10%);
+    transform: translateY(-9%);
   }
 
   .playground {
@@ -4168,9 +4177,9 @@ button.selected {
 
 @media (min-aspect-ratio: 15/6.5) {
   .playground-container {
-    scale: 0.8;
+    scale: 0.75;
     min-height: 135vh;
-    transform: translateY(-20%);
+    transform: translateY(-18%);
   }
 
   .cards-deck-container {
@@ -4186,9 +4195,9 @@ button.selected {
 
 @media (min-aspect-ratio: 15/5) {
   .playground-container {
-    scale: 0.7;
+    scale: 0.65;
     min-height: 155vh;
-    transform: translateY(-30%);
+    transform: translateY(-28%);
   }
 
   .cards-deck-container {
@@ -4312,9 +4321,9 @@ button.selected {
   }
 
   .playground-container {
-    scale: 0.6;
+    scale: 0.56;
     min-height: 175vh;
-    transform: translateY(-40%);
+    transform: translateY(-38%);
   }
 
   .cards-deck-container {

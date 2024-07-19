@@ -10,7 +10,6 @@ class Action {
 
         if (this.actions.length == 0) {
             if (_logEnabled) {
-                console.log(`no listeners`);
             }
             return;
         }

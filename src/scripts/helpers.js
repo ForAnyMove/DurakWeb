@@ -194,6 +194,8 @@ function createButton(classList, styleList, parent, onClick) {
 
     if (onClick != null) {
         element.onclick = function () {
+            audioManager.playSound();
+
             onClick();
         }
     }
@@ -723,7 +725,6 @@ function pullOutElement(element, zIndex, saveParent) {
     element.style.scale = scale;
 
     const left = (pos.x - parseFloat(style.marginLeft)) - rect.width * ((1 / scale - 1) / 2);
-    console.log(left);
     const top = (pos.y - parseFloat(style.marginTop)) - rect.height * ((1 / scale - 1) / 2);
 
     element.style.left = left + 'px';

@@ -1,8 +1,7 @@
-import { storyLevelDatabase, trialLevelDatabase } from "./data/level_databases.js";
+import { storyLevelDatabase } from "./data/level_databases.js";
 import { useHintBooster } from "./boosters.js";
 import Card, { CardColumn } from "./cardModel.js";
-import { statistics, updateEvent } from "./gameStatistics.js";
-import { completeLevel, failLevel, startLevel } from "./levelStarter.js";
+import { completeLevel, startLevel } from "./levelStarter.js";
 import { log } from "./logger.js";
 import { oneSuitSpider } from "../../rules/gameRules.js";
 import { load, save } from "../../save_system/SaveSystem.js";
@@ -99,8 +98,6 @@ function testRules() {
     column.push(cardDiamondThree);
     column.push(cardDiamondTwo);
     column.push(cardDiamondAce);
-
-    console.log(oneSuitSpider.isCardSetCollectable(column));
 }
 
 function testHintBooster() {
@@ -135,7 +132,6 @@ function testHintBooster() {
     columnTwo.addCard(cardDiamondTen);
 
     let result = useHintBooster([columnTwo, columnOne], oneSuitSpider);
-    console.log(result);
 }
 
 testHintBooster();

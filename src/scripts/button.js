@@ -21,6 +21,7 @@ class StateButton extends Button {
         this.selected = initialState;
 
         clickableElement.onclick = () => {
+            audioManager.playSound();
             this.selected = !this.selected;
             onClicked?.(this.selected);
         }
@@ -63,6 +64,7 @@ class SequentlyChoosingButton {
 
         nextButton.onclick = () => {
             if (canClick == null || canClick()) {
+                audioManager.playSound();
                 this.currentLevel = (this.currentLevel + 1) % (this.maxCount);
                 this.select(this.currentLevel);
             }
@@ -70,6 +72,7 @@ class SequentlyChoosingButton {
 
         previousButton.onclick = () => {
             if (canClick == null || canClick()) {
+                audioManager.playSound();
                 this.currentLevel = this.currentLevel - 1;
                 if (this.currentLevel < 0) {
                     this.currentLevel = this.maxCount - 1;
@@ -100,6 +103,7 @@ class Tabs {
             const element = options.tabElements[i];
 
             element.onclick = () => {
+                audioManager.playSound();
                 for (let j = 0; j < options.tabElements.length; j++) {
                     if (i == j) {
                         this.selected = i;

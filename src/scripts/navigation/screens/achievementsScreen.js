@@ -24,13 +24,18 @@ class AchievementsScreen extends ScreenLogic {
                     element: element,
                     onSelect: () => {
                         const box = element.getBoundingClientRect();
-                        const height = box.height;
-                        const yCenter = box.top + height / 2;
 
-                        if (yCenter + height / 2 >= achievementsParent.getBoundingClientRect().bottom) {
-                            achievementsParent.scrollBy(0, height)
-                        } else if (yCenter - height / 2 <= achievementsParent.getBoundingClientRect().top) {
-                            achievementsParent.scrollBy(0, -height)
+                        const top = box.top;
+                        const bottom = box.bottom;
+                        const verticalGap = window.innerWidth * 1.5 / 100;
+
+                        const scrollBottom = achievementsParent.getBoundingClientRect().bottom
+                        const scrollTop = achievementsParent.getBoundingClientRect().top
+
+                        if (bottom >= scrollBottom - verticalGap) {
+                            achievementsParent.scrollBy(0, bottom - scrollBottom + verticalGap)
+                        } else if (top <= scrollTop + verticalGap) {
+                            achievementsParent.scrollBy(0, top - scrollTop - verticalGap)
                         }
                     }
                 }

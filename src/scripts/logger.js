@@ -1,4 +1,4 @@
-let logEnabled = true;
+let logEnabled = false;
 
 let logModules = [
     {
@@ -15,7 +15,8 @@ let logModules = [
             details: false
         }]
     },
-    { battleFlow: false }
+    { battleFlow: false },
+    { audioManager: true }
 ]
 
 function log(object, module, submodule) {
@@ -23,6 +24,7 @@ function log(object, module, submodule) {
 
 
     if ((hasModule(logModules, module) || (submodule != undefined && hasSubModule(logModules, module, submodule))) || module == undefined) {
+        logToConsole(object);
         console.log(object)
     }
 }
@@ -31,6 +33,7 @@ function error(object, module, submodule) {
     if (!logEnabled) return;
 
     if ((hasModule(logModules, module) || (submodule != undefined && hasSubModule(logModules, module, submodule))) || module == undefined) {
+        logToConsole(object, 'error');
         console.error(object)
     }
 }

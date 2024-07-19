@@ -2,6 +2,12 @@ import { ContentType } from "./enums.js"
 
 const locales = ['ru', 'en', 'de', 'hi', 'pt', 'es', 'tr'];
 
+const SoundIDs = {
+    ButtonClick: 'button',
+    CardPlace: 'card_place',
+    CardPick: 'card_pick',
+}
+
 const Platform = {
     Desktop: 'desktop',
     Mobile: 'mobile',
@@ -49,4 +55,4 @@ const Content = {
     Background09: { type: ContentType.Background, id: "background_09" },
 }
 
-export { Items, Content, Platform, IconsByItem, locales }
+export { Items, Content, Platform, IconsByItem, locales, SoundIDs }

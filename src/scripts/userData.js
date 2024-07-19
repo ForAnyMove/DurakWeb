@@ -470,7 +470,7 @@ export default class User {
         for (let i = 0; i < this.achievements.length; i++) {
             const element = this.achievements[i];
 
-            element.completedIndex = data.achievements[i];
+            element.updateCurrentCompletionIndex(data.achievements[i]);
         }
 
         for (let i = 0; i < this.items.length; i++) {

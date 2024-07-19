@@ -173,6 +173,8 @@ class StackNavigation extends Navigation {
                 for (let i = 0; i < screen.openButtons.length; i++) {
                     const element = screen.openButtons[i];
                     element.onclick = function () {
+                        audioManager.playSound();
+
                         navigation.push(screen);
                     }
                 }
@@ -182,6 +184,8 @@ class StackNavigation extends Navigation {
                 for (let i = 0; i < screen.closeButtons.length; i++) {
                     const element = screen.closeButtons[i];
                     element.onclick = function () {
+                        audioManager.playSound();
+
                         navigation.pop();
                     }
                 }

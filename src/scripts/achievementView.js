@@ -38,10 +38,10 @@ class AchievementView {
             plane.onclick = () => {
                 const reward = this.data.tryCompleteCurrentTrial();
                 if (reward) {
+                    audioManager.playSound();
                     user.addItem(reward.type, reward.count, { isTrue: true });
                 }
             }
-            audioManager.addClickableToPull(plane);
 
             const container = createElement('div', ['achievements_stats-list-item'], null, plane);
             {

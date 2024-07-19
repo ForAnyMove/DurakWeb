@@ -12,6 +12,7 @@ class ExitGameScreen extends ScreenLogic {
             const { isGameExit } = parameters;
             if (isGameExit) {
                 acceptButton.onclick = () => {
+                    audioManager.playSound();
                     acceptButton.onclick = null;
                     navigation.pop();
                     navigation.pop();

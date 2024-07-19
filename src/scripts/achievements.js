@@ -1,6 +1,5 @@
 import { Action } from "./globalEvents.js";
 import { Items } from "./statics/staticValues.js";
-import { statistics, updateEvent } from "./gameStatistics.js";
 import { log } from "./logger.js";
 
 class Achievement {
@@ -17,6 +16,13 @@ class Achievement {
         this.completed = false;
         this.allTrialsCompleted = false;
         this.isValueInversed = false;
+    }
+
+    updateCurrentCompletionIndex = function (index) {
+        this.completedIndex = index;
+
+        this.update();
+        this.sendEvent();
     }
 
     onLoad = function () {

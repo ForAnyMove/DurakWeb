@@ -83,6 +83,8 @@ class GameSettingsScreen extends ScreenLogic {
 
         const startButton = this.screenRoot.querySelector('.start-game_play-btn');
         startButton.addEventListener('click', () => {
+            // audioManager.playSound();
+
             user.removeItem(Items.Currency, bet);
             const currency = user.getItemCount(Items.Currency);
             if (currency < 100) {
@@ -94,6 +96,7 @@ class GameSettingsScreen extends ScreenLogic {
 
         const rewardedCurrencyButton = this.screenRoot.querySelector('.start-game_watch-add-btn');
         rewardedCurrencyButton.onclick = () => {
+            audioManager.playSound();
             showRewarded(null, null, () => {
                 user.addItem(Items.Currency, 500, { isTrue: true });
             }, null);

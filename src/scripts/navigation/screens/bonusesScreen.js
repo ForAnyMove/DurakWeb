@@ -1,6 +1,6 @@
 import { load, save } from "../../save_system/SaveSystem.js";
 import { showRewarded } from "../../sdk/sdk.js";
-import { Content, Items } from "../../statics/staticValues.js";
+import { Content, Items, Platform } from "../../statics/staticValues.js";
 import { Timer } from "../../timer.js";
 import { ScreenLogic } from "../navigation.js";
 
@@ -87,6 +87,10 @@ class BonusesScreen extends ScreenLogic {
         const finishTimer = (index) => {
             staticData[index].timerFinishCallback?.();
             data[index].obtainded = false;
+            const nextDataElement = data[index + 1];
+            if (nextDataElement != null) {
+                nextDataElement.opened = true;
+            }
 
             this.save(data);
             updateView();
@@ -115,12 +119,14 @@ class BonusesScreen extends ScreenLogic {
             }
 
             view.onclick = () => {
-                showRewarded(null, null, () => {
-                    if (dataElement.obtainded || !dataElement.opened) return;
+                if (dataElement.obtainded || !dataElement.opened) return;
+                audioManager.playSound();
 
-                    if (nextDataElement != null) {
-                        nextDataElement.opened = true;
-                    }
+                showRewarded(null, null, () => {
+                    if (platform != Platform.TV)
+                        if (nextDataElement != null) {
+                            nextDataElement.opened = true;
+                        }
 
                     dataElement.obtainded = true;
                     const reward = staticData[i].reward;
@@ -135,7 +141,6 @@ class BonusesScreen extends ScreenLogic {
                         for (let i = 0; i < reward.content.length; i++) {
                             const element = reward.content[i];
                             user.addContent(element, { isTrue: true });
-                            console.log(user.availableContent);
                         }
                     }
 

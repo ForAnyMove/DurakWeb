@@ -51,7 +51,6 @@ export default class DirectionalInput {
             if (pull.key == key) {
                 this.saveSelectablePull[i].selectables = selectables;
                 this.saveSelectablePull[i].selected = selected;
-                console.log('wporijgpwoeirjgpoweirjgpweoirjgwpoeirjgwpoeirjgp');
                 return;
             }
         }
@@ -68,11 +67,12 @@ export default class DirectionalInput {
             const element = this.saveSelectablePull[i];
             if (element.key == key) {
                 this.updateQueryCustom(element.selectables, element.selected?.() ?? element.selected);
-                return;
+                return true;
             }
         }
 
         this.updateQueryCustom([], { element: null });
+        return false;
     }
 
     preventAxis = function (ignoreList) {

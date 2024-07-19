@@ -1,12 +1,6 @@
 import('./src/scripts/rewardReceiverView.js');
 
-import { Items, Platform, locales } from './src/scripts/statics/staticValues.js';
-import { inDayGameCount } from './src/scripts/ingameDayCounter.js';
-import {
-  dailyRewards,
-  isCompleted,
-  tryCompleteDailyReward,
-} from './src/scripts/dailyRewards.js';
+import { Platform } from './src/scripts/statics/staticValues.js';
 import { load, save } from './src/scripts/save_system/SaveSystem.js';
 
 import DirectionalInput from './src/scripts/directionInput.js';
@@ -273,7 +267,6 @@ const exitGameScreen = new Screen({
   onFocus: () => {
     dynamicFontChanger.update();
     const elements = getInputElements(exitGameScreen.element, { tags: ['button'] });
-    console.log(`${elements}`);
     input.updateQueryCustom(elements, elements[1]);
   }, onUnfocus: () => {
   }, screenLogic: new GlobalExitGameScreen({ screenRoot: exitGamePopupRoot })
@@ -281,6 +274,19 @@ const exitGameScreen = new Screen({
 
 const tutorialPopupRoot = document.getElementById('tutorial-popup-tab');
 const tutorialOffsetScreen = new Screen({
+  element: tutorialPopupRoot,
+  closeButtons: [tutorialPopupRoot.querySelector('.no')],
+  onFocus: () => {
+    dynamicFontChanger.update();
+    const elements = getInputElements(tutorialOffsetScreen.element, { tags: ['button'] });
+    input.updateQueryCustom(elements, elements[0]);
+  }, onUnfocus: () => {
+    navigation.push(mainScreen);
+  }
+});
+
+const tutorialOfferPopupRoot = document.getElementById('tutorial-popup-tab');
+const tutorialOfferOffsetScreen = new Screen({
   element: tutorialPopupRoot,
   closeButtons: [tutorialPopupRoot.querySelector('.no')],
   onFocus: () => {
@@ -335,7 +341,8 @@ const playgroundScreen = new Screen({
       navigation.push(exitGameScreen);
     };
 
-    input.loadFromSavedPull('tv-gameplay');
+    if (!input.loadFromSavedPull('tv-gameplay'))
+      input.loadFromSavedPull('tutorial');
   },
   onUnfocus: () => {
     navigation.push(mainScreen);
@@ -349,19 +356,58 @@ const playgroundScreen = new Screen({
 
 const exitButton = exitScreen.element.getElementsByClassName('exid-yes')[0];
 if (exitButton != null) {
-  exitButton.onclick = function () { SDK?.dispatchEvent(SDK.EVENTS.EXIT); }
+  exitButton.onclick = function () {
+    audioManager.playSound();
+    SDK?.dispatchEvent(SDK.EVENTS.EXIT);
+  }
 }
 
-// if (load('tutorial-offer', false) == false) {
-//   tutorialPopupRoot.querySelector('.yes').onclick = function () {
-//     window.location.href = './src/playground/playground.html?levelID=level_def_s_1&isTutorial=true';
-//   }
+setTimeout(() => {
+  if (load('tutorial-offer', false) == false) {
+    tutorialPopupRoot.querySelector('.yes').onclick = () => {
+      // start tutorial
+      audioManager.playSound();
+      isTutorial = true;
+      navigation.pushID('playground');
+    }
 
-//   setTimeout(() => { navigation.push(tutorialOffsetScreen) }, 400)
-//   save('tutorial-offer', true);
-// }
+    if (dailyBonusesScreen.screenLogic.rewardAvailable) {
+      dailyBonusesScreen.screenLogic.closeEvent.addListener(() => {
+        setTimeout(() => {
+          navigation.push(tutorialOfferOffsetScreen);
+          save('tutorial-offer', true);
+        }, 400)
+      })
+    } else {
+      setTimeout(() => {
+        navigation.push(tutorialOfferOffsetScreen);
+        save('tutorial-offer', true);
+      }, 400)
+    }
+  }
+}, 50);
 
 navigation.push(mainScreen);
+
+if (platform == Platform.TV) {
+  setTimeout(() => {
+    const tvDisableElements = document.getElementsByClassName('tv-disable');
+    for (let i = tvDisableElements.length - 1; i >= 0; i--) {
+      const element = tvDisableElements[i];
+      element.remove();
+    }
+    const tvDisableMarginElements = document.getElementsByClassName('tv-disable-margin');
+    for (let i = tvDisableMarginElements.length - 1; i >= 0; i--) {
+      const element = tvDisableMarginElements[i];
+      element.style.margin = '0 0';
+    }
+    const tvHCemterChElements = document.getElementsByClassName('tv-h-center-ch');
+    for (let i = tvHCemterChElements.length - 1; i >= 0; i--) {
+      const element = tvHCemterChElements[i];
+      element.style.justifyContent = 'center'
+    }
+  }, 0);
+}
 
 backActionHandler = new BackActionHandler(input);
 

@@ -5,7 +5,7 @@ const dailyRewards = [
     {
         item: Items.Currency,
         count: 100,
-        completed: false
+        completed: true
     }, {
         item: Items.Currency,
         count: 200,

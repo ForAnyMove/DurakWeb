@@ -1,4 +1,3 @@
-import { statistics, updateEvent } from "../../gameStatistics.js";
 import { setRemoveClass } from "../../helpers.js";
 import { UserStatus } from "../../userStatus.js";
 import { ScreenLogic } from "../navigation.js";
@@ -38,6 +37,7 @@ class ProfileScreen extends ScreenLogic {
                 const tab = tabs[i];
                 this.selectableElements.push({ element: tab.button });
                 tab.button.onclick = () => {
+                    audioManager.playSound();
                     select(i);
                 }
             }

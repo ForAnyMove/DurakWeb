@@ -72,6 +72,19 @@ export default class DynamicFontChanger {
         this.updateTextFont();
     }
 
+    updateElement = function (element) {
+        for (let i = 0; i < this.containers.length; i++) {
+            const elements = this.containers[i].elements;
+            for (let j = 0; j < elements.length; j++) {
+                const containedElement = elements[j];
+                if (element == containedElement) {
+                    setDynamicContainerText(initialLocale, this.containers[i], true);
+                    return;
+                }
+            }
+        }
+    }
+
     updateTextFont = () => {
         for (let i = 0; i < this.containers.length; i++) {
             const container = this.containers[i];

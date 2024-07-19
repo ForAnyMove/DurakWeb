@@ -4,7 +4,7 @@ import { CardsPlayableDeck } from "../../../scripts/cardModel.js"
 import { createTweener } from "../../../scripts/dotween/dotween.js"
 import { getRandomInt, setRemoveClass } from "../../helpers.js";
 import { Items, Platform, locales } from "../../statics/staticValues.js";
-import { statistics, updateStatistics } from "../../gameStatistics.js";
+import { updateStatistics } from "../../gameStatistics.js";
 import { ContentType } from "../../statics/enums.js";
 import { getBackgroundImage } from "../../data/card_skin_database.js";
 import { initialLocale } from "../../../localization/translator.js";
@@ -18,7 +18,6 @@ class PlaygroundScreen extends ScreenLogic {
         const updateBackground = () => {
             const background = this.screenRoot;
             const skin = user.getContentOfType(ContentType.Background);
-            console.log(skin);
             background.style.backgroundImage = getBackgroundImage(skin);
         }
         user.contentUsageChanged.addListener(() => updateBackground());
@@ -41,7 +40,6 @@ class PlaygroundScreen extends ScreenLogic {
         const getRandomAvatar = () => {
             return avatars[getRandomInt(avatars.length - 1)];
         }
-
 
         const botCount = rules.entityMode == EntityMode.Pair ? 3 : rules.numberOfPlayers - 1;
         const enemiesList = Array.from(this.screenRoot.querySelectorAll('.enemy-container'));
@@ -86,7 +84,6 @@ class PlaygroundScreen extends ScreenLogic {
         }
 
         if (rules.entityMode == EntityMode.Pair) {
-            console.log('true');
             setRemoveClass(portraits[1], 'ally', true);
             setRemoveClass(portraits[1], 'enemy', false);
         }
@@ -97,8 +94,6 @@ class PlaygroundScreen extends ScreenLogic {
                 bot.lateGameRatio = botsConfiguration.lateGameRatio;
                 bot.luck = botsConfiguration.luck;
                 bot.maxTossCount = botsConfiguration.maxTossCount;
-
-                console.log(bot);
             }
 
         }
@@ -125,13 +120,13 @@ class PlaygroundScreen extends ScreenLogic {
             configureBots();
 
             this.battleFlow = new BattleFlow([player].concat(this.bots), rules);
-            this.battleFlow.finishCallback.addListener((result) => {
+
+            const resultFunction = (result) => {
                 input.clearSavedState('tv-gameplay');
 
                 const { winners, loser } = result;
                 if (loser == null) {
                     // draw
-                    console.log('draw');
                     navigation.pushID('gameFinishScreen', { state: 'draw' });
                     this.updateStatistics('draw', rules);
                     return;
@@ -145,7 +140,6 @@ class PlaygroundScreen extends ScreenLogic {
                 } else if (winners.some(i => i.id == player.id)) {
                     isWon = true;
                 }
-                console.log(isWon);
 
                 if (isWon) {
                     let multiplier = botCount + 1;
@@ -165,15 +159,18 @@ class PlaygroundScreen extends ScreenLogic {
 
                     navigation.pushID('gameFinishScreen', { state: 'lose' });
                 }
-            });
+            }
+
+            this.battleFlow.finishCallback.addListener(resultFunction);
         }
 
         const closeButton = this.screenRoot.querySelector('.playground-tab-close-button');
         closeButton.onclick = () => {
+            audioManager.playSound();
             navigation.pushID('exitGameScreen', { isGameExit: true })
         }
 
-        setRemoveClass(closeButton, 'hidden-all', platform == Platform.TV)
+        setRemoveClass(closeButton, 'hidden-all', isTutorial || platform == Platform.TV);
 
         this.selectableElements.push({ element: closeButton })
 
@@ -187,6 +184,7 @@ class PlaygroundScreen extends ScreenLogic {
         updatePlayerAvatar();
 
         isTutorial = false;
+        showInterstitial();
     }
 
     updateStatistics(state, rules) {
@@ -294,7 +292,6 @@ class PlaygroundScreen extends ScreenLogic {
         }
 
         updateStatistics();
-        showInterstitial();
     }
 
     onScreenUnloaded() {

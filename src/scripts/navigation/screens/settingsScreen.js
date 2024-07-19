@@ -13,7 +13,7 @@ class SettingsScreen extends ScreenLogic {
         const soundButton = new StateButton(
             this.selectableElements,
             this.screenRoot.querySelectorAll('.settings_tune-switch-container')[0],
-            audioManager.isSoundEnabled,
+            audioManager.soundEnabled,
             (stateIsTrue) => {
                 const checkbox = soundButton.element.querySelector('.settings_checkbox');
                 checkbox.src = stateIsTrue ? checkedIcon : uncheckedIcon;
@@ -23,7 +23,7 @@ class SettingsScreen extends ScreenLogic {
         const musicButton = new StateButton(
             this.selectableElements,
             this.screenRoot.querySelectorAll('.settings_tune-switch-container')[1],
-            audioManager.isMusicEnabled,
+            audioManager.musicEnabled,
             (stateIsTrue) => {
                 const checkbox = musicButton.element.querySelector('.settings_checkbox');
                 checkbox.src = stateIsTrue ? checkedIcon : uncheckedIcon;
@@ -102,6 +102,7 @@ class SettingsScreen extends ScreenLogic {
         const tutorialButton = this.screenRoot.querySelector('.tutorial-btn');
         tutorialButton.onclick = () => {
             // start tutorial
+            audioManager.playSound();
             isTutorial = true;
             navigation.pushID('playground');
         }
@@ -110,6 +111,7 @@ class SettingsScreen extends ScreenLogic {
 
         const languageButton = this.screenRoot.querySelector('.languages-open-button');
         languageButton.onclick = () => {
+            audioManager.playSound();
             navigation.pushID('languagesScreen');
         }
 

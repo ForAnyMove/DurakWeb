@@ -1,5 +1,6 @@
 import { StateButton } from "../../button.js";
 import { dailyRewards, isCompleted, tryCompleteDailyReward } from "../../dailyRewards.js";
+import { Action } from "../../globalEvents.js";
 import { setRemoveClass } from "../../helpers.js";
 import { inDayGameCount } from "../../ingameDayCounter.js";
 import { showRewarded } from "../../sdk/sdk.js";
@@ -7,7 +8,7 @@ import { ScreenLogic } from "../navigation.js";
 
 class DailyBonusesScreen extends ScreenLogic {
     onCreate() {
-
+        this.closeEvent = new Action();
         let rewardAvailable = false;
 
         this.defaultSelectedElement = { element: this.screenRoot.querySelector('.daily-bonuses-tab-close-button') };
@@ -25,6 +26,7 @@ class DailyBonusesScreen extends ScreenLogic {
 
             if (isCompleted(i)) {
                 setRemoveClass(element, 'completed', true)
+                setRemoveClass(element, 'opened', false);
                 continue;
             }
 
@@ -36,6 +38,8 @@ class DailyBonusesScreen extends ScreenLogic {
 
                 element.onclick = function () {
                     if (!isCompleted(i)) {
+                        audioManager.playSound();
+
                         const get = (rewardMultiplier = 1) => {
                             if (tryCompleteDailyReward(i)) {
                                 setRemoveClass(element, 'opened', false)
@@ -52,8 +56,6 @@ class DailyBonusesScreen extends ScreenLogic {
                         }
                     }
                 };
-
-                audioManager.addClickableToPull(element);
             }
         }
 
@@ -63,7 +65,7 @@ class DailyBonusesScreen extends ScreenLogic {
             isForRewarded,
             (stateIsTrue) => {
                 const checkbox = this.screenRoot.querySelector('.daily-bonuses_multiple-bounty-icon');
-                checkbox.src = stateIsTrue ? checkedIcon : uncheckedIcon;
+                if (checkbox) checkbox.src = stateIsTrue ? checkedIcon : uncheckedIcon;
 
                 isForRewarded = stateIsTrue;
             });
@@ -71,6 +73,12 @@ class DailyBonusesScreen extends ScreenLogic {
         if (rewardAvailable) {
             this.parameters?.onRewardAvailable?.()
         }
+
+        this.rewardAvailable = rewardAvailable;
+    }
+
+    onScreenUnloaded() {
+        this.closeEvent?.invoke();
     }
 }
 

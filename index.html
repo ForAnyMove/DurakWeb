@@ -13,14 +13,7 @@
 </head>
 
 <body>
-  <audio id="backgroundMusic" loop>
-    <source src="./assets/audio/music/Card game track 1.wav" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
-  <audio id="buttonClick">
-    <source src="./assets/audio/sounds/SFX_Pop_Bottle_Designed_3.wav" type="audio/mpeg">
-  </audio>
-  <div class="mask">
+  <div class="mask" style="z-index: 5001;">
     <div class="banter-loader">
       <div class="banter-loader__box"></div>
       <div class="banter-loader__box"></div>
@@ -50,7 +43,8 @@
       </div>
     </button>
     <div class="logo-container">
-      <img src="./Sprites/Desktop - дурак main/Logo/EN.png" alt="Logo" width="200px" class="logo" />
+      <img src="./Sprites/Desktop - дурак main/Logo/EN.png" alt="Logo" width="200px" class="logo"
+        lang="[img]logo_img" />
     </div>
     <div class="play-btn-container">
       <button tabindex="-1" class="play-btn start-game-tab-open-button">
@@ -352,7 +346,7 @@
       <span class="tutorial-btn-title" lang="MainMenu/Content/Tutorial"></span>
     </button>
     <div class="version-container">
-      <span class="version-title">0.0.9</span>
+      <span class="version-title">v0.1.8</span>
     </div>
     <div class="settings_settings-container">
       <div class="settings_header-container">
@@ -426,8 +420,8 @@
           </div>
           <div class="settings_choose-language-container">
             <img src="./Sprites/Desktop - дурак- настройки/en.png" alt="EN" width="30px"
-              class="settings_choose-language-icon">
-            <span class="settings_choose-language-title">eng</span>
+              class="settings_choose-language-icon" lang="[img]flag_img">
+            <span class="settings_choose-language-title" lang="locale">eng</span>
           </div>
         </div>
       </div>
@@ -442,7 +436,7 @@
       <span class="cash-info-value">100</span>
     </div>
     <div class="achievements_tab-header-container">
-      <h2 class="achievements_tab-header" lang="MainMenu/MainPanel/BonusesTitle"></h2>
+      <h2 class="achievements_tab-header" lang="MainMenu/MainPanel/AchievementsTitle"></h2>
     </div>
     <div class="achievements_stats-container">
     </div>
@@ -520,10 +514,10 @@
         </div>
         <div class="bonuses_add-activate-container">
           <img src="./Sprites/Mutual/accept-icon.png" width="30px" alt="" class="bonuses_check-add-icon">
-          <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="bonuses_add-icon">
-          <img src="./Sprites/Mutual/ads-locked.png" width="30px" alt="" class="bonuses_add-icon_locked">
+          <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="bonuses_add-icon tv-disable">
+          <img src="./Sprites/Mutual/ads-locked.png" width="30px" alt="" class="bonuses_add-icon_locked tv-disable">
           <span class="bonuses_timer">00:00</span>
-          <span class="bonuses_time-limit">24H</span>
+          <span class="bonuses_time-limit tv-disable-margin" lang="{24}MainMenu/Content/Timer/Hour">24H</span>
         </div>
       </div>
       <div class="bonuses_bonus-container checked">
@@ -544,10 +538,10 @@
         </div>
         <div class="bonuses_add-activate-container">
           <img src="./Sprites/Mutual/accept-icon.png" width="30px" alt="" class="bonuses_check-add-icon">
-          <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="bonuses_add-icon">
-          <img src="./Sprites/Mutual/ads-locked.png" width="30px" alt="" class="bonuses_add-icon_locked">
+          <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="bonuses_add-icon tv-disable">
+          <img src="./Sprites/Mutual/ads-locked.png" width="30px" alt="" class="bonuses_add-icon_locked tv-disable">
           <span class="bonuses_timer">00:00</span>
-          <span class="bonuses_time-limit">24H</span>
+          <span class="bonuses_time-limit tv-disable-margin" lang="{24}MainMenu/Content/Timer/Hour">24H</span>
         </div>
       </div>
       <div class="bonuses_bonus-container opened">
@@ -568,10 +562,10 @@
         </div>
         <div class="bonuses_add-activate-container">
           <img src="./Sprites/Mutual/accept-icon.png" width="30px" alt="" class="bonuses_check-add-icon">
-          <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="bonuses_add-icon">
-          <img src="./Sprites/Mutual/ads-locked.png" width="30px" alt="" class="bonuses_add-icon_locked">
+          <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="bonuses_add-icon tv-disable">
+          <img src="./Sprites/Mutual/ads-locked.png" width="30px" alt="" class="bonuses_add-icon_locked tv-disable">
           <span class="bonuses_timer">00:00</span>
-          <span class="bonuses_time-limit">24H</span>
+          <span class="bonuses_time-limit tv-disable-margin" lang="{24}MainMenu/Content/Timer/Hour">24H</span>
         </div>
       </div>
       <div class="bonuses_bonus-container locked">
@@ -592,10 +586,10 @@
         </div>
         <div class="bonuses_add-activate-container">
           <img src="./Sprites/Mutual/accept-icon.png" width="30px" alt="" class="bonuses_check-add-icon">
-          <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="bonuses_add-icon">
-          <img src="./Sprites/Mutual/ads-locked.png" width="30px" alt="" class="bonuses_add-icon_locked">
+          <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="bonuses_add-icon tv-disable">
+          <img src="./Sprites/Mutual/ads-locked.png" width="30px" alt="" class="bonuses_add-icon_locked tv-disable">
           <span class="bonuses_timer">00:00</span>
-          <span class="bonuses_time-limit">24H</span>
+          <span class="bonuses_time-limit tv-disable-margin" lang="{24}MainMenu/Content/Timer/Hour">24H</span>
         </div>
       </div>
       <div class="bonuses_bonus-container locked">
@@ -616,10 +610,10 @@
         </div>
         <div class="bonuses_add-activate-container">
           <img src="./Sprites/Mutual/accept-icon.png" width="30px" alt="" class="bonuses_check-add-icon">
-          <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="bonuses_add-icon">
-          <img src="./Sprites/Mutual/ads-locked.png" width="30px" alt="" class="bonuses_add-icon_locked">
+          <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="bonuses_add-icon tv-disable">
+          <img src="./Sprites/Mutual/ads-locked.png" width="30px" alt="" class="bonuses_add-icon_locked tv-disable">
           <span class="bonuses_timer">00:00</span>
-          <span class="bonuses_time-limit">24H</span>
+          <span class="bonuses_time-limit tv-disable-margin" lang="{24}MainMenu/Content/Timer/Hour">24H</span>
         </div>
       </div>
     </div>
@@ -632,7 +626,7 @@
     <div class="cash-info-container">
       <span class="cash-info-value">100</span>
     </div>
-    <div class="start-game_watch-add-btn">
+    <div class="start-game_watch-add-btn tv-disable">
       <img src="./Sprites/Mutual/ads.png" width="20px" alt="" class="start-game_watch-add-btn-icon">
       <span class="start-game_watch-add-btn-title">+500</span>
     </div>
@@ -731,8 +725,8 @@
             </div>
             <img src="./Sprites/Desktop - дурак- ежедневный бону/Frame 4x 964080724.png" width="60px" alt=""
               class="bounty-card-icon">
-            <div class="add-bounty-container">
-              <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="add-bounty-icon">
+            <div class="add-bounty-container tv-h-center-ch">
+              <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="add-bounty-icon tv-disable">
               <span class="add-bounty-value">100</span>
             </div>
           </div>
@@ -749,8 +743,8 @@
             </div>
             <img src="./Sprites/Desktop - дурак- ежедневный бону/Frame 4x 964080724.png" width="60px" alt=""
               class="bounty-card-icon">
-            <div class="add-bounty-container">
-              <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="add-bounty-icon">
+            <div class="add-bounty-container tv-h-center-ch">
+              <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="add-bounty-icon tv-disable">
               <span class="add-bounty-value">200</span>
             </div>
           </div>
@@ -767,8 +761,8 @@
             </div>
             <img src="./Sprites/Desktop - дурак- ежедневный бону/Frame 4x 964080724.png" width="60px" alt=""
               class="bounty-card-icon">
-            <div class="add-bounty-container">
-              <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="add-bounty-icon">
+            <div class="add-bounty-container tv-h-center-ch">
+              <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="add-bounty-icon tv-disable">
               <span class="add-bounty-value">300</span>
             </div>
           </div>
@@ -785,8 +779,8 @@
             </div>
             <img src="./Sprites/Desktop - дурак- ежедневный бону/Frame 4x 964080724.png" width="60px" alt=""
               class="bounty-card-icon">
-            <div class="add-bounty-container">
-              <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="add-bounty-icon">
+            <div class="add-bounty-container tv-h-center-ch">
+              <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="add-bounty-icon tv-disable">
               <span class="add-bounty-value">500</span>
             </div>
           </div>
@@ -803,8 +797,8 @@
             </div>
             <img src="./Sprites/Desktop - дурак- ежедневный бону/Frame 4x 964080724.png" width="60px" alt=""
               class="bounty-card-icon">
-            <div class="add-bounty-container">
-              <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="add-bounty-icon">
+            <div class="add-bounty-container tv-h-center-ch">
+              <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="add-bounty-icon tv-disable">
               <span class="add-bounty-value">700</span>
             </div>
           </div>
@@ -821,14 +815,14 @@
             </div>
             <img src="./Sprites/Desktop - дурак- ежедневный бону/Frame 4x 964080724.png" width="60px" alt=""
               class="bounty-card-icon">
-            <div class="add-bounty-container">
-              <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="add-bounty-icon">
+            <div class="add-bounty-container tv-h-center-ch">
+              <img src="./Sprites/Mutual/ads-colorize.png" width="30px" alt="" class="add-bounty-icon tv-disable">
               <span class="add-bounty-value">1000</span>
             </div>
           </div>
         </div>
       </div>
-      <div class="daily-bonuses_multiple-bounty-container">
+      <div class="daily-bonuses_multiple-bounty-container tv-disable">
         <img src="./Sprites/Desktop - дурак- ежедневный бону/Group 55 4x 1540056260.png" width="50px" alt=""
           class="daily-bonuses_multiple-bounty-icon">
         <div class="daily-bonuses_multiple-bounty-title-container">
@@ -852,7 +846,7 @@
       </div>
     </div>
   </section>
-  <section class="popup exit-popup-tab" id="exit-popup-tab">
+  <section class="popup exit-popup-tab" id="exit-popup-tab" style="z-index: 4998;">
     <div class="popup-background-fading"></div>
     <div class="exit-popup_container">
       <div class="exit-popup_title-container">
@@ -871,7 +865,7 @@
       </div>
     </div>
   </section>
-  <section class="popup exit-popup-tab" id="global-exit-popup-tab">
+  <section class="popup exit-popup-tab" id="global-exit-popup-tab" style="z-index: 5000;">
     <div class="popup-background-fading"></div>
     <div class="exit-popup_container">
       <div class="exit-popup_title-container">
@@ -887,7 +881,7 @@
       </div>
     </div>
   </section>
-  <section class="popup end-popup-tab" id="end-popup-tab">
+  <section class="popup end-popup-tab" id="end-popup-tab" style="z-index: 4999;">
     <div class="popup-background-fading"></div>
     <!-- Добавить win-popup/lose-popup/draw-popup в зависимости от нужного состояния -->
     <div class="end-popup_container win-popup">
@@ -917,7 +911,7 @@
           <span class="tutorial-popup-btn-title">X2</span>
         </button>
         <button tabindex="-1" class="tutorial-popup-btn continue-button">
-          <span class="tutorial-popup-btn-title" lang="PreGamePanelMainMenu/TutorialAsk/Yes"></span>
+          <span class="tutorial-popup-btn-title" lang="Panels/Finish/FinishButton"></span>
         </button>
       </div>
     </div>
@@ -934,7 +928,7 @@
       <div class="languages-list">
         <div class="language-container">
           <div class="language">
-            <img src="./Sprites/Desktop - дурак- настройки/Frame 4x 1356641136.png" alt="RU" class="language-icon">
+            <img src="./Sprites/Desktop - дурак- настройки/ru.png" alt="RU" class="language-icon">
             <span class="language-title">Русский</span>
           </div>
           <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px"
@@ -950,7 +944,7 @@
         </div>
         <div class="language-container">
           <div class="language">
-            <img src="./Sprites/Desktop - дурак- настройки/ger.png" alt="GER" class="language-icon">
+            <img src="./Sprites/Desktop - дурак- настройки/de.png" alt="GER" class="language-icon">
             <span class="language-title">German</span>
           </div>
           <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px"
@@ -958,7 +952,7 @@
         </div>
         <div class="language-container">
           <div class="language">
-            <img src="./Sprites/Desktop - дурак- настройки/ind.png" alt="IND" class="language-icon">
+            <img src="./Sprites/Desktop - дурак- настройки/hi.png" alt="IND" class="language-icon">
             <span class="language-title">Hindi</span>
           </div>
           <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px"
@@ -966,7 +960,7 @@
         </div>
         <div class="language-container">
           <div class="language">
-            <img src="./Sprites/Desktop - дурак- настройки/portu.png" alt="PORTU" class="language-icon">
+            <img src="./Sprites/Desktop - дурак- настройки/pt.png" alt="PORTU" class="language-icon">
             <span class="language-title">Portuguese</span>
           </div>
           <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px"
@@ -974,7 +968,7 @@
         </div>
         <div class="language-container">
           <div class="language">
-            <img src="./Sprites/Desktop - дурак- настройки/esp.png" alt="ESP" class="language-icon">
+            <img src="./Sprites/Desktop - дурак- настройки/es.png" alt="ESP" class="language-icon">
             <span class="language-title">Spanish</span>
           </div>
           <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px"
@@ -982,7 +976,7 @@
         </div>
         <div class="language-container">
           <div class="language">
-            <img src="./Sprites/Desktop - дурак- настройки/turk.png" alt="TURK" class="language-icon">
+            <img src="./Sprites/Desktop - дурак- настройки/tr.png" alt="TURK" class="language-icon">
             <span class="language-title">Turkish</span>
           </div>
           <img src="./Sprites/Desktop - дурак- настройки/Group 54 4x 451329194.png" alt="Checkbox" width="40px"
@@ -1065,7 +1059,7 @@
             <img src="./Sprites/Avatars/avatar_05.png" alt="Player" width="50px" class="portrait-icon">
           </div>
           <div class="palyer-name-container name-container">
-            <span class="player-name name">Player</span>
+            <span class="player-name name" lang="player-title">Player</span>
           </div>
           <div class="state-container">
             <span class="player-name name state">Attack</span>
@@ -1189,10 +1183,46 @@
     </button>
   </section>
 
+  <!-- <div id="consoleContainer" class="console-container">
+    <div id="consoleContent" class="console-content"></div>
+  </div> -->
+
+  <style>
+    .console-container {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #33333333;
+      color: #fff;
+      overflow: hidden;
+      padding: 10px;
+      box-sizing: border-box;
+      pointer-events: none;
+    }
+
+    .console-content {
+      max-height: 100%;
+      overflow-y: auto;
+      word-wrap: break-word;
+      pointer-events: none;
+    }
+
+    .console-content p {
+      margin: 0;
+      padding: 2px 0;
+      font-size: 1.5vh;
+      font-weight: 100;
+      pointer-events: none;
+    }
+  </style>
+
   <script>
     let savesList = [];
     let SDK = null;
     let player = null;
+    let sdkPlayer = null;
     let user = null;
     let input = null;
     let languageChangeEvent;
@@ -1204,6 +1234,10 @@
     let gameRules;
     let selectedAvatarIndex;
     let bet;
+    let timeThreshold = 500;
+    let timeout = false;
+    let statistics;
+    let updateEvent;
 
     let trumpSuit;
     let globalGameSpeed = 1;
@@ -1213,7 +1247,33 @@
       luck: 0,
       maxTossCount: 0
     }
+
+    // window.onerror = function (message, source, lineno, colno, error) {
+    //   logToConsole("Ошибка: " + message + " в " + source + " на строке " + lineno, "error");
+    // };
+
+    // function scrollToBottom() {
+    //   const consoleContent = document.getElementById('consoleContent');
+    //   consoleContent.scrollTop = consoleContent.scrollHeight;
+    // }
+
+    function logToConsole(message, type) {
+      // const consoleContent = document.getElementById('consoleContent');
+      // const logEntry = document.createElement('p');
+
+      // logEntry.style.color = type === "error" ? "#ff0000aa" : "#ffffffaa";
+      // logEntry.textContent = message;
+
+      // consoleContent.appendChild(logEntry);
+      // scrollToBottom();
+
+      // setTimeout(() => {
+      //   logEntry.remove();
+      // }, 10000);
+    }
+
   </script>
+
   <script type="module">
     import { createEvent } from "./src/localization/translator.js";
     import { preload } from './src/loader/loader.js';
@@ -1224,24 +1284,28 @@
     import { StackNavigation } from './src/scripts/navigation/navigation.js';
     import { AudioManager } from './src/scripts/audioManager.js'
     import { Rule } from "./src/scripts/battleFlow.js"
+    import { initializeStatistics } from './src/scripts/gameStatistics.js'
+
     document.addEventListener('focusin', function (event) {
       event.target.blur();
     });
 
     gameRules = new Rule();
 
-    audioManager = new AudioManager();
-    user = new User();
     navigation = new StackNavigation();
 
     const dfc = await import('./src/localization/dynamicFontChanger.js');
     dynamicFontChanger = dfc.getNew();
 
     preload(async () => {
-      new Promise((p) => { setTimeout(() => p(), 200) });
+      await new Promise((p) => { setTimeout(() => p(), 200) });
       await initializeSDK();
       platform = await getPlatform();
       await initialize();
+      initializeStatistics();
+      user = new User();
+      audioManager = new AudioManager("./assets/audio/sound/Card game track 1.wav", "./assets/audio/sound/SFX_Pop_Bottle_Designed_3.wav");
+      await new Promise((p) => { setTimeout(() => p(), 200) });
       await createEvent();
       user.loadData();
       await import('./index.js');

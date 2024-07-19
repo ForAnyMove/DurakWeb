@@ -52,6 +52,8 @@ class CollectionScreen extends ScreenLogic {
                 this.selectableElements.push({ element: element })
                 element.onclick = function () {
                     if (changeTabsVisibility(i)) {
+                        audioManager.playSound();
+
                         for (let j = 0; j < tabs.length; j++) {
                             const element = tabs[j];
                             if (i == j && !element.classList.contains('categories-btn-title_active')) {
@@ -77,10 +79,9 @@ class CollectionScreen extends ScreenLogic {
             const lock = createImage(['skin-element_locked-icon'], null, plane, lockedIcon);
             const useButton = plane;
             useButton.onclick = () => {
+                audioManager.playSound();
                 user.useContent(data.id);
             }
-
-            audioManager.addClickableToPull(useButton);
 
             this.selectableElements.push({
                 element: useButton
@@ -140,10 +141,9 @@ class CollectionScreen extends ScreenLogic {
             const lock = createImage(['skin-element_locked-icon'], null, plane, lockedIcon);
             const useButton = plane;
             useButton.onclick = () => {
+                audioManager.playSound();
                 user.useContent(data.id);
             }
-
-            audioManager.addClickableToPull(useButton);
 
             this.selectableElements.push({
                 element: useButton
@@ -204,10 +204,9 @@ class CollectionScreen extends ScreenLogic {
             const lock = createImage(['skin-element_locked-icon'], null, plane, lockedIcon);
             const useButton = plane;
             useButton.onclick = () => {
+                audioManager.playSound();
                 user.useContent(data.id);
             }
-
-            audioManager.addClickableToPull(useButton);
 
             this.selectableElements.push({
                 element: useButton

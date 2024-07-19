@@ -14,23 +14,23 @@ async function showRewarded(openCallback, closeCallback, rewardCallback, errorCa
         return;
     }
 
-    SDK = await getSDK();
+    let localSDK = await getSDK();
 
-    if (SDK == null) {
+    if (localSDK == null) {
         error("[showRewarded] SKD is not defined", "sdk", "sdk");
         return;
     }
 
     log('[showRewarded] Try start rewarded', "sdk", "sdk");
-    SDK.adv.showRewardedVideo({
+    localSDK.adv.showRewardedVideo({
         callbacks: {
             onOpen: () => {
-                audioManager.pause();
+                audioManager.pause(1);
                 openCallback?.();
             }, onRewarded: () => {
                 rewardCallback?.();
             }, onClose: () => {
-                audioManager.unpause();
+                audioManager.unpause(1);
                 closeCallback?.();
             }, onError: (e) => {
                 errorCallback?.();
@@ -41,15 +41,20 @@ async function showRewarded(openCallback, closeCallback, rewardCallback, errorCa
 
 async function showInterstitial(closeCallback, errorCallback) {
     if (isLocalHost()) {
+        audioManager.pause(1);
+        setTimeout(() => {
+            audioManager.unpause(1);
+        }, 5000);
+
         error("[showInterstitial] local host usage", "sdk", "sdk");
 
         closeCallback?.();
         return;
     }
 
-    SDK = await getSDK();
+    let localSDK = await getSDK();
 
-    if (SDK == null) {
+    if (localSDK == null) {
         error("[showInterstitial] SKD is not defined", "sdk", "sdk");
         return;
     }
@@ -74,11 +79,14 @@ async function showInterstitial(closeCallback, errorCallback) {
     }
 
     if (canShowInterstitial) {
-        SDK.adv.showFullscreenAdv({
+        audioManager.pause(1);
+        localSDK.adv.showFullscreenAdv({
             callbacks: {
                 onClose: function (wasShown) {
+                    audioManager.unpause(1);
                     closeCallback?.(wasShown);
                 }, onError: function (error) {
+                    audioManager.unpause(1);
                     errorCallback?.(error);
                 }
             }
@@ -86,13 +94,15 @@ async function showInterstitial(closeCallback, errorCallback) {
     }
 }
 
-function processExit() {
-    if (SDK == null || isLocalHost()) {
+async function processExit() {
+    let localSDK = await getSDK();
+
+    if (localSDK == null || isLocalHost()) {
         error("SKD is undefined or script launched on localhost", "sdk", "sdk");
         return;
     }
 
-    SDK.dispatchEvent(SDK.EVENTS.EXIT);
+    localSDK.dispatchEvent(SDK.EVENTS.EXIT);
 }
 
 async function getPlatform() {
@@ -119,9 +129,9 @@ async function getPlatform() {
         return returnDefault();
     }
 
-    SDK = await getSDK();
+    let localSDK = await getSDK();
 
-    if (SDK == null) {
+    if (localSDK == null) {
         error("[getPlatform] SKD is not defined", "sdk", "sdk");
 
         return returnDefault();
@@ -149,21 +159,21 @@ async function saveUserData(data) {
             return;
         }
 
-        SDK = await getSDK();
-        if (SDK == null) {
+        let localSDK = await getSDK();
+        if (localSDK == null) {
             error("[saveUserData] SKD is not defined", "sdk", "sdk");
             return;
         }
 
-        player = await getPlayer(SDK);
+        let localPlayer = await getPlayer(localSDK);
 
-        if (player == null) {
+        if (localPlayer == null) {
             error("[saveUserData] PLAYER is not defined", "sdk", "player");
             return;
         }
 
-        console.log("[saveUserData] start saving", 'sdk', 'player');
-        player.setData(data);
+        log("[saveUserData] start saving", 'sdk', 'player');
+        await localPlayer.setData(data);
     } catch (err) {
         error(`[saveUserData] catched error ${err}`, 'sdk', 'player');
     }
@@ -173,29 +183,30 @@ async function loadUserData(key) {
     try {
         if (isLocalHost()) {
             error("[loadUserData] local host usage", "sdk", "sdk");
-            return {};
+            return { "saves_020017": [{ "language": "ru" }, { "user_01": { "items": [{ "count": 200, "type": "currency" }], "availableContent": [{ "id": "card_skin_01", "type": "cardSkin" }, { "id": "card_back_skin_01", "type": "cardBack" }, { "id": "background_01", "type": "background" }, { "id": "card_skin_02", "type": "cardSkin" }], "usedContent": [{ "id": "card_skin_01", "type": "cardSkin" }, { "id": "card_back_skin_01", "type": "cardBack" }, { "id": "background_01", "type": "background" }], "achievements": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] } }, { "game_statistics": { "draw": { "byEntityMode": [{ "count": 0, "entityMode": "Self" }, { "count": 0, "entityMode": "Pair" }], "byGameMode": [{ "count": 0, "gameMode": "DurakDefault" }, { "count": 0, "gameMode": "DurakTransfare" }], "overall": 0 }, "gameCount": { "byEntityMode": [{ "count": 0, "entityMode": "Self" }, { "count": 0, "entityMode": "Pair" }], "byGameMode": [{ "count": 0, "gameMode": "DurakDefault" }, { "count": 0, "gameMode": "DurakTransfare" }], "overall": 0 }, "ingameDayCount": 0, "loseCount": { "byEntityMode": [{ "count": 0, "entityMode": "Self" }, { "count": 0, "entityMode": "Pair" }], "byGameMode": [{ "count": 0, "gameMode": "DurakDefault" }, { "count": 0, "gameMode": "DurakTransfare" }], "overall": 0 }, "lostWithAces": 0, "maxCurrencyCollected": 200, "throwedCards": 0, "transfaredCards": 0, "winCount": { "byEntityMode": [{ "count": 0, "entityMode": "Self" }, { "count": 0, "entityMode": "Pair" }], "byGameMode": [{ "count": 0, "gameMode": "DurakDefault" }, { "count": 0, "gameMode": "DurakTransfare" }], "overall": 0 }, "winInARow": { "byEntityMode": [{ "count": 0, "entityMode": "Self" }, { "count": 0, "entityMode": "Pair" }], "byGameMode": [{ "count": 0, "gameMode": "DurakDefault" }, { "count": 0, "gameMode": "DurakTransfare" }], "overall": 0 } } }, { "day_counter": { "lastDay": 1, "time": 1718978356899 } }, { "user_avatar": 0 }, { "sound": true }, { "music": true }, { "daily_rewards": { "completion": [true, false, false, false, false, false] } }, { "tutorial-offer": true }, { "user_status_01": [true, false, false, false, false, false, false, false] }] };
         }
 
-        SDK = await getSDK();
-        if (SDK == null) {
+        let localSDK = await getSDK();
+        if (localSDK == null) {
             error("[loadUserData] SKD is not defined", "sdk", "sdk");
             return {};
         }
 
-        player = await getPlayer(SDK);
+        let localPlayer = await getPlayer(localSDK);
 
-        if (player == null) {
+        if (localPlayer == null) {
             error("[loadUserData] PLAYER is not defined", "sdk", "player");
             return {};
         }
 
-        const data = await player.getData([key]);
-        log(`[loadUserData] data from server => ${data}`, "sdk", "player");
+        const data = await localPlayer.getData([key]);
 
         return data ?? {};
     } catch (err) {
         error(`[loadUserData] catched error ${err}`, 'sdk', 'player');
     }
+
+    return {}
 }
 
 async function getDefaultLanguage() {
@@ -204,9 +215,9 @@ async function getDefaultLanguage() {
         return 'ru';
     }
 
-    SDK = await getSDK();
+    let localSDK = await getSDK();
 
-    if (SDK == null) {
+    if (localSDK == null) {
         error("[getDefaultLanguage] SKD is not defined", "sdk", "sdk");
         return 'ru';
     }
@@ -217,13 +228,13 @@ async function getDefaultLanguage() {
 async function getSDK() {
     try {
         if (SDK != null) {
-            console.log('[getSDK] Has cached SDK');
+            log('[getSDK] Has cached SDK', "sdk", "sdk");
             return SDK;
         }
 
-        console.log('[getSDK] Try initialize SDK');
+        log('[getSDK] Try initialize SDK', "sdk", "sdk");
         SDK = await YaGames.init();
-        console.log('[getSDK] SDK has been initialized');
+        log('[getSDK] SDK has been initialized', "sdk", "sdk");
         return SDK;
     } catch (err) {
         error(`Failed to load [SDK]: ${err}`, "sdk", "sdk");
@@ -232,9 +243,9 @@ async function getSDK() {
 }
 
 async function getPlayer(sdk) {
-    if (player != null) {
-        console.log('[getPlayer] Has cached PLAYER');
-        return player;
+    if (sdkPlayer != null) {
+        log('[getPlayer] Has cached PLAYER ' + sdkPlayer, "sdk", "player");
+        return sdkPlayer;
     }
     if (sdk == null) {
         error(`Failed to get [PLAYER]: [SDK] is not defined`, "sdk", "player");
@@ -242,10 +253,10 @@ async function getPlayer(sdk) {
     }
 
     try {
-        console.log('[getPlayer] Try initialize PLAYER');
-        player = await sdk.getPlayer({ scopes: false });
-        console.log('[getPlayer] PLAYER has been initialized');
-        return player;
+        log('[getPlayer] Try initialize PLAYER', "sdk", "player");
+        sdkPlayer = await sdk.getPlayer({ scopes: false });
+        log('[getPlayer] PLAYER has been initialized', "sdk", "player");
+        return sdkPlayer;
     } catch (err) {
         error(`Failed to load [PLAYER]: ${err}`, "sdk", "player");
         return null;
@@ -254,7 +265,7 @@ async function getPlayer(sdk) {
 
 async function initializeSDK() {
     SDK = await getSDK();
-    player = await getPlayer(SDK);
+    sdkPlayer = await getPlayer(SDK);
 }
 
 export { saveUserData, loadUserData, getPlatform, showRewarded, showInterstitial, initializeSDK, getDefaultLanguage, processExit }

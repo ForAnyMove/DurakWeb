@@ -1,5 +1,3 @@
-import { statistics, updateStatistics } from "./gameStatistics.js";
-
 class LevelManagement {
     selectLevel = function (database, order) {
         if (database.levels[order] == null) return null;

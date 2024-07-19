@@ -101,7 +101,6 @@ class Sequence {
         if (this.tweens.length == 0) {
             this.tweens.push([tween]);
         } else {
-            console.log('join');
             this.tweens[this.tweens.length - 1].push(tween);
         }
 

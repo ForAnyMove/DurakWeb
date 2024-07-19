@@ -9,6 +9,7 @@ class GameFinishScreen extends ScreenLogic {
         this.selectableElements.push(this.defaultSelectedElement);
 
         continueButton.onclick = () => {
+            audioManager.playSound();
             navigation.pop();
             navigation.pop();
         }

@@ -1,4 +1,3 @@
-import { statistics, updateEvent } from "./gameStatistics.js";
 import { setRemoveClass } from "./helpers.js";
 import { load, save } from "./save_system/SaveSystem.js"
 import { Content } from "./statics/staticValues.js"
@@ -85,6 +84,7 @@ class UserStatus {
 
                 view.onclick = () => {
                     if (!data[i] && view.classList.contains('profile-status-item_completed')) {
+                        audioManager.playSound();
                         obtainReward(i);
 
                         view.classList.add('profile-status-item_obtained');

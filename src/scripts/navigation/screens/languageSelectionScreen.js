@@ -33,11 +33,13 @@ class LanguageSelectionScreen extends ScreenLogic {
             };
 
             selector.onclick = () => {
+                audioManager.playSound();
+
                 selectorStruct.select();
             };
+
             this.selectableElements.push({ element: selector })
 
-            audioManager.addClickableToPull(selector);
             languageSelectorStructs.push(selectorStruct)
         }
 

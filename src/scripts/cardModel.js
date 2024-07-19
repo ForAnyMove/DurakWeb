@@ -373,7 +373,6 @@ export default class Card {
             }
 
             const angle = parseFloat(currentTransform.match(/-?\d+(\.\d+)?/));
-            console.log(angle);
 
             function rotate(origin, point, angle) {
                 let radians = (Math.PI / 180) * angle;

@@ -177,4 +177,4 @@ async function createEvent() {
     });
 }
 
-export { initialLocale, updateInContainer, createEvent }
+export { initialLocale, updateInContainer, updateLanguage, createEvent }

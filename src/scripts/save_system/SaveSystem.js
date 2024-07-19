@@ -1,10 +1,7 @@
 import { log } from "../logger.js";
 import { loadUserData, saveUserData } from "../sdk/sdk.js";
 
-const globalSaveKey = 'saves_020017';
-
-let timeThreshold = 0;
-let timeout = false;
+const globalSaveKey = 'saves_020018';
 
 function save(key, obj) {
     for (let i = 0; i < savesList.length; i++) {
@@ -56,7 +53,21 @@ function sendToServer() {
 
     const saveObject = { [globalSaveKey]: savesList };
 
-    log(`Send to server: ${JSON.stringify(saveObject)}`, "saveSystem");
+    function logArray(obj) {
+        const keys = Object.keys(obj);
+        for (let i = 0; i < keys.length; i++) {
+            const element = obj[keys[i]];
+
+            const key = Object.keys(element);
+            const value = element[key];
+
+            log(`{${key}: ${value}}`, "saveSystem");
+        }
+    }
+
+    log(`Send to server:`, "saveSystem");
+    logArray(saveObject[globalSaveKey]);
+    // log(`Send to server: ${JSON.stringify(saveObject)}`, "saveSystem");
 
     saveUserData(saveObject);
 
@@ -65,8 +76,6 @@ function sendToServer() {
 
 function loadFromServer(data) {
     log('[SS] Try load from server', "saveSystem");
-    log(typeof (data), "saveSystem");
-    log(data, "saveSystem");
 
     if (data == {}) {
         savesList = [];
@@ -75,6 +84,7 @@ function loadFromServer(data) {
     if (typeof (data) == 'object') {
         if (data[globalSaveKey] != null) {
             savesList = data[globalSaveKey];
+            log(savesList, "saveSystem");
             return;
         }
         savesList = [];

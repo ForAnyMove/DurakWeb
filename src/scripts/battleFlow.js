@@ -1,4 +1,4 @@
-import { initialLocale } from "../localization/translator.js";
+import { initialLocale, updateLanguage } from "../localization/translator.js";
 import { animator } from "./animator.js";
 import { CardsDeck } from "./cardModel.js";
 import { DOChangeValue, Delay, Ease, SequencedDelay } from "./dotween/dotween.js";
@@ -86,18 +86,23 @@ class Entity {
     updateStateText = function (state) {
         switch (state) {
             case State.None:
+                this.stateText.lang = '';
                 this.stateText.innerText = '';
                 break;
             case State.Attack:
-                this.stateText.innerText = 'Attack';
+                this.stateText.lang = 'Player/State/Attack';
+                updateLanguage([this.stateText], initialLocale);
                 break;
             case State.Toss:
-                this.stateText.innerText = 'Toss';
+                this.stateText.lang = 'Player/State/Attack';
+                updateLanguage([this.stateText], initialLocale);
                 break;
             case State.Defend:
-                this.stateText.innerText = 'Defend';
+                this.stateText.lang = 'Player/State/Defend';
+                updateLanguage([this.stateText], initialLocale);
                 break;
             default:
+                this.stateText.lang = '';
                 this.stateText.innerText = '';
                 break;
         }
@@ -158,7 +163,7 @@ class Entity {
         return canToss;
     }
 
-    async defend(canTransfare) {
+    async defend(canTransfare, thisEntityDefend = true) {
         this.state = canTransfare ? State.DefendCanTransfare : State.Defend;
         this.updateStateText(State.Defend);
     }
@@ -810,11 +815,11 @@ class Player extends Entity {
         return this.wrapper.cards.length == 0 ? MoveResult.SuccessNoCards : MoveResult.Success;
     }
 
-    async defend(canTransfare) {
+    async defend(canTransfare, thisEntityDefend = true) {
         this.cardPlacedByUserEvent.removeAllListeners();
         this.cardPrePlacedByUserEvent.removeAllListeners();
 
-        await super.defend(canTransfare);
+        await super.defend(canTransfare, thisEntityDefend);
 
         log('[Defend] by "Player"', 'battleFlow');
 
@@ -843,7 +848,7 @@ class Player extends Entity {
         const passButtonText = document.getElementsByClassName('pass-btn-title')[0];
         passButton.style.display = 'flex';
 
-        passButtonText.lang = 'Buttons/TakeAll';
+        passButtonText.lang = thisEntityDefend ? 'Buttons/TakeAll' : 'Buttons/Pass';
         languageChangeEvent?.invoke(initialLocale);
 
         enableInteractions();
@@ -976,10 +981,7 @@ class Player extends Entity {
 
                 if (moveResult != null && moveResult.transfare) {
                     result = DefendResult.Transfare;
-                    console.log(moveResult);
-                    console.log(moveResult.card != null);
                     if (moveResult.card != null) {
-                        console.log(moveResult.card);
                         await this.transfareTrump(moveResult.card);
                     }
 
@@ -1057,6 +1059,7 @@ class Player extends Entity {
             enableInteractions();
 
             passButton.onclick = async () => {
+                audioManager.playSound();
                 result = tossCount > 0 ? TossResult.Skip : TossResult.Fail;
                 // await Delay(0.1 / globalGameSpeed);
                 p();
@@ -1159,8 +1162,6 @@ class Player extends Entity {
             }
         }
 
-        console.log(elements);
-
         elements.forEach((item) => {
             item.element.onclick = () =>
                 onSubmit(item, elements)
@@ -1185,11 +1186,7 @@ class Player extends Entity {
             elements.push(button);
         }
 
-        console.log('Going to save');
-        console.log(`${elements.map(i => `\n${i.element.id}`)}`.replaceAll(',', ''));
-        console.log('\n');
         input.saveSelectableState('tv-gameplay', elements, () => {
-            console.log(`Loading from save to INPUT ${elements}`);
             return elements[currentSelected];
         })
 
@@ -1352,9 +1349,6 @@ class BattleFlow {
     }
 
     finish() {
-        // console.log('Finish');
-        // console.log(` - Winners ${this.winners.map((i, index) => `(${index + 1} - ${i.id})`)}`)
-        // console.log(` - Durak ${this.entities[0].id}`)
 
         this.finishCallback.invoke({ winners: this.winners, loser: this.entities.length == 0 ? null : this.entities[0] })
     }
@@ -1448,8 +1442,6 @@ class BattleFlow {
                     break;
                 }
             }
-
-            console.log(`Attack: ${attackEntities.map(i => i.id)}\nDefend: ${defendEntities.map(i => i.id)}\n`);
         }
 
         updatePlaygroundEntityState();
@@ -1491,7 +1483,6 @@ class BattleFlow {
                     this.entities.splice(this.entities.indexOf(entity), 1);
                 }
                 this.winners.push(entity);
-                console.log(`  >  Added winner ${entity.id}`);
             }
 
             const toss = async (cycled) => {
@@ -1534,7 +1525,6 @@ class BattleFlow {
                 log(`Toss result ${tossResult} || ${cycled} ${tossCanBeCycled} ${tossQueue}`, 'battleFlow');
 
                 if (tossResult == TossResult.SuccessNoCards) {
-                    console.log(`if (tossResult == TossResult.SuccessNoCards) { (${attackEntities.map(i => i.id)})  ${currentTossEntityQueue}`);
                     removeEntity(attackEntities[currentTossEntityQueue], true);
 
                     currentTossEntityQueue = (currentTossEntityQueue) % attackEntities.length;
@@ -1562,14 +1552,14 @@ class BattleFlow {
                 return tossResult;
             }
 
-            const defend = async (canTransfare) => {
+            const defend = async (canTransfare, noChance = false) => {
 
                 const canTransfareByRules = battleground.canTransfareByRule((defendEntities.length > 1 ? defendEntities[(currentDefenceEntityQueue + 1) % defendEntities.length] : attackEntities[attackEntities.length - 1]).wrapper.cards); // remake
                 if (!canTransfareByRules || this.rules.gameMode != GameMode.DurakTransfare) {
                     canTransfare = false;
                 }
 
-                const result = await defendEntities[currentDefenceEntityQueue].defend(canTransfare);
+                const result = await defendEntities[currentDefenceEntityQueue].defend(canTransfare, noChance);
                 if (result == DefendResult.DefenceNoCards) {
                     removeEntity(defendEntities[currentDefenceEntityQueue]);
                     return true;
@@ -1582,7 +1572,7 @@ class BattleFlow {
                     }
 
                     if (tossResult == TossResult.Success || tossResult == TossResult.SuccessNoCards) {
-                        return await defend(false);
+                        return await defend(false, noChance);
                     }
                     return true;
                 } else if (result == DefendResult.Transfare) {
@@ -1614,18 +1604,30 @@ class BattleFlow {
 
                     currentTossEntityQueue = 0;
 
-                    return await defend(true);
+                    return await defend(true, noChance);
                 } else {
-                    if (currentDefenceEntityQueue >= defendEntities.length - 1) {
-
+                    if (noChance) {
                         await nextToss(true, 0);
                         await defendEntities[0].grabPlaygroundCards();
                         await battleground.clearZones();
                         return false;
+                    }
+
+                    if (currentDefenceEntityQueue >= defendEntities.length - 1) {
+
+                        if (noChance) {
+                            await nextToss(true, 0);
+                            await defendEntities[0].grabPlaygroundCards();
+                            await battleground.clearZones();
+                            return false;
+                        } else {
+                            currentDefenceEntityQueue = 0;
+                            return await defend(false, true);
+                        }
                     } else {
                         currentDefenceEntityQueue++;
                         currentDefenceEntityQueue = currentDefenceEntityQueue % defendEntities.length;
-                        return await defend(false);
+                        return await defend(false, noChance);
                     }
                 }
             }
@@ -1634,16 +1636,14 @@ class BattleFlow {
             const tossResult = await toss(true);
 
             if (result == MoveResult.SuccessNoCards) { // || tossResult == TossResult.SuccessNoCards
-                console.log(`if (result == MoveResult.SuccessNoCards) (${attackEntities.map(i => i.id)})  ${currentTossEntityQueue}`);
                 removeEntity(attackEntities[0]);
             }
 
             if (tossResult == TossResult.SuccessNoCards) {
-                console.log(`if (tossResult == TossResult.SuccessNoCards) aft move (${attackEntities.map(i => i.id)})  ${currentTossEntityQueue}`);
                 removeEntity(attackEntities[0]);
             }
 
-            const isDefenceSuccess = await defend(true);
+            const isDefenceSuccess = await defend(true, false);
             log(` > > Defence result ${isDefenceSuccess}`, 'battleFlow');
 
             if (isDefenceSuccess) {

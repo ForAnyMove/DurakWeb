@@ -1,3 +1,4 @@
+import { initialLocale, updateLanguage } from "../localization/translator.js";
 import { animator } from "./animator.js";
 import { State } from "./battleFlow.js";
 import { CardsDeck } from "./cardModel.js";
@@ -91,9 +92,14 @@ class TutorialFlow {
         const updateButtonText = (lang) => {
             setTimeout(() => {
                 button.children[0].lang = lang;
-                languageChangeEvent.invoke('ru');
+                updateLanguage([button], initialLocale);
+
+                input.updateQueryCustom([{ element: button }], { element: button });
+                dynamicFontChanger.updateElement(button.children[0]);
             }, 0);
         }
+
+        input.saveSelectableState('tutorial', [{ element: button }], () => { return { element: button } });
 
         updateButtonText('Tutorial/Continue');
 
@@ -102,13 +108,13 @@ class TutorialFlow {
         const waitContinue = async () => {
             return new Promise(p => {
                 button.onclick = () => {
+                    audioManager.playSound();
                     p();
                 }
             })
         }
 
         const tutorial01 = async () => {
-            console.log('> tutorial01');
             const container = screen.querySelector('#tutorial-01');
             setRemoveClass(container, 'hidden-all', false);
 
@@ -118,7 +124,6 @@ class TutorialFlow {
         }
 
         const tutorial02 = async () => {
-            console.log('> tutorial02');
             const container = screen.querySelector('#tutorial-02');
             setRemoveClass(container, 'hidden-all', false);
             const deckWrapper = container.querySelector('.tutorial-flow-deck-container');
@@ -150,7 +155,6 @@ class TutorialFlow {
         }
 
         const tutorial03 = async () => {
-            console.log('> tutorial03');
             const container = screen.querySelector('#tutorial-03');
             setRemoveClass(container, 'hidden-all', false);
             setRemoveClass(screen, 'hidden-all', false);
@@ -194,7 +198,6 @@ class TutorialFlow {
         }
 
         const tutorial04 = async () => {
-            console.log('> tutorial04');
             const container = screen.querySelector('#tutorial-04');
             setRemoveClass(container, 'hidden-all', false);
 
@@ -204,7 +207,6 @@ class TutorialFlow {
         }
 
         const tutorial05 = async () => {
-            console.log('> tutorial05');
             const container = screen.querySelector('#tutorial-05');
             setRemoveClass(container, 'hidden-all', false);
             setRemoveClass(button, 'tutorial-05', true);
@@ -272,7 +274,6 @@ class TutorialFlow {
         }
 
         const tutorial05p2 = async () => {
-            console.log('> tutorial05p2');
             setRemoveClass(screen, 'hidden-all', true);
 
             await new Promise(async p => {
@@ -285,6 +286,8 @@ class TutorialFlow {
                 }
 
                 enableInteractions();
+
+                input.deselect();
                 await this.entities[0].move();
                 await Delay(0.1);
                 await this.entities[1].defend();
@@ -294,10 +297,12 @@ class TutorialFlow {
         }
 
         const tutorial06 = async () => {
-            console.log('> tutorial06');
             const container = screen.querySelector('#tutorial-06');
+
             setRemoveClass(screen, 'hidden-all', false);
             setRemoveClass(container, 'hidden-all', false);
+
+            updateButtonText('Tutorial/Continue');
 
             await waitContinue();
 
@@ -305,7 +310,6 @@ class TutorialFlow {
         }
 
         const tutorial07 = async () => {
-            console.log('> tutorial07');
             const container = screen.querySelector('#tutorial-07');
             setRemoveClass(container, 'hidden-all', false);
 
@@ -368,7 +372,6 @@ class TutorialFlow {
         }
 
         const tutorial07p2 = async () => {
-            console.log('> tutorial07p2');
             setRemoveClass(screen, 'hidden-all', true);
 
             await new Promise(async p => {
@@ -381,6 +384,8 @@ class TutorialFlow {
                 }
 
                 enableInteractions();
+
+                input.deselect();
                 await this.entities[0].toss(this.entities[0], true, null, () => true);
                 await Delay(0.1);
                 await this.entities[1].defend();
@@ -390,7 +395,6 @@ class TutorialFlow {
         }
 
         const tutorial08 = async () => {
-            console.log('> tutorial08');
             const container = screen.querySelector('#tutorial-08');
             setRemoveClass(container, 'hidden-all', false);
             setRemoveClass(screen, 'hidden-all', false);
@@ -406,7 +410,6 @@ class TutorialFlow {
         }
 
         const tutorial09 = async () => {
-            console.log('> tutorial09');
             await this.distributeCards([this.entities[1], this.entities[0]]);
             await this.entities[1].moveSelected(Rank.Eight, Suit.Hearts);
             await Delay(0.1);
@@ -477,19 +480,21 @@ class TutorialFlow {
         }
 
         const tutorial09p2 = async () => {
-            console.log('> tutorial09p2');
             setRemoveClass(screen, 'hidden-all', true);
 
             for (let i = 0; i < this.entities[0].wrapper.cards.length; i++) {
                 const card = this.entities[0].wrapper.cards[i];
                 card.locked = !(card.suit == Suit.Hearts && card.rank == Rank.Ten);
             }
+
+            input.deselect();
             await this.entities[0].defend();
             await this.entities[1].moveSelected(Rank.Ten, Suit.Clubs);
             for (let i = 0; i < this.entities[0].wrapper.cards.length; i++) {
                 const card = this.entities[0].wrapper.cards[i];
                 card.locked = !(card.suit == Suit.Spades && card.rank == Rank.Nine);
             }
+
             await this.entities[0].defend();
             await this.entities[1].moveSelected(Rank.Ten, Suit.Spades);
 
@@ -511,7 +516,6 @@ class TutorialFlow {
         }
 
         const tutorial10 = async () => {
-            console.log('> tutorial10');
             const container = screen.querySelector('#tutorial-10');
             setRemoveClass(screen, 'hidden-all', false);
             setRemoveClass(container, 'hidden-all', false);
@@ -551,7 +555,6 @@ class TutorialFlow {
         }
 
         const tutorial11 = async () => {
-            console.log('> tutorial11');
             await this.distributeCards([this.entities[1], this.entities[0]]);
             const container = screen.querySelector('#tutorial-11');
             setRemoveClass(screen, 'hidden-all', false);
@@ -563,13 +566,11 @@ class TutorialFlow {
         }
 
         const tutorial11p2 = async () => {
-            console.log('> tutorial11p2');
             setRemoveClass(screen, 'hidden-all', true);
             await this.entities[1].moveSelected(Rank.Eight, Suit.Diamonds);
         }
 
         const tutorial12 = async () => {
-            console.log('> tutorial12');
             const container = screen.querySelector('#tutorial-12');
             setRemoveClass(screen, 'hidden-all', false);
             setRemoveClass(container, 'hidden-all', false);
@@ -642,7 +643,6 @@ class TutorialFlow {
         }
 
         const tutorial12p2 = async () => {
-            console.log('> tutorial12p2');
             setRemoveClass(screen, 'hidden-all', true);
 
             await new Promise(async p => {
@@ -655,6 +655,8 @@ class TutorialFlow {
                 }
 
                 enableInteractions();
+
+                input.deselect();
                 await this.entities[0].defend(true);
                 await Delay(0.2);
                 await this.entities[1].defend();
@@ -748,6 +750,8 @@ class TutorialFlow {
     }
 
     clear() {
+        input.clearSavedState('tutorial');
+
         animator.clearAll();
 
         setRemoveClass(document.querySelector('.tutorial-flow'), 'hidden-all', true);
